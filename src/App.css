@@ -37,16 +37,26 @@ h1 {
 
 .content-wrapper {
   display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
 .sidebar {
-  flex: 1;
+  display: flex;
+  justify-content: space-between;
   background-color: var(--card-background);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  max-width: 300px; /* Add this line to limit sidebar width */
+}
+
+.pick-tracker-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.entry-form-container {
+  flex: 1;
 }
 
 .pick-tracker-container {
@@ -115,5 +125,14 @@ h1 {
   .sidebar, .game-list-container {
     width: 100%;
     max-width: none; /* Remove max-width for mobile */
+  }
+  
+  .sidebar {
+    flex-direction: column;
+  }
+  
+  .pick-tracker-container {
+    margin-right: 0;
+    margin-bottom: 20px;
   }
 }
