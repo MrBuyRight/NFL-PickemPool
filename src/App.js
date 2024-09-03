@@ -12,6 +12,8 @@ function App() {
   const [isSubmitMessageVisible, setIsSubmitMessageVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [countdown, setCountdown] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const games = [
     { id: 1, homeTeam: "Kansas City Chiefs", awayTeam: "Baltimore Ravens", date: 'Thu, Sep 5th, 2024 at 8:20pm ET' },
@@ -38,6 +40,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     console.log('Form submitted');
 
     const entry = { 
@@ -96,11 +99,14 @@ function App() {
       console.error('Full error object:', JSON.stringify(error, null, 2));
       setSubmitMessage(`Error submitting entry: ${error.message}`);
       setTimeout(() => setSubmitMessage(''), 5000);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const clearAllPicks = () => {
     setPicks({});
+    setProgress(0);
   };
 
   useEffect(() => {
@@ -121,6 +127,12 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // Update progress when picks change
+    const picksCount = Object.keys(picks).length;
+    setProgress((picksCount / games.length) * 100);
+  }, [picks]);
+
+  useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date();
       const firstGame = new Date(games[0].date);
@@ -136,10 +148,17 @@ function App() {
     <div className={`App ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <header className="app-header">
         <h1>NFL Week 1 Pick 'em Pool</h1>
+        <div className="countdown">{countdown}</div>
+        <button className="mode-toggle" onClick={() => setIsDarkMode(!isDarkMode)}>
+          {isDarkMode ? '☀️' : '🌙'}
+        </button>
       </header>
       <main className="content-wrapper">
         <section className="game-list-container">
           <h2>Select Your Picks</h2>
+          <div className="progress-bar">
+            <div className="progress" style={{width: `${progress}%`}}></div>
+          </div>
           {GameSelectionList ? (
             <GameSelectionList games={games} onSelect={handleSelect} picks={picks} />
           ) : (
@@ -179,19 +198,17 @@ function App() {
                   required
                 />
               </div>
-              <button type="submit" className="submit-button" disabled={isLoading}>
-                {isLoading ? 'Submitting...' : 'Submit Entry'}
-              </button>
-              <button onClick={clearAllPicks} className="clear-picks-button">Clear All Picks</button>
+              <div className="button-group">
+                <button type="submit" className="submit-button" disabled={isLoading || progress < 100}>
+                  {isLoading ? 'Submitting...' : 'Submit Entry'}
+                </button>
+                <button type="button" onClick={clearAllPicks} className="clear-picks-button">Clear All Picks</button>
+              </div>
             </form>
             {isSubmitMessageVisible && <p className="submit-message">{submitMessage}</p>}
           </div>
         </aside>
       </main>
-      <div className="countdown">{countdown}</div>
-      <button onClick={() => setIsDarkMode(!isDarkMode)}>
-        Toggle {isDarkMode ? 'Light' : 'Dark'} Mode
-      </button>
     </div>
   );
 }

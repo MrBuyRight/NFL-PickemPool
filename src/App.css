@@ -36,6 +36,9 @@ body {
   border-radius: 12px;
   margin-bottom: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 h1, h2, h3 {
@@ -61,17 +64,25 @@ h3 {
 
 .content-wrapper {
   display: flex;
-  flex-direction: column;
   gap: 20px;
 }
 
+.game-list-container {
+  flex: 2;
+  background-color: var(--surface-color);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .sidebar {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.game-list-container, .pick-tracker-container, .entry-form-container {
+.pick-tracker-container, .entry-form-container {
   background-color: var(--surface-color);
   padding: 20px;
   border-radius: 12px;
@@ -104,19 +115,42 @@ input {
   font-size: 1rem;
 }
 
-.submit-button {
-  background-color: var(--primary-color);
-  color: var(--text-color);
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.submit-button, .clear-picks-button {
+  flex: 1;
+  padding: 10px;
   border: none;
-  padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
 }
 
-.submit-button:hover {
+.submit-button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.submit-button:hover:not(:disabled) {
   background-color: #7c4dff;
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.clear-picks-button {
+  background-color: var(--error-color);
+  color: var(--text-color);
+}
+
+.clear-picks-button:hover {
+  background-color: #e57373;
 }
 
 .submit-message {
@@ -125,33 +159,55 @@ input {
   border-radius: 4px;
   background-color: var(--success-color);
   color: var(--text-color);
+  animation: fadeIn 0.3s ease-in;
 }
 
 .error-message {
   color: var(--error-color);
 }
 
-@media (min-width: 768px) {
+.mode-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: var(--border-color);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+.countdown {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
   .content-wrapper {
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .sidebar {
-    flex: 1;
-    max-width: 300px;
+    order: -1;
   }
 
-  .game-list-container {
-    flex: 2;
+  .game-list-container, .pick-tracker-container, .entry-form-container {
+    width: 100%;
   }
 }
 
-/* Remove outlines */
-* {
-  outline: none !important;
-}
-
-/* Focus styles for accessibility */
-input:focus, button:focus {
-  box-shadow: 0 0 0 2px var(--secondary-color);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
