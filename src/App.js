@@ -126,25 +126,27 @@ function App() {
               <p>Error: PickTracker component not found</p>
             )}
           </div>
-          <form className="entry-form" onSubmit={handleSubmit}>
-            <h3>Submit Your Entry</h3>
-            <input
-              type="text"
-              placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              required
-            />
-            <button type="submit">Submit Entry</button>
-          </form>
-          {submitMessage && <p className="submit-message">{submitMessage}</p>}
+          <div className="entry-form-container">
+            <form className="entry-form" onSubmit={handleSubmit}>
+              <h3>Submit Your Entry</h3>
+              <input
+                type="text"
+                placeholder="Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <input
+                type="tel"
+                placeholder="Phone Number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                required
+              />
+              <button type="submit">Submit Entry</button>
+            </form>
+            {submitMessage && <p className="submit-message">{submitMessage}</p>}
+          </div>
         </aside>
         <section className="game-list-container">
           {GameSelectionList ? (

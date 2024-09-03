@@ -46,6 +46,7 @@ h1 {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  max-width: 300px; /* Add this line to limit sidebar width */
 }
 
 .pick-tracker-container {
@@ -56,30 +57,36 @@ h1 {
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .entry-form h3 {
   margin-top: 0;
+  margin-bottom: 15px;
   color: var(--primary-color);
+  font-size: 1.2rem;
 }
 
 .entry-form input {
-  width: 100%;
+  width: calc(100% - 20px); /* Subtract padding from width */
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  font-size: 1rem;
 }
 
 .entry-form button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   background-color: var(--secondary-color);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .entry-form button:hover {
@@ -87,12 +94,13 @@ h1 {
 }
 
 .submit-message {
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 10px;
   background-color: #e8f5e9;
   border: 1px solid #c8e6c9;
   border-radius: 4px;
   color: #2e7d32;
+  font-size: 0.9rem;
 }
 
 .game-list-container {
@@ -106,5 +114,6 @@ h1 {
   
   .sidebar, .game-list-container {
     width: 100%;
+    max-width: none; /* Remove max-width for mobile */
   }
 }
