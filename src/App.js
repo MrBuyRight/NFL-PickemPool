@@ -10,10 +10,7 @@ function App() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
   const [isSubmitMessageVisible, setIsSubmitMessageVisible] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
-  const [countdown, setCountdown] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
 
   const games = [
     { id: 1, homeTeam: "Kansas City Chiefs", awayTeam: "Baltimore Ravens", date: 'Thu, Sep 5th, 2024 at 8:20pm ET' },
@@ -51,14 +48,27 @@ function App() {
     console.log('Entry to be submitted:', JSON.stringify(entry, null, 2));
 
     try {
+      // Check if Supabase client is properly initialized
+      if (!supabase) {
+        throw new Error('Supabase client is not initialized');
+      }
+
+      console.log('Supabase client initialized');
+
       // First, check if an entry with this name and phone number already exists
+      console.log('Checking for existing entries...');
       const { data: existingEntries, error: fetchError } = await supabase
         .from('entries')
         .select('id')
         .eq('name', name)
         .eq('phoneNumber', phoneNumber);
 
-      if (fetchError) throw fetchError;
+      if (fetchError) {
+        console.error('Error fetching existing entries:', fetchError);
+        throw fetchError;
+      }
+
+      console.log('Existing entries:', existingEntries);
 
       let result;
       if (existingEntries && existingEntries.length > 0) {
@@ -74,11 +84,15 @@ function App() {
         console.log('Inserting new entry...');
         result = await supabase
           .from('entries')
-          .insert([entry])
-          .select();
+          .insert([entry]);
       }
 
-      if (result.error) throw result.error;
+      console.log('Supabase operation result:', result);
+
+      if (result.error) {
+        console.error('Error saving entry:', result.error);
+        throw result.error;
+      }
       
       console.log('Entry saved successfully:', JSON.stringify(result.data, null, 2));
       
@@ -104,11 +118,6 @@ function App() {
     }
   };
 
-  const clearAllPicks = () => {
-    setPicks({});
-    setProgress(0);
-  };
-
   useEffect(() => {
     async function testSupabaseConnection() {
       console.log('Testing Supabase connection...');
@@ -126,38 +135,24 @@ function App() {
     testSupabaseConnection();
   }, []);
 
-  useEffect(() => {
-    // Update progress when picks change
-    const picksCount = Object.keys(picks).length;
-    setProgress((picksCount / games.length) * 100);
-  }, [picks]);
-
   return (
     <div className="App">
       <header className="app-header">
         <h1>NFL Week 1 Pick 'em Pool</h1>
       </header>
       <main className="content-wrapper">
-        <section className="game-list-container">
-          <h2>Select Your Picks</h2>
-          {GameSelectionList ? (
-            <GameSelectionList games={games} onSelect={handleSelect} picks={picks} />
-          ) : (
-            <p className="error-message">Error: GameSelectionList component not found</p>
-          )}
-        </section>
-        <aside className="sidebar">
-          <div className="pick-tracker-container">
-            <h3>Your Picks</h3>
-            {PickTracker ? (
-              <PickTracker picks={picks} games={games} />
+        <section className="main-content">
+          <div className="game-list-container">
+            <h2>Select Your Picks</h2>
+            {GameSelectionList ? (
+              <GameSelectionList games={games} onSelect={handleSelect} picks={picks} />
             ) : (
-              <p className="error-message">Error: PickTracker component not found</p>
+              <p className="error-message">Error: GameSelectionList component not found</p>
             )}
           </div>
           <div className="entry-form-container">
+            <h3>Submit Your Entry</h3>
             <form className="entry-form" onSubmit={handleSubmit}>
-              <h3>Submit Your Entry</h3>
               <div className="form-group">
                 <label htmlFor="name">Your Name</label>
                 <input
@@ -185,6 +180,15 @@ function App() {
               </button>
             </form>
             {isSubmitMessageVisible && <p className="submit-message">{submitMessage}</p>}
+          </div>
+        </section>
+        <aside className="sidebar">
+          <div className="pick-tracker-container">
+            {PickTracker ? (
+              <PickTracker picks={picks} games={games} />
+            ) : (
+              <p className="error-message">Error: PickTracker component not found</p>
+            )}
           </div>
         </aside>
       </main>

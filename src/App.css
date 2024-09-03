@@ -48,79 +48,70 @@ h1 {
 
 .content-wrapper {
   display: flex;
+  gap: 20px;
+}
+
+.main-content {
+  flex: 3;
+  display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
-.game-list-container, .sidebar {
+.game-list-container,
+.entry-form-container,
+.sidebar {
   background-color: var(--surface-color);
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h2, h3 {
-  color: var(--primary-color);
-  margin-bottom: 20px;
-  font-weight: 700;
+.sidebar {
+  flex: 1;
+}
+
+.entry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: var(--text-color);
+.form-group label {
+  margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="tel"] {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
+.form-group input {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
 }
 
-input[type="text"]:focus,
-input[type="tel"]:focus {
-  border-color: var(--secondary-color);
-  outline: none;
-}
-
-.submit-button {
+button[type="submit"] {
+  padding: 10px;
   background-color: var(--accent-color);
-  color: var(--surface-color);
+  color: white;
   border: none;
-  padding: 14px 20px;
-  border-radius: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 500;
-  width: 100%;
-  transition: background-color 0.3s ease;
 }
 
-.submit-button:hover:not(:disabled) {
-  background-color: #1cad51;
-}
-
-.submit-button:disabled {
+button[type="submit"]:disabled {
   background-color: var(--text-secondary-color);
   cursor: not-allowed;
 }
 
 .submit-message {
-  margin-top: 15px;
-  padding: 12px;
+  margin-top: 10px;
+  padding: 10px;
   background-color: var(--accent-color);
-  color: var(--surface-color);
-  border-radius: 6px;
-  font-weight: 500;
+  color: white;
+  border-radius: 4px;
 }
 
 .error-message {
@@ -139,6 +130,16 @@ input[type="tel"]:focus {
 
   .sidebar {
     flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    order: -1;
   }
 }
 
