@@ -142,3 +142,27 @@ h1 {
     flex: 2;
   }
 }
+
+/* Add these styles at the end of your App.css file */
+
+/* Remove default focus outlines */
+*:focus {
+  outline: none;
+}
+
+/* Add custom focus styles for better accessibility */
+*:focus-visible {
+  outline: 2px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+
+/* Custom focus styles for form elements */
+input:focus, button:focus {
+  box-shadow: 0 0 0 2px var(--secondary-color);
+}
+
+/* Ensure the game selection buttons don't have a red outline */
+.team-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--secondary-color);
+}
