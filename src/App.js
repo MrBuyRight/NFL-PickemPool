@@ -43,19 +43,25 @@ function App() {
     const entry = { 
       name, 
       phoneNumber, 
-      picks: picks, // Supabase will automatically handle JSON conversion
+      picks: picks,
     };
     console.log('Entry to be submitted:', JSON.stringify(entry, null, 2));
 
     try {
-      console.log('Attempting to insert entry into Supabase...');
+      console.log('Attempting to upsert entry into Supabase...');
       const { data, error } = await supabase
         .from('entries')
-        .insert([entry])
+        .upsert(
+          [entry],
+          { 
+            onConflict: 'name,phoneNumber',
+            ignoreDuplicates: false,
+          }
+        )
         .select();
 
       if (error) {
-        console.error('Supabase insert error:', JSON.stringify(error, null, 2));
+        console.error('Supabase upsert error:', JSON.stringify(error, null, 2));
         throw error;
       }
       
@@ -96,16 +102,18 @@ function App() {
 
   return (
     <div className="App">
-      <header>
+      <header className="app-header">
         <h1>NFL Week 1 Pick 'em Pool</h1>
       </header>
       <main className="content-wrapper">
         <aside className="sidebar">
-          {PickTracker ? (
-            <PickTracker picks={picks} games={games} />
-          ) : (
-            <p>Error: PickTracker component not found</p>
-          )}
+          <div className="pick-tracker-container">
+            {PickTracker ? (
+              <PickTracker picks={picks} games={games} />
+            ) : (
+              <p>Error: PickTracker component not found</p>
+            )}
+          </div>
           <form className="entry-form" onSubmit={handleSubmit}>
             <h3>Submit Your Entry</h3>
             <input
@@ -126,11 +134,13 @@ function App() {
           </form>
           {submitMessage && <p className="submit-message">{submitMessage}</p>}
         </aside>
-        {GameSelectionList ? (
-          <GameSelectionList games={games} onSelect={handleSelect} picks={picks} />
-        ) : (
-          <p>Error: GameSelectionList component not found</p>
-        )}
+        <section className="game-list-container">
+          {GameSelectionList ? (
+            <GameSelectionList games={games} onSelect={handleSelect} picks={picks} />
+          ) : (
+            <p>Error: GameSelectionList component not found</p>
+          )}
+        </section>
       </main>
     </div>
   );
