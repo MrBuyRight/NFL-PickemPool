@@ -132,23 +132,10 @@ function App() {
     setProgress((picksCount / games.length) * 100);
   }, [picks]);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const now = new Date();
-      const firstGame = new Date(games[0].date);
-      const diff = firstGame - now;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      setCountdown(`${days}d ${hours}h until kickoff`);
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <div className="App">
       <header className="app-header">
         <h1>NFL Week 1 Pick 'em Pool</h1>
-        <p className="countdown">{countdown}</p>
       </header>
       <main className="content-wrapper">
         <section className="game-list-container">

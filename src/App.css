@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 :root {
-  --primary-color: #1e3a8a;
+  --primary-color: #0f172a;
   --secondary-color: #3b82f6;
-  --background-color: #f3f4f6;
+  --background-color: #f1f5f9;
   --surface-color: #ffffff;
-  --text-color: #1f2937;
-  --text-secondary-color: #6b7280;
-  --accent-color: #10b981;
+  --text-color: #1e293b;
+  --text-secondary-color: #64748b;
+  --accent-color: #22c55e;
   --error-color: #ef4444;
+  --border-color: #e2e8f0;
 }
 
 * {
@@ -33,66 +34,70 @@ body {
 .app-header {
   background-color: var(--primary-color);
   color: var(--surface-color);
-  padding: 20px;
+  padding: 30px;
   text-align: center;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.countdown {
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 }
 
 .game-list-container, .sidebar {
   background-color: var(--surface-color);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 h2, h3 {
   color: var(--primary-color);
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-weight: 500;
-  color: var(--text-secondary-color);
+  color: var(--text-color);
 }
 
 input[type="text"],
 input[type="tel"] {
   width: 100%;
-  padding: 10px;
-  border: 1px solid var(--text-secondary-color);
-  border-radius: 4px;
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
   font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus {
+  border-color: var(--secondary-color);
+  outline: none;
 }
 
 .submit-button {
   background-color: var(--accent-color);
   color: var(--surface-color);
   border: none;
-  padding: 12px 20px;
-  border-radius: 4px;
+  padding: 14px 20px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 500;
@@ -101,7 +106,7 @@ input[type="tel"] {
 }
 
 .submit-button:hover:not(:disabled) {
-  background-color: #0ea5e9;
+  background-color: #1cad51;
 }
 
 .submit-button:disabled {
@@ -110,15 +115,17 @@ input[type="tel"] {
 }
 
 .submit-message {
-  margin-top: 10px;
-  padding: 10px;
+  margin-top: 15px;
+  padding: 12px;
   background-color: var(--accent-color);
   color: var(--surface-color);
-  border-radius: 4px;
+  border-radius: 6px;
+  font-weight: 500;
 }
 
 .error-message {
   color: var(--error-color);
+  font-weight: 500;
 }
 
 @media (min-width: 768px) {
@@ -135,4 +142,77 @@ input[type="tel"] {
   }
 }
 
-/* Add any additional styles for GameSelectionList and PickTracker components if needed */
+/* Styles for GameSelectionList component */
+.game-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.game-card {
+  background-color: var(--surface-color);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  transition: box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-button {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.team-button:hover {
+  background-color: var(--secondary-color);
+  color: var(--surface-color);
+}
+
+.team-button.selected {
+  background-color: var(--secondary-color);
+  color: var(--surface-color);
+  font-weight: 500;
+}
+
+/* Styles for PickTracker component */
+.pick-tracker {
+  background-color: var(--surface-color);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.pick-tracker ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.pick-tracker li {
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: var(--background-color);
+  border-radius: 4px;
+}
+
+.progress-bar {
+  height: 10px;
+  background-color: var(--border-color);
+  border-radius: 5px;
+  margin-top: 15px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: var(--accent-color);
+  transition: width 0.3s ease;
+}
