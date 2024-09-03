@@ -18,54 +18,46 @@ body {
 .App {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
 }
 
 .app-header {
   background-color: var(--primary-color);
   color: white;
-  padding: 20px;
+  padding: 15px;
   text-align: center;
   border-radius: 8px 8px 0 0;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 .sidebar {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 15px;
   background-color: var(--card-background);
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.pick-tracker-container {
-  flex: 1;
-  margin-right: 20px;
-}
-
-.entry-form-container {
-  flex: 1;
-}
-
-.pick-tracker-container {
-  margin-bottom: 20px;
+.pick-tracker-container, .entry-form-container {
+  width: 100%;
 }
 
 .entry-form {
   background-color: #f9f9f9;
-  padding: 20px;
+  padding: 15px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
@@ -78,12 +70,13 @@ h1 {
 }
 
 .entry-form input {
-  width: calc(100% - 20px); /* Subtract padding from width */
+  width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .entry-form button {
@@ -94,13 +87,18 @@ h1 {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
   font-size: 1rem;
   font-weight: bold;
 }
 
 .entry-form button:hover {
   background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.entry-form button:active {
+  transform: translateY(0);
 }
 
 .submit-message {
@@ -113,26 +111,21 @@ h1 {
   font-size: 0.9rem;
 }
 
-.game-list-container {
-  flex: 2;
-}
+@media (min-width: 768px) {
+  .App {
+    padding: 20px;
+  }
 
-@media (max-width: 768px) {
   .content-wrapper {
-    flex-direction: column;
+    flex-direction: row;
   }
-  
-  .sidebar, .game-list-container {
-    width: 100%;
-    max-width: none; /* Remove max-width for mobile */
-  }
-  
+
   .sidebar {
-    flex-direction: column;
+    flex: 1;
+    max-width: 300px;
   }
-  
-  .pick-tracker-container {
-    margin-right: 0;
-    margin-bottom: 20px;
+
+  .game-list-container {
+    flex: 2;
   }
 }

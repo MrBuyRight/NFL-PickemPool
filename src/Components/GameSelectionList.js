@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './GameSelectionList.css';
 
 const GameSelectionList = ({ games, onSelect, picks }) => {
@@ -13,7 +13,7 @@ const GameSelectionList = ({ games, onSelect, picks }) => {
 	}, {});
 
 	// Set initial active date
-	React.useEffect(() => {
+	useEffect(() => {
 		if (!activeDate && Object.keys(gamesByDate).length > 0) {
 			setActiveDate(Object.keys(gamesByDate)[0]);
 		}

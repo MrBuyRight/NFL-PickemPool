@@ -118,6 +118,13 @@ function App() {
         <h1>NFL Week 1 Pick 'em Pool</h1>
       </header>
       <main className="content-wrapper">
+        <section className="game-list-container">
+          {GameSelectionList ? (
+            <GameSelectionList games={games} onSelect={handleSelect} picks={picks} />
+          ) : (
+            <p>Error: GameSelectionList component not found</p>
+          )}
+        </section>
         <aside className="sidebar">
           <div className="pick-tracker-container">
             {PickTracker ? (
@@ -148,13 +155,6 @@ function App() {
             {submitMessage && <p className="submit-message">{submitMessage}</p>}
           </div>
         </aside>
-        <section className="game-list-container">
-          {GameSelectionList ? (
-            <GameSelectionList games={games} onSelect={handleSelect} picks={picks} />
-          ) : (
-            <p>Error: GameSelectionList component not found</p>
-          )}
-        </section>
       </main>
     </div>
   );
