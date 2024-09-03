@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// Remove these lines
-// import { collection, addDoc } from 'firebase/firestore';
-// import { db } from './firebase';
 import GameSelectionList from './Components/GameSelectionList';
 import PickTracker from './Components/PickTracker';
 import './App.css';
@@ -12,6 +9,7 @@ function App() {
   const [name, setName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
+  const [isSubmitMessageVisible, setIsSubmitMessageVisible] = useState(false);
 
   const games = [
     { id: 1, homeTeam: "Kansas City Chiefs", awayTeam: "Baltimore Ravens", date: 'Thu, Sep 5th, 2024 at 8:20pm ET' },
@@ -85,7 +83,11 @@ function App() {
       setPicks({});
       setSubmitMessage('Entry submitted successfully!');
 
-      setTimeout(() => setSubmitMessage(''), 5000);
+      setIsSubmitMessageVisible(true);
+      setTimeout(() => {
+        setIsSubmitMessageVisible(false);
+        setSubmitMessage('');
+      }, 5000);
 
     } catch (error) {
       console.error('Error submitting entry:', error.message);
@@ -152,7 +154,7 @@ function App() {
               />
               <button type="submit">Submit Entry</button>
             </form>
-            {submitMessage && <p className="submit-message">{submitMessage}</p>}
+            {isSubmitMessageVisible && <p className="submit-message">{submitMessage}</p>}
           </div>
         </aside>
       </main>
