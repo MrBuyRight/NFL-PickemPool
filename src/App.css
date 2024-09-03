@@ -9,6 +9,8 @@
   --text-secondary-color: #b0bec5;
   --card-background: #2c2c2c;
   --border-color: #333333;
+  --error-color: #cf6679;
+  --success-color: #4caf50;
 }
 
 body {
@@ -36,10 +38,25 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+h1, h2, h3 {
   margin: 0;
-  font-size: 1.8rem;
   font-weight: 600;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
 }
 
 .content-wrapper {
@@ -52,80 +69,66 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.game-list-container, .pick-tracker-container, .entry-form-container {
   background-color: var(--surface-color);
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.pick-tracker-container, .entry-form-container {
-  width: 100%;
 }
 
 .entry-form {
   background-color: var(--card-background);
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.entry-form h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: var(--text-color);
-  font-size: 1.4rem;
-  font-weight: 600;
+.form-group {
+  margin-bottom: 1rem;
 }
 
-.entry-form input {
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary-color);
+}
+
+input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
+  padding: 10px;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 4px;
   background-color: var(--surface-color);
   color: var(--text-color);
-  box-sizing: border-box;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.entry-form input:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(98, 0, 234, 0.2);
-}
-
-.entry-form button {
-  width: 100%;
-  padding: 14px;
-  background-color: var(--secondary-color);
-  color: var(--background-color);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
   font-size: 1rem;
-  font-weight: 600;
 }
 
-.entry-form button:hover {
-  background-color: #00c853;
-  transform: translateY(-2px);
+.submit-button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.entry-form button:active {
-  transform: translateY(0);
+.submit-button:hover {
+  background-color: #7c4dff;
 }
 
 .submit-message {
-  margin-top: 15px;
-  padding: 12px;
-  background-color: rgba(0, 230, 118, 0.1);
-  border: 1px solid var(--secondary-color);
-  border-radius: 8px;
-  color: var(--secondary-color);
-  font-size: 0.9rem;
+  margin-top: 1rem;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: var(--success-color);
+  color: var(--text-color);
+}
+
+.error-message {
+  color: var(--error-color);
 }
 
 @media (min-width: 768px) {
@@ -143,26 +146,12 @@ h1 {
   }
 }
 
-/* Add these styles at the end of your App.css file */
-
-/* Remove default focus outlines */
-*:focus {
-  outline: none;
+/* Remove outlines */
+* {
+  outline: none !important;
 }
 
-/* Add custom focus styles for better accessibility */
-*:focus-visible {
-  outline: 2px solid var(--secondary-color);
-  outline-offset: 2px;
-}
-
-/* Custom focus styles for form elements */
+/* Focus styles for accessibility */
 input:focus, button:focus {
-  box-shadow: 0 0 0 2px var(--secondary-color);
-}
-
-/* Ensure the game selection buttons don't have a red outline */
-.team-button:focus {
-  outline: none;
   box-shadow: 0 0 0 2px var(--secondary-color);
 }

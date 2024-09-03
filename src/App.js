@@ -10,6 +10,8 @@ function App() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
   const [isSubmitMessageVisible, setIsSubmitMessageVisible] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [countdown, setCountdown] = useState('');
 
   const games = [
     { id: 1, homeTeam: "Kansas City Chiefs", awayTeam: "Baltimore Ravens", date: 'Thu, Sep 5th, 2024 at 8:20pm ET' },
@@ -97,6 +99,10 @@ function App() {
     }
   };
 
+  const clearAllPicks = () => {
+    setPicks({});
+  };
+
   useEffect(() => {
     async function testSupabaseConnection() {
       console.log('Testing Supabase connection...');
@@ -114,17 +120,30 @@ function App() {
     testSupabaseConnection();
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date();
+      const firstGame = new Date(games[0].date);
+      const diff = firstGame - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      setCountdown(`${days}d ${hours}h until kickoff`);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="App">
+    <div className={`App ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
       <header className="app-header">
         <h1>NFL Week 1 Pick 'em Pool</h1>
       </header>
       <main className="content-wrapper">
         <section className="game-list-container">
+          <h2>Select Your Picks</h2>
           {GameSelectionList ? (
             <GameSelectionList games={games} onSelect={handleSelect} picks={picks} />
           ) : (
-            <p>Error: GameSelectionList component not found</p>
+            <p className="error-message">Error: GameSelectionList component not found</p>
           )}
         </section>
         <aside className="sidebar">
@@ -132,32 +151,47 @@ function App() {
             {PickTracker ? (
               <PickTracker picks={picks} games={games} />
             ) : (
-              <p>Error: PickTracker component not found</p>
+              <p className="error-message">Error: PickTracker component not found</p>
             )}
           </div>
           <div className="entry-form-container">
             <form className="entry-form" onSubmit={handleSubmit}>
               <h3>Submit Your Entry</h3>
-              <input
-                type="text"
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                required
-              />
-              <button type="submit">Submit Entry</button>
+              <div className="form-group">
+                <label htmlFor="name">Your Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phoneNumber">Phone Number</label>
+                <input
+                  id="phoneNumber"
+                  type="tel"
+                  placeholder="Enter your phone number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="submit-button" disabled={isLoading}>
+                {isLoading ? 'Submitting...' : 'Submit Entry'}
+              </button>
+              <button onClick={clearAllPicks} className="clear-picks-button">Clear All Picks</button>
             </form>
             {isSubmitMessageVisible && <p className="submit-message">{submitMessage}</p>}
           </div>
         </aside>
       </main>
+      <div className="countdown">{countdown}</div>
+      <button onClick={() => setIsDarkMode(!isDarkMode)}>
+        Toggle {isDarkMode ? 'Light' : 'Dark'} Mode
+      </button>
     </div>
   );
 }
