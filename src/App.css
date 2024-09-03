@@ -52,14 +52,28 @@ h1 {
   gap: 20px;
 }
 
-.main-content {
+.game-selection-section {
   display: flex;
-  flex-direction: column;
   gap: 20px;
 }
 
-.game-list-container,
-.pick-tracker-container,
+.game-list-container {
+  flex: 3;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pick-tracker-container {
+  flex: 1;
+  min-width: 250px;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .entry-form-container {
   background-color: var(--surface-color);
   border-radius: 8px;
@@ -130,11 +144,11 @@ button[type="submit"]:disabled {
 }
 
 @media (max-width: 768px) {
-  .content-wrapper {
+  .game-selection-section {
     flex-direction: column;
   }
 
-  .sidebar {
+  .pick-tracker-container {
     order: -1;
   }
 }

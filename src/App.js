@@ -88,7 +88,7 @@ function App() {
         <h1>NFL Week 1 Pick 'em Pool</h1>
       </header>
       <main className="content-wrapper">
-        <section className="main-content">
+        <section className="game-selection-section">
           <div className="game-list-container">
             <h2>Select Your Picks</h2>
             {GameSelectionList ? (
@@ -104,6 +104,8 @@ function App() {
               <p className="error-message">Error: PickTracker component not found</p>
             )}
           </div>
+        </section>
+        <section className="entry-form-section">
           <div className="entry-form-container">
             <h3>Submit Your Entry</h3>
             <form className="entry-form" onSubmit={handleSubmit}>
