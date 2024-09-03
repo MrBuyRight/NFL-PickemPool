@@ -148,6 +148,7 @@ function App() {
     <div className="App">
       <header className="app-header">
         <h1>NFL Week 1 Pick 'em Pool</h1>
+        <p className="countdown">{countdown}</p>
       </header>
       <main className="content-wrapper">
         <section className="game-list-container">
@@ -192,7 +193,7 @@ function App() {
                   required
                 />
               </div>
-              <button type="submit" className="submit-button" disabled={isLoading}>
+              <button type="submit" className="submit-button" disabled={isLoading || Object.keys(picks).length !== games.length}>
                 {isLoading ? 'Submitting...' : 'Submit Entry'}
               </button>
             </form>
