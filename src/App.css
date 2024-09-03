@@ -1,25 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-:root {
-  --primary-color: #6200ea;
-  --secondary-color: #00e676;
-  --background-color: #121212;
-  --surface-color: #1e1e1e;
-  --text-color: #ffffff;
-  --text-secondary-color: #b0bec5;
-  --card-background: #2c2c2c;
-  --border-color: #333333;
-  --error-color: #cf6679;
-  --success-color: #4caf50;
+* {
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.6;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f0f0f0;
 }
 
 .App {
@@ -29,185 +18,99 @@ body {
 }
 
 .app-header {
-  background-color: var(--surface-color);
-  color: var(--text-color);
+  background-color: #003366;
+  color: white;
   padding: 20px;
   text-align: center;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-h1, h2, h3 {
-  margin: 0;
-  font-weight: 600;
 }
 
 h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--secondary-color);
-}
-
-h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--secondary-color);
+  margin: 0;
+  font-size: 24px;
 }
 
 .content-wrapper {
   display: flex;
-  gap: 20px;
-}
-
-.game-list-container {
-  flex: 2;
-  background-color: var(--surface-color);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar {
-  flex: 1;
-  display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-top: 20px;
 }
 
-.pick-tracker-container, .entry-form-container {
-  background-color: var(--surface-color);
+.game-list-container, .sidebar {
+  background-color: white;
+  border-radius: 8px;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.entry-form {
-  background-color: var(--card-background);
-  padding: 20px;
-  border-radius: 12px;
+h2, h3 {
+  margin-top: 0;
+  color: #003366;
 }
 
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 15px;
 }
 
 label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: var(--text-secondary-color);
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-input {
+input[type="text"],
+input[type="tel"] {
   width: 100%;
   padding: 10px;
-  border: 1px solid var(--border-color);
+  border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: var(--surface-color);
-  color: var(--text-color);
-  font-size: 1rem;
-}
-
-.button-group {
-  display: flex;
-  gap: 10px;
-}
-
-.submit-button, .clear-picks-button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
 }
 
 .submit-button {
-  background-color: var(--primary-color);
-  color: var(--text-color);
-}
-
-.submit-button:hover:not(:disabled) {
-  background-color: #7c4dff;
+  background-color: #003366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
 }
 
 .submit-button:disabled {
-  opacity: 0.5;
+  background-color: #cccccc;
   cursor: not-allowed;
 }
 
-.clear-picks-button {
-  background-color: var(--error-color);
-  color: var(--text-color);
-}
-
-.clear-picks-button:hover {
-  background-color: #e57373;
-}
-
 .submit-message {
-  margin-top: 1rem;
+  margin-top: 10px;
   padding: 10px;
+  background-color: #4CAF50;
+  color: white;
   border-radius: 4px;
-  background-color: var(--success-color);
-  color: var(--text-color);
-  animation: fadeIn 0.3s ease-in;
 }
 
 .error-message {
-  color: var(--error-color);
+  color: #D32F2F;
 }
 
-.mode-toggle {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background-color: var(--border-color);
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-.progress {
-  height: 100%;
-  background-color: var(--secondary-color);
-  transition: width 0.3s ease;
-}
-
-.countdown {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .content-wrapper {
-    flex-direction: column;
+    flex-direction: row;
+  }
+
+  .game-list-container {
+    flex: 2;
   }
 
   .sidebar {
-    order: -1;
+    flex: 1;
   }
 
-  .game-list-container, .pick-tracker-container, .entry-form-container {
-    width: 100%;
+  h1 {
+    font-size: 32px;
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+/* Add styles for GameSelectionList and PickTracker components if needed */

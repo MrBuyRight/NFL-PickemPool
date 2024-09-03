@@ -10,7 +10,10 @@ function App() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [submitMessage, setSubmitMessage] = useState('');
   const [isSubmitMessageVisible, setIsSubmitMessageVisible] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [countdown, setCountdown] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const games = [
     { id: 1, homeTeam: "Kansas City Chiefs", awayTeam: "Baltimore Ravens", date: 'Thu, Sep 5th, 2024 at 8:20pm ET' },
@@ -101,6 +104,11 @@ function App() {
     }
   };
 
+  const clearAllPicks = () => {
+    setPicks({});
+    setProgress(0);
+  };
+
   useEffect(() => {
     async function testSupabaseConnection() {
       console.log('Testing Supabase connection...');
@@ -116,6 +124,24 @@ function App() {
     }
 
     testSupabaseConnection();
+  }, []);
+
+  useEffect(() => {
+    // Update progress when picks change
+    const picksCount = Object.keys(picks).length;
+    setProgress((picksCount / games.length) * 100);
+  }, [picks]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date();
+      const firstGame = new Date(games[0].date);
+      const diff = firstGame - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      setCountdown(`${days}d ${hours}h until kickoff`);
+    }, 1000);
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -134,6 +160,7 @@ function App() {
         </section>
         <aside className="sidebar">
           <div className="pick-tracker-container">
+            <h3>Your Picks</h3>
             {PickTracker ? (
               <PickTracker picks={picks} games={games} />
             ) : (
