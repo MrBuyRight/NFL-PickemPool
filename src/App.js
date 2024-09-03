@@ -48,24 +48,41 @@ function App() {
     console.log('Entry to be submitted:', JSON.stringify(entry, null, 2));
 
     try {
-      console.log('Attempting to upsert entry into Supabase...');
-      const { data, error } = await supabase
+      // First, check if an entry with this name and phone number already exists
+      const { data: existingEntries, error: fetchError } = await supabase
         .from('entries')
-        .upsert(
-          [entry],
-          { 
-            onConflict: 'name,phoneNumber',
-            ignoreDuplicates: false,
-          }
-        )
-        .select();
+        .select()
+        .eq('name', name)
+        .eq('phoneNumber', phoneNumber);
 
-      if (error) {
-        console.error('Supabase upsert error:', JSON.stringify(error, null, 2));
-        throw error;
+      if (fetchError) {
+        throw fetchError;
+      }
+
+      let result;
+      if (existingEntries && existingEntries.length > 0) {
+        // If entry exists, update it
+        console.log('Updating existing entry...');
+        result = await supabase
+          .from('entries')
+          .update({ picks: picks })
+          .eq('name', name)
+          .eq('phoneNumber', phoneNumber)
+          .select();
+      } else {
+        // If entry doesn't exist, insert a new one
+        console.log('Inserting new entry...');
+        result = await supabase
+          .from('entries')
+          .insert([entry])
+          .select();
+      }
+
+      if (result.error) {
+        throw result.error;
       }
       
-      console.log('Entry saved successfully:', JSON.stringify(data, null, 2));
+      console.log('Entry saved successfully:', JSON.stringify(result.data, null, 2));
       
       // Reset form and state
       setName('');
