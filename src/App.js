@@ -43,95 +43,42 @@ function App() {
     const entry = { 
       name, 
       phoneNumber, 
-      picks: picks,
+      picks: JSON.stringify(picks), // Stringify the picks object
     };
-    console.log('Entry to be submitted:', JSON.stringify(entry, null, 2));
+    console.log('Entry to be submitted:', entry);
 
     try {
-      // Check if Supabase client is properly initialized
-      if (!supabase) {
-        throw new Error('Supabase client is not initialized');
-      }
-
-      console.log('Supabase client initialized');
-
-      // First, check if an entry with this name and phone number already exists
-      console.log('Checking for existing entries...');
-      const { data: existingEntries, error: fetchError } = await supabase
-        .from('entries')
-        .select('id')
-        .eq('name', name)
-        .eq('phoneNumber', phoneNumber);
-
-      if (fetchError) {
-        console.error('Error fetching existing entries:', fetchError);
-        throw fetchError;
-      }
-
-      console.log('Existing entries:', existingEntries);
-
-      let result;
-      if (existingEntries && existingEntries.length > 0) {
-        // If entry exists, update it
-        console.log('Updating existing entry...');
-        result = await supabase
-          .from('entries')
-          .update({ picks: picks })
-          .eq('id', existingEntries[0].id)
-          .select();
-      } else {
-        // If entry doesn't exist, insert a new one
-        console.log('Inserting new entry...');
-        result = await supabase
-          .from('entries')
-          .insert([entry]);
-      }
-
-      console.log('Supabase operation result:', result);
-
-      if (result.error) {
-        console.error('Error saving entry:', result.error);
-        throw result.error;
-      }
+      const { data, error } = await supabase.from('entries').insert([entry]);
       
-      console.log('Entry saved successfully:', JSON.stringify(result.data, null, 2));
+      if (error) throw error;
       
-      // Reset form and state
+      console.log('Entry submitted successfully:', data);
+      
       setName('');
       setPhoneNumber('');
       setPicks({});
       setSubmitMessage('Entry submitted successfully!');
-
       setIsSubmitMessageVisible(true);
-      setTimeout(() => {
-        setIsSubmitMessageVisible(false);
-        setSubmitMessage('');
-      }, 5000);
-
+      setTimeout(() => setIsSubmitMessageVisible(false), 5000);
     } catch (error) {
-      console.error('Error submitting entry:', error.message);
-      console.error('Full error object:', JSON.stringify(error, null, 2));
+      console.error('Error submitting entry:', error);
       setSubmitMessage(`Error submitting entry: ${error.message}`);
-      setTimeout(() => setSubmitMessage(''), 5000);
     } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    async function testSupabaseConnection() {
-      console.log('Testing Supabase connection...');
-      const { data, error } = await supabase
-        .from('entries')
-        .select('count', { count: 'exact' });
-      
-      if (error) {
-        console.error('Supabase connection test failed:', JSON.stringify(error, null, 2));
-      } else {
-        console.log('Supabase connection successful. Number of entries:', data[0].count);
-      }
+  const testSupabaseConnection = async () => {
+    try {
+      const { data, error } = await supabase.from('entries').select('count', { count: 'exact' });
+      if (error) throw error;
+      console.log('Supabase connection successful. Number of entries:', data[0].count);
+    } catch (error) {
+      console.error('Supabase connection test failed:', error);
     }
+  };
 
+  useEffect(() => {
     testSupabaseConnection();
   }, []);
 
@@ -148,6 +95,13 @@ function App() {
               <GameSelectionList games={games} onSelect={handleSelect} picks={picks} />
             ) : (
               <p className="error-message">Error: GameSelectionList component not found</p>
+            )}
+          </div>
+          <div className="pick-tracker-container">
+            {PickTracker ? (
+              <PickTracker picks={picks} games={games} />
+            ) : (
+              <p className="error-message">Error: PickTracker component not found</p>
             )}
           </div>
           <div className="entry-form-container">
@@ -182,15 +136,6 @@ function App() {
             {isSubmitMessageVisible && <p className="submit-message">{submitMessage}</p>}
           </div>
         </section>
-        <aside className="sidebar">
-          <div className="pick-tracker-container">
-            {PickTracker ? (
-              <PickTracker picks={picks} games={games} />
-            ) : (
-              <p className="error-message">Error: PickTracker component not found</p>
-            )}
-          </div>
-        </aside>
       </main>
     </div>
   );
