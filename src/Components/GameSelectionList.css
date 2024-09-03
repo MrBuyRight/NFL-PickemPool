@@ -1,99 +1,66 @@
-.game-selection-container {
-    max-width: 1200px;
-    margin: 0 auto;
+.game-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
     padding: 20px;
 }
 
-.centered {
-    text-align: center;
+.game-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.content-wrapper {
-    display: flex;
-    gap: 20px;
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.sidebar {
-    width: 250px;
+.game-date {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.teams-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
 }
 
-.game-grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.game-item-wrapper {
-    break-inside: avoid;
-    page-break-inside: avoid;
-}
-
-.picks-tracker, .entry-form {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    padding: 20px;
-}
-
-.picks-tracker h3, .entry-form h3 {
-    margin-top: 0;
-    color: #333;
-}
-
-.picks-tracker ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.picks-tracker li {
-    background-color: #e0e0e0;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 4px;
-}
-
-.entry-form input {
+.team-button {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.entry-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
+    margin: 5px 0;
     border: none;
     border-radius: 4px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 1rem;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.entry-form button:hover {
-    background-color: #45a049;
+.team-button:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
 }
 
-@media (max-width: 768px) {
-    .content-wrapper {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        order: 2;
-    }
-
-    .game-grid {
-        order: 1;
-    }
+.team-button.selected {
+    background-color: #4caf50;
+    color: white;
 }
 
-@media (max-width: 480px) {
-    .game-grid {
+.vs {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+@media (max-width: 600px) {
+    .game-list {
         grid-template-columns: 1fr;
     }
 }

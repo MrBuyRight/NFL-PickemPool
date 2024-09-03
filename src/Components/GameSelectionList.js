@@ -1,17 +1,28 @@
 import React from 'react';
-import GameItem from './GameItem';
+import './GameSelectionList.css';
 
-const GameSelectionList = ({ games, onSelect }) => {
+const GameSelectionList = ({ games, onSelect, picks }) => {
     return (
-        <div className="game-grid">
-            {games.map(game => (
-                <GameItem 
-                    key={game.id}
-                    homeTeam={game.homeTeam} 
-                    awayTeam={game.awayTeam} 
-                    date={game.date} 
-                    onSelectTeam={(team) => onSelect(game.id, team)}
-                />
+        <div className="game-list">
+            {games.map((game) => (
+                <div key={game.id} className="game-card">
+                    <h3 className="game-date">{game.date}</h3>
+                    <div className="teams-container">
+                        <button
+                            className={`team-button ${picks[game.id] === game.awayTeam ? 'selected' : ''}`}
+                            onClick={() => onSelect(game.id, game.awayTeam)}
+                        >
+                            {game.awayTeam}
+                        </button>
+                        <span className="vs">VS</span>
+                        <button
+                            className={`team-button ${picks[game.id] === game.homeTeam ? 'selected' : ''}`}
+                            onClick={() => onSelect(game.id, game.homeTeam)}
+                        >
+                            {game.homeTeam}
+                        </button>
+                    </div>
+                </div>
             ))}
         </div>
     );

@@ -51,13 +51,11 @@ function App() {
       // First, check if an entry with this name and phone number already exists
       const { data: existingEntries, error: fetchError } = await supabase
         .from('entries')
-        .select()
+        .select('id')
         .eq('name', name)
         .eq('phoneNumber', phoneNumber);
 
-      if (fetchError) {
-        throw fetchError;
-      }
+      if (fetchError) throw fetchError;
 
       let result;
       if (existingEntries && existingEntries.length > 0) {
@@ -66,8 +64,7 @@ function App() {
         result = await supabase
           .from('entries')
           .update({ picks: picks })
-          .eq('name', name)
-          .eq('phoneNumber', phoneNumber)
+          .eq('id', existingEntries[0].id)
           .select();
       } else {
         // If entry doesn't exist, insert a new one
@@ -78,9 +75,7 @@ function App() {
           .select();
       }
 
-      if (result.error) {
-        throw result.error;
-      }
+      if (result.error) throw result.error;
       
       console.log('Entry saved successfully:', JSON.stringify(result.data, null, 2));
       
