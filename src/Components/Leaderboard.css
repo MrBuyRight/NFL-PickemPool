@@ -14,34 +14,30 @@
 }
 
 .leaderboard {
-  max-width: 100%;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  margin: 0;
-  padding: 10px;
-  border-radius: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
-.leaderboard h2 {
-  color: var(--accent-color);
-  margin-bottom: 20px;
+.leaderboard h1 {
+  padding: 10px;
+  margin: 0;
   text-align: center;
-  font-size: 24px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
 }
 
 .table-container {
-  flex-grow: 1;
-  overflow-y: auto;
-  overflow-x: auto;
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
-  border-collapse: separate;
-  border-spacing: 0;
   width: 100%;
+  border-collapse: collapse;
 }
 
 th, td {
@@ -125,27 +121,19 @@ th.name-column {
 }
 
 @media (max-width: 768px) {
-  .leaderboard {
+  .leaderboard h1 {
+    font-size: 20px;
     padding: 5px;
   }
 
-  .leaderboard h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-
-  .table-container {
-    max-height: 400px;
-  }
-
   th, td {
-    padding: 8px;
+    padding: 8px 4px;
     font-size: 12px;
   }
 
   .rank-column { width: 40px; }
-  .name-column { width: 80px; left: 40px; }
-  .score-column { width: 50px; left: 120px; }
+  .name-column { width: 80px; }
+  .score-column { width: 50px; }
 
   th.name-column, td.name-column { left: 40px; }
   th.score-column, td.score-column { left: 120px; }
