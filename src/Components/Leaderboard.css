@@ -127,11 +127,32 @@ th.name-column {
 @media (max-width: 768px) {
   .leaderboard {
     padding: 10px;
+    margin: 10px auto;
+  }
+
+  .leaderboard h2 {
+    font-size: 20px;
+  }
+
+  .table-container {
+    max-height: 400px;
   }
 
   th, td {
-    padding: 8px 10px;
-    font-size: 14px;
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .rank-column { width: 40px; }
+  .name-column { width: 80px; left: 40px; }
+  .score-column { width: 50px; left: 120px; }
+
+  th.name-column, td.name-column { left: 40px; }
+  th.score-column, td.score-column { left: 120px; }
+
+  .game-header {
+    font-size: 0.8em;
+    padding: 8px 6px;
   }
 }
 

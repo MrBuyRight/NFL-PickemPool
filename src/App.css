@@ -53,8 +53,52 @@ body {
 }
 
 @media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+
+  .app-header {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  .content-wrapper {
+    gap: 15px;
+  }
+
   .game-selection-section {
     flex-direction: column;
+  }
+
+  .game-row {
+    padding: 8px;
+  }
+
+  .teams-container {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .team-button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .vs {
+    margin: 5px 0;
+  }
+
+  .pick-tracker {
+    padding: 10px;
+  }
+
+  .pick-tracker li {
+    font-size: 14px;
   }
 }
 
@@ -271,4 +315,11 @@ nav ul li a {
 
 nav ul li a:hover {
   color: #007bff;
+}
+
+/* Add smooth scrolling for iOS devices */
+@supports (-webkit-overflow-scrolling: touch) {
+  .table-container {
+    -webkit-overflow-scrolling: touch;
+  }
 }
