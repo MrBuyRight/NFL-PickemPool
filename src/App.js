@@ -7,6 +7,7 @@ import supabase from './supabaseClient';
 function App() {
   const [games, setGames] = useState([]);
   const [selectedPicks, setSelectedPicks] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchGames();
@@ -21,8 +22,10 @@ function App() {
 
       if (error) throw error;
       setGames(data);
+      console.log('Games fetched:', data);
     } catch (error) {
       console.error('Error fetching games:', error);
+      setError('Failed to fetch games. Please try again later.');
     }
   };
 
