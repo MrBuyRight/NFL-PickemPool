@@ -40,14 +40,6 @@ function Leaderboard() {
     return "";
   }
 
-  function abbreviateName(name) {
-    const names = name.split(' ');
-    if (names.length === 1) return name;
-    const lastName = names[names.length - 1];
-    const firstNameInitial = names[0][0];
-    return `${firstNameInitial}. ${lastName.charAt(0)}.`;
-  }
-
   return (
     <div className="leaderboard">
       <h2>Week 1 Leaderboard</h2>
@@ -65,7 +57,7 @@ function Leaderboard() {
             {entries.map((entry) => (
               <tr key={entry.id}>
                 <td className="rank-column">{entry.rank}</td>
-                <td className="name-column">{abbreviateName(entry.name)}</td>
+                <td className="name-column">{entry.name}</td>
                 <td className="score-column">{entry.correctPicks}</td>
                 {parsePicks(entry.picks).map((pick, pickIndex) => (
                   <td key={pickIndex} className={getPickClassName(pick)}>{pick}</td>
