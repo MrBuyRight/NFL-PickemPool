@@ -1,8 +1,4 @@
-// This appears to be SQL INSERT statements, which are not typically found in a JavaScript file.
-// If you intended to have JavaScript code here to handle entries, we should rewrite this.
-// Here's a basic structure for handling entries in JavaScript:
-
-const entries = [
+export const entries = [
   {
     id: 1,
     name: 'Aj',

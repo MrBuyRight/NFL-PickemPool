@@ -1,58 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import initSqlJs from 'sql.js';
-import { createDbWorker } from 'sql.js-httpvfs';
-
-const workerUrl = new URL('sql.js-httpvfs/dist/sqlite.worker.js', import.meta.url);
-const wasmUrl = new URL('sql.js-httpvfs/dist/sql-wasm.wasm', import.meta.url);
+import React, { useState } from 'react';
+import { entries } from './entries.sql';
+import './SQLiteViewer.css';
 
 function SQLiteViewer() {
-  const [db, setDb] = useState(null);
+  const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    async function initDB() {
-      const worker = await createDbWorker(
-        [{ from: 'inline', config: { serverMode: 'full', url: '/path/to/your/database.sqlite' } }],
-        workerUrl.toString(),
-        wasmUrl.toString()
-      );
-      setDb(worker);
-    }
-    initDB();
-  }, []);
-
-  const runQuery = async (query) => {
-    if (db) {
-      const result = await db.db.exec(query);
-      setResults(result);
+  const runQuery = () => {
+    // This is a very basic query parser. It only supports SELECT * FROM entries
+    if (query.toLowerCase().trim() === 'select * from entries') {
+      setResults(entries);
+    } else {
+      setResults([{ error: 'Only "SELECT * FROM entries" is supported' }]);
     }
   };
 
   return (
-    <div>
+    <div className="sqlite-viewer">
       <h2>SQLite Viewer</h2>
-      <textarea onChange={(e) => runQuery(e.target.value)} placeholder="Enter SQL query" />
-      <div>
-        {results.map((result, i) => (
-          <table key={i}>
+      <textarea 
+        value={query}
+        onChange={(e) => setQuery(e.target.value)} 
+        placeholder="Enter SQL query (only SELECT * FROM entries is supported)"
+      />
+      <button onClick={runQuery}>Run Query</button>
+      <div className="results">
+        {results.length > 0 && (
+          <table>
             <thead>
               <tr>
-                {result.columns.map((column, j) => (
-                  <th key={j}>{column}</th>
-                ))}
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Picks</th>
               </tr>
             </thead>
             <tbody>
-              {result.values.map((row, k) => (
-                <tr key={k}>
-                  {row.map((cell, l) => (
-                    <td key={l}>{cell}</td>
-                  ))}
+              {results.map((entry) => (
+                <tr key={entry.id}>
+                  <td>{entry.id}</td>
+                  <td>{entry.name}</td>
+                  <td>{entry.phoneNumber}</td>
+                  <td>{JSON.stringify(entry.picks)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        ))}
+        )}
       </div>
     </div>
   );
