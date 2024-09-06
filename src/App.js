@@ -8,6 +8,7 @@ import supabase from './supabaseClient';
 function App() {
   // ... existing state variables ...
   const [leaderboardData, setLeaderboardData] = useState([]);
+  const [games, setGames] = useState([]);
 
   // ... existing code ...
 
@@ -29,9 +30,24 @@ function App() {
     }
   };
 
+  const fetchGames = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('games')
+        .select('*')
+        .order('id', { ascending: true });
+
+      if (error) throw error;
+
+      setGames(data);
+    } catch (error) {
+      console.error('Error fetching games:', error);
+    }
+  };
+
   useEffect(() => {
-    testSupabaseConnection();
     fetchLeaderboardData();
+    fetchGames();
   }, []);
 
   return (
