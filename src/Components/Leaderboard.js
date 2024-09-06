@@ -27,7 +27,7 @@ function Leaderboard() {
           <thead>
             <tr>
               <th className="name-column">User</th>
-              {gameHeaders.map(header => <th key={header}>{header}</th>)}
+              {gameHeaders.map(header => <th key={header} className="game-header">{header}</th>)}
             </tr>
           </thead>
           <tbody>
