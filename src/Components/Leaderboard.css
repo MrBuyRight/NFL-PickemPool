@@ -185,3 +185,20 @@ th.score-column, td.score-column { left: 150px; }
 th.rank-column { z-index: 17; }
 th.name-column { z-index: 16; }
 th.score-column { z-index: 15; }
+
+/* Update the header text color */
+th.rank-column,
+th.name-column,
+th.score-column,
+th.game-header {
+  color: #ffffff; /* Change this to your desired color */
+  font-weight: bold;
+}
+
+/* If you want to change the background color of the headers as well, you can add: */
+th.rank-column,
+th.name-column,
+th.score-column,
+th.game-header {
+  background-color: var(--header-bg-color);
+}
