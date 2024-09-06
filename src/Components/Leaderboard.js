@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import entriesData from './entriesData';
-import './Leaderboard.css';
+import './Leaderboard.css'; // Make sure this path is correct
 
 function Leaderboard() {
   const [entries, setEntries] = useState([]);
