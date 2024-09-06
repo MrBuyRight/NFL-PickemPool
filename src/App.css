@@ -289,3 +289,50 @@ button[type="submit"]:disabled {
   background-color: var(--highlight-color);
   transition: width 0.3s ease;
 }
+
+.leaderboard-section {
+  margin-top: 2rem;
+}
+
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard th, .leaderboard td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.leaderboard th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.leaderboard tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.leaderboard-section {
+  margin-top: 2rem;
+}
+
+.leaderboard table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard th, .leaderboard td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.leaderboard th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.leaderboard tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
