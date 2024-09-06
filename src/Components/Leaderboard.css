@@ -5,8 +5,8 @@
   --text-color: #ecf0f1;
   --border-color: #7f8c8d;
   --hover-color: #2980b9;
-  --header-bg-color: #e74c3c; /* New contrasting color for headers */
-  --header-text-color: #ffffff; /* White text for better readability */
+  --header-bg-color: #1a2733; /* Darker shade for headers */
+  --header-text-color: #ecf0f1; /* Light text for better readability */
 }
 
 .leaderboard {
@@ -51,6 +51,8 @@ th, td {
 }
 
 th {
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -60,14 +62,15 @@ th {
 }
 
 th.game-header {
-  background-color: var(--header-bg-color);
-  color: var(--header-text-color);
   font-size: 0.9em; /* Slightly smaller font size for game headers */
   padding: 10px 8px; /* Adjust padding for game headers */
 }
 
-th.name-column {
-  background-color: var(--accent-color);
+th.name-column, td.name-column {
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+  position: sticky;
+  left: 0;
   z-index: 15;
 }
 
