@@ -12,8 +12,7 @@ function Leaderboard() {
   async function fetchEntries() {
     const { data, error } = await supabase
       .from('entries_rows')
-      .select('id, picks')
-      .eq('week', 1); // Assuming we're showing Week 1 picks
+      .select('id, picks');
 
     if (error) {
       console.error('Error fetching entries:', error);
@@ -29,8 +28,8 @@ function Leaderboard() {
   ];
 
   function parsePicks(picksString) {
-    const picksArray = picksString.split(',').map(pick => pick.trim().split(':')[1].replace(/"/g, ''));
-    return picksArray;
+    const picksObject = JSON.parse(picksString.replace(/'/g, '"'));
+    return gameHeaders.map((_, index) => picksObject[index + 1] || '-');
   }
 
   return (
