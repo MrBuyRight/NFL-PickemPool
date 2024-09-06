@@ -40,6 +40,12 @@ function Leaderboard() {
     return "";
   }
 
+  function formatName(name) {
+    const parts = name.split(' ');
+    if (parts.length === 1) return name; // Keep one-word names unchanged
+    return `${parts[0]} ${parts[1].charAt(0)}.`; // Abbreviate the second name
+  }
+
   return (
     <div className="leaderboard">
       <h2>Week 1 Leaderboard</h2>
@@ -57,7 +63,7 @@ function Leaderboard() {
             {entries.map((entry) => (
               <tr key={entry.id}>
                 <td className="rank-column">{entry.rank}</td>
-                <td className="name-column">{entry.name}</td>
+                <td className="name-column">{formatName(entry.name)}</td>
                 <td className="score-column">{entry.correctPicks}</td>
                 {parsePicks(entry.picks).map((pick, pickIndex) => (
                   <td key={pickIndex} className={getPickClassName(pick)}>{pick}</td>
