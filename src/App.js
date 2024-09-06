@@ -1,30 +1,54 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Home from './Components/Home';
-import LeaderboardPage from './Components/LeaderboardPage';
+import React, { useState, useEffect } from 'react';
+import GameSelectionList from './Components/GameSelectionList';
+import PickTracker from './Components/PickTracker';
 import './App.css';
+import supabase from './supabaseClient';
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/leaderboard">Leaderboard</Link>
-            </li>
-          </ul>
-        </nav>
+  const [games, setGames] = useState([]);
+  const [selectedPicks, setSelectedPicks] = useState({});
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/leaderboard" element={<LeaderboardPage />} />
-        </Routes>
-      </div>
-    </Router>
+  useEffect(() => {
+    fetchGames();
+  }, []);
+
+  const fetchGames = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('games')
+        .select('*')
+        .order('id', { ascending: true });
+
+      if (error) throw error;
+      setGames(data);
+    } catch (error) {
+      console.error('Error fetching games:', error);
+    }
+  };
+
+  const handlePickSelection = (gameId, teamPicked) => {
+    setSelectedPicks(prevPicks => ({
+      ...prevPicks,
+      [gameId]: teamPicked
+    }));
+  };
+
+  return (
+    <div className="App">
+      <header className="app-header">
+        <h1>NFL Pickem Pool</h1>
+      </header>
+      <main className="content-wrapper">
+        <div className="game-selection-section">
+          <GameSelectionList 
+            games={games} 
+            selectedPicks={selectedPicks} 
+            onPickSelection={handlePickSelection} 
+          />
+          <PickTracker selectedPicks={selectedPicks} games={games} />
+        </div>
+      </main>
+    </div>
   );
 }
 
