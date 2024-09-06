@@ -9,7 +9,7 @@ function SQLiteViewer() {
   const runQuery = () => {
     if (query.toLowerCase().trim() === 'select * from entries') {
       const sanitizedEntries = entriesData.entries.map((entry, index) => ({
-        id: `User ${index + 1}`,
+        id: `User ${entry.id}`,
         picks: entry.picks
       }));
       setResults(sanitizedEntries);

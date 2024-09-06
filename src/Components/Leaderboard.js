@@ -1,27 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../supabaseClient'; // Make sure you have this file set up
-import './Leaderboard.css'; // Import the CSS file
+import entriesData from './entries.sql';
+import './Leaderboard.css';
 
 function Leaderboard() {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    fetchEntries();
+    // Use local data instead of fetching from Supabase
+    const shuffledEntries = entriesData.entries
+      .map(entry => ({ ...entry, id: `User ${entry.id}` }))
+      .sort(() => 0.5 - Math.random());
+    setEntries(shuffledEntries);
   }, []);
-
-  async function fetchEntries() {
-    const { data, error } = await supabase
-      .from('entries_rows')
-      .select('id, picks');
-
-    if (error) {
-      console.error('Error fetching entries:', error);
-    } else {
-      // Randomize the order of entries
-      const shuffledEntries = data.sort(() => 0.5 - Math.random());
-      setEntries(shuffledEntries);
-    }
-  }
 
   const gameHeaders = [
     "BAL@KC", "GB@PHI", "PIT@ATL", "ARI@BUF", "TEN@CHI", "NE@CIN", 
@@ -29,9 +19,8 @@ function Leaderboard() {
     "DAL@CLE", "WAS@TB", "LAR@DET", "NYJ@SF"
   ];
 
-  function parsePicks(picksString) {
-    const picksObject = JSON.parse(picksString.replace(/'/g, '"'));
-    return gameHeaders.map((_, index) => picksObject[index + 1] || '-');
+  function parsePicks(picks) {
+    return gameHeaders.map((_, index) => picks[index + 1] || '-');
   }
 
   return (
@@ -41,14 +30,14 @@ function Leaderboard() {
         <table>
           <thead>
             <tr>
-              <th>User</th>
+              <th>User ID</th>
               {gameHeaders.map(header => <th key={header}>{header}</th>)}
             </tr>
           </thead>
           <tbody>
-            {entries.map((entry, index) => (
+            {entries.map((entry) => (
               <tr key={entry.id}>
-                <td>User {index + 1}</td>
+                <td>{entry.id}</td>
                 {parsePicks(entry.picks).map((pick, pickIndex) => (
                   <td key={pickIndex}>{pick}</td>
                 ))}
