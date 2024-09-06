@@ -21,6 +21,8 @@ function Leaderboard() {
     }
   }
 
+  const gameHeaders = Array.from({ length: 16 }, (_, i) => `Game ${i + 1}`);
+
   return (
     <div className="leaderboard">
       <h2>Week 1 Leaderboard</h2>
@@ -28,20 +30,17 @@ function Leaderboard() {
         <thead>
           <tr>
             <th>User</th>
-            {/* Add table headers for each game */}
-            <th>Game 1</th>
-            <th>Game 2</th>
-            <th>Game 3</th>
-            {/* Add more game columns as needed */}
+            {gameHeaders.map(header => <th key={header}>{header}</th>)}
           </tr>
         </thead>
         <tbody>
           {entries.map((entry, index) => (
             <tr key={entry.id}>
               <td>User {index + 1}</td>
-              {/* Map through picks and display them */}
-              {Object.values(entry.picks).map((pick, pickIndex) => (
-                <td key={pickIndex}>{pick}</td>
+              {gameHeaders.map((_, gameIndex) => (
+                <td key={gameIndex}>
+                  {entry.picks[gameIndex + 1] || '-'}
+                </td>
               ))}
             </tr>
           ))}
