@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { entries } from './entries.sql';
+import entriesData from './entries.sql';
 import './SQLiteViewer.css';
 
 function SQLiteViewer() {
@@ -9,7 +9,7 @@ function SQLiteViewer() {
   const runQuery = () => {
     // This is a very basic query parser. It only supports SELECT * FROM entries
     if (query.toLowerCase().trim() === 'select * from entries') {
-      setResults(entries);
+      setResults(entriesData.entries);
     } else {
       setResults([{ error: 'Only "SELECT * FROM entries" is supported' }]);
     }

@@ -1,4 +1,4 @@
-export const entries = [
+const entries = [
   {
     id: 1,
     name: 'Aj',
@@ -45,5 +45,9 @@ function getEntryById(id) {
   return entries.find(entry => entry.id === id);
 }
 
-// Export functions if needed
-export { addEntry, getAllEntries, getEntryById };
+export default {
+  entries,
+  addEntry,
+  getAllEntries,
+  getEntryById
+};
