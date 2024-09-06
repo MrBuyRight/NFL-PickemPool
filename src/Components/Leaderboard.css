@@ -125,3 +125,11 @@ th.name-column {
     font-size: 14px;
   }
 }
+
+.correct-pick {
+  background-color: rgba(0, 255, 0, 0.2) !important; /* Light green */
+}
+
+.wrong-pick {
+  background-color: rgba(255, 0, 0, 0.2) !important; /* Light red */
+}

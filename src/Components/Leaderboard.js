@@ -19,6 +19,12 @@ function Leaderboard() {
     return gameHeaders.map((_, index) => picks[index + 1] || '-');
   }
 
+  function getPickClassName(pick) {
+    if (pick === "Kansas City Chiefs") return "correct-pick";
+    if (pick === "Baltimore Ravens") return "wrong-pick";
+    return "";
+  }
+
   return (
     <div className="leaderboard">
       <h2>Week 1 Leaderboard</h2>
@@ -35,7 +41,7 @@ function Leaderboard() {
               <tr key={entry.id}>
                 <td className="name-column">{entry.name}</td>
                 {parsePicks(entry.picks).map((pick, pickIndex) => (
-                  <td key={pickIndex}>{pick}</td>
+                  <td key={pickIndex} className={getPickClassName(pick)}>{pick}</td>
                 ))}
               </tr>
             ))}
