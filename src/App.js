@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import GameSelectionList from './Components/GameSelectionList';
 import PickTracker from './Components/PickTracker';
 import Leaderboard from './Components/Leaderboard';
+import SQLiteViewer from './Components/SQLiteViewer';
 import './App.css';
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <PickTracker picks={selectedPicks} games={games} />
         </div>
         <Leaderboard />
+        <SQLiteViewer />
       </main>
     </div>
   );
