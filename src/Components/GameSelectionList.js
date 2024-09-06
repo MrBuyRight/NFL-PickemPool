@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './GameSelectionList.css';
 
-const GameSelectionList = ({ games, onSelect, picks }) => {
+const GameSelectionList = ({ games, onPickSelection, selectedPicks }) => {
 	const [expandedDate, setExpandedDate] = useState(null);
 
 	const groupedGames = games.reduce((acc, game) => {
@@ -32,15 +32,15 @@ const GameSelectionList = ({ games, onSelect, picks }) => {
 									</div>
 									<div className="teams-container">
 										<button
-											className={`team-button ${picks[game.id] === game.awayTeam ? 'selected' : ''}`}
-											onClick={() => onSelect(game.id, game.awayTeam)}
+											className={`team-button ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
+											onClick={() => onPickSelection(game.id, game.awayTeam)}
 										>
 											{game.awayTeam}
 										</button>
 										<span className="vs">@</span>
 										<button
-											className={`team-button ${picks[game.id] === game.homeTeam ? 'selected' : ''}`}
-											onClick={() => onSelect(game.id, game.homeTeam)}
+											className={`team-button ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
+											onClick={() => onPickSelection(game.id, game.homeTeam)}
 										>
 											{game.homeTeam}
 										</button>

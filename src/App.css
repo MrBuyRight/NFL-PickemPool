@@ -33,17 +33,12 @@ body {
 }
 
 .app-header {
-  background-color: var(--primary-color);
-  color: var(--accent-color);
+  background-color: #121212;
+  color: #ff9800;
   padding: 30px;
   text-align: center;
   border-radius: 12px;
   margin-bottom: 30px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-h1, h2, h3 {
-  color: var(--accent-color);
 }
 
 .content-wrapper {
@@ -57,85 +52,9 @@ h1, h2, h3 {
   gap: 20px;
 }
 
-.game-list-container, .pick-tracker-container, .entry-form-container {
-  background-color: var(--surface-color);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.game-list-container {
-  flex: 3;
-}
-
-.pick-tracker-container {
-  flex: 1;
-  min-width: 250px;
-}
-
-.entry-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  margin-bottom: 5px;
-  color: var(--text-secondary-color);
-}
-
-.form-group input {
-  padding: 8px;
-  background-color: var(--secondary-color);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  color: var(--text-color);
-}
-
-button[type="submit"] {
-  padding: 10px;
-  background-color: var(--accent-color);
-  color: var(--primary-color);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: var(--highlight-color);
-}
-
-button[type="submit"]:disabled {
-  background-color: var(--text-secondary-color);
-  cursor: not-allowed;
-}
-
-.submit-message {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: var(--accent-color);
-  color: var(--primary-color);
-  border-radius: 4px;
-}
-
-.error-message {
-  color: var(--error-color);
-  font-weight: 500;
-}
-
 @media (max-width: 768px) {
   .game-selection-section {
     flex-direction: column;
-  }
-
-  .pick-tracker-container {
-    order: -1;
   }
 }
 
