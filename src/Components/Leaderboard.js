@@ -48,7 +48,7 @@ function Leaderboard() {
 
   return (
     <div className="leaderboard">
-      <h1>NFL Week 1 Pick'em Pool</h1>
+      <h1>NFL Week 1 Pick'em Pool Leaderboard</h1>
       <div className="table-container">
         <table>
           <thead>
