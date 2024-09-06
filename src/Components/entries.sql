@@ -24,30 +24,17 @@ const entries = [
   // ... other entries
 ];
 
-// Function to add a new entry
-function addEntry(name, phoneNumber, picks) {
-  const newEntry = {
-    id: entries.length + 1,
-    name,
-    phoneNumber,
-    picks
-  };
-  entries.push(newEntry);
-}
-
-// Function to get all entries
-function getAllEntries() {
-  return entries;
-}
-
-// Function to get entry by id
-function getEntryById(id) {
-  return entries.find(entry => entry.id === id);
-}
-
 export default {
   entries,
-  addEntry,
-  getAllEntries,
-  getEntryById
+  addEntry: (name, phoneNumber, picks) => {
+    const newEntry = {
+      id: entries.length + 1,
+      name,
+      phoneNumber,
+      picks
+    };
+    entries.push(newEntry);
+  },
+  getAllEntries: () => entries,
+  getEntryById: (id) => entries.find(entry => entry.id === id)
 };

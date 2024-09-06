@@ -7,9 +7,12 @@ function SQLiteViewer() {
   const [results, setResults] = useState([]);
 
   const runQuery = () => {
-    // This is a very basic query parser. It only supports SELECT * FROM entries
     if (query.toLowerCase().trim() === 'select * from entries') {
-      setResults(entriesData.entries);
+      const sanitizedEntries = entriesData.entries.map((entry, index) => ({
+        id: `User ${index + 1}`,
+        picks: entry.picks
+      }));
+      setResults(sanitizedEntries);
     } else {
       setResults([{ error: 'Only "SELECT * FROM entries" is supported' }]);
     }
@@ -29,9 +32,7 @@ function SQLiteViewer() {
           <table>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Phone Number</th>
+                <th>User ID</th>
                 <th>Picks</th>
               </tr>
             </thead>
@@ -39,8 +40,6 @@ function SQLiteViewer() {
               {results.map((entry) => (
                 <tr key={entry.id}>
                   <td>{entry.id}</td>
-                  <td>{entry.name}</td>
-                  <td>{entry.phoneNumber}</td>
                   <td>{JSON.stringify(entry.picks)}</td>
                 </tr>
               ))}

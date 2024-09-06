@@ -17,7 +17,9 @@ function Leaderboard() {
     if (error) {
       console.error('Error fetching entries:', error);
     } else {
-      setEntries(data);
+      // Randomize the order of entries
+      const shuffledEntries = data.sort(() => 0.5 - Math.random());
+      setEntries(shuffledEntries);
     }
   }
 
