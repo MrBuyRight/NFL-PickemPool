@@ -6,11 +6,7 @@ function Leaderboard() {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    // Use local data instead of fetching from Supabase
-    const shuffledEntries = entriesData.entries
-      .map(entry => ({ ...entry, id: `User ${entry.id}` }))
-      .sort(() => 0.5 - Math.random());
-    setEntries(shuffledEntries);
+    setEntries(entriesData);
   }, []);
 
   const gameHeaders = [
@@ -30,14 +26,14 @@ function Leaderboard() {
         <table>
           <thead>
             <tr>
-              <th>User ID</th>
+              <th>User</th>
               {gameHeaders.map(header => <th key={header}>{header}</th>)}
             </tr>
           </thead>
           <tbody>
             {entries.map((entry) => (
               <tr key={entry.id}>
-                <td>{entry.id}</td>
+                <td>{entry.name}</td>
                 {parsePicks(entry.picks).map((pick, pickIndex) => (
                   <td key={pickIndex}>{pick}</td>
                 ))}
