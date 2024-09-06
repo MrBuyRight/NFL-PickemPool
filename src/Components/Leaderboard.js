@@ -26,14 +26,14 @@ function Leaderboard() {
         <table>
           <thead>
             <tr>
-              <th>User</th>
+              <th className="name-column">User</th>
               {gameHeaders.map(header => <th key={header}>{header}</th>)}
             </tr>
           </thead>
           <tbody>
             {entries.map((entry) => (
               <tr key={entry.id}>
-                <td>{entry.name}</td>
+                <td className="name-column">{entry.name}</td>
                 {parsePicks(entry.picks).map((pick, pickIndex) => (
                   <td key={pickIndex}>{pick}</td>
                 ))}
