@@ -35,34 +35,39 @@
 .table-container {
   max-height: 600px;
   overflow-y: auto;
+  overflow-x: auto;
 }
 
 table {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-  background-color: var(--secondary-color);
-  border-radius: 8px;
-  overflow: hidden;
 }
 
 th, td {
   padding: 12px 15px;
-  text-align: center;
-  color: var(--text-color);
+  text-align: left;
   border-bottom: 1px solid var(--border-color);
-  background-color: var(--secondary-color); /* Ensure all cells have the dark background */
 }
 
-th {
-  background-color: var(--header-bg-color);
-  color: var(--header-text-color);
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.rank-column, .name-column, .score-column {
   position: sticky;
-  top: 0;
+  left: 0;
+  background-color: var(--secondary-color);
   z-index: 10;
+}
+
+.rank-column { width: 60px; left: 0; }
+.name-column { width: 100px; left: 60px; }
+.score-column { width: 60px; left: 160px; }
+
+th.rank-column, th.name-column, th.score-column {
+  background-color: var(--header-bg-color);
+  z-index: 11;
+}
+
+.game-header {
+  white-space: nowrap;
 }
 
 th.game-header {

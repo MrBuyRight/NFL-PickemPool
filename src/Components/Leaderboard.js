@@ -64,7 +64,9 @@ function Leaderboard() {
           <tbody>
             {entries.map((entry) => (
               <tr key={entry.id}>
+                <td className="rank-column">{entry.rank}</td>
                 <td className="name-column">{abbreviateName(entry.name)}</td>
+                <td className="score-column">{entry.correctPicks}</td>
                 {parsePicks(entry.picks).map((pick, pickIndex) => (
                   <td key={pickIndex} className={getPickClassName(pick)}>{pick}</td>
                 ))}
