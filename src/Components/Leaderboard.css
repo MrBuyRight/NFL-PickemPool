@@ -45,6 +45,7 @@ th, td {
   text-align: center;
   color: var(--text-color);
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--secondary-color); /* Ensure all cells have the dark background */
 }
 
 th {
@@ -61,11 +62,11 @@ tr:last-child td {
   border-bottom: none;
 }
 
-tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.05);
+tr:nth-child(even) td {
+  background-color: rgba(52, 73, 94, 0.7); /* Slightly lighter shade for even rows */
 }
 
-tr:hover {
+tr:hover td {
   background-color: var(--hover-color);
   transition: background-color 0.3s ease;
 }
