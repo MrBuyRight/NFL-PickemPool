@@ -48,7 +48,7 @@ function Leaderboard() {
 
   return (
     <div className="leaderboard">
-      <h2>Week 1 Leaderboard</h2>
+      <h2>Leaderboard</h2>
       <div className="table-container">
         <table>
           <thead>
