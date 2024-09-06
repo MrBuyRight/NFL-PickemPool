@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import entriesData from './entries.sql';
+import entriesData from './entriesData';
 import './SQLiteViewer.css';
 
 function SQLiteViewer() {

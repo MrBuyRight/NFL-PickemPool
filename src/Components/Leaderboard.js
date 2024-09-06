@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import entriesData from './entries.sql';
+import entriesData from './entriesData';
 import './Leaderboard.css';
 
 function Leaderboard() {
