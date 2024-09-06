@@ -6,7 +6,22 @@ function Leaderboard() {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
-    setEntries(entriesData);
+    const sortedEntries = entriesData.map(entry => ({
+      ...entry,
+      correctPicks: Object.values(entry.picks).filter(pick => pick === "Kansas City Chiefs").length
+    })).sort((a, b) => b.correctPicks - a.correctPicks);
+
+    let rank = 1;
+    let prevScore = null;
+    const rankedEntries = sortedEntries.map((entry, index) => {
+      if (entry.correctPicks !== prevScore) {
+        rank = index + 1;
+      }
+      prevScore = entry.correctPicks;
+      return { ...entry, rank };
+    });
+
+    setEntries(rankedEntries);
   }, []);
 
   const gameHeaders = [
@@ -40,7 +55,9 @@ function Leaderboard() {
         <table>
           <thead>
             <tr>
+              <th className="rank-column">Rank</th>
               <th className="name-column">User</th>
+              <th className="score-column">Score</th>
               {gameHeaders.map(header => <th key={header} className="game-header">{header}</th>)}
             </tr>
           </thead>

@@ -139,3 +139,44 @@ th.name-column {
   background-color: var(--wrong-pick-bg) !important;
   color: var(--wrong-pick-text) !important;
 }
+
+/* Add these new styles to your existing CSS file */
+
+.rank-column, .score-column {
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+  font-weight: bold;
+  position: sticky;
+  left: 0;
+  z-index: 15;
+}
+
+.rank-column {
+  width: 50px;
+  text-align: center;
+}
+
+.score-column {
+  width: 60px;
+  text-align: center;
+}
+
+th.rank-column, th.score-column {
+  background-color: var(--accent-color);
+}
+
+/* Update this selector to include the new columns */
+th.rank-column, th.name-column, th.score-column, td.rank-column, td.name-column, td.score-column {
+  position: sticky;
+  left: 0;
+  z-index: 15;
+}
+
+/* Adjust the left position for each sticky column */
+th.name-column, td.name-column { left: 50px; }
+th.score-column, td.score-column { left: 150px; }
+
+/* Add this to ensure proper stacking of sticky columns */
+th.rank-column { z-index: 17; }
+th.name-column { z-index: 16; }
+th.score-column { z-index: 15; }
