@@ -9,7 +9,7 @@ function App() {
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </Helmet>
-      <h1>NFL Week 1 Pick'em Pool</h1>
+      <h1></h1>
       <Leaderboard />
     </div>
   );
