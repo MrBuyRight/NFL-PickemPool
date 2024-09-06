@@ -5,7 +5,7 @@ import './App.css'; // Make sure you have this if you're using App-specific styl
 function App() {
   return (
     <div className="App">
-      <h1>Pickem Pool</h1>
+      <h1>NFL Week 1 Pick'em Pool</h1>
       <Leaderboard />
     </div>
   );
