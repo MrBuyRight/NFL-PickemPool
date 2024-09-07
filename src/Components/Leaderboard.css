@@ -63,21 +63,9 @@ body {
   z-index: 5;
 }
 
-.rank-column {
-  width: 50px;
-  min-width: 50px;
-}
-
 .name-column {
   width: 120px;
   min-width: 120px;
-  left: 50px;
-}
-
-.score-column {
-  width: 50px;
-  min-width: 50px;
-  left: 170px;
 }
 
 .pick-header {
@@ -103,21 +91,9 @@ body {
 }
 
 @media (max-width: 768px) {
-  .rank-column {
-    width: 40px;
-    min-width: 40px;
-  }
-
   .name-column {
     width: 100px;
     min-width: 100px;
-    left: 40px;
-  }
-
-  .score-column {
-    width: 40px;
-    min-width: 40px;
-    left: 140px;
   }
 
   .pick-header,
