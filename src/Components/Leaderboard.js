@@ -17,6 +17,14 @@ function Leaderboard({ entriesData }) {
     return '';
   };
 
+  const formatName = (name) => {
+    const nameParts = name.split(' ');
+    if (nameParts.length > 1) {
+      return `${nameParts[0]} ${nameParts[1].charAt(0)}.`;
+    }
+    return name;
+  };
+
   return (
     <div className="leaderboard">
       <h2>Week 1 Leaderboard</h2>
@@ -33,7 +41,7 @@ function Leaderboard({ entriesData }) {
           <tbody>
             {entriesData.map((entry, index) => (
               <tr key={index}>
-                <td className="name-column">{entry.name}</td>
+                <td className="name-column">{formatName(entry.name)}</td>
                 {Object.values(entry.picks).map((pick, pickIndex) => (
                   <td key={pickIndex} className="pick-cell">
                     <div className={`pick-info ${getPickClass(pick)}`}>
