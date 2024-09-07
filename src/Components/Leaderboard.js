@@ -110,38 +110,29 @@ function Leaderboard({ entriesData }) {
   return (
     <div className="leaderboard">
       <h2>Week 1 Leaderboard</h2>
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th className="rank-column">Rank</th>
-              <th className="name-column">Name</th>
-              <th className="score-column">Score</th>
-              {gameHeaders.map((header, index) => (
-                <th key={index} className="game-header">{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rankedEntries.map((entry, index) => (
-              <tr key={index}>
-                <td className="rank-column">{entry.rank}</td>
-                <td className="name-column">{formatName(entry.name)}</td>
-                <td className="score-column">{entry.score}</td>
-                {gameMatchups.map((matchup, pickIndex) => {
-                  const pick = entry.picks[pickIndex + 1];
-                  return (
-                    <td key={pickIndex} className="pick-cell">
-                      <div className={`pick-info ${getPickClass(pick)}`}>
-                        <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
-                      </div>
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="leaderboard-container">
+        {rankedEntries.map((entry, index) => (
+          <div key={index} className="entry-row">
+            <div className="entry-info">
+              <span className="rank">{entry.rank}</span>
+              <span className="name">{formatName(entry.name)}</span>
+              <span className="score">{entry.score}</span>
+            </div>
+            <div className="picks-container">
+              {gameMatchups.map((matchup, pickIndex) => {
+                const pick = entry.picks[pickIndex + 1];
+                return (
+                  <div key={pickIndex} className="pick-cell">
+                    <div className="game-header">{gameHeaders[pickIndex]}</div>
+                    <div className={`pick-info ${getPickClass(pick)}`}>
+                      <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

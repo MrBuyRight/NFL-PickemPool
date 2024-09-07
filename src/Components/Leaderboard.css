@@ -20,104 +20,68 @@ body {
 
 .leaderboard {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 
-.table-container {
-  overflow-x: auto;
+.leaderboard-container {
   width: 100%;
 }
 
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: max-content;
-  min-width: 100%;
-}
-
-th, td {
-  padding: 10px 5px;
-  text-align: center;
+.entry-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
   border: 1px solid var(--border-color);
-  white-space: nowrap;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-th {
+.entry-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
   background-color: var(--secondary-color);
-  color: var(--header-text-color);
-  font-weight: bold;
 }
 
-.rank-column, .score-column {
-  position: sticky;
-  background-color: var(--secondary-color);
-  color: var(--header-text-color);
-  z-index: 10;
-  width: 60px;
-  min-width: 60px;
-  max-width: 60px;
+.rank, .name, .score {
+  flex: 1;
+  text-align: center;
 }
 
-.rank-column {
-  left: 0;
-}
-
-.score-column {
-  left: 210px; /* Adjust based on the width of rank and name columns */
-}
-
-.name-column {
-  position: sticky;
-  left: 60px; /* Adjust based on the width of rank column */
-  background-color: var(--secondary-color);
-  color: var(--header-text-color);
-  z-index: 10;
-  width: 150px;
-  min-width: 150px;
-  max-width: 150px;
-}
-
-.picks-column {
-  padding: 0;
-}
-
-.picks-scroll {
+.picks-container {
+  display: flex;
   overflow-x: auto;
-  width: calc(100vw - 190px); /* Adjust based on your layout */
-}
-
-.picks-scroll table {
-  table-layout: fixed;
-}
-
-.game-header {
-  width: 70px;
-  min-width: 70px;
-  max-width: 70px;
-  font-size: 0.8rem;
-  background-color: var(--secondary-color);
-  color: var(--header-text-color);
+  padding: 10px;
+  background-color: var(--primary-color);
 }
 
 .pick-cell {
-  width: 70px;
-  min-width: 70px;
-  max-width: 70px;
-  padding: 5px;
+  flex: 0 0 auto;
+  width: 80px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.game-header {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pick-info {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
+  height: 40px;
   border-radius: 4px;
-  height: 100%;
+  font-weight: bold;
 }
 
 .pick-team {
   font-size: 0.9rem;
-  font-weight: bold;
 }
 
 .correct {
@@ -130,39 +94,9 @@ th {
   color: var(--wrong-pick-text);
 }
 
-/* Zebra striping for rows */
-tbody tr:nth-child(even) {
-  background-color: var(--secondary-color);
-}
-
-/* Hover effect for rows */
-tbody tr:hover {
-  background-color: #3a3a3a;
-}
-
-/* Add responsive styles as needed */
 @media (max-width: 768px) {
-  .rank-column, .score-column {
-    width: 50px;
-    min-width: 50px;
-    max-width: 50px;
-  }
-
-  .score-column {
-    left: 170px; /* Adjust based on the width of rank and name columns on mobile */
-  }
-
-  .name-column {
-    left: 50px;
-    width: 120px;
-    min-width: 120px;
-    max-width: 120px;
-  }
-
-  .game-header, .pick-cell {
+  .pick-cell {
     width: 60px;
-    min-width: 60px;
-    max-width: 60px;
   }
 
   .game-header {
@@ -172,35 +106,4 @@ tbody tr:hover {
   .pick-team {
     font-size: 0.8rem;
   }
-}
-
-/* Add these new styles */
-.entry-details {
-  background-color: var(--secondary-color);
-}
-
-.picks-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 10px;
-  padding: 10px;
-}
-
-.pick-cell {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--primary-color);
-  border-radius: 4px;
-  padding: 5px;
-}
-
-.game-header {
-  font-size: 0.8rem;
-  margin-bottom: 5px;
-}
-
-.pick-info {
-  width: 100%;
-  text-align: center;
 }
