@@ -63,21 +63,9 @@ body {
   z-index: 5;
 }
 
-.rank-column {
-  width: 30px;
-  min-width: 30px;
-}
-
 .name-column {
-  width: 100px;
-  min-width: 100px;
-  left: 30px;
-}
-
-.score-column {
-  width: 30px;
-  min-width: 30px;
-  left: 130px;
+  width: 120px;
+  min-width: 120px;
 }
 
 .pick-header {
@@ -103,21 +91,9 @@ body {
 }
 
 @media (max-width: 768px) {
-  .rank-column {
-    width: 25px;
-    min-width: 25px;
-  }
-
   .name-column {
-    width: 80px;
-    min-width: 80px;
-    left: 25px;
-  }
-
-  .score-column {
-    width: 25px;
-    min-width: 25px;
-    left: 105px;
+    width: 100px;
+    min-width: 100px;
   }
 
   .pick-header,

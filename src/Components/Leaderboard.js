@@ -77,32 +77,12 @@ function Leaderboard({ entriesData }) {
     return name;
   };
 
-  const calculateScore = (picks) => {
-    return Object.values(picks).reduce((score, pick) => {
-      return score + (correctTeams.includes(pick) ? 1 : 0);
-    }, 0);
-  };
-
-  // Generate game headers based on the gameMatchups array
-  const gameHeaders = gameMatchups.map((matchup, index) => 
-    `${teamAbbreviations[matchup.away]}@${teamAbbreviations[matchup.home]}`
-  );
-
-  const rankedEntries = useMemo(() => {
+  const sortedEntries = useMemo(() => {
     if (!entriesData || entriesData.length === 0) {
       return [];
     }
 
-    return entriesData
-      .map(entry => ({
-        ...entry,
-        score: calculateScore(entry.picks)
-      }))
-      .sort((a, b) => b.score - a.score)
-      .map((entry, index, array) => ({
-        ...entry,
-        rank: index === 0 || entry.score !== array[index - 1].score ? index + 1 : array[index - 1].rank
-      }));
+    return [...entriesData].sort((a, b) => a.name.localeCompare(b.name));
   }, [entriesData]);
 
   return (
@@ -112,20 +92,16 @@ function Leaderboard({ entriesData }) {
         <table className="leaderboard-table">
           <thead>
             <tr>
-              <th className="fixed-column rank-column">R</th>
               <th className="fixed-column name-column">Name</th>
-              <th className="fixed-column score-column">S</th>
               {gameHeaders.map((header, index) => (
                 <th key={index} className="pick-header">{header}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {rankedEntries.map((entry, index) => (
+            {sortedEntries.map((entry, index) => (
               <tr key={index}>
-                <td className="fixed-column rank-column">{entry.rank}</td>
                 <td className="fixed-column name-column">{formatName(entry.name)}</td>
-                <td className="fixed-column score-column">{entry.score}</td>
                 {gameMatchups.map((matchup, pickIndex) => {
                   const pick = entry.picks[pickIndex + 1];
                   return (
