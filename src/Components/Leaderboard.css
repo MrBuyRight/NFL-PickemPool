@@ -41,15 +41,16 @@ body {
 }
 
 table {
-  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
   width: max-content;
   min-width: 100%;
 }
 
 th, td {
+  padding: 10px 5px;
+  text-align: center;
   border: 1px solid var(--border-color);
-  padding: 12px;
-  text-align: left;
 }
 
 th {
@@ -66,7 +67,6 @@ th {
   width: 60px;
   min-width: 60px;
   max-width: 60px;
-  text-align: center;
 }
 
 .rank-column {
@@ -108,15 +108,12 @@ th {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: var(--secondary-color);
-  color: var(--header-text-color);
-  text-align: center;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   padding: 8px 2px;
 }
 
 .pick-cell {
-  padding: 8px 4px;
+  padding: 5px;
   text-align: center;
   background-color: var(--primary-color);
 }
@@ -125,12 +122,13 @@ th {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px;
+  padding: 5px;
   border-radius: 4px;
   min-height: 30px;
 }
 
 .pick-team {
+  font-size: 0.9rem;
   font-weight: bold;
 }
 
@@ -177,6 +175,7 @@ tbody tr:hover {
     width: 60px;
     min-width: 60px;
     max-width: 60px;
+    font-size: 0.7rem;
   }
 
   .pick-team {
