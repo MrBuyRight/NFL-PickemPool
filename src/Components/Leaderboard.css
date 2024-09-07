@@ -20,9 +20,10 @@ body {
 
 .leaderboard {
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
+  overflow-x: auto;
 }
 
 .leaderboard h2 {
@@ -38,64 +39,54 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.leaderboard-header {
-  display: flex;
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.leaderboard-table thead {
   background-color: var(--secondary-color);
   color: var(--accent-color);
-  font-weight: bold;
-  padding: 15px;
   position: sticky;
   top: 0;
   z-index: 10;
 }
 
-.leaderboard-header > div {
-  flex: 1;
-  text-align: center;
+.leaderboard-table th {
+  font-weight: bold;
 }
 
-.leaderboard-body {
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
-}
-
-.leaderboard-row {
-  border-bottom: 1px solid var(--border-color);
-}
-
-.entry-summary {
-  display: flex;
-  padding: 15px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.entry-summary:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.entry-summary > div {
-  flex: 1;
-  text-align: center;
-}
-
-.pick-details {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 15px;
+.rank-header,
+.name-header,
+.score-header,
+.rank-cell,
+.name-cell,
+.score-cell {
+  position: sticky;
+  left: 0;
   background-color: var(--secondary-color);
+  z-index: 5;
+}
+
+.name-header,
+.name-cell {
+  left: 60px;
+}
+
+.score-header,
+.score-cell {
+  left: 200px;
 }
 
 .pick-cell {
-  flex: 1 0 calc(25% - 20px);
-  margin: 10px;
-  text-align: center;
-}
-
-.matchup {
-  font-size: 0.8rem;
-  margin-bottom: 5px;
-  color: var(--text-secondary-color);
+  min-width: 80px;
 }
 
 .pick-info {
@@ -122,13 +113,20 @@ body {
 }
 
 @media (max-width: 768px) {
-  .pick-cell {
-    flex: 1 0 calc(50% - 20px);
+  .leaderboard {
+    padding: 10px;
   }
-}
 
-@media (max-width: 480px) {
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 8px;
+  }
+
   .pick-cell {
-    flex: 1 0 calc(100% - 20px);
+    min-width: 60px;
+  }
+
+  .pick-team {
+    font-size: 0.8rem;
   }
 }
