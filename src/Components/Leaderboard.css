@@ -19,9 +19,8 @@ body {
 }
 
 .leaderboard {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 100px);
+  width: 100%;
+  overflow: hidden;
 }
 
 .leaderboard h2 {
@@ -29,59 +28,41 @@ body {
 }
 
 .leaderboard-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.leaderboard-header,
+.entry-row {
   display: flex;
-  flex: 1;
-  overflow: hidden;
+  min-width: max-content;
 }
 
-.sidebar {
-  width: 200px;
-  flex-shrink: 0;
-  overflow-y: auto;
-  background-color: var(--secondary-color);
-  border-right: 1px solid var(--border-color);
-}
-
-.sidebar-header, .sidebar-row {
-  display: flex;
-  padding: 10px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.sidebar-header {
-  font-weight: bold;
+.leaderboard-header {
   position: sticky;
   top: 0;
   background-color: var(--secondary-color);
   z-index: 10;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.leaderboard-body {
+  overflow-y: auto;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  flex-shrink: 0;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border-right: 2px solid var(--border-color);
 }
 
 .rank, .name, .score {
   flex: 1;
   text-align: center;
-}
-
-.main-content {
-  flex: 1;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.picks-header, .picks-row {
-  display: flex;
-  min-width: max-content;
-}
-
-.picks-header {
-  position: sticky;
-  top: 0;
-  background-color: var(--secondary-color);
-  z-index: 10;
-}
-
-.picks-body {
-  overflow-y: auto;
-  height: calc(100% - 40px);
 }
 
 .pick-cell {
@@ -123,9 +104,17 @@ body {
   color: var(--text-color);
 }
 
+.entry-row:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.entry-row:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 @media (max-width: 768px) {
-  .sidebar {
-    width: 150px;
+  .user-info {
+    width: 200px;
   }
 
   .pick-cell {
