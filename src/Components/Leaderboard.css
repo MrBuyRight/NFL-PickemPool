@@ -20,60 +20,82 @@ body {
 
 .leaderboard {
   width: 100%;
-  height: calc(100vh - 100px);
-  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .leaderboard h2 {
+  text-align: center;
   margin-bottom: 20px;
+  color: var(--accent-color);
 }
 
 .leaderboard-container {
-  height: calc(100% - 60px);
-  overflow: auto;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-th, td {
-  padding: 10px;
-  text-align: center;
-  border-bottom: 1px solid var(--border-color);
-}
-
-thead {
+.leaderboard-header {
+  display: flex;
+  background-color: var(--secondary-color);
+  color: var(--accent-color);
+  font-weight: bold;
+  padding: 15px;
   position: sticky;
   top: 0;
-  background-color: var(--secondary-color);
   z-index: 10;
 }
 
-th {
-  font-weight: bold;
+.leaderboard-header > div {
+  flex: 1;
+  text-align: center;
 }
 
-.rank-header, .name-header, .score-header,
-.rank-cell, .name-cell, .score-cell {
-  position: sticky;
-  left: 0;
-  z-index: 20;
+.leaderboard-body {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+.leaderboard-row {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.entry-summary {
+  display: flex;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.entry-summary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.entry-summary > div {
+  flex: 1;
+  text-align: center;
+}
+
+.pick-details {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
   background-color: var(--secondary-color);
 }
 
-.name-header, .name-cell {
-  left: 40px;
-}
-
-.score-header, .score-cell {
-  left: 120px;
-}
-
 .pick-cell {
-  min-width: 60px;
+  flex: 1 0 calc(25% - 20px);
+  margin: 10px;
+  text-align: center;
+}
+
+.matchup {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  color: var(--text-secondary-color);
 }
 
 .pick-info {
@@ -100,36 +122,13 @@ th {
 }
 
 @media (max-width: 768px) {
-  .rank-header, .rank-cell {
-    width: 40px;
-    min-width: 40px;
-  }
-
-  .name-header, .name-cell {
-    width: 80px;
-    min-width: 80px;
-    left: 40px;
-  }
-
-  .score-header, .score-cell {
-    width: 40px;
-    min-width: 40px;
-    left: 120px;
-  }
-
   .pick-cell {
-    min-width: 50px;
+    flex: 1 0 calc(50% - 20px);
   }
+}
 
-  .pick-team {
-    font-size: 0.8rem;
-  }
-
-  .leaderboard-container {
-    overflow-x: auto;
-  }
-
-  table {
-    width: auto;
+@media (max-width: 480px) {
+  .pick-cell {
+    flex: 1 0 calc(100% - 20px);
   }
 }

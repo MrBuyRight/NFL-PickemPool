@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import './Leaderboard.css';
 
 function Leaderboard({ entriesData }) {
+  const [selectedWeek, setSelectedWeek] = useState(1);
   const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles'];
   const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers'];
 
@@ -103,45 +104,51 @@ function Leaderboard({ entriesData }) {
       }));
   }, [entriesData]);
 
+  const togglePickDetails = (entryIndex) => {
+    const updatedEntries = [...rankedEntries];
+    updatedEntries[entryIndex].showDetails = !updatedEntries[entryIndex].showDetails;
+    setRankedEntries(updatedEntries);
+  };
+
   if (rankedEntries.length === 0) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="leaderboard">
-      <h2>Week 1 Leaderboard</h2>
+      <h2>NFL Pick'em Pool - Week {selectedWeek}</h2>
       <div className="leaderboard-container">
-        <table>
-          <thead>
-            <tr>
-              <th className="rank-header">Rank</th>
-              <th className="name-header">Name</th>
-              <th className="score-header">Score</th>
-              {gameHeaders.map((header, index) => (
-                <th key={index} className="pick-header">{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rankedEntries.map((entry, index) => (
-              <tr key={index}>
-                <td className="rank-cell">{entry.rank}</td>
-                <td className="name-cell">{formatName(entry.name)}</td>
-                <td className="score-cell">{entry.score}</td>
-                {gameMatchups.map((matchup, pickIndex) => {
-                  const pick = entry.picks[pickIndex + 1];
-                  return (
-                    <td key={pickIndex} className="pick-cell">
-                      <div className={`pick-info ${getPickClass(pick)}`}>
-                        <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+        <div className="leaderboard-header">
+          <div className="rank-header">Rank</div>
+          <div className="name-header">Name</div>
+          <div className="score-header">Score</div>
+        </div>
+        <div className="leaderboard-body">
+          {rankedEntries.map((entry, index) => (
+            <div key={index} className="leaderboard-row">
+              <div className="entry-summary" onClick={() => togglePickDetails(index)}>
+                <div className="rank-cell">{entry.rank}</div>
+                <div className="name-cell">{formatName(entry.name)}</div>
+                <div className="score-cell">{entry.score}</div>
+              </div>
+              {entry.showDetails && (
+                <div className="pick-details">
+                  {gameMatchups.map((matchup, pickIndex) => {
+                    const pick = entry.picks[pickIndex + 1];
+                    return (
+                      <div key={pickIndex} className="pick-cell">
+                        <div className="matchup">{gameHeaders[pickIndex]}</div>
+                        <div className={`pick-info ${getPickClass(pick)}`}>
+                          <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+                        </div>
                       </div>
-                    </td>
-                  );
-                })}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
