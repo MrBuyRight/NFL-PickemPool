@@ -1,8 +1,10 @@
 import React from 'react';
 
 function Leaderboard({ entriesData }) {
+  console.log('Leaderboard component rendered', entriesData);
+
   if (!entriesData || entriesData.length === 0) {
-    return <div>Loading...</div>;
+    return <div>No data available</div>;
   }
 
   // Assuming Week 1 picks are at index 0

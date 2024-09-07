@@ -267,7 +267,7 @@ const entriesData = [
     id: 45,
     name: "Steve",
     phoneNumber: "+1 (907) 687-6870",
-    picks: {"1":"Baltimore Ravens","2":"Philadelphia Eagles","3":"Pittsburgh Steelers","4":"Buffalo Bills","5":"Chicago Bears","6":"Cincinnati Bengals","7":"Houston Texans","8":"Miami Dolphins","9":"Carolina Panthers","10":"Minnesota Vikings","11":"Los Angeles Chargers","12":"Seattle Seahawks","13":"Cleveland Browns","14":"Tampa Bay Buccaneers","15":"Detroit Lions","16":"San Francisco 49ers"}
+    picks: {"1":"Baltimore Ravens","2":"Philadelphia Eagles","3":"Pittsburgh Steelers","4":"Arizona Cardinals","5":"Tennessee Titans","6":"New England Patriots","7":"Houston Texans","8":"Jacksonville Jaguars","9":"Carolina Panthers","10":"Minnesota Vikings","11":"Las Vegas Raiders","12":"Denver Broncos","13":"Dallas Cowboys","14":"Washington Commanders","15":"Los Angeles Rams","16":"New York Jets"}
   },
   {
     id: 46,
