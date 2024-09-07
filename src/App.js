@@ -12,8 +12,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>NFL Pick'em Pool</h1>
-      <Leaderboard entriesData={entries} />
+      <header className="app-header">
+        <h1>NFL Pick'em Pool</h1>
+      </header>
+      <main className="app-main">
+        <Leaderboard entriesData={entries} />
+      </main>
     </div>
   );
 }

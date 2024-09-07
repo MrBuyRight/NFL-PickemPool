@@ -111,12 +111,23 @@ function Leaderboard({ entriesData }) {
     <div className="leaderboard">
       <h2>Week 1 Leaderboard</h2>
       <div className="leaderboard-container">
-        <div className="leaderboard-header">
-          <div className="user-info">
+        <div className="sidebar">
+          <div className="sidebar-header">
             <span className="rank">Rank</span>
             <span className="name">Name</span>
             <span className="score">Score</span>
           </div>
+          <div className="sidebar-body">
+            {rankedEntries.map((entry, index) => (
+              <div key={index} className="sidebar-row">
+                <span className="rank">{entry.rank}</span>
+                <span className="name">{formatName(entry.name)}</span>
+                <span className="score">{entry.score}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="main-content">
           <div className="picks-header">
             {gameHeaders.map((header, index) => (
               <div key={index} className="pick-cell">
@@ -124,16 +135,9 @@ function Leaderboard({ entriesData }) {
               </div>
             ))}
           </div>
-        </div>
-        <div className="leaderboard-body">
-          {rankedEntries.map((entry, index) => (
-            <div key={index} className="entry-row">
-              <div className="user-info">
-                <span className="rank">{entry.rank}</span>
-                <span className="name">{formatName(entry.name)}</span>
-                <span className="score">{entry.score}</span>
-              </div>
-              <div className="picks-container">
+          <div className="picks-body">
+            {rankedEntries.map((entry, index) => (
+              <div key={index} className="picks-row">
                 {gameMatchups.map((matchup, pickIndex) => {
                   const pick = entry.picks[pickIndex + 1];
                   return (
@@ -145,8 +149,8 @@ function Leaderboard({ entriesData }) {
                   );
                 })}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
