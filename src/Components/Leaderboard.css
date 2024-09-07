@@ -36,7 +36,7 @@ body {
 }
 
 .table-container {
-  overflow-x: auto;
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -65,6 +65,20 @@ th {
   color: var(--header-text-color);
   z-index: 10;
   min-width: 150px;
+  max-width: 150px;
+}
+
+.picks-column {
+  padding: 0;
+}
+
+.picks-scroll {
+  overflow-x: auto;
+  width: calc(100vw - 190px); /* Adjust based on your layout */
+}
+
+.picks-scroll table {
+  table-layout: fixed;
 }
 
 .game-header {
