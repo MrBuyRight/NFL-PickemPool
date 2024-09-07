@@ -63,6 +63,9 @@ function Leaderboard({ entriesData }) {
     { away: 'New York Jets', home: 'San Francisco 49ers' }
   ];
 
+  // Add the gameHeaders definition
+  const gameHeaders = gameMatchups.map((matchup, index) => `${teamAbbreviations[matchup.away]} @ ${teamAbbreviations[matchup.home]}`);
+
   const getPickClass = (pick) => {
     if (correctTeams.includes(pick)) return 'correct';
     if (incorrectTeams.includes(pick)) return 'wrong';
