@@ -98,6 +98,7 @@ th {
   font-size: 0.8rem;
   white-space: nowrap;
   padding: 8px 4px;
+  min-width: 40px; /* Adjust as needed */
 }
 
 .pick-cell {
@@ -154,5 +155,11 @@ tbody tr:hover {
 
   .pick-team {
     font-size: 0.8rem;
+  }
+
+  .game-header {
+    font-size: 0.7rem;
+    padding: 6px 2px;
+    min-width: 30px; /* Adjust for mobile */
   }
 }

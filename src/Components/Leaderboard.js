@@ -5,6 +5,15 @@ function Leaderboard({ entriesData }) {
   const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles'];
   const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers'];
 
+  // Add a mapping of team names to abbreviations
+  const teamAbbreviations = {
+    'Kansas City Chiefs': 'KC',
+    'Philadelphia Eagles': 'PHI',
+    'Baltimore Ravens': 'BAL',
+    'Green Bay Packers': 'GB',
+    // Add more teams as needed
+  };
+
   const getPickClass = (pick) => {
     if (correctTeams.includes(pick)) return 'correct';
     if (incorrectTeams.includes(pick)) return 'wrong';
@@ -47,6 +56,7 @@ function Leaderboard({ entriesData }) {
   }
 
   const gameCount = Object.keys(rankedEntries[0].picks).length;
+  const gameHeaders = Object.values(rankedEntries[0].picks).map(pick => teamAbbreviations[pick] || 'TBD');
 
   return (
     <div className="leaderboard">
@@ -58,8 +68,8 @@ function Leaderboard({ entriesData }) {
               <th className="rank-column">Rank</th>
               <th className="name-column">Name</th>
               <th className="score-column">Score</th>
-              {[...Array(gameCount)].map((_, index) => (
-                <th key={index} className="game-header">G{index + 1}</th>
+              {gameHeaders.map((header, index) => (
+                <th key={index} className="game-header">{header}</th>
               ))}
             </tr>
           </thead>
@@ -72,7 +82,7 @@ function Leaderboard({ entriesData }) {
                 {Object.values(entry.picks).map((pick, pickIndex) => (
                   <td key={pickIndex} className="pick-cell">
                     <div className={`pick-info ${getPickClass(pick)}`}>
-                      <span className="pick-team">{pick.split(' ').pop()}</span>
+                      <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
                     </div>
                   </td>
                 ))}
