@@ -109,40 +109,35 @@ function Leaderboard({ entriesData }) {
     <div className="leaderboard">
       <h2>NFL Pick'em Pool - Week {selectedWeek}</h2>
       <div className="leaderboard-container">
-        <div className="user-list">
-          {rankedEntries.map((entry, index) => (
-            <div key={index} className="user-info">
-              <span className="user-rank">{entry.rank}</span>
-              <span className="user-name">{formatName(entry.name)}</span>
-              <span className="user-score">{entry.score}</span>
-            </div>
-          ))}
-        </div>
-        <div className="picks-table-container">
-          <table className="picks-table">
-            <thead>
-              <tr>
-                {gameHeaders.map((header, index) => (
-                  <th key={index}>{header}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rankedEntries.map((entry, index) => (
-                <tr key={index}>
-                  {gameMatchups.map((matchup, pickIndex) => {
-                    const pick = entry.picks[pickIndex + 1];
-                    return (
-                      <td key={pickIndex} className={`pick-cell ${getPickClass(pick)}`}>
-                        <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
-                      </td>
-                    );
-                  })}
-                </tr>
+        <table className="leaderboard-table">
+          <thead>
+            <tr>
+              <th className="fixed-column">Rank</th>
+              <th className="fixed-column">Name</th>
+              <th className="fixed-column">Score</th>
+              {gameHeaders.map((header, index) => (
+                <th key={index}>{header}</th>
               ))}
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody>
+            {rankedEntries.map((entry, index) => (
+              <tr key={index}>
+                <td className="fixed-column">{entry.rank}</td>
+                <td className="fixed-column">{formatName(entry.name)}</td>
+                <td className="fixed-column">{entry.score}</td>
+                {gameMatchups.map((matchup, pickIndex) => {
+                  const pick = entry.picks[pickIndex + 1];
+                  return (
+                    <td key={pickIndex} className={`pick-cell ${getPickClass(pick)}`}>
+                      <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

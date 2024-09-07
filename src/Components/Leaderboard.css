@@ -31,66 +31,44 @@ body {
 }
 
 .leaderboard-container {
-  display: flex;
   height: calc(100% - 60px);
-}
-
-.user-list {
-  flex: 0 0 200px;
-  overflow-y: auto;
-  background-color: var(--surface-color);
-  border-right: 1px solid var(--border-color);
-}
-
-.user-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.user-rank {
-  font-weight: bold;
-  color: var(--accent-color);
-}
-
-.user-name {
-  flex: 1;
-  margin: 0 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.user-score {
-  font-weight: bold;
-}
-
-.picks-table-container {
-  flex: 1;
   overflow: auto;
 }
 
-.picks-table {
+.leaderboard-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
 }
 
-.picks-table th,
-.picks-table td {
+.leaderboard-table th,
+.leaderboard-table td {
   padding: 10px;
   text-align: center;
   border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
 }
 
-.picks-table th {
+.leaderboard-table th {
   position: sticky;
   top: 0;
   background-color: var(--secondary-color);
   z-index: 10;
+}
+
+.fixed-column {
+  position: sticky;
+  left: 0;
+  background-color: var(--surface-color);
+  z-index: 5;
+}
+
+.fixed-column:nth-child(2) {
+  left: 60px; /* Adjust based on the width of the first column */
+}
+
+.fixed-column:nth-child(3) {
+  left: 200px; /* Adjust based on the width of the first two columns */
 }
 
 .pick-cell {
@@ -112,17 +90,12 @@ body {
 }
 
 @media (max-width: 768px) {
-  .user-list {
-    flex: 0 0 120px;
+  .fixed-column:nth-child(2) {
+    left: 50px;
   }
 
-  .user-info {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .user-name {
-    margin: 5px 0;
+  .fixed-column:nth-child(3) {
+    left: 160px;
   }
 
   .pick-cell {
