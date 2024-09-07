@@ -136,31 +136,85 @@ tbody tr:hover {
 
 /* Add responsive styles as needed */
 @media (max-width: 768px) {
+  .leaderboard table {
+    width: 100%;
+  }
+
   .rank-column, .score-column {
     width: 50px;
     min-width: 50px;
   }
 
-  .score-column {
-    left: 170px; /* Adjust based on the width of rank and name columns on mobile */
-  }
-
   .name-column {
-    left: 50px;
-    width: 120px;
-    min-width: 120px;
+    width: auto;
   }
 
-  .game-header, .pick-cell {
-    width: 60px;
-    min-width: 60px;
+  .picks-column {
+    width: 80px;
+  }
+
+  .entry-details td {
+    padding: 0;
+  }
+
+  .picks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .pick-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    padding: 5px;
   }
 
   .game-header {
     font-size: 0.7rem;
+    margin-bottom: 5px;
+  }
+
+  .pick-info {
+    width: 100%;
+    text-align: center;
   }
 
   .pick-team {
     font-size: 0.8rem;
   }
+}
+
+/* Add these new styles */
+.entry-details {
+  background-color: var(--secondary-color);
+}
+
+.picks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+
+.pick-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.game-header {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.pick-info {
+  width: 100%;
+  text-align: center;
 }

@@ -1,7 +1,9 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import './Leaderboard.css';
 
 function Leaderboard({ entriesData }) {
+  const [selectedEntry, setSelectedEntry] = useState(null);
+
   const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles'];
   const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers'];
 
@@ -105,6 +107,10 @@ function Leaderboard({ entriesData }) {
       }));
   }, [entriesData]);
 
+  const toggleEntryDetails = (entry) => {
+    setSelectedEntry(selectedEntry && selectedEntry.id === entry.id ? null : entry);
+  };
+
   if (rankedEntries.length === 0) {
     return <div>Loading...</div>;
   }
@@ -119,28 +125,38 @@ function Leaderboard({ entriesData }) {
               <th className="rank-column">Rank</th>
               <th className="name-column">Name</th>
               <th className="score-column">Score</th>
-              {gameHeaders.map((header, index) => (
-                <th key={index} className="game-header">{header}</th>
-              ))}
+              <th className="picks-column">Picks</th>
             </tr>
           </thead>
           <tbody>
             {rankedEntries.map((entry, index) => (
-              <tr key={index}>
-                <td className="rank-column">{entry.rank}</td>
-                <td className="name-column">{formatName(entry.name)}</td>
-                <td className="score-column">{entry.score}</td>
-                {gameMatchups.map((matchup, pickIndex) => {
-                  const pick = entry.picks[pickIndex + 1];
-                  return (
-                    <td key={pickIndex} className="pick-cell">
-                      <div className={`pick-info ${getPickClass(pick)}`}>
-                        <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+              <React.Fragment key={index}>
+                <tr onClick={() => toggleEntryDetails(entry)}>
+                  <td className="rank-column">{entry.rank}</td>
+                  <td className="name-column">{formatName(entry.name)}</td>
+                  <td className="score-column">{entry.score}</td>
+                  <td className="picks-column">View Picks</td>
+                </tr>
+                {selectedEntry && selectedEntry.id === entry.id && (
+                  <tr className="entry-details">
+                    <td colSpan="4">
+                      <div className="picks-grid">
+                        {gameMatchups.map((matchup, pickIndex) => {
+                          const pick = entry.picks[pickIndex + 1];
+                          return (
+                            <div key={pickIndex} className="pick-cell">
+                              <div className="game-header">{gameHeaders[pickIndex]}</div>
+                              <div className={`pick-info ${getPickClass(pick)}`}>
+                                <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </td>
-                  );
-                })}
-              </tr>
+                  </tr>
+                )}
+              </React.Fragment>
             ))}
           </tbody>
         </table>
