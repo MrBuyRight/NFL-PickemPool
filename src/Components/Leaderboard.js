@@ -16,38 +16,22 @@ function Leaderboard({ entriesData }) {
           <thead>
             <tr>
               <th className="name-column">Name</th>
-              <th className="picks-column">
-                <div className="picks-scroll">
-                  <table>
-                    <tr>
-                      {[...Array(gameCount)].map((_, index) => (
-                        <th key={index} className="game-header">Game {index + 1}</th>
-                      ))}
-                    </tr>
-                  </table>
-                </div>
-              </th>
+              {[...Array(gameCount)].map((_, index) => (
+                <th key={index} className="game-header">Game {index + 1}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {entriesData.map((entry, index) => (
               <tr key={index}>
                 <td className="name-column">{entry.name}</td>
-                <td className="picks-column">
-                  <div className="picks-scroll">
-                    <table>
-                      <tr>
-                        {Object.values(entry.picks).map((pick, pickIndex) => (
-                          <td key={pickIndex} className="pick-cell">
-                            <div className="pick-info">
-                              <span className="pick-team">{pick}</span>
-                            </div>
-                          </td>
-                        ))}
-                      </tr>
-                    </table>
-                  </div>
-                </td>
+                {Object.values(entry.picks).map((pick, pickIndex) => (
+                  <td key={pickIndex} className="pick-cell">
+                    <div className="pick-info">
+                      <span className="pick-team">{pick}</span>
+                    </div>
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
