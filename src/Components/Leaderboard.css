@@ -39,7 +39,7 @@ table {
 }
 
 th, td {
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   padding: 8px;
   text-align: left;
 }
@@ -60,13 +60,31 @@ th.rank-column, th.name-column, th.score-column {
   z-index: 11;
 }
 
-.game-header {
+.week-header {
   white-space: nowrap;
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
 }
 
-th.game-header {
-  font-size: 0.9em; /* Slightly smaller font size for game headers */
-  padding: 10px 8px; /* Adjust padding for game headers */
+.pick-cell {
+  padding: 4px;
+  text-align: center;
+}
+
+.pick-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pick-matchup {
+  font-size: 0.8em;
+  color: var(--text-color);
+  margin-bottom: 2px;
+}
+
+.pick-team {
+  font-weight: bold;
 }
 
 .correct {
@@ -81,5 +99,7 @@ th.game-header {
 
 /* Add responsive styles as needed */
 @media (max-width: 768px) {
-  /* Add responsive styles here */
+  .pick-matchup {
+    display: none;
+  }
 }

@@ -11,11 +11,6 @@ const Leaderboard = ({ entriesData }) => {
   // Get all unique weeks
   const weeks = [...new Set(entriesData.flatMap(entry => Object.keys(entry.picks)))].sort((a, b) => a - b);
 
-  // Get all unique matchups
-  const matchups = [...new Set(entriesData.flatMap(entry => 
-    Object.values(entry.picks).map(pick => pick.matchup)
-  ))];
-
   // Sort entries by score (assuming score is the number of correct picks)
   const sortedEntries = entriesData.sort((a, b) => b.score - a.score);
 
@@ -29,8 +24,8 @@ const Leaderboard = ({ entriesData }) => {
               <th className="rank-column">Rank</th>
               <th className="name-column">Name</th>
               <th className="score-column">Score</th>
-              {matchups.map((matchup, index) => (
-                <th key={index} className="game-header">{matchup}</th>
+              {weeks.map(week => (
+                <th key={week} className="week-header">Week {week}</th>
               ))}
             </tr>
           </thead>
@@ -40,11 +35,16 @@ const Leaderboard = ({ entriesData }) => {
                 <td className="rank-column">{index + 1}</td>
                 <td className="name-column">{entry.name}</td>
                 <td className="score-column">{entry.score}</td>
-                {matchups.map((matchup, matchupIndex) => {
-                  const pick = Object.values(entry.picks).find(p => p.matchup === matchup);
+                {weeks.map(week => {
+                  const pick = entry.picks[week];
                   return (
-                    <td key={matchupIndex} className={pick ? pick.result : ''}>
-                      {pick ? pick.pick : '-'}
+                    <td key={week} className={`pick-cell ${pick ? pick.result : ''}`}>
+                      {pick ? (
+                        <div className="pick-info">
+                          <div className="pick-matchup">{pick.matchup}</div>
+                          <div className="pick-team">{pick.pick}</div>
+                        </div>
+                      ) : '-'}
                     </td>
                   );
                 })}
