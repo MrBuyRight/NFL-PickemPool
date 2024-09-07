@@ -20,8 +20,9 @@ body {
 
 .leaderboard {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .leaderboard h2 {
@@ -32,76 +33,58 @@ body {
 
 .leaderboard-container {
   display: flex;
-  height: calc(100% - 60px);
+  flex-direction: column;
+  gap: 20px;
+}
+
+.user-module {
+  background-color: var(--surface-color);
+  border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.leaderboard-sticky-columns {
-  flex: 0 0 220px;
-  overflow-y: auto;
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
   background-color: var(--secondary-color);
+  color: var(--text-color);
 }
 
-.leaderboard-scrollable {
-  flex: 1;
-  overflow-x: auto;
-  overflow-y: auto;
-}
-
-.leaderboard-sticky-columns table,
-.leaderboard-scrollable table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.leaderboard-sticky-columns th,
-.leaderboard-sticky-columns td,
-.leaderboard-scrollable th,
-.leaderboard-scrollable td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid var(--border-color);
-  white-space: nowrap;
-}
-
-.leaderboard-sticky-columns th,
-.leaderboard-scrollable th {
-  background-color: var(--secondary-color);
-  color: var(--accent-color);
+.user-rank {
   font-weight: bold;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  font-size: 1.2rem;
+  color: var(--accent-color);
 }
 
-.rank-header,
-.name-header,
-.score-header,
-.rank-cell,
-.name-cell,
-.score-cell {
-  position: absolute;
-  left: 0;
-  width: 60px;
-  background-color: var(--secondary-color);
-  z-index: 20;
+.user-name {
+  font-size: 1.1rem;
 }
 
-.name-header,
-.name-cell {
-  left: 60px;
-  width: 100px;
+.user-score {
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
-.score-header,
-.score-cell {
-  left: 160px;
-  width: 60px;
+.user-picks {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+  gap: 10px;
 }
 
 .pick-cell {
-  min-width: 80px;
+  flex: 1 0 calc(25% - 10px);
+  min-width: 120px;
+  text-align: center;
+}
+
+.matchup {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  color: var(--text-secondary-color);
 }
 
 .pick-info {
@@ -128,27 +111,13 @@ body {
 }
 
 @media (max-width: 768px) {
-  .leaderboard-sticky-columns {
-    flex: 0 0 180px;
-  }
-
-  .leaderboard-sticky-columns th,
-  .leaderboard-sticky-columns td,
-  .leaderboard-scrollable th,
-  .leaderboard-scrollable td {
-    padding: 8px;
-  }
-
-  .name-header,
-  .name-cell {
-    width: 80px;
-  }
-
   .pick-cell {
-    min-width: 60px;
+    flex: 1 0 calc(50% - 10px);
   }
+}
 
-  .pick-team {
-    font-size: 0.8rem;
+@media (max-width: 480px) {
+  .pick-cell {
+    flex: 1 0 100%;
   }
 }
