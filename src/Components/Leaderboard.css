@@ -107,3 +107,25 @@ body {
     font-size: 0.8rem;
   }
 }
+
+.leaderboard-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--secondary-color);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.leaderboard-header .entry-info {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.leaderboard-header .picks-container {
+  border-top: 1px solid var(--border-color);
+}
+
+.leaderboard-header .pick-cell {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
