@@ -1,14 +1,14 @@
 :root {
-  --primary-color: #1e3a8a;
-  --secondary-color: #3b82f6;
-  --background-color: #f3f4f6;
-  --text-color: #1f2937;
-  --border-color: #d1d5db;
-  --header-bg-color: #2563eb;
+  --primary-color: #1a1a1a;
+  --secondary-color: #2c2c2c;
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --border-color: #333333;
+  --header-bg-color: #1e1e1e;
   --header-text-color: #ffffff;
-  --correct-pick-bg: #10b981;
+  --correct-pick-bg: #1b5e20;
   --correct-pick-text: #ffffff;
-  --wrong-pick-bg: #ef4444;
+  --wrong-pick-bg: #b71c1c;
   --wrong-pick-text: #ffffff;
 }
 
@@ -20,9 +20,9 @@ body {
 
 .leaderboard {
   margin: 20px;
-  background-color: #ffffff;
+  background-color: var(--primary-color);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
@@ -53,25 +53,22 @@ th, td {
 }
 
 th {
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   color: var(--header-text-color);
   font-weight: bold;
 }
 
-.rank-column, .name-column, .score-column {
+.name-column {
   position: sticky;
   left: 0;
   background-color: var(--secondary-color);
   color: var(--header-text-color);
   z-index: 10;
+  min-width: 150px;
 }
 
-.rank-column { width: 60px; left: 0; }
-.name-column { width: 150px; left: 60px; }
-.score-column { width: 60px; left: 210px; }
-
 .game-header {
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   color: var(--header-text-color);
   text-align: center;
   font-size: 0.8rem;
@@ -82,6 +79,7 @@ th {
 .pick-cell {
   padding: 8px 4px;
   text-align: center;
+  background-color: var(--primary-color);
 }
 
 .pick-info {
@@ -109,12 +107,12 @@ th {
 
 /* Zebra striping for rows */
 tbody tr:nth-child(even) {
-  background-color: #f8fafc;
+  background-color: var(--secondary-color);
 }
 
 /* Hover effect for rows */
 tbody tr:hover {
-  background-color: #e2e8f0;
+  background-color: #3a3a3a;
 }
 
 /* Add responsive styles as needed */
