@@ -8,9 +8,18 @@ function Leaderboard({ entriesData }) {
 
   const gameCount = Object.keys(entriesData[0].picks).length;
 
+  const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles'];
+  const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers'];
+
+  const getPickClass = (pick) => {
+    if (correctTeams.includes(pick)) return 'correct';
+    if (incorrectTeams.includes(pick)) return 'wrong';
+    return '';
+  };
+
   return (
     <div className="leaderboard">
-      <h2>Week 1 Picks</h2>
+      <h2>Week 1 Leaderboard</h2>
       <div className="table-container">
         <table>
           <thead>
@@ -27,7 +36,7 @@ function Leaderboard({ entriesData }) {
                 <td className="name-column">{entry.name}</td>
                 {Object.values(entry.picks).map((pick, pickIndex) => (
                   <td key={pickIndex} className="pick-cell">
-                    <div className="pick-info">
+                    <div className={`pick-info ${getPickClass(pick)}`}>
                       <span className="pick-team">{pick}</span>
                     </div>
                   </td>
