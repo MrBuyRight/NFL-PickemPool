@@ -18,7 +18,7 @@
   overflow-x: auto;
 }
 
-.leaderboard h1 {
+.leaderboard h2 {
   padding: 10px;
   margin: 0;
   text-align: center;
@@ -69,154 +69,17 @@ th.game-header {
   padding: 10px 8px; /* Adjust padding for game headers */
 }
 
-th.name-column, td.name-column {
-  background-color: var(--header-bg-color);
-  color: var(--header-text-color);
-  position: sticky;
-  left: 0;
-  z-index: 15;
+.correct {
+  background-color: var(--correct-pick-bg);
+  color: var(--correct-pick-text);
 }
 
-tr:last-child td {
-  border-bottom: none;
+.wrong {
+  background-color: var(--wrong-pick-bg);
+  color: var(--wrong-pick-text);
 }
 
-tr:nth-child(even) td {
-  background-color: rgba(52, 73, 94, 0.7); /* Slightly lighter shade for even rows */
-}
-
-tr:hover td {
-  background-color: var(--hover-color);
-  transition: background-color 0.3s ease;
-}
-
-.name-column {
-  position: sticky;
-  left: 0;
-  background-color: var(--secondary-color);
-  z-index: 5;
-}
-
-th.name-column {
-  background-color: var(--accent-color);
-  z-index: 15;
-}
-
-/* Scrollbar styles */
-.table-container::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
-}
-
-.table-container::-webkit-scrollbar-track {
-  background: var(--primary-color);
-}
-
-.table-container::-webkit-scrollbar-thumb {
-  background-color: var(--accent-color);
-  border-radius: 6px;
-  border: 3px solid var(--primary-color);
-}
-
+/* Add responsive styles as needed */
 @media (max-width: 768px) {
-  .leaderboard h1 {
-    font-size: 20px;
-    padding: 5px;
-  }
-
-  th, td {
-    padding: 8px 4px;
-    font-size: 12px;
-  }
-
-  .rank-column { width: 40px; }
-  .name-column { width: 80px; }
-  .score-column { width: 50px; }
-
-  th.name-column, td.name-column { left: 40px; }
-  th.score-column, td.score-column { left: 120px; }
-
-  .game-header {
-    font-size: 0.8em;
-    padding: 8px 6px;
-  }
-}
-
-.correct-pick {
-  background-color: var(--correct-pick-bg) !important;
-  color: green;
-  font-weight: bold;
-}
-
-.wrong-pick {
-  background-color: var(--wrong-pick-bg) !important;
-  color: red;
-  text-decoration: line-through;
-}
-
-/* Add these new styles to your existing CSS file */
-
-.rank-column, .score-column {
-  background-color: var(--header-bg-color);
-  color: var(--header-text-color);
-  font-weight: bold;
-  position: sticky;
-  left: 0;
-  z-index: 15;
-}
-
-.rank-column {
-  width: 50px;
-  text-align: center;
-}
-
-.score-column {
-  width: 60px;
-  text-align: center;
-}
-
-th.rank-column, th.score-column {
-  background-color: var(--accent-color);
-}
-
-/* Update this selector to include the new columns */
-th.rank-column, th.name-column, th.score-column, td.rank-column, td.name-column, td.score-column {
-  position: sticky;
-  left: 0;
-  z-index: 15;
-}
-
-/* Adjust the left position for each sticky column */
-th.name-column, td.name-column { left: 50px; }
-th.score-column, td.score-column { left: 150px; }
-
-/* Add this to ensure proper stacking of sticky columns */
-th.rank-column { z-index: 17; }
-th.name-column { z-index: 16; }
-th.score-column { z-index: 15; }
-
-/* Update the header text color */
-th.rank-column,
-th.name-column,
-th.score-column,
-th.game-header {
-  color: #3498db; /* Change this to your desired color */
-  font-weight: bold;
-}
-
-/* If you want to change the background color of the headers as well, you can add: */
-th.rank-column,
-th.name-column,
-th.score-column,
-th.game-header {
-  background-color: var(--header-bg-color);
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-.picks-column {
-  max-width: 300px;
-  word-wrap: break-word;
+  /* Add responsive styles here */
 }
