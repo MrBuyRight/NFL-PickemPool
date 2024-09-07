@@ -1,13 +1,9 @@
 import React from 'react';
 import './Leaderboard.css';
 
-const Leaderboard = () => {
-  const players = [
-    { name: 'Player 1', score: 10 },
-    { name: 'Player 2', score: 8 },
-    { name: 'Player 3', score: 6 },
-    // Add more players as needed
-  ];
+const Leaderboard = ({ entriesData }) => {
+  // Sort entries by score in descending order
+  const sortedEntries = entriesData.sort((a, b) => b.score - a.score);
 
   return (
     <div className="leaderboard">
@@ -16,16 +12,16 @@ const Leaderboard = () => {
         <thead>
           <tr>
             <th>Rank</th>
-            <th>Player</th>
+            <th>Name</th>
             <th>Score</th>
           </tr>
         </thead>
         <tbody>
-          {players.map((player, index) => (
-            <tr key={index}>
+          {sortedEntries.map((entry, index) => (
+            <tr key={entry.id}>
               <td>{index + 1}</td>
-              <td>{player.name}</td>
-              <td>{player.score}</td>
+              <td>{entry.name}</td>
+              <td>{entry.score}</td>
             </tr>
           ))}
         </tbody>
