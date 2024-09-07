@@ -82,7 +82,7 @@ function Leaderboard({ entriesData }) {
   };
 
   // Generate game headers based on the gameMatchups array
-  const gameHeaders = gameMatchups.map(matchup => 
+  const gameHeaders = gameMatchups.map((matchup, index) => 
     `${teamAbbreviations[matchup.away]}@${teamAbbreviations[matchup.home]}`
   );
 
