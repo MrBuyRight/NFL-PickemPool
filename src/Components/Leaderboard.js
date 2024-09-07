@@ -111,45 +111,37 @@ function Leaderboard({ entriesData }) {
     <div className="leaderboard">
       <h2>Week 1 Leaderboard</h2>
       <div className="leaderboard-container">
-        <div className="user-info-column">
-          <div className="user-info-header">
-            <span className="rank">Rank</span>
-            <span className="name">Name</span>
-            <span className="score">Score</span>
-          </div>
-          {rankedEntries.map((entry, index) => (
-            <div key={index} className="user-info-row">
-              <span className="rank">{entry.rank}</span>
-              <span className="name">{formatName(entry.name)}</span>
-              <span className="score">{entry.score}</span>
-            </div>
-          ))}
-        </div>
-        <div className="picks-column">
-          <div className="picks-header">
-            {gameHeaders.map((header, index) => (
-              <div key={index} className="pick-cell">
-                <div className="game-header">{header}</div>
-              </div>
-            ))}
-          </div>
-          <div className="picks-body">
+        <table>
+          <thead>
+            <tr>
+              <th className="rank-header">Rank</th>
+              <th className="name-header">Name</th>
+              <th className="score-header">Score</th>
+              {gameHeaders.map((header, index) => (
+                <th key={index} className="pick-header">{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
             {rankedEntries.map((entry, index) => (
-              <div key={index} className="picks-row">
+              <tr key={index}>
+                <td className="rank-cell">{entry.rank}</td>
+                <td className="name-cell">{formatName(entry.name)}</td>
+                <td className="score-cell">{entry.score}</td>
                 {gameMatchups.map((matchup, pickIndex) => {
                   const pick = entry.picks[pickIndex + 1];
                   return (
-                    <div key={pickIndex} className="pick-cell">
+                    <td key={pickIndex} className="pick-cell">
                       <div className={`pick-info ${getPickClass(pick)}`}>
                         <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
                       </div>
-                    </div>
+                    </td>
                   );
                 })}
-              </div>
+              </tr>
             ))}
-          </div>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   );
