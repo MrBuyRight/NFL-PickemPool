@@ -13,14 +13,52 @@ function Leaderboard({ entriesData }) {
     'Green Bay Packers': 'GB',
     'Detroit Lions': 'DET',
     'San Francisco 49ers': 'SF',
-    // Add more teams as needed
+    'Cincinnati Bengals': 'CIN',
+    'Cleveland Browns': 'CLE',
+    'Jacksonville Jaguars': 'JAX',
+    'Indianapolis Colts': 'IND',
+    'Tampa Bay Buccaneers': 'TB',
+    'Minnesota Vikings': 'MIN',
+    'Tennessee Titans': 'TEN',
+    'New Orleans Saints': 'NO',
+    'Carolina Panthers': 'CAR',
+    'Atlanta Falcons': 'ATL',
+    'Houston Texans': 'HOU',
+    'Pittsburgh Steelers': 'PIT',
+    'Arizona Cardinals': 'ARI',
+    'Washington Commanders': 'WAS',
+    'Chicago Bears': 'CHI',
+    'Los Angeles Rams': 'LAR',
+    'Las Vegas Raiders': 'LV',
+    'Denver Broncos': 'DEN',
+    'New England Patriots': 'NE',
+    'Miami Dolphins': 'MIA',
+    'Los Angeles Chargers': 'LAC',
+    'New York Jets': 'NYJ',
+    'Seattle Seahawks': 'SEA',
+    'Dallas Cowboys': 'DAL',
+    'New York Giants': 'NYG',
+    'Buffalo Bills': 'BUF',
   };
 
-  // Add game matchups
+  // Add game matchups for Week 1
   const gameMatchups = [
     { home: 'Kansas City Chiefs', away: 'Detroit Lions' },
-    { home: 'Philadelphia Eagles', away: 'San Francisco 49ers' },
-    // Add more matchups as needed
+    { home: 'Philadelphia Eagles', away: 'New England Patriots' },
+    { home: 'Baltimore Ravens', away: 'Houston Texans' },
+    { home: 'Atlanta Falcons', away: 'Carolina Panthers' },
+    { home: 'Minnesota Vikings', away: 'Tampa Bay Buccaneers' },
+    { home: 'Indianapolis Colts', away: 'Jacksonville Jaguars' },
+    { home: 'Washington Commanders', away: 'Arizona Cardinals' },
+    { home: 'Pittsburgh Steelers', away: 'San Francisco 49ers' },
+    { home: 'Cleveland Browns', away: 'Cincinnati Bengals' },
+    { home: 'New Orleans Saints', away: 'Tennessee Titans' },
+    { home: 'Chicago Bears', away: 'Green Bay Packers' },
+    { home: 'Denver Broncos', away: 'Las Vegas Raiders' },
+    { home: 'Los Angeles Chargers', away: 'Miami Dolphins' },
+    { home: 'Seattle Seahawks', away: 'Los Angeles Rams' },
+    { home: 'New York Giants', away: 'Dallas Cowboys' },
+    { home: 'New York Jets', away: 'Buffalo Bills' },
   ];
 
   const getPickClass = (pick) => {
