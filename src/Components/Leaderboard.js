@@ -11,7 +11,7 @@ const Leaderboard = ({ entriesData }) => {
   // Get all unique weeks
   const weeks = [...new Set(entriesData.flatMap(entry => Object.keys(entry.picks)))].sort((a, b) => a - b);
 
-  // Sort entries by score (assuming score is the number of correct picks)
+  // Sort entries by score
   const sortedEntries = entriesData.sort((a, b) => b.score - a.score);
 
   return (
@@ -38,9 +38,9 @@ const Leaderboard = ({ entriesData }) => {
                 {weeks.map(week => {
                   const pick = entry.picks[week];
                   return (
-                    <td key={week} className={`pick-cell ${pick ? pick.result : ''}`}>
+                    <td key={week} className="pick-cell">
                       {pick ? (
-                        <div className="pick-info">
+                        <div className={`pick-info ${pick.result}`}>
                           <div className="pick-matchup">{pick.matchup}</div>
                           <div className="pick-team">{pick.pick}</div>
                         </div>
