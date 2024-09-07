@@ -7,18 +7,12 @@ function App() {
   const [entriesData, setEntriesData] = useState([]);
 
   useEffect(() => {
-    // Fetch entries data from your API or data source
-    const fetchEntriesData = async () => {
-      try {
-        const response = await fetch('YOUR_API_ENDPOINT');
-        const data = await response.json();
-        setEntriesData(data);
-      } catch (error) {
-        console.error('Error fetching entries data:', error);
-      }
-    };
-
-    fetchEntriesData();
+    // For now, let's use the local data instead of fetching from an API
+    import('./Components/entriesData').then(module => {
+      const data = module.default;
+      console.log('Entries Data:', data); // Log the data
+      setEntriesData(data);
+    });
   }, []);
 
   return (
