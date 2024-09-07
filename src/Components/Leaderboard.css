@@ -19,6 +19,7 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
+  margin: 20px;
 }
 
 .leaderboard h1 {
@@ -44,6 +45,7 @@ th, td {
   padding: 12px 15px;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
+  border: 1px solid #ddd;
 }
 
 .rank-column, .name-column, .score-column {
@@ -146,12 +148,14 @@ th.name-column {
 
 .correct-pick {
   background-color: var(--correct-pick-bg) !important;
-  color: var(--correct-pick-text) !important;
+  color: green;
+  font-weight: bold;
 }
 
 .wrong-pick {
   background-color: var(--wrong-pick-bg) !important;
-  color: var(--wrong-pick-text) !important;
+  color: red;
+  text-decoration: line-through;
 }
 
 /* Add these new styles to your existing CSS file */
@@ -210,4 +214,8 @@ th.name-column,
 th.score-column,
 th.game-header {
   background-color: var(--header-bg-color);
+}
+
+th {
+  background-color: #f2f2f2;
 }
