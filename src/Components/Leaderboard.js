@@ -11,8 +11,17 @@ function Leaderboard({ entriesData }) {
     'Philadelphia Eagles': 'PHI',
     'Baltimore Ravens': 'BAL',
     'Green Bay Packers': 'GB',
+    'Detroit Lions': 'DET',
+    'San Francisco 49ers': 'SF',
     // Add more teams as needed
   };
+
+  // Add game matchups
+  const gameMatchups = [
+    { home: 'Kansas City Chiefs', away: 'Detroit Lions' },
+    { home: 'Philadelphia Eagles', away: 'San Francisco 49ers' },
+    // Add more matchups as needed
+  ];
 
   const getPickClass = (pick) => {
     if (correctTeams.includes(pick)) return 'correct';
@@ -56,7 +65,9 @@ function Leaderboard({ entriesData }) {
   }
 
   const gameCount = Object.keys(rankedEntries[0].picks).length;
-  const gameHeaders = Object.values(rankedEntries[0].picks).map(pick => teamAbbreviations[pick] || 'TBD');
+  const gameHeaders = gameMatchups.map(matchup => 
+    `${teamAbbreviations[matchup.away] || 'TBD'}@${teamAbbreviations[matchup.home] || 'TBD'}`
+  );
 
   return (
     <div className="leaderboard">

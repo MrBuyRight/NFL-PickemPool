@@ -95,10 +95,10 @@ th {
   background-color: var(--secondary-color);
   color: var(--header-text-color);
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   white-space: nowrap;
-  padding: 8px 4px;
-  min-width: 40px; /* Adjust as needed */
+  padding: 8px 2px;
+  min-width: 60px; /* Adjust as needed */
 }
 
 .pick-cell {
@@ -158,8 +158,8 @@ tbody tr:hover {
   }
 
   .game-header {
-    font-size: 0.7rem;
-    padding: 6px 2px;
-    min-width: 30px; /* Adjust for mobile */
+    font-size: 0.6rem;
+    padding: 6px 1px;
+    min-width: 50px; /* Adjust for mobile */
   }
 }
