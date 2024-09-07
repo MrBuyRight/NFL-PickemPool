@@ -112,12 +112,12 @@ function Leaderboard({ entriesData }) {
       <h2>Week 1 Leaderboard</h2>
       <div className="leaderboard-container">
         <div className="leaderboard-header">
-          <div className="entry-info">
+          <div className="user-info">
             <span className="rank">Rank</span>
             <span className="name">Name</span>
             <span className="score">Score</span>
           </div>
-          <div className="picks-container">
+          <div className="picks-header">
             {gameHeaders.map((header, index) => (
               <div key={index} className="pick-cell">
                 <div className="game-header">{header}</div>
@@ -125,27 +125,29 @@ function Leaderboard({ entriesData }) {
             ))}
           </div>
         </div>
-        {rankedEntries.map((entry, index) => (
-          <div key={index} className="entry-row">
-            <div className="entry-info">
-              <span className="rank">{entry.rank}</span>
-              <span className="name">{formatName(entry.name)}</span>
-              <span className="score">{entry.score}</span>
-            </div>
-            <div className="picks-container">
-              {gameMatchups.map((matchup, pickIndex) => {
-                const pick = entry.picks[pickIndex + 1];
-                return (
-                  <div key={pickIndex} className="pick-cell">
-                    <div className={`pick-info ${getPickClass(pick)}`}>
-                      <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+        <div className="leaderboard-body">
+          {rankedEntries.map((entry, index) => (
+            <div key={index} className="entry-row">
+              <div className="user-info">
+                <span className="rank">{entry.rank}</span>
+                <span className="name">{formatName(entry.name)}</span>
+                <span className="score">{entry.score}</span>
+              </div>
+              <div className="picks-container">
+                {gameMatchups.map((matchup, pickIndex) => {
+                  const pick = entry.picks[pickIndex + 1];
+                  return (
+                    <div key={pickIndex} className="pick-cell">
+                      <div className={`pick-info ${getPickClass(pick)}`}>
+                        <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
