@@ -180,6 +180,14 @@ h1 {
     padding: 8px;
     font-size: 0.9rem;
   }
+
+  .app-main {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
 }
 
 /* Scrollbar styling */

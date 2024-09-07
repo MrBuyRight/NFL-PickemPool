@@ -56,37 +56,24 @@ th {
   font-weight: bold;
 }
 
-.rank-header, .name-header, .score-header {
+.rank-header, .name-header, .score-header,
+.rank-cell, .name-cell, .score-cell {
   position: sticky;
   left: 0;
   z-index: 20;
   background-color: var(--secondary-color);
 }
 
-.name-header {
-  left: 60px;
+.name-header, .name-cell {
+  left: 40px;
 }
 
-.score-header {
-  left: 200px;
-}
-
-.rank-cell, .name-cell, .score-cell {
-  position: sticky;
-  left: 0;
-  background-color: var(--secondary-color);
-}
-
-.name-cell {
-  left: 60px;
-}
-
-.score-cell {
-  left: 200px;
+.score-header, .score-cell {
+  left: 120px;
 }
 
 .pick-cell {
-  min-width: 80px;
+  min-width: 60px;
 }
 
 .pick-info {
@@ -113,11 +100,36 @@ th {
 }
 
 @media (max-width: 768px) {
+  .rank-header, .rank-cell {
+    width: 40px;
+    min-width: 40px;
+  }
+
+  .name-header, .name-cell {
+    width: 80px;
+    min-width: 80px;
+    left: 40px;
+  }
+
+  .score-header, .score-cell {
+    width: 40px;
+    min-width: 40px;
+    left: 120px;
+  }
+
   .pick-cell {
-    min-width: 60px;
+    min-width: 50px;
   }
 
   .pick-team {
     font-size: 0.8rem;
+  }
+
+  .leaderboard-container {
+    overflow-x: auto;
+  }
+
+  table {
+    width: auto;
   }
 }
