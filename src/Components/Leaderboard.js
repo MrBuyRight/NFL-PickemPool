@@ -81,6 +81,11 @@ function Leaderboard({ entriesData }) {
     }, 0);
   };
 
+  // Generate game headers based on the gameMatchups array
+  const gameHeaders = gameMatchups.map(matchup => 
+    `${teamAbbreviations[matchup.away] || 'TBD'}@${teamAbbreviations[matchup.home] || 'TBD'}`
+  );
+
   const rankedEntries = useMemo(() => {
     if (!entriesData || entriesData.length === 0) {
       return [];
@@ -101,12 +106,6 @@ function Leaderboard({ entriesData }) {
   if (rankedEntries.length === 0) {
     return <div>Loading...</div>;
   }
-
-  // Generate game headers based on the first entry's picks
-  const gameHeaders = Object.keys(rankedEntries[0].picks).map(game => {
-    const [away, home] = game.split(' @ ');
-    return `${teamAbbreviations[away] || 'TBD'}@${teamAbbreviations[home] || 'TBD'}`;
-  });
 
   return (
     <div className="leaderboard">
@@ -129,13 +128,16 @@ function Leaderboard({ entriesData }) {
                 <td className="rank-column">{entry.rank}</td>
                 <td className="name-column">{formatName(entry.name)}</td>
                 <td className="score-column">{entry.score}</td>
-                {Object.values(entry.picks).map((pick, pickIndex) => (
-                  <td key={pickIndex} className="pick-cell">
-                    <div className={`pick-info ${getPickClass(pick)}`}>
-                      <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
-                    </div>
-                  </td>
-                ))}
+                {gameMatchups.map((matchup, pickIndex) => {
+                  const pick = entry.picks[`${matchup.away} @ ${matchup.home}`];
+                  return (
+                    <td key={pickIndex} className="pick-cell">
+                      <div className={`pick-info ${getPickClass(pick)}`}>
+                        <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+                      </div>
+                    </td>
+                  );
+                })}
               </tr>
             ))}
           </tbody>

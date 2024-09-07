@@ -36,14 +36,14 @@ body {
 }
 
 .table-container {
-  overflow: hidden;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  width: 100%;
 }
 
 table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  table-layout: fixed;
+  width: max-content;
+  min-width: 100%;
 }
 
 th, td {
@@ -58,34 +58,32 @@ th {
   font-weight: bold;
 }
 
-.rank-column {
+.rank-column, .score-column {
   position: sticky;
-  left: 0;
   background-color: var(--secondary-color);
   color: var(--header-text-color);
   z-index: 10;
-  min-width: 50px;
-  max-width: 50px;
+  width: 60px;
+  min-width: 60px;
+  max-width: 60px;
   text-align: center;
 }
 
+.rank-column {
+  left: 0;
+}
+
 .score-column {
-  position: sticky;
-  left: 200px; /* Adjust based on the width of rank and name columns */
-  background-color: var(--secondary-color);
-  color: var(--header-text-color);
-  z-index: 10;
-  min-width: 50px;
-  max-width: 50px;
-  text-align: center;
+  left: 210px; /* Adjust based on the width of rank and name columns */
 }
 
 .name-column {
   position: sticky;
-  left: 50px; /* Adjust based on the width of rank column */
+  left: 60px; /* Adjust based on the width of rank column */
   background-color: var(--secondary-color);
   color: var(--header-text-color);
   z-index: 10;
+  width: 150px;
   min-width: 150px;
   max-width: 150px;
 }
@@ -104,13 +102,17 @@ th {
 }
 
 .game-header {
+  width: 70px;
+  min-width: 70px;
+  max-width: 70px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   background-color: var(--secondary-color);
   color: var(--header-text-color);
   text-align: center;
   font-size: 0.7rem;
-  white-space: nowrap;
   padding: 8px 2px;
-  min-width: 60px; /* Adjust as needed */
 }
 
 .pick-cell {
@@ -154,21 +156,27 @@ tbody tr:hover {
 
 /* Add responsive styles as needed */
 @media (max-width: 768px) {
-  .rank-column {
-    min-width: 40px;
-    max-width: 40px;
+  .rank-column, .score-column {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
   }
 
   .score-column {
-    left: 140px; /* Adjust based on the width of rank and name columns on mobile */
-    min-width: 40px;
-    max-width: 40px;
+    left: 170px; /* Adjust based on the width of rank and name columns on mobile */
   }
 
   .name-column {
-    left: 40px;
-    min-width: 100px;
-    max-width: 100px;
+    left: 50px;
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+  }
+
+  .game-header {
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
   }
 
   .pick-team {
