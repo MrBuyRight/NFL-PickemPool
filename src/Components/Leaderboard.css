@@ -58,7 +58,7 @@ th {
   font-weight: bold;
 }
 
-.rank-column, .score-column {
+.rank-column {
   position: sticky;
   left: 0;
   background-color: var(--secondary-color);
@@ -69,9 +69,20 @@ th {
   text-align: center;
 }
 
+.score-column {
+  position: sticky;
+  left: 200px; /* Adjust based on the width of rank and name columns */
+  background-color: var(--secondary-color);
+  color: var(--header-text-color);
+  z-index: 10;
+  min-width: 50px;
+  max-width: 50px;
+  text-align: center;
+}
+
 .name-column {
   position: sticky;
-  left: 100px; /* Adjust based on the width of rank and score columns */
+  left: 50px; /* Adjust based on the width of rank column */
   background-color: var(--secondary-color);
   color: var(--header-text-color);
   z-index: 10;
@@ -143,13 +154,19 @@ tbody tr:hover {
 
 /* Add responsive styles as needed */
 @media (max-width: 768px) {
-  .rank-column, .score-column {
+  .rank-column {
+    min-width: 40px;
+    max-width: 40px;
+  }
+
+  .score-column {
+    left: 140px; /* Adjust based on the width of rank and name columns on mobile */
     min-width: 40px;
     max-width: 40px;
   }
 
   .name-column {
-    left: 80px;
+    left: 40px;
     min-width: 100px;
     max-width: 100px;
   }

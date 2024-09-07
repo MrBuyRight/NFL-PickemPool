@@ -43,22 +43,22 @@ function Leaderboard({ entriesData }) {
 
   // Add game matchups for Week 1
   const gameMatchups = [
-    { home: 'Kansas City Chiefs', away: 'Detroit Lions' },
-    { home: 'Philadelphia Eagles', away: 'New England Patriots' },
-    { home: 'Baltimore Ravens', away: 'Houston Texans' },
-    { home: 'Atlanta Falcons', away: 'Carolina Panthers' },
-    { home: 'Minnesota Vikings', away: 'Tampa Bay Buccaneers' },
-    { home: 'Indianapolis Colts', away: 'Jacksonville Jaguars' },
-    { home: 'Washington Commanders', away: 'Arizona Cardinals' },
-    { home: 'Pittsburgh Steelers', away: 'San Francisco 49ers' },
-    { home: 'Cleveland Browns', away: 'Cincinnati Bengals' },
-    { home: 'New Orleans Saints', away: 'Tennessee Titans' },
-    { home: 'Chicago Bears', away: 'Green Bay Packers' },
-    { home: 'Denver Broncos', away: 'Las Vegas Raiders' },
-    { home: 'Los Angeles Chargers', away: 'Miami Dolphins' },
-    { home: 'Seattle Seahawks', away: 'Los Angeles Rams' },
-    { home: 'New York Giants', away: 'Dallas Cowboys' },
-    { home: 'New York Jets', away: 'Buffalo Bills' },
+    { home: 'Kansas City Chiefs', away: 'Baltimore Ravens' },
+    { home: 'Philadelphia Eagles', away: 'Green Bay Packers' },
+    { home: 'Atlanta Falcons', away: 'Pittsburgh Steelers' },
+    { home: 'Buffalo Bills', away: 'Arizona Cardinals' },
+    { home: 'Chicago Bears', away: 'Tennessee Titans' },
+    { home: 'Cincinnati Bengals', away: 'New England Patriots' },
+    { home: 'Indianapolis Colts', away: 'Houston Texans' },
+    { home: 'Miami Dolphins', away: 'Jacksonville Jaguars' },
+    { home: 'New Orleans Saints', away: 'Carolina Panthers' },
+    { home: 'New York Giants', away: 'Minnesota Vikings' },
+    { home: 'Los Angeles Chargers', away: 'Las Vegas Raiders' },
+    { home: 'Seattle Seahawks', away: 'Denver Broncos' },
+    { home: 'Cleveland Browns', away: 'Dallas Cowboys' },
+    { home: 'Tampa Bay Buccaneers', away: 'Washington Commanders' },
+    { home: 'Detroit Lions', away: 'Los Angeles Rams' },
+    { home: 'San Francisco 49ers', away: 'New York Jets' },
   ];
 
   const getPickClass = (pick) => {
@@ -102,10 +102,11 @@ function Leaderboard({ entriesData }) {
     return <div>Loading...</div>;
   }
 
-  const gameCount = Object.keys(rankedEntries[0].picks).length;
-  const gameHeaders = gameMatchups.map(matchup => 
-    `${teamAbbreviations[matchup.away] || 'TBD'}@${teamAbbreviations[matchup.home] || 'TBD'}`
-  );
+  // Generate game headers based on the first entry's picks
+  const gameHeaders = Object.keys(rankedEntries[0].picks).map(game => {
+    const [away, home] = game.split(' @ ');
+    return `${teamAbbreviations[away] || 'TBD'}@${teamAbbreviations[home] || 'TBD'}`;
+  });
 
   return (
     <div className="leaderboard">
