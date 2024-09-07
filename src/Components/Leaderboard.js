@@ -5,7 +5,61 @@ function Leaderboard({ entriesData }) {
   const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles'];
   const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers'];
 
-  // Keep existing teamAbbreviations and gameMatchups
+  // Add the teamAbbreviations definition
+  const teamAbbreviations = {
+    'Kansas City Chiefs': 'KC',
+    'Detroit Lions': 'DET',
+    'Philadelphia Eagles': 'PHI',
+    'New England Patriots': 'NE',
+    'Baltimore Ravens': 'BAL',
+    'Houston Texans': 'HOU',
+    'Atlanta Falcons': 'ATL',
+    'Carolina Panthers': 'CAR',
+    'Minnesota Vikings': 'MIN',
+    'Tampa Bay Buccaneers': 'TB',
+    'Indianapolis Colts': 'IND',
+    'Jacksonville Jaguars': 'JAX',
+    'Washington Commanders': 'WAS',
+    'Arizona Cardinals': 'ARI',
+    'Pittsburgh Steelers': 'PIT',
+    'San Francisco 49ers': 'SF',
+    'Cleveland Browns': 'CLE',
+    'Cincinnati Bengals': 'CIN',
+    'New Orleans Saints': 'NO',
+    'Tennessee Titans': 'TEN',
+    'Chicago Bears': 'CHI',
+    'Green Bay Packers': 'GB',
+    'Denver Broncos': 'DEN',
+    'Las Vegas Raiders': 'LV',
+    'Los Angeles Chargers': 'LAC',
+    'Miami Dolphins': 'MIA',
+    'Seattle Seahawks': 'SEA',
+    'Los Angeles Rams': 'LAR',
+    'New York Giants': 'NYG',
+    'Dallas Cowboys': 'DAL',
+    'New York Jets': 'NYJ',
+    'Buffalo Bills': 'BUF'
+  };
+
+  // Add the gameMatchups definition
+  const gameMatchups = [
+    { away: 'Detroit Lions', home: 'Kansas City Chiefs' },
+    { away: 'San Francisco 49ers', home: 'Pittsburgh Steelers' },
+    { away: 'Jacksonville Jaguars', home: 'Indianapolis Colts' },
+    { away: 'Tampa Bay Buccaneers', home: 'Minnesota Vikings' },
+    { away: 'Tennessee Titans', home: 'New Orleans Saints' },
+    { away: 'Carolina Panthers', home: 'Atlanta Falcons' },
+    { away: 'Houston Texans', home: 'Baltimore Ravens' },
+    { away: 'Cincinnati Bengals', home: 'Cleveland Browns' },
+    { away: 'Arizona Cardinals', home: 'Washington Commanders' },
+    { away: 'Green Bay Packers', home: 'Chicago Bears' },
+    { away: 'Las Vegas Raiders', home: 'Denver Broncos' },
+    { away: 'Philadelphia Eagles', home: 'New England Patriots' },
+    { away: 'Miami Dolphins', home: 'Los Angeles Chargers' },
+    { away: 'Los Angeles Rams', home: 'Seattle Seahawks' },
+    { away: 'Dallas Cowboys', home: 'New York Giants' },
+    { away: 'Buffalo Bills', home: 'New York Jets' }
+  ];
 
   const getPickClass = (pick) => {
     if (correctTeams.includes(pick)) return 'correct';
