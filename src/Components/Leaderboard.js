@@ -112,20 +112,20 @@ function Leaderboard({ entriesData }) {
         <table className="leaderboard-table">
           <thead>
             <tr>
-              <th className="fixed-column">Rank</th>
-              <th className="fixed-column">Name</th>
-              <th className="fixed-column">Score</th>
+              <th className="fixed-column rank-column">R</th>
+              <th className="fixed-column name-column">Name</th>
+              <th className="fixed-column score-column">S</th>
               {gameHeaders.map((header, index) => (
-                <th key={index}>{header}</th>
+                <th key={index} className="pick-header">{header}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {rankedEntries.map((entry, index) => (
               <tr key={index}>
-                <td className="fixed-column">{entry.rank}</td>
-                <td className="fixed-column">{formatName(entry.name)}</td>
-                <td className="fixed-column">{entry.score}</td>
+                <td className="fixed-column rank-column">{entry.rank}</td>
+                <td className="fixed-column name-column">{formatName(entry.name)}</td>
+                <td className="fixed-column score-column">{entry.score}</td>
                 {gameMatchups.map((matchup, pickIndex) => {
                   const pick = entry.picks[pickIndex + 1];
                   return (

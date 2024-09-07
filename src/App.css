@@ -47,7 +47,7 @@ body {
 .app-header {
   background-color: var(--surface-color);
   color: var(--accent-color);
-  padding: 10px 20px;
+  padding: 5px 10px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -62,10 +62,10 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 @media (max-width: 768px) {

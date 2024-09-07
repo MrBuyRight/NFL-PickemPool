@@ -26,12 +26,12 @@ body {
 
 .leaderboard h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: var(--accent-color);
 }
 
 .leaderboard-container {
-  height: calc(100% - 60px);
+  height: calc(100% - 40px);
   overflow: auto;
 }
 
@@ -43,7 +43,7 @@ body {
 
 .leaderboard-table th,
 .leaderboard-table td {
-  padding: 10px;
+  padding: 8px 4px;
   text-align: center;
   border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
@@ -63,12 +63,25 @@ body {
   z-index: 5;
 }
 
-.fixed-column:nth-child(2) {
-  left: 60px; /* Adjust based on the width of the first column */
+.rank-column {
+  width: 30px;
+  min-width: 30px;
 }
 
-.fixed-column:nth-child(3) {
-  left: 200px; /* Adjust based on the width of the first two columns */
+.name-column {
+  width: 100px;
+  min-width: 100px;
+  left: 30px;
+}
+
+.score-column {
+  width: 30px;
+  min-width: 30px;
+  left: 130px;
+}
+
+.pick-header {
+  min-width: 60px;
 }
 
 .pick-cell {
@@ -90,14 +103,24 @@ body {
 }
 
 @media (max-width: 768px) {
-  .fixed-column:nth-child(2) {
-    left: 50px;
+  .rank-column {
+    width: 25px;
+    min-width: 25px;
   }
 
-  .fixed-column:nth-child(3) {
-    left: 160px;
+  .name-column {
+    width: 80px;
+    min-width: 80px;
+    left: 25px;
   }
 
+  .score-column {
+    width: 25px;
+    min-width: 25px;
+    left: 105px;
+  }
+
+  .pick-header,
   .pick-cell {
     min-width: 50px;
   }
