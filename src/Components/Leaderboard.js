@@ -1,69 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import './Leaderboard.css';
 
 function Leaderboard({ entriesData }) {
-  const [selectedEntry, setSelectedEntry] = useState(null);
-
   const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles'];
   const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers'];
 
-  // Add the teamAbbreviations definition
-  const teamAbbreviations = {
-    'Kansas City Chiefs': 'KC',
-    'Detroit Lions': 'DET',
-    'Philadelphia Eagles': 'PHI',
-    'New England Patriots': 'NE',
-    'Baltimore Ravens': 'BAL',
-    'Houston Texans': 'HOU',
-    'Atlanta Falcons': 'ATL',
-    'Carolina Panthers': 'CAR',
-    'Minnesota Vikings': 'MIN',
-    'Tampa Bay Buccaneers': 'TB',
-    'Indianapolis Colts': 'IND',
-    'Jacksonville Jaguars': 'JAX',
-    'Washington Commanders': 'WAS',
-    'Arizona Cardinals': 'ARI',
-    'Pittsburgh Steelers': 'PIT',
-    'San Francisco 49ers': 'SF',
-    'Cleveland Browns': 'CLE',
-    'Cincinnati Bengals': 'CIN',
-    'New Orleans Saints': 'NO',
-    'Tennessee Titans': 'TEN',
-    'Chicago Bears': 'CHI',
-    'Green Bay Packers': 'GB',
-    'Denver Broncos': 'DEN',
-    'Las Vegas Raiders': 'LV',
-    'Los Angeles Chargers': 'LAC',
-    'Miami Dolphins': 'MIA',
-    'Seattle Seahawks': 'SEA',
-    'Los Angeles Rams': 'LAR',
-    'New York Giants': 'NYG',
-    'Dallas Cowboys': 'DAL',
-    'New York Jets': 'NYJ',
-    'Buffalo Bills': 'BUF'
-  };
-
-  // Add the gameMatchups definition
-  const gameMatchups = [
-    { away: 'Detroit Lions', home: 'Kansas City Chiefs' },
-    { away: 'San Francisco 49ers', home: 'Pittsburgh Steelers' },
-    { away: 'Jacksonville Jaguars', home: 'Indianapolis Colts' },
-    { away: 'Tampa Bay Buccaneers', home: 'Minnesota Vikings' },
-    { away: 'Tennessee Titans', home: 'New Orleans Saints' },
-    { away: 'Carolina Panthers', home: 'Atlanta Falcons' },
-    { away: 'Houston Texans', home: 'Baltimore Ravens' },
-    { away: 'Cincinnati Bengals', home: 'Cleveland Browns' },
-    { away: 'Arizona Cardinals', home: 'Washington Commanders' },
-    { away: 'Green Bay Packers', home: 'Chicago Bears' },
-    { away: 'Las Vegas Raiders', home: 'Denver Broncos' },
-    { away: 'Philadelphia Eagles', home: 'New England Patriots' },
-    { away: 'Miami Dolphins', home: 'Los Angeles Chargers' },
-    { away: 'Los Angeles Rams', home: 'Seattle Seahawks' },
-    { away: 'Dallas Cowboys', home: 'New York Giants' },
-    { away: 'Buffalo Bills', home: 'New York Jets' }
-  ];
-
-  // Keep the existing teamAbbreviations and gameMatchups
+  // Keep existing teamAbbreviations and gameMatchups
 
   const getPickClass = (pick) => {
     if (correctTeams.includes(pick)) return 'correct';
@@ -107,10 +49,6 @@ function Leaderboard({ entriesData }) {
       }));
   }, [entriesData]);
 
-  const toggleEntryDetails = (entry) => {
-    setSelectedEntry(selectedEntry && selectedEntry.id === entry.id ? null : entry);
-  };
-
   if (rankedEntries.length === 0) {
     return <div>Loading...</div>;
   }
@@ -125,38 +63,28 @@ function Leaderboard({ entriesData }) {
               <th className="rank-column">Rank</th>
               <th className="name-column">Name</th>
               <th className="score-column">Score</th>
-              <th className="picks-column">Picks</th>
+              {gameHeaders.map((header, index) => (
+                <th key={index} className="game-header">{header}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {rankedEntries.map((entry, index) => (
-              <React.Fragment key={index}>
-                <tr onClick={() => toggleEntryDetails(entry)}>
-                  <td className="rank-column">{entry.rank}</td>
-                  <td className="name-column">{formatName(entry.name)}</td>
-                  <td className="score-column">{entry.score}</td>
-                  <td className="picks-column">View Picks</td>
-                </tr>
-                {selectedEntry && selectedEntry.id === entry.id && (
-                  <tr className="entry-details">
-                    <td colSpan="4">
-                      <div className="picks-grid">
-                        {gameMatchups.map((matchup, pickIndex) => {
-                          const pick = entry.picks[pickIndex + 1];
-                          return (
-                            <div key={pickIndex} className="pick-cell">
-                              <div className="game-header">{gameHeaders[pickIndex]}</div>
-                              <div className={`pick-info ${getPickClass(pick)}`}>
-                                <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
-                              </div>
-                            </div>
-                          );
-                        })}
+              <tr key={index}>
+                <td className="rank-column">{entry.rank}</td>
+                <td className="name-column">{formatName(entry.name)}</td>
+                <td className="score-column">{entry.score}</td>
+                {gameMatchups.map((matchup, pickIndex) => {
+                  const pick = entry.picks[pickIndex + 1];
+                  return (
+                    <td key={pickIndex} className="pick-cell">
+                      <div className={`pick-info ${getPickClass(pick)}`}>
+                        <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
                       </div>
                     </td>
-                  </tr>
-                )}
-              </React.Fragment>
+                  );
+                })}
+              </tr>
             ))}
           </tbody>
         </table>
