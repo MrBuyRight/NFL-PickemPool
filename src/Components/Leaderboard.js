@@ -1,6 +1,10 @@
 import React from 'react';
 
 function Leaderboard({ entriesData }) {
+  if (!entriesData || entriesData.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="leaderboard">
       <h2>Leaderboard</h2>
