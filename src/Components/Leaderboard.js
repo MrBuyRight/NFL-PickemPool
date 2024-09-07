@@ -3,6 +3,8 @@ import './Leaderboard.css';
 
 function Leaderboard({ entriesData }) {
   const [selectedWeek, setSelectedWeek] = useState(1);
+  const [expandedEntry, setExpandedEntry] = useState(null);
+
   const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles'];
   const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers'];
 
@@ -105,9 +107,7 @@ function Leaderboard({ entriesData }) {
   }, [entriesData]);
 
   const togglePickDetails = (entryIndex) => {
-    const updatedEntries = [...rankedEntries];
-    updatedEntries[entryIndex].showDetails = !updatedEntries[entryIndex].showDetails;
-    setRankedEntries(updatedEntries);
+    setExpandedEntry(expandedEntry === entryIndex ? null : entryIndex);
   };
 
   if (rankedEntries.length === 0) {
@@ -131,7 +131,7 @@ function Leaderboard({ entriesData }) {
                 <div className="name-cell">{formatName(entry.name)}</div>
                 <div className="score-cell">{entry.score}</div>
               </div>
-              {entry.showDetails && (
+              {expandedEntry === index && (
                 <div className="pick-details">
                   {gameMatchups.map((matchup, pickIndex) => {
                     const pick = entry.picks[pickIndex + 1];
