@@ -110,7 +110,12 @@ function Leaderboard({ entriesData }) {
             <tr>
               <th className="fixed-column name-column">Name</th>
               {gameHeaders.map((header, index) => (
-                <th key={index} className="pick-header">{header}</th>
+                <th key={index} className="pick-header">
+                  <div className="game-header">
+                    <span className="game-number">Game {index + 1}</span>
+                    <span className="matchup">{header}</span>
+                  </div>
+                </th>
               ))}
             </tr>
           </thead>
@@ -121,8 +126,10 @@ function Leaderboard({ entriesData }) {
                 {gameMatchups.map((matchup, pickIndex) => {
                   const pick = entry.picks[pickIndex + 1];
                   return (
-                    <td key={pickIndex} className={`pick-cell ${getPickClass(pick)}`}>
-                      <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+                    <td key={pickIndex} className="pick-cell">
+                      <div className={`pick-container ${getPickClass(pick)}`}>
+                        <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
+                      </div>
                     </td>
                   );
                 })}

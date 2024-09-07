@@ -38,7 +38,7 @@ body {
 .leaderboard-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0;
+  border-spacing: 0 1px;
 }
 
 .leaderboard-table th,
@@ -69,15 +69,44 @@ body {
 }
 
 .pick-header {
-  min-width: 60px;
+  min-width: 100px;
+  padding: 8px 2px;
+}
+
+.game-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-number {
+  font-size: 0.8rem;
+  color: var(--text-secondary-color);
+  margin-bottom: 4px;
+}
+
+.matchup {
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .pick-cell {
-  min-width: 60px;
+  padding: 4px 2px;
+}
+
+.pick-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: 4px;
+  background-color: var(--surface-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .pick-team {
   font-size: 0.9rem;
+  font-weight: bold;
 }
 
 .correct {
@@ -96,9 +125,8 @@ body {
     min-width: 100px;
   }
 
-  .pick-header,
-  .pick-cell {
-    min-width: 50px;
+  .pick-header {
+    min-width: 80px;
   }
 
   .pick-team {
