@@ -58,9 +58,19 @@ th {
   font-weight: bold;
 }
 
-.name-column {
+.rank-column, .score-column {
   position: sticky;
   left: 0;
+  background-color: var(--secondary-color);
+  color: var(--header-text-color);
+  z-index: 10;
+  min-width: 50px;
+  max-width: 50px;
+}
+
+.name-column {
+  position: sticky;
+  left: 100px; /* Adjust based on the width of rank and score columns */
   background-color: var(--secondary-color);
   color: var(--header-text-color);
   z-index: 10;
@@ -131,7 +141,18 @@ tbody tr:hover {
 
 /* Add responsive styles as needed */
 @media (max-width: 768px) {
-  .pick-matchup {
-    display: none;
+  .rank-column, .score-column {
+    min-width: 40px;
+    max-width: 40px;
+  }
+
+  .name-column {
+    left: 80px;
+    min-width: 100px;
+    max-width: 100px;
+  }
+
+  .pick-team {
+    font-size: 0.8rem;
   }
 }
