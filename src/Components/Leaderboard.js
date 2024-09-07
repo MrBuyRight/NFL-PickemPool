@@ -1,39 +1,42 @@
 import React from 'react';
+import './Leaderboard.css';
 
 function Leaderboard({ entriesData }) {
-  console.log('Leaderboard component rendered', entriesData);
-
   if (!entriesData || entriesData.length === 0) {
-    return <div>No data available</div>;
+    return <div>Loading...</div>;
   }
 
-  // Assuming Week 1 picks are at index 0
-  const week1Picks = entriesData[0].picks[0];
-  const gameCount = week1Picks ? week1Picks.length : 0;
+  const gameCount = Object.keys(entriesData[0].picks).length;
 
   return (
     <div className="leaderboard">
       <h2>Week 1 Picks</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            {[...Array(gameCount)].map((_, index) => (
-              <th key={index}>Game {index + 1}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {entriesData.map((entry, index) => (
-            <tr key={index}>
-              <td>{entry.name}</td>
-              {entry.picks[0].map((pick, pickIndex) => (
-                <td key={pickIndex}>{pick}</td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th className="name-column">Name</th>
+              {[...Array(gameCount)].map((_, index) => (
+                <th key={index} className="game-header">Game {index + 1}</th>
               ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {entriesData.map((entry, index) => (
+              <tr key={index}>
+                <td className="name-column">{entry.name}</td>
+                {Object.values(entry.picks).map((pick, pickIndex) => (
+                  <td key={pickIndex} className="pick-cell">
+                    <div className="pick-info">
+                      <span className="pick-team">{pick}</span>
+                    </div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

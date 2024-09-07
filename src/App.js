@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Leaderboard from './Components/Leaderboard';
+import entriesData from './Components/entriesData';
+import './App.css';
 
 function App() {
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    setEntries(entriesData);
+  }, []);
+
   return (
     <div className="App">
       <h1>NFL Pick'em Pool</h1>
-      <p>This is a test message. If you can see this, the app is rendering.</p>
+      <Leaderboard entriesData={entries} />
     </div>
   );
 }
