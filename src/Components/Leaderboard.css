@@ -14,11 +14,6 @@
 }
 
 .leaderboard {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
   margin: 20px;
 }
 
@@ -42,10 +37,9 @@ table {
 }
 
 th, td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid var(--border-color);
   border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
 .rank-column, .name-column, .score-column {

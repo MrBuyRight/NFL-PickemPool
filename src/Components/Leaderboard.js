@@ -3,8 +3,9 @@ import './Leaderboard.css';
 
 const Leaderboard = () => {
   const players = [
-    { name: 'Player 1', picks: ['Philadelphia Eagles', 'Other Team'], score: 1 },
-    { name: 'Player 2', picks: ['Green Bay Packers', 'Other Team'], score: 0 },
+    { name: 'Player 1', score: 10 },
+    { name: 'Player 2', score: 8 },
+    { name: 'Player 3', score: 6 },
     // Add more players as needed
   ];
 
@@ -14,23 +15,16 @@ const Leaderboard = () => {
       <table>
         <thead>
           <tr>
+            <th>Rank</th>
             <th>Player</th>
-            <th>Picks</th>
             <th>Score</th>
           </tr>
         </thead>
         <tbody>
           {players.map((player, index) => (
             <tr key={index}>
+              <td>{index + 1}</td>
               <td>{player.name}</td>
-              <td>
-                {player.picks.map((pick, pickIndex) => (
-                  <span key={pickIndex} className={pick === 'Philadelphia Eagles' ? 'correct-pick' : pick === 'Green Bay Packers' ? 'wrong-pick' : ''}>
-                    {pick}
-                    {pickIndex < player.picks.length - 1 ? ', ' : ''}
-                  </span>
-                ))}
-              </td>
               <td>{player.score}</td>
             </tr>
           ))}
