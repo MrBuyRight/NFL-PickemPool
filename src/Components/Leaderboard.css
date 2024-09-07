@@ -20,10 +20,8 @@ body {
 
 .leaderboard {
   width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  overflow-x: auto;
+  height: 100%;
+  overflow: hidden;
 }
 
 .leaderboard h2 {
@@ -33,34 +31,48 @@ body {
 }
 
 .leaderboard-container {
-  background-color: var(--surface-color);
-  border-radius: 8px;
+  display: flex;
+  height: calc(100% - 60px);
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.leaderboard-table {
+.leaderboard-sticky-columns {
+  flex: 0 0 220px;
+  overflow-y: auto;
+  background-color: var(--secondary-color);
+}
+
+.leaderboard-scrollable {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.leaderboard-sticky-columns table,
+.leaderboard-scrollable table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-.leaderboard-table th,
-.leaderboard-table td {
+.leaderboard-sticky-columns th,
+.leaderboard-sticky-columns td,
+.leaderboard-scrollable th,
+.leaderboard-scrollable td {
   padding: 12px;
   text-align: center;
   border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
 }
 
-.leaderboard-table thead {
+.leaderboard-sticky-columns th,
+.leaderboard-scrollable th {
   background-color: var(--secondary-color);
   color: var(--accent-color);
+  font-weight: bold;
   position: sticky;
   top: 0;
   z-index: 10;
-}
-
-.leaderboard-table th {
-  font-weight: bold;
 }
 
 .rank-header,
@@ -69,20 +81,23 @@ body {
 .rank-cell,
 .name-cell,
 .score-cell {
-  position: sticky;
+  position: absolute;
   left: 0;
+  width: 60px;
   background-color: var(--secondary-color);
-  z-index: 5;
+  z-index: 20;
 }
 
 .name-header,
 .name-cell {
   left: 60px;
+  width: 100px;
 }
 
 .score-header,
 .score-cell {
-  left: 200px;
+  left: 160px;
+  width: 60px;
 }
 
 .pick-cell {
@@ -113,13 +128,20 @@ body {
 }
 
 @media (max-width: 768px) {
-  .leaderboard {
-    padding: 10px;
+  .leaderboard-sticky-columns {
+    flex: 0 0 180px;
   }
 
-  .leaderboard-table th,
-  .leaderboard-table td {
+  .leaderboard-sticky-columns th,
+  .leaderboard-sticky-columns td,
+  .leaderboard-scrollable th,
+  .leaderboard-scrollable td {
     padding: 8px;
+  }
+
+  .name-header,
+  .name-cell {
+    width: 80px;
   }
 
   .pick-cell {

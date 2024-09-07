@@ -22,11 +22,13 @@ function App() {
         <h1>NFL Pick'em Pool</h1>
       </header>
       <main className="app-main">
-        {error ? (
-          <div className="error-message">{error}</div>
-        ) : (
-          <Leaderboard entriesData={entries} />
-        )}
+        <div className="app-content">
+          {error ? (
+            <div className="error-message">{error}</div>
+          ) : (
+            <Leaderboard entriesData={entries} />
+          )}
+        </div>
       </main>
     </div>
   );
