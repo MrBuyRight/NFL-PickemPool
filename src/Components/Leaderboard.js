@@ -80,12 +80,25 @@ function Leaderboard({ entriesData }) {
     return name;
   };
 
-  const sortedEntries = useMemo(() => {
+  const calculateScore = (picks) => {
+    return Object.values(picks).filter(pick => correctTeams.includes(pick)).length;
+  };
+
+  const rankedEntries = useMemo(() => {
     if (!entriesData || entriesData.length === 0) {
       return [];
     }
 
-    return [...entriesData].sort((a, b) => a.name.localeCompare(b.name));
+    return entriesData
+      .map(entry => ({
+        ...entry,
+        score: calculateScore(entry.picks)
+      }))
+      .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
+      .map((entry, index, array) => ({
+        ...entry,
+        rank: index === 0 || entry.score !== array[index - 1].score ? index + 1 : array[index - 1].rank
+      }));
   }, [entriesData]);
 
   return (
@@ -95,16 +108,20 @@ function Leaderboard({ entriesData }) {
         <table className="leaderboard-table">
           <thead>
             <tr>
+              <th className="fixed-column rank-column">Rank</th>
               <th className="fixed-column name-column">Name</th>
+              <th className="fixed-column score-column">Score</th>
               {gameHeaders.map((header, index) => (
                 <th key={index} className="pick-header">{header}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {sortedEntries.map((entry, index) => (
+            {rankedEntries.map((entry, index) => (
               <tr key={index}>
+                <td className="fixed-column rank-column">{entry.rank}</td>
                 <td className="fixed-column name-column">{formatName(entry.name)}</td>
+                <td className="fixed-column score-column">{entry.score}</td>
                 {gameMatchups.map((matchup, pickIndex) => {
                   const pick = entry.picks[pickIndex + 1];
                   return (
