@@ -20,9 +20,8 @@ body {
 
 .leaderboard {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  height: calc(100vh - 80px); /* Adjust based on your header height */
+  overflow: hidden;
 }
 
 .leaderboard h2 {
@@ -33,67 +32,69 @@ body {
 
 .leaderboard-container {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  height: calc(100% - 60px);
 }
 
-.user-module {
+.user-list {
+  flex: 0 0 200px;
+  overflow-y: auto;
   background-color: var(--surface-color);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid var(--border-color);
 }
 
 .user-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
-  background-color: var(--secondary-color);
-  color: var(--text-color);
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .user-rank {
   font-weight: bold;
-  font-size: 1.2rem;
   color: var(--accent-color);
 }
 
 .user-name {
-  font-size: 1.1rem;
+  flex: 1;
+  margin: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-score {
   font-weight: bold;
-  font-size: 1.2rem;
 }
 
-.user-picks {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 15px;
-  gap: 10px;
+.picks-table-container {
+  flex: 1;
+  overflow: auto;
+}
+
+.picks-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.picks-table th,
+.picks-table td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.picks-table th {
+  position: sticky;
+  top: 0;
+  background-color: var(--secondary-color);
+  z-index: 10;
 }
 
 .pick-cell {
-  flex: 1 0 calc(25% - 10px);
-  min-width: 120px;
-  text-align: center;
-}
-
-.matchup {
-  font-size: 0.8rem;
-  margin-bottom: 5px;
-  color: var(--text-secondary-color);
-}
-
-.pick-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  border-radius: 4px;
-  font-weight: bold;
+  min-width: 60px;
 }
 
 .pick-team {
@@ -111,13 +112,24 @@ body {
 }
 
 @media (max-width: 768px) {
-  .pick-cell {
-    flex: 1 0 calc(50% - 10px);
+  .user-list {
+    flex: 0 0 120px;
   }
-}
 
-@media (max-width: 480px) {
+  .user-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-name {
+    margin: 5px 0;
+  }
+
   .pick-cell {
-    flex: 1 0 100%;
+    min-width: 50px;
+  }
+
+  .pick-team {
+    font-size: 0.8rem;
   }
 }
