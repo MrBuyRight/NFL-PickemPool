@@ -8,8 +8,8 @@ const Leaderboard = ({ entriesData }) => {
     return <div>No entries data available</div>;
   }
 
-  // Get all unique weeks
-  const weeks = [...new Set(entriesData.flatMap(entry => Object.keys(entry.picks)))].sort((a, b) => a - b);
+  // Get all games from Week 1
+  const week1Games = entriesData[0].picks["1"] ? Object.values(entriesData[0].picks["1"]) : [];
 
   // Sort entries by score
   const sortedEntries = entriesData.sort((a, b) => b.score - a.score);
@@ -24,8 +24,8 @@ const Leaderboard = ({ entriesData }) => {
               <th className="rank-column">Rank</th>
               <th className="name-column">Name</th>
               <th className="score-column">Score</th>
-              {weeks.map(week => (
-                <th key={week} className="week-header">Week {week}</th>
+              {week1Games.map((game, index) => (
+                <th key={index} className="game-header">{game.matchup}</th>
               ))}
             </tr>
           </thead>
@@ -35,13 +35,12 @@ const Leaderboard = ({ entriesData }) => {
                 <td className="rank-column">{index + 1}</td>
                 <td className="name-column">{entry.name}</td>
                 <td className="score-column">{entry.score}</td>
-                {weeks.map(week => {
-                  const pick = entry.picks[week];
+                {week1Games.map((game, gameIndex) => {
+                  const pick = entry.picks["1"][gameIndex + 1];
                   return (
-                    <td key={week} className="pick-cell">
+                    <td key={gameIndex} className="pick-cell">
                       {pick ? (
                         <div className={`pick-info ${pick.result}`}>
-                          <div className="pick-matchup">{pick.matchup}</div>
                           <div className="pick-team">{pick.pick}</div>
                         </div>
                       ) : '-'}

@@ -70,28 +70,27 @@ th {
 .name-column { width: 150px; left: 60px; }
 .score-column { width: 60px; left: 210px; }
 
-.week-header {
+.game-header {
   background-color: var(--primary-color);
   color: var(--header-text-color);
   text-align: center;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  padding: 8px 4px;
 }
 
 .pick-cell {
-  padding: 8px;
+  padding: 8px 4px;
   text-align: center;
 }
 
 .pick-info {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 4px;
   border-radius: 4px;
-}
-
-.pick-matchup {
-  font-size: 0.8em;
-  margin-bottom: 2px;
+  min-height: 30px;
 }
 
 .pick-team {
