@@ -20,6 +20,7 @@ body {
 
 .leaderboard {
   width: 100%;
+  height: calc(100vh - 100px);
   overflow: hidden;
 }
 
@@ -28,41 +29,58 @@ body {
 }
 
 .leaderboard-container {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.leaderboard-header,
-.entry-row {
   display: flex;
-  min-width: max-content;
+  height: calc(100% - 60px);
 }
 
-.leaderboard-header {
+.user-info-column {
+  width: 250px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  background-color: var(--secondary-color);
+  border-right: 2px solid var(--border-color);
+}
+
+.user-info-header,
+.user-info-row {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.user-info-header {
   position: sticky;
   top: 0;
   background-color: var(--secondary-color);
+  font-weight: bold;
   z-index: 10;
-  border-bottom: 2px solid var(--border-color);
-}
-
-.leaderboard-body {
-  overflow-y: auto;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  width: 300px;
-  flex-shrink: 0;
-  padding: 10px;
-  background-color: var(--secondary-color);
-  border-right: 2px solid var(--border-color);
 }
 
 .rank, .name, .score {
   flex: 1;
   text-align: center;
+}
+
+.picks-column {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.picks-header {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background-color: var(--secondary-color);
+  z-index: 10;
+}
+
+.picks-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.picks-row {
+  display: flex;
 }
 
 .pick-cell {
@@ -71,6 +89,7 @@ body {
   padding: 5px;
   text-align: center;
   border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .game-header {
@@ -95,25 +114,17 @@ body {
 }
 
 .correct {
-  background-color: var(--accent-color);
-  color: var(--text-color);
+  background-color: var(--correct-pick-bg);
+  color: var(--correct-pick-text);
 }
 
 .wrong {
-  background-color: var(--error-color);
-  color: var(--text-color);
-}
-
-.entry-row:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.entry-row:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--wrong-pick-bg);
+  color: var(--wrong-pick-text);
 }
 
 @media (max-width: 768px) {
-  .user-info {
+  .user-info-column {
     width: 200px;
   }
 

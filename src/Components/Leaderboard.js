@@ -111,23 +111,21 @@ function Leaderboard({ entriesData }) {
     <div className="leaderboard">
       <h2>Week 1 Leaderboard</h2>
       <div className="leaderboard-container">
-        <div className="sidebar">
-          <div className="sidebar-header">
+        <div className="user-info-column">
+          <div className="user-info-header">
             <span className="rank">Rank</span>
             <span className="name">Name</span>
             <span className="score">Score</span>
           </div>
-          <div className="sidebar-body">
-            {rankedEntries.map((entry, index) => (
-              <div key={index} className="sidebar-row">
-                <span className="rank">{entry.rank}</span>
-                <span className="name">{formatName(entry.name)}</span>
-                <span className="score">{entry.score}</span>
-              </div>
-            ))}
-          </div>
+          {rankedEntries.map((entry, index) => (
+            <div key={index} className="user-info-row">
+              <span className="rank">{entry.rank}</span>
+              <span className="name">{formatName(entry.name)}</span>
+              <span className="score">{entry.score}</span>
+            </div>
+          ))}
         </div>
-        <div className="main-content">
+        <div className="picks-column">
           <div className="picks-header">
             {gameHeaders.map((header, index) => (
               <div key={index} className="pick-cell">
