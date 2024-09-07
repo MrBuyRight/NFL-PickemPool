@@ -2,12 +2,6 @@ import React, { useMemo } from 'react';
 import './Leaderboard.css';
 
 function Leaderboard({ entriesData }) {
-  if (!entriesData || entriesData.length === 0) {
-    return <div>Loading...</div>;
-  }
-
-  const gameCount = Object.keys(entriesData[0].picks).length;
-
   const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles'];
   const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers'];
 
@@ -32,6 +26,10 @@ function Leaderboard({ entriesData }) {
   };
 
   const rankedEntries = useMemo(() => {
+    if (!entriesData || entriesData.length === 0) {
+      return [];
+    }
+
     return entriesData
       .map(entry => ({
         ...entry,
@@ -43,6 +41,12 @@ function Leaderboard({ entriesData }) {
         rank: index === 0 || entry.score !== array[index - 1].score ? index + 1 : array[index - 1].rank
       }));
   }, [entriesData]);
+
+  if (rankedEntries.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  const gameCount = Object.keys(rankedEntries[0].picks).length;
 
   return (
     <div className="leaderboard">
