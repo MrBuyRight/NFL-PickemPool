@@ -4,8 +4,9 @@ import './Leaderboard.css';
 function Leaderboard({ entriesData }) {
   const [selectedWeek, setSelectedWeek] = useState(1);
 
-  const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles'];
-  const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers'];
+  // Update correctTeams and incorrectTeams
+  const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles', 'New England Patriots'];
+  const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers', 'Cincinnati Bengals'];
 
   // Add the teamAbbreviations definition
   const teamAbbreviations = {
@@ -75,9 +76,9 @@ function Leaderboard({ entriesData }) {
   const formatName = (name) => {
     const nameParts = name.split(' ');
     if (nameParts.length > 1) {
-      return `${nameParts[0]} ${nameParts[1].charAt(0)}.`;
+      return `${nameParts[0].charAt(0)}${nameParts[1].charAt(0)}`;
     }
-    return name;
+    return name.slice(0, 2);
   };
 
   const calculateScore = (picks) => {
@@ -108,7 +109,9 @@ function Leaderboard({ entriesData }) {
         <table className="leaderboard-table">
           <thead>
             <tr>
-              <th className="fixed-column name-column">Name</th>
+              <th className="fixed-column name-column">
+                <span className="name-header">Name</span>
+              </th>
               {gameHeaders.map((header, index) => (
                 <th key={index} className="pick-header">
                   <div className="game-header">
@@ -121,8 +124,12 @@ function Leaderboard({ entriesData }) {
           </thead>
           <tbody>
             {rankedEntries.map((entry, index) => (
-              <tr key={index}>
-                <td className="fixed-column name-column">{formatName(entry.name)}</td>
+              <tr key={index} className="entry-row">
+                <td className="fixed-column name-column">
+                  <div className="name-container" title={entry.name}>
+                    {formatName(entry.name)}
+                  </div>
+                </td>
                 {gameMatchups.map((matchup, pickIndex) => {
                   const pick = entry.picks[pickIndex + 1];
                   return (

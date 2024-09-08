@@ -22,6 +22,12 @@ body {
   width: 100%;
   height: calc(100vh - 80px);
   overflow: hidden;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .leaderboard h2 {
@@ -64,8 +70,25 @@ body {
 }
 
 .name-column {
-  width: 120px;
-  min-width: 120px;
+  width: 50px;
+  min-width: 50px;
+}
+
+.name-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.name-container:hover {
+  background-color: var(--accent-color);
+  color: var(--surface-color);
 }
 
 .pick-header {
@@ -102,6 +125,12 @@ body {
   border-radius: 4px;
   background-color: var(--surface-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pick-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .pick-team {
@@ -119,10 +148,34 @@ body {
   color: var(--wrong-pick-text);
 }
 
+.entry-row {
+  opacity: 0;
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.entry-row:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+
+.entry-row:nth-child(even) {
+  animation-delay: 0.2s;
+}
+
 @media (max-width: 768px) {
   .name-column {
-    width: 100px;
-    min-width: 100px;
+    width: 40px;
+    min-width: 40px;
   }
 
   .pick-header {
