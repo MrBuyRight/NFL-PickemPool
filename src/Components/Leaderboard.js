@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import './Leaderboard.css';
 
-function Leaderboard({ entriesData }) {
+function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) {
   const [selectedWeek, setSelectedWeek] = useState(1);
 
   // Update correctTeams and incorrectTeams
@@ -76,9 +76,9 @@ function Leaderboard({ entriesData }) {
   const formatName = (name) => {
     const nameParts = name.split(' ');
     if (nameParts.length > 1) {
-      return `${nameParts[0].charAt(0)}${nameParts[1].charAt(0)}`;
+      return `${nameParts[0]} ${nameParts[1].charAt(0)}.`;
     }
-    return name.slice(0, 2);
+    return name;
   };
 
   const calculateScore = (picks) => {
