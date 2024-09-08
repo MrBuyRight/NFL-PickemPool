@@ -5,8 +5,16 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) 
   const [selectedWeek, setSelectedWeek] = useState(1);
 
   // Update correctTeams and incorrectTeams
-  const correctTeams = ['Kansas City Chiefs', 'Philadelphia Eagles', 'New England Patriots'];
-  const incorrectTeams = ['Baltimore Ravens', 'Green Bay Packers', 'Cincinnati Bengals'];
+  const correctTeams = [
+    'Kansas City Chiefs', 'Philadelphia Eagles', 'New England Patriots',
+    'Buffalo Bills', 'Minnesota Vikings', 'Chicago Bears', 'New Orleans Saints',
+    'Pittsburgh Steelers', 'Miami Dolphins', 'Houston Texans'
+  ];
+  const incorrectTeams = [
+    'Baltimore Ravens', 'Green Bay Packers', 'Cincinnati Bengals',
+    'Arizona Cardinals', 'Tennessee Titans', 'Carolina Panthers',
+    'Atlanta Falcons', 'Jacksonville Jaguars', 'Indianapolis Colts'
+  ];
 
   // Add the teamAbbreviations definition
   const teamAbbreviations = {
