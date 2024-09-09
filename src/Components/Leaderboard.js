@@ -2,20 +2,23 @@ import React, { useMemo, useState } from 'react';
 import './Leaderboard.css';
 
 function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) {
-  console.log('Leaderboard updated with New York Giants as incorrect');
+  console.log('Leaderboard updated with new correct and incorrect teams');
   const [selectedWeek, setSelectedWeek] = useState(1);
 
-  // Ensure these arrays are updated with the correct teams
+  // Update correctTeams and incorrectTeams
   const correctTeams = [
     'Kansas City Chiefs', 'Philadelphia Eagles', 'New England Patriots',
     'Buffalo Bills', 'Minnesota Vikings', 'Chicago Bears', 'New Orleans Saints',
-    'Pittsburgh Steelers', 'Miami Dolphins', 'Houston Texans'
+    'Pittsburgh Steelers', 'Miami Dolphins', 'Houston Texans',
+    'Los Angeles Chargers', 'Seattle Seahawks', 'Dallas Cowboys', 
+    'Tampa Bay Buccaneers', 'Detroit Lions'
   ];
   const incorrectTeams = [
     'Baltimore Ravens', 'Green Bay Packers', 'Cincinnati Bengals',
     'Arizona Cardinals', 'Tennessee Titans', 'Carolina Panthers',
     'Atlanta Falcons', 'Jacksonville Jaguars', 'Indianapolis Colts',
-    'New York Giants'  // Added New York Giants
+    'New York Giants', 'Las Vegas Raiders', 'Denver Broncos', 
+    'Cleveland Browns', 'Washington Commanders', 'Los Angeles Rams'
   ];
 
   // Add the teamAbbreviations definition

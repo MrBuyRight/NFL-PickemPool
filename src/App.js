@@ -38,6 +38,7 @@ function App() {
             <div className="error-message">{error}</div>
           ) : (
             <Leaderboard 
+              key={Date.now()}  // Add this line
               entriesData={entries} 
               updatePick={updatePick}
               correctPicks={correctPicks}
