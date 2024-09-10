@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GameSelectionList from './Components/GameSelectionList';
-import { initSupabase } from './supabaseClient';
+import { supabase } from './supabaseClient';
 import './App.css';
 
 function App() {
@@ -18,6 +18,25 @@ function App() {
     // ... rest of the games ...
   ];
 
+  useEffect(() => {
+    const initializeSupabase = async () => {
+      setIsLoading(true);
+      try {
+        // Test the Supabase connection
+        const { data, error } = await supabase.from('entries').select('count', { count: 'exact', head: true });
+        if (error) throw error;
+        console.log('Supabase connection successful');
+        setIsLoading(false);
+      } catch (err) {
+        console.error("Error connecting to Supabase:", err);
+        setError(`Failed to connect to Supabase: ${err.message}`);
+        setIsLoading(false);
+      }
+    };
+
+    initializeSupabase();
+  }, []);
+
   const handlePickSelection = (gameId, team) => {
     setSelectedPicks(prev => ({ ...prev, [gameId]: team }));
   };
@@ -30,11 +49,6 @@ function App() {
     }
 
     try {
-      const supabase = await initSupabase();
-      if (!supabase) {
-        throw new Error('Supabase client is not initialized');
-      }
-
       console.log('Submitting picks:', { name, email, picks: selectedPicks });
       const { data, error } = await supabase
         .from('entries')
@@ -66,6 +80,7 @@ function App() {
       } catch (err) {
         console.error("Error initializing Supabase:", err);
         setError(`Failed to initialize Supabase: ${err.message}`);
+        console.log('All environment variables:', process.env);
         setIsLoading(false);
       }
     };
