@@ -39,26 +39,56 @@ body {
 }
 
 .App {
+  text-align: center;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
 .app-header {
-  background-color: var(--surface-color);
-  color: var(--accent-color);
+  background-color: #282c34;
+  padding: 20px;
+  color: white;
   padding: 5px 10px;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.app-header h1 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.app-header nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.app-header button {
+  background-color: #61dafb;
+  border: none;
+  color: #282c34;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.app-header button:hover {
+  background-color: #21a1c9;
+}
+
 .app-main {
   flex: 1;
   overflow: hidden;
+  padding: 20px;
 }
 
 .app-content {
   height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 h1 {
@@ -99,4 +129,9 @@ h1 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--highlight-color);
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
 }

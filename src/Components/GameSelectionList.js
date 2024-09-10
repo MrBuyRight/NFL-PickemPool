@@ -17,6 +17,7 @@ const GameSelectionList = ({ games, onPickSelection, selectedPicks }) => {
 
 	return (
 		<div className="game-list">
+			<h2>Week 2 Game Selection</h2>
 			{Object.entries(groupedGames).map(([date, dateGames]) => (
 				<div key={date} className="date-group">
 					<button className="date-header" onClick={() => toggleDate(date)}>
