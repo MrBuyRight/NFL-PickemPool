@@ -60,7 +60,7 @@ function App() {
       <header className="app-header">
         <h1>NFL Pick'em Pool</h1>
         <nav>
-          <button onClick={() => setActiveComponent('gameSelection')}>Game Selection</button>
+          <button onClick={() => setActiveComponent('gameSelection')}>Week 2 Picks</button>
           <button onClick={() => setActiveComponent('leaderboard')}>Leaderboard</button>
         </nav>
       </header>

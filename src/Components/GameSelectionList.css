@@ -5,6 +5,8 @@
     padding: 20px;
     margin: 0 auto;
     max-width: 1200px;
+    overflow-y: auto;
+    max-height: calc(100vh - 150px); /* Adjust based on your header height */
 }
 
 .date-group {
@@ -24,9 +26,10 @@
 }
 
 .game-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 15px;
+    justify-content: center;
 }
 
 .game-card {
@@ -34,21 +37,29 @@
     border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 10px;
+    width: 280px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.game-card:hover {
+    transform: translateY(-2px);
 }
 
 .game-info {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .game-time {
     font-size: 0.9rem;
     color: var(--text-secondary-color);
+    font-weight: bold;
 }
 
 .teams-container {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
 }
 
 .team-button {
@@ -60,6 +71,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
+    font-weight: bold;
 }
 
 .team-button:hover {
@@ -84,8 +96,8 @@
         padding: 10px;
     }
 
-    .game-grid {
-        grid-template-columns: 1fr;
+    .game-card {
+        width: 100%;
     }
 }
 
