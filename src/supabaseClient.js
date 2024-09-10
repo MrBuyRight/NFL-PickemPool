@@ -1,27 +1,18 @@
 import { createClient } from '@supabase/supabase-js'
 
-let supabase = null;
+const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 
-export async function initSupabase() {
-  if (supabase) return supabase;
-
-  const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-  const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
-
-  console.log('Supabase URL:', supabaseUrl);
-  console.log('Supabase Anon Key:', supabaseAnonKey ? 'Set' : 'Not set');
-
-  if (!supabaseUrl || !supabaseAnonKey) {
-    console.error('Supabase URL or Anon Key is missing');
-    return null;
-  }
-
-  try {
-    supabase = createClient(supabaseUrl, supabaseAnonKey);
-    console.log('Supabase client created successfully');
-    return supabase;
-  } catch (error) {
-    console.error('Error creating Supabase client:', error);
-    return null;
-  }
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('Supabase URL or Anon Key is missing');
 }
+
+let supabase;
+try {
+  supabase = createClient(supabaseUrl, supabaseAnonKey);
+  console.log('Supabase client created successfully');
+} catch (error) {
+  console.error('Error creating Supabase client:', error);
+}
+
+export { supabase };
