@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Leaderboard from './Components/Leaderboard';
 import GameSelectionList from './Components/GameSelectionList';
-import entriesData from './Components/entriesData';
+import { supabase } from './supabaseClient';
 import './App.css';
 
 function App() {
@@ -13,6 +13,9 @@ function App() {
   const [incorrectTeams, setIncorrectTeams] = useState(['Jets']);
   const [selectedPicks, setSelectedPicks] = useState({});
   const [activeComponent, setActiveComponent] = useState('gameSelection');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [submissionStatus, setSubmissionStatus] = useState(null);
 
   // Week 2 games data
   const week2Games = [
@@ -46,13 +49,52 @@ function App() {
     setSelectedPicks(prev => ({ ...prev, [gameId]: team }));
   };
 
-  useEffect(() => {
-    try {
-      setEntries(entriesData);
-    } catch (err) {
-      console.error("Error loading entries data:", err);
-      setError("Failed to load entries data. Please try again later.");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (Object.keys(selectedPicks).length !== week2Games.length) {
+      setSubmissionStatus('Please make selections for all games before submitting.');
+      return;
     }
+
+    try {
+      console.log('Submitting picks:', { name, email, picks: selectedPicks });
+      const { data, error } = await supabase
+        .from('entries')
+        .insert([
+          { name, email, picks: selectedPicks }
+        ]);
+
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+      console.log('Submission successful:', data);
+      setSubmissionStatus('Entry submitted successfully!');
+      setName('');
+      setEmail('');
+      setSelectedPicks({});
+    } catch (error) {
+      console.error('Error submitting entry:', error);
+      setSubmissionStatus('Failed to submit entry. Please try again.');
+    }
+  };
+
+  useEffect(() => {
+    const fetchEntries = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('entries')
+          .select('*');
+        
+        if (error) throw error;
+        setEntries(data);
+      } catch (err) {
+        console.error("Error loading entries data:", err);
+        setError("Failed to load entries data. Please try again later.");
+      }
+    };
+
+    fetchEntries();
   }, []);
 
   return (
@@ -74,6 +116,12 @@ function App() {
                 games={week2Games}
                 onPickSelection={handlePickSelection}
                 selectedPicks={selectedPicks}
+                onSubmit={handleSubmit}
+                name={name}
+                setName={setName}
+                email={email}
+                setEmail={setEmail}
+                submissionStatus={submissionStatus}
               />
             ) : (
               <Leaderboard 
