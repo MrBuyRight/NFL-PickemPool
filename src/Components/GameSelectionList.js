@@ -12,27 +12,17 @@ const GameSelectionList = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [mondayScorePrediction, setMondayScorePrediction] = useState({ falcons: '', eagles: '' });
 
-	const formatDate = (dateString) => {
-		const date = new Date(dateString);
-		const monthNames = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
-							"Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
-		const month = monthNames[date.getMonth()];
-		const day = date.getDate();
-		const year = date.getFullYear();
-		const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
-		
-		// Function to add ordinal suffix to day
-		const getOrdinalSuffix = (d) => {
-			if (d > 3 && d < 21) return 'th';
-			switch (d % 10) {
-				case 1:  return "st";
-				case 2:  return "nd";
-				case 3:  return "rd";
-				default: return "th";
-			}
+	const getFormattedDate = (dateString) => {
+		switch (dateString) {
+			case '2024-09-12':
+				return 'Thursday- Sept. 12th, 2024';
+			case '2024-09-15':
+				return 'Sunday- Sept. 15th, 2024';
+			case '2024-09-16':
+				return 'Monday- Sept. 16th, 2024';
+			default:
+				return dateString;
 		}
-
-		return `${dayOfWeek}- ${month} ${day}${getOrdinalSuffix(day)}, ${year}`;
 	};
 
 	const week2Games = [
@@ -56,7 +46,7 @@ const GameSelectionList = () => {
 
 	const gamesByDate = useMemo(() => {
 		return week2Games.reduce((acc, game) => {
-			const formattedDate = formatDate(game.date);
+			const formattedDate = getFormattedDate(game.date);
 			if (!acc[formattedDate]) {
 				acc[formattedDate] = [];
 			}
