@@ -56,6 +56,12 @@ function App() {
       return;
     }
 
+    if (!supabase) {
+      console.error('Supabase client is not initialized');
+      setSubmissionStatus('Error: Unable to connect to the database');
+      return;
+    }
+
     try {
       console.log('Submitting picks:', { name, email, picks: selectedPicks });
       const { data, error } = await supabase
@@ -83,6 +89,7 @@ function App() {
     // Check if Supabase is correctly configured
     console.log('Supabase URL:', process.env.REACT_APP_SUPABASE_URL);
     console.log('Supabase Anon Key:', process.env.REACT_APP_SUPABASE_ANON_KEY);
+    console.log('Supabase client:', supabase);
   }, []);
 
   useEffect(() => {
