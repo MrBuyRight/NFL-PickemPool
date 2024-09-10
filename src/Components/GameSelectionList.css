@@ -2,65 +2,30 @@
     background-color: var(--surface-color);
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .date-group {
-    border-bottom: 1px solid var(--border-color);
-}
-
-.date-group:last-child {
-    border-bottom: none;
+    margin-bottom: 20px;
 }
 
 .date-header {
-    width: 100%;
-    padding: 15px;
     background-color: var(--secondary-color);
     color: var(--text-color);
-    border: none;
-    text-align: left;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.date-header:hover {
-    background-color: var(--accent-color);
-    color: var(--primary-color);
-}
-
-.arrow {
-    border: solid var(--text-color);
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 3px;
-    transition: transform 0.3s ease;
-}
-
-.arrow.down {
-    transform: rotate(45deg);
-}
-
-.arrow.up {
-    transform: rotate(-135deg);
-}
-
-.game-group {
     padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: left;
 }
 
 .game-row {
-    display: flex;
-    flex-direction: column;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
     padding: 10px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.game-row:last-child {
-    border-bottom: none;
+    margin-bottom: 10px;
 }
 
 .game-info {
@@ -85,6 +50,7 @@
     background-color: var(--secondary-color);
     color: var(--text-color);
     border: 1px solid var(--border-color);
+    border-radius: 5px;
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
@@ -107,6 +73,10 @@
 }
 
 @media (max-width: 768px) {
+    .game-list {
+        padding: 10px;
+    }
+
     .teams-container {
         flex-direction: column;
     }
