@@ -6,11 +6,11 @@ const PickTracker = ({ selectedPicks, games }) => {
 
   return (
     <div className="pick-tracker">
-      <h3>Your Picks</h3>
+      <h3>Your Picks 📋</h3>
       <ul>
         {sortedPicks.map(([gameId, team]) => (
           <li key={gameId}>
-            <span className="selected-team">{team}</span>
+            <span className="selected-team">🏈 {team}</span>
           </li>
         ))}
       </ul>
@@ -20,7 +20,7 @@ const PickTracker = ({ selectedPicks, games }) => {
           style={{ width: `${(sortedPicks.length / games.length) * 100}%` }}
         ></div>
       </div>
-      <p>{sortedPicks.length} of {games.length} picks made</p>
+      <p>🏁 {sortedPicks.length} of {games.length} picks made</p>
     </div>
   );
 };

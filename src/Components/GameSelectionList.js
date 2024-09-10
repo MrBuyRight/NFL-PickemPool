@@ -78,18 +78,18 @@ const GameSelectionList = () => {
 		<div className="game-list-container">
 			<div className="game-and-picks-wrapper">
 				<div className="game-list">
-					<h2>Week 2 Game Selection</h2>
+					<h2>Week 2 Game Selection 🏈</h2>
 					{Object.entries(gamesByDate).map(([date, games]) => (
 						<div key={date} className="date-group">
 							<h3 className="date-header" onClick={() => toggleDateExpansion(date)}>
-								{date} {expandedDates[date] ? '▼' : '▶'}
+								{date} {expandedDates[date] ? '🔽' : '▶️'}
 							</h3>
 							{expandedDates[date] && (
 								<div className="game-grid">
 									{games.map((game) => (
 										<div key={game.id} className="game-card">
 											<div className="game-info">
-												<div className="game-time">{game.time}</div>
+												<div className="game-time">⏰ {game.time}</div>
 											</div>
 											<div className="teams-container">
 												<button
@@ -98,7 +98,7 @@ const GameSelectionList = () => {
 												>
 													{game.awayTeam}
 												</button>
-												<span className="vs">@</span>
+												<span className="vs">🆚</span>
 												<button
 													className={`team-button ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
 													onClick={() => handlePickSelection(game.id, game.homeTeam)}
@@ -118,23 +118,23 @@ const GameSelectionList = () => {
 			<form className="entry-form" onSubmit={handleSubmit}>
 				<input
 					type="text"
-					placeholder="Your Name"
+					placeholder="Your Name 👤"
 					value={name}
 					onChange={(e) => setName(e.target.value)}
 					required
 				/>
 				<input
 					type="email"
-					placeholder="Your Email"
+					placeholder="Your Email 📧"
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 					required
 				/>
 				<button type="submit" disabled={isSubmitting}>
-					{isSubmitting ? 'Submitting...' : 'Submit Picks'}
+					{isSubmitting ? 'Submitting... ⏳' : 'Submit Picks 🚀'}
 				</button>
 			</form>
-			{submissionStatus && <p className="submission-status">{submissionStatus}</p>}
+			{submissionStatus && <p className="submission-status">✅ {submissionStatus}</p>}
 		</div>
 	);
 };
