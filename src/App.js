@@ -15,14 +15,13 @@ function App() {
   const week2Games = [
     { id: 1, date: 'Thursday, September 12th, 2024 at 8:15pm ET', awayTeam: 'Buffalo Bills', homeTeam: 'Miami Dolphins' },
     { id: 2, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'Las Vegas Raiders', homeTeam: 'Baltimore Ravens' },
-    // ... rest of the games ...
+    // Add more games as needed
   ];
 
   useEffect(() => {
     const initializeSupabase = async () => {
       setIsLoading(true);
       try {
-        // Test the Supabase connection
         const { data, error } = await supabase.from('entries').select('count', { count: 'exact', head: true });
         if (error) throw error;
         console.log('Supabase connection successful');
