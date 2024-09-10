@@ -186,3 +186,11 @@ body {
     font-size: 0.8rem;
   }
 }
+
+.entry-row.least-incorrect {
+  background-color: #e6ffe6; /* Light green background */
+}
+
+.entry-row.least-incorrect:hover {
+  background-color: #ccffcc; /* Slightly darker green on hover */
+}

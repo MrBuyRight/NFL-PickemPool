@@ -98,21 +98,30 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) 
     return Object.values(picks).filter(pick => correctTeams.includes(pick)).length;
   };
 
+  const calculateIncorrectPicks = (picks) => {
+    return Object.values(picks).filter(pick => incorrectTeams.includes(pick)).length;
+  };
+
   const rankedEntries = useMemo(() => {
     if (!entriesData || entriesData.length === 0) {
       return [];
     }
 
-    return entriesData
+    const entries = entriesData
       .map(entry => ({
         ...entry,
-        score: calculateScore(entry.picks)
+        score: calculateScore(entry.picks),
+        incorrectPicks: calculateIncorrectPicks(entry.picks)
       }))
-      .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name))
-      .map((entry, index, array) => ({
-        ...entry,
-        rank: index === 0 || entry.score !== array[index - 1].score ? index + 1 : array[index - 1].rank
-      }));
+      .sort((a, b) => b.score - a.score || a.incorrectPicks - b.incorrectPicks || a.name.localeCompare(b.name));
+
+    const minIncorrectPicks = Math.min(...entries.map(e => e.incorrectPicks));
+
+    return entries.map((entry, index, array) => ({
+      ...entry,
+      rank: index === 0 || entry.score !== array[index - 1].score ? index + 1 : array[index - 1].rank,
+      isLeastIncorrect: entry.incorrectPicks === minIncorrectPicks
+    }));
   }, [entriesData]);
 
   return (
@@ -137,7 +146,7 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) 
           </thead>
           <tbody>
             {rankedEntries.map((entry, index) => (
-              <tr key={index} className="entry-row">
+              <tr key={index} className={`entry-row ${entry.isLeastIncorrect ? 'least-incorrect' : ''}`}>
                 <td className="fixed-column name-column">
                   <div className="name-container" title={entry.name}>
                     {formatName(entry.name)}
