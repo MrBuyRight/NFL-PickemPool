@@ -56,14 +56,12 @@ function App() {
       return;
     }
 
-    const supabase = await initSupabase();
-    if (!supabase) {
-      console.error('Supabase client is not initialized');
-      setSubmissionStatus('Error: Unable to connect to the database');
-      return;
-    }
-
     try {
+      const supabase = await initSupabase();
+      if (!supabase) {
+        throw new Error('Supabase client is not initialized');
+      }
+
       console.log('Submitting picks:', { name, email, picks: selectedPicks });
       const { data, error } = await supabase
         .from('entries')
@@ -71,10 +69,8 @@ function App() {
           { name, email, picks: selectedPicks }
         ]);
 
-      if (error) {
-        console.error('Supabase error:', error);
-        throw error;
-      }
+      if (error) throw error;
+      
       console.log('Submission successful:', data);
       setSubmissionStatus('Entry submitted successfully!');
       setName('');
@@ -88,29 +84,31 @@ function App() {
 
   useEffect(() => {
     const initializeSupabaseAndFetchEntries = async () => {
-      const supabase = await initSupabase();
-      console.log('Supabase client:', supabase);
+      try {
+        const supabase = await initSupabase();
+        console.log('Supabase client:', supabase);
 
-      if (supabase) {
-        try {
-          const { data, error } = await supabase
-            .from('entries')
-            .select('*');
-          
-          if (error) throw error;
-          setEntries(data);
-        } catch (err) {
-          console.error("Error loading entries data:", err);
-          setError("Failed to load entries data. Please try again later.");
+        if (!supabase) {
+          throw new Error('Failed to initialize Supabase client');
         }
+
+        const { data, error } = await supabase
+          .from('entries')
+          .select('*');
+        
+        if (error) throw error;
+        setEntries(data);
+      } catch (err) {
+        console.error("Error:", err);
+        setError("Failed to load entries data. Please try again later.");
       }
     };
 
     initializeSupabaseAndFetchEntries();
 
-    // Check if Supabase is correctly configured
-    console.log('Supabase URL:', process.env.REACT_APP_SUPABASE_URL);
-    console.log('Supabase Anon Key:', process.env.REACT_APP_SUPABASE_ANON_KEY);
+    // Log environment variables
+    console.log('REACT_APP_SUPABASE_URL:', process.env.REACT_APP_SUPABASE_URL);
+    console.log('REACT_APP_SUPABASE_ANON_KEY:', process.env.REACT_APP_SUPABASE_ANON_KEY ? 'Set' : 'Not set');
   }, []);
 
   return (

@@ -1,24 +1,27 @@
+import { createClient } from '@supabase/supabase-js'
+
 let supabase = null;
 
-async function initSupabase() {
+export async function initSupabase() {
   if (supabase) return supabase;
 
-  try {
-    const { createClient } = await import('@supabase/supabase-js');
-    const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-    const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+  const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+  const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 
-    if (!supabaseUrl || !supabaseAnonKey) {
-      throw new Error('Supabase URL or Anon Key is missing');
-    }
+  console.log('Supabase URL:', supabaseUrl);
+  console.log('Supabase Anon Key:', supabaseAnonKey ? 'Set' : 'Not set');
 
-    supabase = createClient(supabaseUrl, supabaseAnonKey);
-    console.log('Supabase client created successfully');
-  } catch (error) {
-    console.error('Error initializing Supabase client:', error);
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Supabase URL or Anon Key is missing');
+    return null;
   }
 
-  return supabase;
+  try {
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+    console.log('Supabase client created successfully');
+    return supabase;
+  } catch (error) {
+    console.error('Error creating Supabase client:', error);
+    return null;
+  }
 }
-
-export { initSupabase };
