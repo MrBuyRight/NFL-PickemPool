@@ -1,9 +1,13 @@
 .game-list-container {
-    display: flex;
-    justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+}
+
+.game-and-picks-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .game-list {
@@ -127,8 +131,13 @@
 }
 
 @media (max-width: 768px) {
+    .game-and-picks-wrapper {
+        flex-direction: column;
+    }
+
     .game-list {
-        padding: 10px;
+        margin-right: 0;
+        margin-bottom: 20px;
     }
 
     .game-card {

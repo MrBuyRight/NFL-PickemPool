@@ -41,10 +41,11 @@
   transition: width 0.3s ease-in-out;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .pick-tracker {
     width: 100%;
     position: static;
+    margin-bottom: 20px;
   }
 }
 

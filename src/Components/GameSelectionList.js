@@ -40,52 +40,54 @@ const GameSelectionList = () => {
 
 	return (
 		<div className="game-list-container">
-			<div className="game-list">
-				<h2>Week 2 Game Selection</h2>
-				<div className="game-grid">
-					{week2Games.map((game) => (
-						<div key={game.id} className="game-card">
-							<div className="game-info">
-								<div className="game-time">{game.date} - {game.time}</div>
+			<div className="game-and-picks-wrapper">
+				<div className="game-list">
+					<h2>Week 2 Game Selection</h2>
+					<div className="game-grid">
+						{week2Games.map((game) => (
+							<div key={game.id} className="game-card">
+								<div className="game-info">
+									<div className="game-time">{game.date} - {game.time}</div>
+								</div>
+								<div className="teams-container">
+									<button
+										className={`team-button ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
+										onClick={() => handlePickSelection(game.id, game.awayTeam)}
+									>
+										{game.awayTeam}
+									</button>
+									<span className="vs">@</span>
+									<button
+										className={`team-button ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
+										onClick={() => handlePickSelection(game.id, game.homeTeam)}
+									>
+										{game.homeTeam}
+									</button>
+								</div>
 							</div>
-							<div className="teams-container">
-								<button
-									className={`team-button ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
-									onClick={() => handlePickSelection(game.id, game.awayTeam)}
-								>
-									{game.awayTeam}
-								</button>
-								<span className="vs">@</span>
-								<button
-									className={`team-button ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
-									onClick={() => handlePickSelection(game.id, game.homeTeam)}
-								>
-									{game.homeTeam}
-								</button>
-							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
-				<form className="entry-form" onSubmit={handleSubmit}>
-					<input
-						type="text"
-						placeholder="Your Name"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-						required
-					/>
-					<input
-						type="email"
-						placeholder="Your Email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-					<button type="submit">Submit Picks</button>
-				</form>
-				{submissionStatus && <p className="submission-status">{submissionStatus}</p>}
+				<PickTracker selectedPicks={selectedPicks} games={week2Games} />
 			</div>
-			<PickTracker selectedPicks={selectedPicks} games={week2Games} />
+			<form className="entry-form" onSubmit={handleSubmit}>
+				<input
+					type="text"
+					placeholder="Your Name"
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+					required
+				/>
+				<input
+					type="email"
+					placeholder="Your Email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					required
+				/>
+				<button type="submit">Submit Picks</button>
+			</form>
+			{submissionStatus && <p className="submission-status">{submissionStatus}</p>}
 		</div>
 	);
 };
