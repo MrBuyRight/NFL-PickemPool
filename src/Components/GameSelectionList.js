@@ -100,8 +100,6 @@ const GameSelectionList = () => {
 
 	const toggleDateExpansion = (date) => {
 		setExpandedDates(prev => ({ ...prev, [date]: !prev[date] }));
-		const header = document.querySelector(`[data-date="${date}"]`);
-		header.classList.toggle('expanded');
 	};
 
 	return (
@@ -136,7 +134,7 @@ const GameSelectionList = () => {
 													{game.homeTeam}
 												</button>
 											</div>
-											{game.date === 'Monday- Sept. 16th, 2024' && (
+											{game.date === '2024-09-16' && (
 												<div className="score-prediction">
 													<h4>Score Prediction 🔮</h4>
 													<div className="score-inputs">

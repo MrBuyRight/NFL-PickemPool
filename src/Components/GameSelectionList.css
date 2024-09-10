@@ -186,13 +186,11 @@
     padding: 10px;
     background-color: var(--secondary-color);
     border-radius: 5px;
-    animation: fadeIn 0.5s ease-out;
 }
 
 .score-prediction h4 {
     margin: 0 0 10px 0;
     font-size: 1rem;
-    color: var(--highlight-color);
 }
 
 .score-inputs {
@@ -208,20 +206,10 @@
     border: 1px solid var(--border-color);
     border-radius: 3px;
     text-align: center;
-    background-color: var(--surface-color);
-    color: var(--text-color);
-    transition: all 0.3s ease;
-}
-
-.score-inputs input:focus {
-    outline: none;
-    border-color: var(--highlight-color);
-    box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
 }
 
 .score-inputs span {
     font-weight: bold;
-    color: var(--text-secondary-color);
 }
 
 @media (max-width: 768px) {
