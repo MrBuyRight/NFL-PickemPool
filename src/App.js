@@ -107,7 +107,7 @@ function App() {
         setEntries(data || []);
       } catch (err) {
         console.error("Error in fetchEntries:", err);
-        setError("Failed to load entries data. Please try again later.");
+        setError(`Failed to load entries data: ${err.message}`);
       } finally {
         setIsLoading(false);
       }
