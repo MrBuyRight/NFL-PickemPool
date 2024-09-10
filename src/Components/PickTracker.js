@@ -1,7 +1,7 @@
 import React from 'react';
 import './PickTracker.css';
 
-const PickTracker = ({ selectedPicks, games }) => {
+const PickTracker = ({ selectedPicks, games, mondayScorePrediction }) => {
   const sortedPicks = Object.entries(selectedPicks).sort((a, b) => a[0] - b[0]);
 
   return (
@@ -14,6 +14,12 @@ const PickTracker = ({ selectedPicks, games }) => {
           </li>
         ))}
       </ul>
+      {mondayScorePrediction.falcons && mondayScorePrediction.eagles && (
+        <div className="monday-prediction">
+          <h4>Monday Score Prediction 🔮</h4>
+          <p>Falcons {mondayScorePrediction.falcons} - {mondayScorePrediction.eagles} Eagles</p>
+        </div>
+      )}
       <div className="progress-bar">
         <div 
           className="progress" 

@@ -186,3 +186,36 @@
         margin-bottom: 20px;
     }
 }
+
+/* Add these styles to your existing CSS */
+
+.score-prediction {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.score-prediction h4 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+}
+
+.score-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.score-inputs input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    text-align: center;
+}
+
+.score-inputs span {
+    font-weight: bold;
+}

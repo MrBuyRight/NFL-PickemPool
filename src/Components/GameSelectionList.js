@@ -10,6 +10,7 @@ const GameSelectionList = () => {
 	const [submissionStatus, setSubmissionStatus] = useState('');
 	const [expandedDates, setExpandedDates] = useState({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [mondayScorePrediction, setMondayScorePrediction] = useState({ falcons: '', eagles: '' });
 
 	const week2Games = [
 		{ id: 1, awayTeam: 'Buffalo Bills', homeTeam: 'Miami Dolphins', date: 'Thursday, September 12th, 2024', time: '8:15pm ET' },
@@ -44,6 +45,13 @@ const GameSelectionList = () => {
 		setSelectedPicks(prev => ({ ...prev, [gameId]: team }));
 	};
 
+	const handleScorePredictionChange = (team, score) => {
+		setMondayScorePrediction(prev => ({
+			...prev,
+			[team]: score
+		}));
+	};
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setIsSubmitting(true);
@@ -53,7 +61,12 @@ const GameSelectionList = () => {
 			const { data, error } = await supabase
 				.from('entries')
 				.insert([
-					{ name, email, picks: selectedPicks }
+					{ 
+						name, 
+						email, 
+						picks: selectedPicks,
+						monday_score_prediction: mondayScorePrediction
+					}
 				]);
 
 			if (error) throw error;
@@ -62,6 +75,7 @@ const GameSelectionList = () => {
 			setName('');
 			setEmail('');
 			setSelectedPicks({});
+			setMondayScorePrediction({ falcons: '', eagles: '' });
 		} catch (error) {
 			console.error('Error submitting picks:', error);
 			setSubmissionStatus(`Error submitting picks: ${error.message}`);
@@ -106,6 +120,28 @@ const GameSelectionList = () => {
 													{game.homeTeam}
 												</button>
 											</div>
+											{game.date === 'Monday, September 16th, 2024' && (
+												<div className="score-prediction">
+													<h4>Score Prediction 🔮</h4>
+													<div className="score-inputs">
+														<input
+															type="number"
+															min="0"
+															placeholder="Falcons"
+															value={mondayScorePrediction.falcons}
+															onChange={(e) => handleScorePredictionChange('falcons', e.target.value)}
+														/>
+														<span>-</span>
+														<input
+															type="number"
+															min="0"
+															placeholder="Eagles"
+															value={mondayScorePrediction.eagles}
+															onChange={(e) => handleScorePredictionChange('eagles', e.target.value)}
+														/>
+													</div>
+												</div>
+											)}
 										</div>
 									))}
 								</div>
@@ -113,7 +149,7 @@ const GameSelectionList = () => {
 						</div>
 					))}
 				</div>
-				<PickTracker selectedPicks={selectedPicks} games={week2Games} />
+				<PickTracker selectedPicks={selectedPicks} games={week2Games} mondayScorePrediction={mondayScorePrediction} />
 			</div>
 			<form className="entry-form" onSubmit={handleSubmit}>
 				<input
