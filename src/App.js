@@ -83,11 +83,9 @@ function App() {
   };
 
   useEffect(() => {
-    const initializeSupabaseAndFetchEntries = async () => {
+    const fetchEntries = async () => {
       try {
         const supabase = await initSupabase();
-        console.log('Supabase client:', supabase);
-
         if (!supabase) {
           throw new Error('Failed to initialize Supabase client');
         }
@@ -104,11 +102,11 @@ function App() {
       }
     };
 
-    initializeSupabaseAndFetchEntries();
+    fetchEntries();
 
     // Log environment variables
-    console.log('REACT_APP_SUPABASE_URL:', process.env.REACT_APP_SUPABASE_URL);
-    console.log('REACT_APP_SUPABASE_ANON_KEY:', process.env.REACT_APP_SUPABASE_ANON_KEY ? 'Set' : 'Not set');
+    console.log('Supabase URL:', process.env.REACT_APP_SUPABASE_URL);
+    console.log('Supabase Anon Key:', process.env.REACT_APP_SUPABASE_ANON_KEY ? 'Set' : 'Not set');
   }, []);
 
   return (
