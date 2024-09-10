@@ -5,22 +5,6 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, co
   console.log('Leaderboard updated with new correct and incorrect teams');
   const [selectedWeek, setSelectedWeek] = useState(1);
 
-  // Update correctTeams and incorrectTeams
-  const correctTeams = [
-    'Kansas City Chiefs', 'Philadelphia Eagles', 'New England Patriots',
-    'Buffalo Bills', 'Minnesota Vikings', 'Chicago Bears', 'New Orleans Saints',
-    'Pittsburgh Steelers', 'Miami Dolphins', 'Houston Texans',
-    'Los Angeles Chargers', 'Seattle Seahawks', 'Dallas Cowboys', 
-    'Tampa Bay Buccaneers', 'Detroit Lions', 'San Francisco 49ers'
-  ];
-  const incorrectTeams = [
-    'Baltimore Ravens', 'Green Bay Packers', 'Cincinnati Bengals',
-    'Arizona Cardinals', 'Tennessee Titans', 'Carolina Panthers',
-    'Atlanta Falcons', 'Jacksonville Jaguars', 'Indianapolis Colts',
-    'New York Giants', 'Las Vegas Raiders', 'Denver Broncos', 
-    'Cleveland Browns', 'Washington Commanders', 'Los Angeles Rams', 'New York Jets'
-  ];
-
   // Add the teamAbbreviations definition
   const teamAbbreviations = {
     'Kansas City Chiefs': 'KC',
