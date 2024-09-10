@@ -4,7 +4,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 800px;
     overflow-y: auto;
     max-height: calc(100vh - 150px); /* Adjust based on your header height */
 }
@@ -20,6 +20,8 @@
     margin-bottom: 10px;
     border-radius: 5px;
     text-align: left;
+    cursor: pointer;
+    user-select: none;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -27,9 +29,8 @@
 
 .game-grid {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 15px;
-    justify-content: center;
 }
 
 .game-card {
@@ -37,7 +38,6 @@
     border: 1px solid var(--border-color);
     border-radius: 5px;
     padding: 10px;
-    width: 280px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
 }
@@ -58,11 +58,13 @@
 
 .teams-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     gap: 10px;
 }
 
 .team-button {
+    flex: 1;
     padding: 10px;
     background-color: var(--secondary-color);
     color: var(--text-color);
@@ -86,9 +88,34 @@
 }
 
 .vs {
-    align-self: center;
     font-weight: bold;
     color: var(--text-secondary-color);
+}
+
+.entry-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.entry-form input,
+.entry-form button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+}
+
+.entry-form button {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submission-status {
+    margin-top: 10px;
+    font-weight: bold;
 }
 
 @media (max-width: 768px) {
