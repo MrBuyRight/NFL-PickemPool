@@ -11,26 +11,33 @@ const GameSelectionList = ({
   setEmail,
   submissionStatus
 }) => {
+	console.log('Rendering GameSelectionList');
+	console.log('Games:', games);
+
 	return (
 		<div className="game-selection-list">
 			<h2>Select Your Picks</h2>
-			{games.map((game) => (
-				<div key={game.id} className="game-item">
-					<p>{game.date}</p>
-					<button
-						onClick={() => onPickSelection(game.id, game.awayTeam)}
-						className={selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}
-					>
-						{game.awayTeam}
-					</button>
-					<button
-						onClick={() => onPickSelection(game.id, game.homeTeam)}
-						className={selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}
-					>
-						{game.homeTeam}
-					</button>
-				</div>
-			))}
+			{games && games.length > 0 ? (
+				games.map((game) => (
+					<div key={game.id} className="game-item">
+						<p>{game.date}</p>
+						<button
+							onClick={() => onPickSelection(game.id, game.awayTeam)}
+							className={selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}
+						>
+							{game.awayTeam}
+						</button>
+						<button
+							onClick={() => onPickSelection(game.id, game.homeTeam)}
+							className={selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}
+						>
+							{game.homeTeam}
+						</button>
+					</div>
+				))
+			) : (
+				<p>No games available</p>
+			)}
 			<form onSubmit={onSubmit}>
 				<input
 					type="text"

@@ -68,6 +68,11 @@ function App() {
     }
   };
 
+  console.log('Rendering App component');
+  console.log('week2Games:', week2Games);
+  console.log('error:', error);
+  console.log('isLoading:', isLoading);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -86,17 +91,21 @@ function App() {
               <small>Please check the console for more details.</small>
             </div>
           ) : (
-            <GameSelectionList
-              games={week2Games}
-              onPickSelection={handlePickSelection}
-              selectedPicks={selectedPicks}
-              onSubmit={handleSubmit}
-              name={name}
-              setName={setName}
-              email={email}
-              setEmail={setEmail}
-              submissionStatus={submissionStatus}
-            />
+            <>
+              <p>Debug: Before GameSelectionList</p>
+              <GameSelectionList
+                games={week2Games}
+                onPickSelection={handlePickSelection}
+                selectedPicks={selectedPicks}
+                onSubmit={handleSubmit}
+                name={name}
+                setName={setName}
+                email={email}
+                setEmail={setEmail}
+                submissionStatus={submissionStatus}
+              />
+              <p>Debug: After GameSelectionList</p>
+            </>
           )}
         </div>
       </main>
