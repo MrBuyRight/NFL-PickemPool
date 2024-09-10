@@ -14,11 +14,24 @@ function App() {
   const [selectedPicks, setSelectedPicks] = useState({});
   const [activeComponent, setActiveComponent] = useState('leaderboard');
 
-  // Mock data for Week 2 games
+  // Week 2 games data
   const week2Games = [
-    { id: 1, date: 'Thursday, September 14 at 8:15 PM ET', awayTeam: 'Minnesota Vikings', homeTeam: 'Philadelphia Eagles' },
-    { id: 2, date: 'Sunday, September 17 at 1:00 PM ET', awayTeam: 'Green Bay Packers', homeTeam: 'Atlanta Falcons' },
-    // Add more games here
+    { id: 1, date: 'Thursday, September 12th, 2024 at 8:15pm ET', awayTeam: 'Buffalo Bills', homeTeam: 'Miami Dolphins' },
+    { id: 2, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'Las Vegas Raiders', homeTeam: 'Baltimore Ravens' },
+    { id: 3, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'Indianapolis Colts', homeTeam: 'Green Bay Packers' },
+    { id: 4, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'New York Jets', homeTeam: 'Tennessee Titans' },
+    { id: 5, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'Seattle Seahawks', homeTeam: 'New England Patriots' },
+    { id: 6, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'Cleveland Browns', homeTeam: 'Jacksonville Jaguars' },
+    { id: 7, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'New Orleans Saints', homeTeam: 'Dallas Cowboys' },
+    { id: 8, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'Los Angeles Chargers', homeTeam: 'Carolina Panthers' },
+    { id: 9, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'New York Giants', homeTeam: 'Washington Commanders' },
+    { id: 10, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'San Francisco 49ers', homeTeam: 'Minnesota Vikings' },
+    { id: 11, date: 'Sunday, September 15th, 2024 at 1:00pm ET', awayTeam: 'Tampa Bay Buccaneers', homeTeam: 'Detroit Lions' },
+    { id: 12, date: 'Sunday, September 15th, 2024 at 4:05pm ET', awayTeam: 'Los Angeles Rams', homeTeam: 'Arizona Cardinals' },
+    { id: 13, date: 'Sunday, September 15th, 2024 at 4:25pm ET', awayTeam: 'Cincinnati Bengals', homeTeam: 'Kansas City Chiefs' },
+    { id: 14, date: 'Sunday, September 15th, 2024 at 4:25pm ET', awayTeam: 'Pittsburgh Steelers', homeTeam: 'Denver Broncos' },
+    { id: 15, date: 'Sunday, September 15th, 2024 at 8:20pm ET', awayTeam: 'Chicago Bears', homeTeam: 'Houston Texans' },
+    { id: 16, date: 'Monday, September 16th, 2024 at 8:15pm ET', awayTeam: 'Atlanta Falcons', homeTeam: 'Philadelphia Eagles' },
   ];
 
   const updatePick = (id, isCorrect) => {
