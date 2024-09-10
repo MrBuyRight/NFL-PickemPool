@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import PickTracker from './PickTracker';
 import { supabase } from '../supabaseClient';
 import './GameSelectionList.css';
@@ -15,11 +15,11 @@ const GameSelectionList = () => {
 	const getFormattedDate = (dateString) => {
 		switch (dateString) {
 			case '2024-09-12':
-				return 'Thursday: Sept. 12th, 2024';
+				return 'Thursday, Sept. 12th, 2024';
 			case '2024-09-15':
-				return 'Sunday: Sept. 15th, 2024';
+				return 'Sunday, Sept. 15th, 2024';
 			case '2024-09-16':
-				return 'Monday: Sept. 16th, 2024';
+				return 'Monday, Sept. 16th, 2024';
 			default:
 				return dateString;
 		}
@@ -54,6 +54,18 @@ const GameSelectionList = () => {
 			return acc;
 		}, {});
 	}, []);
+
+	useEffect(() => {
+		const dates = Object.keys(gamesByDate);
+		for (let i = 0; i < dates.length; i++) {
+			const currentDateGames = gamesByDate[dates[i]];
+			const allSelected = currentDateGames.every(game => selectedPicks[game.id]);
+			
+			if (allSelected && i < dates.length - 1) {
+				setExpandedDates(prev => ({ ...prev, [dates[i+1]]: true }));
+			}
+		}
+	}, [selectedPicks, gamesByDate]);
 
 	const handlePickSelection = (gameId, team) => {
 		setSelectedPicks(prev => ({ ...prev, [gameId]: team }));
@@ -112,54 +124,52 @@ const GameSelectionList = () => {
 							<h3 className={`date-header ${expandedDates[date] ? 'expanded' : ''}`} data-date={date} onClick={() => toggleDateExpansion(date)}>
 								{date}
 							</h3>
-							{expandedDates[date] && (
-								<div className="game-grid">
-									{games.map((game) => (
-										<div key={game.id} className="game-card">
-											<div className="game-info">
-												<div className="game-time">{game.time}</div>
-											</div>
-											<div className="teams-container">
-												<button
-													className={`team-button ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
-													onClick={() => handlePickSelection(game.id, game.awayTeam)}
-												>
-													{game.awayTeam}
-												</button>
-												<span className="vs">🆚</span>
-												<button
-													className={`team-button ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
-													onClick={() => handlePickSelection(game.id, game.homeTeam)}
-												>
-													{game.homeTeam}
-												</button>
-											</div>
-											{game.date === '2024-09-16' && (
-												<div className="score-prediction">
-													<h4>Score Prediction 🔮</h4>
-													<div className="score-inputs">
-														<input
-															type="number"
-															min="0"
-															placeholder="Falcons"
-															value={mondayScorePrediction.falcons}
-															onChange={(e) => handleScorePredictionChange('falcons', e.target.value)}
-														/>
-														<span>-</span>
-														<input
-															type="number"
-															min="0"
-															placeholder="Eagles"
-															value={mondayScorePrediction.eagles}
-															onChange={(e) => handleScorePredictionChange('eagles', e.target.value)}
-														/>
-													</div>
-												</div>
-											)}
+							<div className={`game-grid ${expandedDates[date] ? 'expanded' : ''}`}>
+								{games.map((game, index) => (
+									<div key={game.id} className="game-card" style={{"--animation-order": index}}>
+										<div className="game-info">
+											<div className="game-time">{game.time}</div>
 										</div>
-									))}
-								</div>
-							)}
+										<div className="teams-container">
+											<button
+												className={`team-button ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
+												onClick={() => handlePickSelection(game.id, game.awayTeam)}
+											>
+												{game.awayTeam}
+											</button>
+											<span className="vs">🆚</span>
+											<button
+												className={`team-button ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
+												onClick={() => handlePickSelection(game.id, game.homeTeam)}
+											>
+												{game.homeTeam}
+											</button>
+										</div>
+										{game.date === '2024-09-16' && (
+											<div className="score-prediction">
+												<h4>Score Prediction 🔮</h4>
+												<div className="score-inputs">
+													<input
+														type="number"
+														min="0"
+														placeholder="Falcons"
+														value={mondayScorePrediction.falcons}
+														onChange={(e) => handleScorePredictionChange('falcons', e.target.value)}
+													/>
+													<span>-</span>
+													<input
+														type="number"
+														min="0"
+														placeholder="Eagles"
+														value={mondayScorePrediction.eagles}
+														onChange={(e) => handleScorePredictionChange('eagles', e.target.value)}
+													/>
+												</div>
+											</div>
+										)}
+									</div>
+								))}
+							</div>
 						</div>
 					))}
 				</div>
