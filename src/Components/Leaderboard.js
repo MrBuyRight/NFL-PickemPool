@@ -11,14 +11,14 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) 
     'Buffalo Bills', 'Minnesota Vikings', 'Chicago Bears', 'New Orleans Saints',
     'Pittsburgh Steelers', 'Miami Dolphins', 'Houston Texans',
     'Los Angeles Chargers', 'Seattle Seahawks', 'Dallas Cowboys', 
-    'Tampa Bay Buccaneers', 'Detroit Lions'
+    'Tampa Bay Buccaneers', 'Detroit Lions', 'San Francisco 49ers'
   ];
   const incorrectTeams = [
     'Baltimore Ravens', 'Green Bay Packers', 'Cincinnati Bengals',
     'Arizona Cardinals', 'Tennessee Titans', 'Carolina Panthers',
     'Atlanta Falcons', 'Jacksonville Jaguars', 'Indianapolis Colts',
     'New York Giants', 'Las Vegas Raiders', 'Denver Broncos', 
-    'Cleveland Browns', 'Washington Commanders', 'Los Angeles Rams'
+    'Cleveland Browns', 'Washington Commanders', 'Los Angeles Rams', 'New York Jets'
   ];
 
   // Add the teamAbbreviations definition

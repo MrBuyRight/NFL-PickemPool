@@ -8,6 +8,8 @@ function App() {
   const [error, setError] = useState(null);
   const [correctPicks, setCorrectPicks] = useState(0); // Track correct picks
   const [incorrectPicks, setIncorrectPicks] = useState(0); // Track incorrect picks
+  const [correctTeams, setCorrectTeams] = useState(['49ers']);
+  const [incorrectTeams, setIncorrectTeams] = useState(['Jets']);
 
   const updatePick = (id, isCorrect) => {
     // Logic to update correct/incorrect picks based on user input
@@ -43,6 +45,8 @@ function App() {
               updatePick={updatePick}
               correctPicks={correctPicks}
               incorrectPicks={incorrectPicks}
+              correctTeams={correctTeams}
+              incorrectTeams={incorrectTeams}
             />
           )}
         </div>
