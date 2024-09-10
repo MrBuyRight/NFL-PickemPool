@@ -15,11 +15,11 @@ const GameSelectionList = () => {
 	const getFormattedDate = (dateString) => {
 		switch (dateString) {
 			case '2024-09-12':
-				return 'Thursday- Sept. 12th, 2024';
+				return 'Thursday: Sept. 12th, 2024';
 			case '2024-09-15':
-				return 'Sunday- Sept. 15th, 2024';
+				return 'Sunday: Sept. 15th, 2024';
 			case '2024-09-16':
-				return 'Monday- Sept. 16th, 2024';
+				return 'Monday: Sept. 16th, 2024';
 			default:
 				return dateString;
 		}
