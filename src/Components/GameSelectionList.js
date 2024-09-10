@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import PickTracker from './PickTracker';
 import './GameSelectionList.css';
 
@@ -7,6 +7,7 @@ const GameSelectionList = () => {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [submissionStatus, setSubmissionStatus] = useState('');
+	const [expandedDates, setExpandedDates] = useState({});
 
 	const week2Games = [
 		{ id: 1, awayTeam: 'Buffalo Bills', homeTeam: 'Miami Dolphins', date: 'Thursday, September 12th, 2024', time: '8:15pm ET' },
@@ -27,6 +28,16 @@ const GameSelectionList = () => {
 		{ id: 16, awayTeam: 'Atlanta Falcons', homeTeam: 'Philadelphia Eagles', date: 'Monday, September 16th, 2024', time: '8:15pm ET' },
 	];
 
+	const gamesByDate = useMemo(() => {
+		return week2Games.reduce((acc, game) => {
+			if (!acc[game.date]) {
+				acc[game.date] = [];
+			}
+			acc[game.date].push(game);
+			return acc;
+		}, {});
+	}, []);
+
 	const handlePickSelection = (gameId, team) => {
 		setSelectedPicks(prev => ({ ...prev, [gameId]: team }));
 	};
@@ -38,35 +49,48 @@ const GameSelectionList = () => {
 		setSubmissionStatus('Picks submitted successfully!');
 	};
 
+	const toggleDateExpansion = (date) => {
+		setExpandedDates(prev => ({ ...prev, [date]: !prev[date] }));
+	};
+
 	return (
 		<div className="game-list-container">
 			<div className="game-and-picks-wrapper">
 				<div className="game-list">
 					<h2>Week 2 Game Selection</h2>
-					<div className="game-grid">
-						{week2Games.map((game) => (
-							<div key={game.id} className="game-card">
-								<div className="game-info">
-									<div className="game-time">{game.date} - {game.time}</div>
+					{Object.entries(gamesByDate).map(([date, games]) => (
+						<div key={date} className="date-group">
+							<h3 className="date-header" onClick={() => toggleDateExpansion(date)}>
+								{date} {expandedDates[date] ? '▼' : '▶'}
+							</h3>
+							{expandedDates[date] && (
+								<div className="game-grid">
+									{games.map((game) => (
+										<div key={game.id} className="game-card">
+											<div className="game-info">
+												<div className="game-time">{game.time}</div>
+											</div>
+											<div className="teams-container">
+												<button
+													className={`team-button ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
+													onClick={() => handlePickSelection(game.id, game.awayTeam)}
+												>
+													{game.awayTeam}
+												</button>
+												<span className="vs">@</span>
+												<button
+													className={`team-button ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
+													onClick={() => handlePickSelection(game.id, game.homeTeam)}
+												>
+													{game.homeTeam}
+												</button>
+											</div>
+										</div>
+									))}
 								</div>
-								<div className="teams-container">
-									<button
-										className={`team-button ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
-										onClick={() => handlePickSelection(game.id, game.awayTeam)}
-									>
-										{game.awayTeam}
-									</button>
-									<span className="vs">@</span>
-									<button
-										className={`team-button ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
-										onClick={() => handlePickSelection(game.id, game.homeTeam)}
-									>
-										{game.homeTeam}
-									</button>
-								</div>
-							</div>
-						))}
-					</div>
+							)}
+						</div>
+					))}
 				</div>
 				<PickTracker selectedPicks={selectedPicks} games={week2Games} />
 			</div>

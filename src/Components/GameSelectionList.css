@@ -18,7 +18,7 @@
     flex: 1;
     margin-right: 20px;
     overflow-y: auto;
-    max-height: calc(100vh - 150px); /* Adjust based on your header height */
+    max-height: calc(100vh - 200px);
 }
 
 .date-group {
@@ -34,9 +34,6 @@
     text-align: left;
     cursor: pointer;
     user-select: none;
-    position: sticky;
-    top: 0;
-    z-index: 1;
 }
 
 .game-grid {
@@ -138,10 +135,25 @@
     .game-list {
         margin-right: 0;
         margin-bottom: 20px;
+        max-height: none;
     }
 
     .game-card {
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .teams-container {
+        flex-direction: column;
+    }
+
+    .team-button {
+        width: 100%;
+    }
+
+    .vs {
+        margin: 5px 0;
     }
 }
 

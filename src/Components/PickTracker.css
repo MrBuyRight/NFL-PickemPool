@@ -7,6 +7,8 @@
   position: sticky;
   top: 20px;
   align-self: flex-start;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
 }
 
 .pick-tracker h3 {
@@ -46,6 +48,7 @@
     width: 100%;
     position: static;
     margin-bottom: 20px;
+    max-height: none;
   }
 }
 

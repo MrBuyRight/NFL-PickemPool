@@ -14,6 +14,12 @@ const PickTracker = ({ selectedPicks, games }) => {
           </li>
         ))}
       </ul>
+      <div className="progress-bar">
+        <div 
+          className="progress" 
+          style={{ width: `${(sortedPicks.length / games.length) * 100}%` }}
+        ></div>
+      </div>
       <p>{sortedPicks.length} of {games.length} picks made</p>
     </div>
   );
