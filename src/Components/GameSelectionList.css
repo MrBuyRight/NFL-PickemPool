@@ -2,6 +2,275 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.game-and-picks-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.game-list {
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1;
+    margin-right: 20px;
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.date-group {
+    margin-bottom: 20px;
+}
+
+.date-header {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.3s ease;
+}
+
+.date-header:hover {
+    background-color: var(--accent-color);
+}
+
+.game-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.game-card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.game-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.game-info {
+    margin-bottom: 10px;
+}
+
+.game-time {
+    font-size: 0.9rem;
+    color: var(--text-secondary-color);
+    font-weight: bold;
+}
+
+.teams-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.team-button {
+    flex: 1;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-weight: bold;
+}
+
+.team-button:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    transform: scale(1.05);
+}
+
+.team-button.selected {
+    background-color: var(--highlight-color);
+    color: var(--primary-color);
+    font-weight: bold;
+    animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.vs {
+    font-weight: bold;
+    color: var(--text-secondary-color);
+}
+
+.entry-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.entry-form input,
+.entry-form button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.entry-form input:focus {
+    outline: none;
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
+}
+
+.entry-form button {
+    background-color: var(--highlight-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.entry-form button:hover:not(:disabled) {
+    background-color: #ff6b81;
+    transform: translateY(-2px);
+}
+
+.entry-form button:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+}
+
+.submission-status {
+    margin-top: 10px;
+    font-weight: bold;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@media (max-width: 768px) {
+    .game-and-picks-wrapper {
+        flex-direction: column;
+    }
+
+    .game-list {
+        margin-right: 0;
+        margin-bottom: 20px;
+        max-height: none;
+    }
+
+    .game-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .teams-container {
+        flex-direction: column;
+    }
+
+    .team-button {
+        width: 100%;
+    }
+
+    .vs {
+        margin: 5px 0;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(3, 218, 198, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(3, 218, 198, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(3, 218, 198, 0);
+    }
+}
+
+/* Add any additional styles here */
+
+@media (max-width: 1024px) {
+    .game-list-container {
+        flex-direction: column;
+    }
+
+    .game-list {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+/* Add these styles to your existing CSS */
+
+.score-prediction {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.score-prediction h4 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    color: var(--highlight-color);
+}
+
+.score-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.score-inputs input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    text-align: center;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.score-inputs input:focus {
+    outline: none;
+    border-color: var(--highlight-color);
+    box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
+}
+
+.score-inputs span {
+.game-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .game-and-picks-wrapper {

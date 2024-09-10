@@ -9,10 +9,12 @@
   align-self: flex-start;
   max-height: calc(100vh - 200px);
   overflow-y: auto;
+  animation: slideIn 0.5s ease-out;
 }
 
 .pick-tracker h3 {
   margin-top: 0;
+  color: var(--highlight-color);
 }
 
 .pick-tracker ul {
@@ -22,6 +24,7 @@
 
 .pick-tracker li {
   margin-bottom: 5px;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .selected-team {
@@ -34,6 +37,7 @@
   height: 10px;
   border-radius: 5px;
   margin-top: 10px;
+  overflow: hidden;
 }
 
 .progress {
@@ -43,6 +47,20 @@
   transition: width 0.3s ease-in-out;
 }
 
+.monday-prediction {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.monday-prediction h4 {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+  color: var(--highlight-color);
+}
+
 @media (max-width: 768px) {
   .pick-tracker {
     width: 100%;
@@ -50,6 +68,16 @@
     margin-bottom: 20px;
     max-height: none;
   }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Add any additional styles here */
