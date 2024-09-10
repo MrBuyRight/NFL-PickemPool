@@ -2,7 +2,11 @@ import React, { useMemo, useState } from 'react';
 import './Leaderboard.css';
 
 function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, correctTeams, incorrectTeams }) {
-  console.log('Leaderboard updated with new correct and incorrect teams');
+  console.log('Rendering Leaderboard');
+  console.log('Entries Data:', entriesData);
+  console.log('Correct Teams:', correctTeams);
+  console.log('Incorrect Teams:', incorrectTeams);
+
   const [selectedWeek, setSelectedWeek] = useState(1);
 
   // Add the teamAbbreviations definition

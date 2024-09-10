@@ -116,6 +116,10 @@ function App() {
     console.log('REACT_APP_SUPABASE_ANON_KEY:', process.env.REACT_APP_SUPABASE_ANON_KEY ? 'Set' : 'Not set');
   }, []);
 
+  console.log('Rendering App component');
+  console.log('Active component:', activeComponent);
+  console.log('Error state:', error);
+
   return (
     <div className="App">
       <header className="app-header">

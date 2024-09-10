@@ -1,6 +1,10 @@
 import React from 'react';
 
 function GameSelectionList({ games, onPickSelection, selectedPicks, onSubmit, name, setName, email, setEmail, submissionStatus }) {
+	console.log('Rendering GameSelectionList');
+	console.log('Games:', games);
+	console.log('Selected Picks:', selectedPicks);
+
 	return (
 		<div className="game-selection-list">
 			<h2>Week 2 Game Selections</h2>
