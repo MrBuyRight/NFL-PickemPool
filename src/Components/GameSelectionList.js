@@ -14,13 +14,25 @@ const GameSelectionList = () => {
 
 	const formatDate = (dateString) => {
 		const date = new Date(dateString);
-		const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-							"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		const monthNames = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
+							"Jul.", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
 		const month = monthNames[date.getMonth()];
 		const day = date.getDate();
 		const year = date.getFullYear();
 		const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long' });
-		return `${dayOfWeek}, ${month} ${day}, ${year}`;
+		
+		// Function to add ordinal suffix to day
+		const getOrdinalSuffix = (d) => {
+			if (d > 3 && d < 21) return 'th';
+			switch (d % 10) {
+				case 1:  return "st";
+				case 2:  return "nd";
+				case 3:  return "rd";
+				default: return "th";
+			}
+		}
+
+		return `${dayOfWeek}- ${month} ${day}${getOrdinalSuffix(day)}, ${year}`;
 	};
 
 	const week2Games = [
@@ -134,7 +146,7 @@ const GameSelectionList = () => {
 													{game.homeTeam}
 												</button>
 											</div>
-											{game.date === 'Monday, Sep 16, 2024' && (
+											{game.date === 'Monday- Sept. 16th, 2024' && (
 												<div className="score-prediction">
 													<h4>Score Prediction 🔮</h4>
 													<div className="score-inputs">
