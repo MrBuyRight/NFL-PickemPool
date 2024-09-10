@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap');
 
 :root {
   --primary-color: #121212;
@@ -14,6 +14,7 @@
   --correct-pick-text: #ffffff;
   --wrong-pick-bg: #B71C1C;
   --wrong-pick-text: #ffffff;
+  --spacing-unit: 16px;
 }
 
 * {
@@ -31,7 +32,7 @@ body, html {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--primary-color);
@@ -43,14 +44,14 @@ body {
   text-align: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: var(--spacing-unit);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 h1 {
@@ -59,7 +60,7 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--highlight-color);
-  margin-bottom: 1.5rem;
+  margin-bottom: calc(var(--spacing-unit) * 2);
   animation: fadeIn 1s ease-out;
 }
 
@@ -89,8 +90,8 @@ h1 {
 
 .error-message {
   color: var(--error-color);
-  font-weight: 500;
-  margin-top: 1rem;
+  font-weight: 600;
+  margin-top: var(--spacing-unit);
 }
 
 @media (max-width: 768px) {
@@ -99,6 +100,6 @@ h1 {
   }
 
   .App {
-    padding: 15px;
+    padding: calc(var(--spacing-unit) / 2);
   }
 }
