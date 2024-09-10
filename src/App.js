@@ -87,32 +87,30 @@ function App() {
   };
 
   useEffect(() => {
-    // Initialize Supabase client
-    initSupabase().then((supabase) => {
+    const initializeSupabaseAndFetchEntries = async () => {
+      const supabase = await initSupabase();
       console.log('Supabase client:', supabase);
-    });
+
+      if (supabase) {
+        try {
+          const { data, error } = await supabase
+            .from('entries')
+            .select('*');
+          
+          if (error) throw error;
+          setEntries(data);
+        } catch (err) {
+          console.error("Error loading entries data:", err);
+          setError("Failed to load entries data. Please try again later.");
+        }
+      }
+    };
+
+    initializeSupabaseAndFetchEntries();
 
     // Check if Supabase is correctly configured
     console.log('Supabase URL:', process.env.REACT_APP_SUPABASE_URL);
     console.log('Supabase Anon Key:', process.env.REACT_APP_SUPABASE_ANON_KEY);
-  }, []);
-
-  useEffect(() => {
-    const fetchEntries = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('entries')
-          .select('*');
-        
-        if (error) throw error;
-        setEntries(data);
-      } catch (err) {
-        console.error("Error loading entries data:", err);
-        setError("Failed to load entries data. Please try again later.");
-      }
-    };
-
-    fetchEntries();
   }, []);
 
   return (
