@@ -1,27 +1,27 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 
-let supabase = null;
-
-export async function initSupabase() {
-  if (supabase) return supabase;
-
-  const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-  const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
-
-  console.log('Supabase URL:', supabaseUrl);
-  console.log('Supabase Anon Key:', supabaseAnonKey ? 'Set' : 'Not set');
-
-  if (!supabaseUrl || !supabaseAnonKey) {
-    console.error('Supabase URL or Anon Key is missing');
-    return null;
-  }
-
+export const initSupabase = async () => {
   try {
-    supabase = createClient(supabaseUrl, supabaseAnonKey);
-    console.log('Supabase client created successfully');
+    const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+    const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+
+    if (!supabaseUrl || !supabaseAnonKey) {
+      throw new Error('Supabase URL or Anon Key is missing');
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseAnonKey);
+    
+    // Test the connection
+    const { data, error } = await supabase.from('entries').select('count', { count: 'exact' });
+    
+    if (error) {
+      throw error;
+    }
+
+    console.log('Supabase connection successful');
     return supabase;
   } catch (error) {
-    console.error('Error creating Supabase client:', error);
+    console.error('Failed to initialize Supabase client:', error);
     return null;
   }
-}
+};
