@@ -15,9 +15,9 @@ const GameSelectionList = ({ games, onPickSelection, selectedPicks }) => {
 			{Object.entries(groupedGames).map(([date, dateGames]) => (
 				<div key={date} className="date-group">
 					<h3 className="date-header">{date}</h3>
-					<div className="game-group">
+					<div className="game-grid">
 						{dateGames.map((game) => (
-							<div key={game.id} className="game-row">
+							<div key={game.id} className="game-card">
 								<div className="game-info">
 									<span className="game-time">{game.date.split('at')[1].trim()}</span>
 								</div>
