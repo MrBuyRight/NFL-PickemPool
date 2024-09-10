@@ -132,14 +132,14 @@ const GameSelectionList = () => {
 										</div>
 										<div className="teams-container">
 											<button
-												className={`team-button ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
+												className={`team-button away ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
 												onClick={() => handlePickSelection(game.id, game.awayTeam)}
 											>
 												{game.awayTeam}
 											</button>
-											<span className="vs">🆚</span>
+											<span className="at-symbol">@</span>
 											<button
-												className={`team-button ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
+												className={`team-button home ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
 												onClick={() => handlePickSelection(game.id, game.homeTeam)}
 											>
 												{game.homeTeam}

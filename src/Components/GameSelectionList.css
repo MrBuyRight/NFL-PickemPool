@@ -95,6 +95,16 @@
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 600;
+    flex: 1;
+    text-align: center;
+}
+
+.team-button.away {
+    text-align: right;
+}
+
+.team-button.home {
+    text-align: left;
 }
 
 .team-button:hover {
@@ -104,6 +114,12 @@
 .team-button.selected {
     background-color: var(--highlight-color);
     color: var(--primary-color);
+}
+
+.at-symbol {
+    font-size: 1.2rem;
+    margin: 0 var(--spacing-unit);
+    color: var(--text-secondary-color);
 }
 
 .score-prediction {
