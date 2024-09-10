@@ -92,7 +92,7 @@ const GameSelectionList = () => {
 		<div className="game-list-container">
 			<div className="game-and-picks-wrapper">
 				<div className="game-list">
-					<h2>Week 2 Game Selection 🏈</h2>
+					<h2>Game Selection</h2>
 					{Object.entries(gamesByDate).map(([date, games]) => (
 						<div key={date} className="date-group">
 							<h3 className="date-header" onClick={() => toggleDateExpansion(date)}>
@@ -103,7 +103,7 @@ const GameSelectionList = () => {
 									{games.map((game) => (
 										<div key={game.id} className="game-card">
 											<div className="game-info">
-												<div className="game-time">⏰ {game.time}</div>
+												<div className="game-time">{game.time}</div>
 											</div>
 											<div className="teams-container">
 												<button
