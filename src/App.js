@@ -69,29 +69,6 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    const initializeSupabase = async () => {
-      setIsLoading(true);
-      try {
-        console.log('Initializing Supabase...');
-        const supabase = await initSupabase();
-        console.log('Supabase initialized successfully');
-        setIsLoading(false);
-      } catch (err) {
-        console.error("Error initializing Supabase:", err);
-        setError(`Failed to initialize Supabase: ${err.message}`);
-        console.log('All environment variables:', process.env);
-        setIsLoading(false);
-      }
-    };
-
-    initializeSupabase();
-  }, []);
-
-  console.log('Rendering App component');
-  console.log('Error state:', error);
-  console.log('Is Loading:', isLoading);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -109,8 +86,6 @@ function App() {
               <br />
               <small>Please check the console for more details.</small>
             </div>
-          ) : isLoading ? (
-            <div>Loading...</div>
           ) : (
             <GameSelectionList
               games={week2Games}
