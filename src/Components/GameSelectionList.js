@@ -166,20 +166,24 @@ const GameSelectionList = () => {
 				<PickTracker selectedPicks={selectedPicks} games={week2Games} mondayScorePrediction={mondayScorePrediction} />
 			</div>
 			<form className="entry-form" onSubmit={handleSubmit}>
-				<input
-					type="text"
-					placeholder="Your Name 👤"
-					value={name}
-					onChange={(e) => setName(e.target.value)}
-					required
-				/>
-				<input
-					type="email"
-					placeholder="Your Email 📧"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					required
-				/>
+				<div className="input-group">
+					<input
+						type="text"
+						placeholder="Your Name 👤"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+						required
+					/>
+				</div>
+				<div className="input-group">
+					<input
+						type="email"
+						placeholder="Your Email 📧"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						required
+					/>
+				</div>
 				<button type="submit" disabled={isSubmitting}>
 					{isSubmitting ? 'Submitting... ⏳' : 'Submit Picks 🚀'}
 				</button>
