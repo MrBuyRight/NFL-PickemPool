@@ -85,6 +85,7 @@
     color: var(--text-secondary-color);
     font-weight: 600;
     margin-bottom: calc(var(--spacing-unit) / 2);
+    text-align: center; /* Center the game time */
 }
 
 .teams-container {
@@ -108,17 +109,20 @@
     flex: 1;
     margin: 0 calc(var(--spacing-unit) / 4);
     font-size: 0.8rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal; /* Allow text to wrap */
+    text-align: center; /* Center the text */
+    min-height: 3em; /* Ensure buttons have a minimum height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .team-button.away {
-    text-align: right;
+    text-align: center;
 }
 
 .team-button.home {
-    text-align: left;
+    text-align: center;
 }
 
 .at-symbol {
@@ -140,11 +144,18 @@
     margin-bottom: calc(var(--spacing-unit) / 2);
     font-weight: 600;
     font-size: 1rem;
+    text-align: center; /* Center the score prediction header */
+}
+
+.score-inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .score-inputs input {
     font-family: 'Open Sans', sans-serif;
-    width: 50px;
+    width: 60px; /* Increase width slightly */
     padding: calc(var(--spacing-unit) / 2);
     border: 1px solid var(--border-color);
     border-radius: 4px;
@@ -152,6 +163,10 @@
     color: var(--text-color);
     text-align: center;
     font-size: 0.9rem;
+}
+
+.score-inputs span {
+    margin: 0 calc(var(--spacing-unit) / 2);
 }
 
 .entry-form {
@@ -218,6 +233,8 @@
     .team-button {
         width: auto;
         margin-bottom: 0;
+        font-size: 0.9rem;
+        padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
     }
 
     .team-button.away {

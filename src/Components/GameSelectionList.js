@@ -152,7 +152,7 @@ const GameSelectionList = () => {
 													<input
 														type="number"
 														min="0"
-														placeholder="Falcons"
+														placeholder={game.awayTeam}
 														value={mondayScorePrediction.falcons}
 														onChange={(e) => handleScorePredictionChange('falcons', e.target.value)}
 													/>
@@ -160,7 +160,7 @@ const GameSelectionList = () => {
 													<input
 														type="number"
 														min="0"
-														placeholder="Eagles"
+														placeholder={game.homeTeam}
 														value={mondayScorePrediction.eagles}
 														onChange={(e) => handleScorePredictionChange('eagles', e.target.value)}
 													/>
