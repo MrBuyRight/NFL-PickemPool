@@ -23,16 +23,8 @@
     animation: slideIn 0.5s ease-out;
 }
 
-@keyframes slideIn {
-    from { transform: translateX(-20px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-.date-group {
-    margin-bottom: 20px;
-}
-
 .date-header {
+    font-family: 'Montserrat', sans-serif;
     background-color: var(--secondary-color);
     color: var(--text-color);
     padding: 12px;
@@ -58,13 +50,6 @@
     transform: rotate(0deg);
 }
 
-.game-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    animation: fadeIn 0.5s ease-out;
-}
-
 .game-card {
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
@@ -79,10 +64,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.game-info {
-    margin-bottom: 10px;
-}
-
 .game-time {
     font-size: 0.9rem;
     color: var(--text-secondary-color);
@@ -90,14 +71,8 @@
     margin-bottom: 8px;
 }
 
-.teams-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-}
-
 .team-button {
+    font-family: 'Roboto', sans-serif;
     padding: 10px 15px;
     background-color: var(--secondary-color);
     color: var(--text-color);
@@ -117,21 +92,33 @@
     color: var(--primary-color);
 }
 
-.vs {
-    font-weight: bold;
-    color: var(--text-secondary-color);
+.score-prediction {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
 }
 
-.entry-form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    animation: fadeIn 0.5s ease-out;
+.score-prediction h4 {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.score-inputs input {
+    font-family: 'Roboto', sans-serif;
+    width: 60px;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    text-align: center;
 }
 
 .entry-form input,
 .entry-form button {
+    font-family: 'Roboto', sans-serif;
     padding: 12px;
     border-radius: 6px;
     border: none;
@@ -141,6 +128,7 @@
 }
 
 .entry-form button {
+    font-family: 'Montserrat', sans-serif;
     background-color: var(--highlight-color);
     color: var(--primary-color);
     font-weight: 600;
@@ -153,45 +141,6 @@
     color: var(--text-color);
 }
 
-.submission-status {
-    margin-top: 10px;
-    font-weight: bold;
-    animation: fadeIn 0.5s ease-out;
-}
-
-.score-prediction {
-    margin-top: 15px;
-    padding: 12px;
-    background-color: var(--secondary-color);
-    border-radius: 8px;
-}
-
-.score-prediction h4 {
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.score-inputs {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.score-inputs input {
-    width: 60px;
-    padding: 8px;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--surface-color);
-    color: var(--text-color);
-    text-align: center;
-}
-
-.score-inputs span {
-    font-weight: bold;
-}
-
 @media (max-width: 768px) {
     .game-and-picks-wrapper {
         flex-direction: column;
@@ -202,27 +151,14 @@
         margin-bottom: 20px;
         max-height: none;
     }
-
-    .game-card {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .teams-container {
-        flex-direction: column;
-    }
-
-    .team-button {
-        width: 100%;
-    }
-
-    .vs {
-        margin: 5px 0;
-    }
 }
 
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
