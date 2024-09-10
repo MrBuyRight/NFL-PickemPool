@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import PickTracker from './PickTracker';
+import { supabase } from '../supabaseClient';
 import './GameSelectionList.css';
 
 const GameSelectionList = () => {
@@ -8,6 +9,7 @@ const GameSelectionList = () => {
 	const [email, setEmail] = useState('');
 	const [submissionStatus, setSubmissionStatus] = useState('');
 	const [expandedDates, setExpandedDates] = useState({});
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const week2Games = [
 		{ id: 1, awayTeam: 'Buffalo Bills', homeTeam: 'Miami Dolphins', date: 'Thursday, September 12th, 2024', time: '8:15pm ET' },
@@ -42,11 +44,30 @@ const GameSelectionList = () => {
 		setSelectedPicks(prev => ({ ...prev, [gameId]: team }));
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// Here you would typically send the data to your backend
-		console.log('Submitting picks:', { name, email, picks: selectedPicks });
-		setSubmissionStatus('Picks submitted successfully!');
+		setIsSubmitting(true);
+		setSubmissionStatus('');
+
+		try {
+			const { data, error } = await supabase
+				.from('entries')
+				.insert([
+					{ name, email, picks: selectedPicks }
+				]);
+
+			if (error) throw error;
+
+			setSubmissionStatus('Picks submitted successfully!');
+			setName('');
+			setEmail('');
+			setSelectedPicks({});
+		} catch (error) {
+			console.error('Error submitting picks:', error);
+			setSubmissionStatus(`Error submitting picks: ${error.message}`);
+		} finally {
+			setIsSubmitting(false);
+		}
 	};
 
 	const toggleDateExpansion = (date) => {
@@ -109,7 +130,9 @@ const GameSelectionList = () => {
 					onChange={(e) => setEmail(e.target.value)}
 					required
 				/>
-				<button type="submit">Submit Picks</button>
+				<button type="submit" disabled={isSubmitting}>
+					{isSubmitting ? 'Submitting...' : 'Submit Picks'}
+				</button>
 			</form>
 			{submissionStatus && <p className="submission-status">{submissionStatus}</p>}
 		</div>

@@ -122,6 +122,11 @@
     font-weight: bold;
 }
 
+.entry-form button:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+}
+
 .submission-status {
     margin-top: 10px;
     font-weight: bold;
