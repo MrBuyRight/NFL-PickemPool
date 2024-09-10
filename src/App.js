@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Leaderboard from './Components/Leaderboard';
 import GameSelectionList from './Components/GameSelectionList';
-import { supabase } from './supabaseClient';
+import { initSupabase } from './supabaseClient';
 import './App.css';
 
 function App() {
@@ -56,6 +56,7 @@ function App() {
       return;
     }
 
+    const supabase = await initSupabase();
     if (!supabase) {
       console.error('Supabase client is not initialized');
       setSubmissionStatus('Error: Unable to connect to the database');
@@ -86,10 +87,14 @@ function App() {
   };
 
   useEffect(() => {
+    // Initialize Supabase client
+    initSupabase().then((supabase) => {
+      console.log('Supabase client:', supabase);
+    });
+
     // Check if Supabase is correctly configured
     console.log('Supabase URL:', process.env.REACT_APP_SUPABASE_URL);
     console.log('Supabase Anon Key:', process.env.REACT_APP_SUPABASE_ANON_KEY);
-    console.log('Supabase client:', supabase);
   }, []);
 
   useEffect(() => {

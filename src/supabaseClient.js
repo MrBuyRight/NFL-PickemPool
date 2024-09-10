@@ -1,19 +1,24 @@
-import { createClient } from '@supabase/supabase-js'
+let supabase = null;
 
-let supabase = null
+async function initSupabase() {
+  if (supabase) return supabase;
 
-try {
-  const supabaseUrl = 'https://grnjclpmqlawncskxhqf.supabase.co'
-  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdybmpjbHBtcWxhd25jc2t4aHFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjUzMjI4NTUsImV4cCI6MjA0MDg5ODg1NX0.tBAWOEnq2rEOoWF976tvdcqy2spZUDzQXqlat_XtPMo'
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
+    const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
 
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error('Supabase URL or Anon Key is missing')
+    if (!supabaseUrl || !supabaseAnonKey) {
+      throw new Error('Supabase URL or Anon Key is missing');
+    }
+
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+    console.log('Supabase client created successfully');
+  } catch (error) {
+    console.error('Error initializing Supabase client:', error);
   }
 
-  supabase = createClient(supabaseUrl, supabaseAnonKey)
-  console.log('Supabase client created successfully')
-} catch (error) {
-  console.error('Error initializing Supabase client:', error)
+  return supabase;
 }
 
-export { supabase }
+export { initSupabase };
