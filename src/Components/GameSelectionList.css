@@ -89,13 +89,15 @@
 
 .teams-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .team-button {
     font-family: 'Open Sans', sans-serif;
-    padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
+    padding: calc(var(--spacing-unit) / 2) calc(var(--spacing-unit) / 4);
     background-color: var(--secondary-color);
     color: var(--text-color);
     border: none;
@@ -103,32 +105,27 @@
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 600;
-    width: 100%;
-    margin-bottom: calc(var(--spacing-unit) / 4);
-    font-size: 0.9rem;
+    flex: 1;
+    margin: 0 calc(var(--spacing-unit) / 4);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .team-button.away {
-    text-align: center;
+    text-align: right;
 }
 
 .team-button.home {
-    text-align: center;
-}
-
-.team-button:hover {
-    background-color: var(--accent-color);
-}
-
-.team-button.selected {
-    background-color: var(--highlight-color);
-    color: var(--primary-color);
+    text-align: left;
 }
 
 .at-symbol {
     font-size: 1rem;
-    margin: calc(var(--spacing-unit) / 4) 0;
+    margin: 0 calc(var(--spacing-unit) / 4);
     color: var(--text-secondary-color);
+    flex-shrink: 0;
 }
 
 .score-prediction {
