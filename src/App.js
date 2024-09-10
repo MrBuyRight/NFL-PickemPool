@@ -85,19 +85,26 @@ function App() {
   useEffect(() => {
     const fetchEntries = async () => {
       try {
+        console.log('Initializing Supabase...');
         const supabase = await initSupabase();
         if (!supabase) {
           throw new Error('Failed to initialize Supabase client');
         }
+        console.log('Supabase initialized successfully');
 
+        console.log('Fetching entries...');
         const { data, error } = await supabase
           .from('entries')
           .select('*');
         
-        if (error) throw error;
+        if (error) {
+          console.error('Supabase query error:', error);
+          throw error;
+        }
+        console.log('Entries fetched successfully:', data);
         setEntries(data);
       } catch (err) {
-        console.error("Error:", err);
+        console.error("Error in fetchEntries:", err);
         setError("Failed to load entries data. Please try again later.");
       }
     };
@@ -105,8 +112,8 @@ function App() {
     fetchEntries();
 
     // Log environment variables
-    console.log('Supabase URL:', process.env.REACT_APP_SUPABASE_URL);
-    console.log('Supabase Anon Key:', process.env.REACT_APP_SUPABASE_ANON_KEY ? 'Set' : 'Not set');
+    console.log('REACT_APP_SUPABASE_URL:', process.env.REACT_APP_SUPABASE_URL);
+    console.log('REACT_APP_SUPABASE_ANON_KEY:', process.env.REACT_APP_SUPABASE_ANON_KEY ? 'Set' : 'Not set');
   }, []);
 
   return (
