@@ -1,25 +1,23 @@
 import React from 'react';
 import './PickTracker.css';
 
-const PickTracker = ({ picks, games }) => {
-  const picksCount = Object.keys(picks).length;
-  const progress = (picksCount / games.length) * 100;
+const PickTracker = ({ selectedPicks, games }) => {
+  const sortedPicks = Object.entries(selectedPicks).sort((a, b) => a[0] - b[0]);
 
   return (
     <div className="pick-tracker">
       <h3>Your Picks</h3>
-      <div className="picks-summary">
-        <span className="picks-count">{picksCount}</span>
-        <span className="picks-total">/ {games.length}</span>
-      </div>
-      <div className="progress-bar">
-        <div className="progress" style={{width: `${progress}%`}}></div>
-      </div>
-      <ul className="picks-list">
-        {Object.entries(picks).map(([gameId, team]) => (
-          <li key={gameId} className="pick-item">{team}</li>
-        ))}
+      <ul>
+        {sortedPicks.map(([gameId, team]) => {
+          const game = games.find(g => g.id === parseInt(gameId));
+          return (
+            <li key={gameId}>
+              {game.awayTeam} @ {game.homeTeam}: <span className="selected-team">{team}</span>
+            </li>
+          );
+        })}
       </ul>
+      <p>{sortedPicks.length} of {games.length} picks made</p>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PickTracker from './PickTracker';
 import './GameSelectionList.css';
 
 const GameSelectionList = () => {
@@ -64,6 +65,7 @@ const GameSelectionList = () => {
 					</div>
 				))}
 			</div>
+			<PickTracker selectedPicks={selectedPicks} games={week2Games} />
 			<form className="entry-form" onSubmit={handleSubmit}>
 				<input
 					type="text"
