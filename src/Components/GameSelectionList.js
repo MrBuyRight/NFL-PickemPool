@@ -86,6 +86,8 @@ const GameSelectionList = () => {
 
 	const toggleDateExpansion = (date) => {
 		setExpandedDates(prev => ({ ...prev, [date]: !prev[date] }));
+		const header = document.querySelector(`[data-date="${date}"]`);
+		header.classList.toggle('expanded');
 	};
 
 	return (
@@ -95,8 +97,8 @@ const GameSelectionList = () => {
 					<h2>Game Selection</h2>
 					{Object.entries(gamesByDate).map(([date, games]) => (
 						<div key={date} className="date-group">
-							<h3 className="date-header" onClick={() => toggleDateExpansion(date)}>
-								{date} {expandedDates[date] ? '🔽' : '▶️'}
+							<h3 className="date-header" data-date={date} onClick={() => toggleDateExpansion(date)}>
+								{date}
 							</h3>
 							{expandedDates[date] && (
 								<div className="game-grid">

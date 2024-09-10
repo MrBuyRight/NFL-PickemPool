@@ -42,12 +42,18 @@
     cursor: pointer;
     user-select: none;
     transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.date-header:hover {
-    background-color: var(--accent-color);
+.date-header::after {
+    content: '▶';
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
 }
 
+.date-header.expanded::after {
 .game-grid {
     display: flex;
     flex-direction: column;
