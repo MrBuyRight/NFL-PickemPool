@@ -118,7 +118,7 @@ const GameSelectionList = () => {
 		<div className="game-list-container">
 			<div className="game-and-picks-wrapper">
 				<div className="game-list">
-					<h2>Game Selection 🏈</h2>
+					<h2>Game Selection</h2>
 					{Object.entries(gamesByDate).map(([date, games]) => (
 						<div key={date} className="date-group">
 							<h3 className={`date-header ${expandedDates[date] ? 'expanded' : ''}`} data-date={date} onClick={() => toggleDateExpansion(date)}>
@@ -147,7 +147,7 @@ const GameSelectionList = () => {
 										</div>
 										{game.date === '2024-09-16' && (
 											<div className="score-prediction">
-												<h4>Score Prediction 🔮</h4>
+												<h4>Score Prediction</h4>
 												<div className="score-inputs">
 													<input
 														type="number"
@@ -179,7 +179,7 @@ const GameSelectionList = () => {
 				<div className="input-group">
 					<input
 						type="text"
-						placeholder="Your Name 👤"
+						placeholder="Your Name"
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 						required
@@ -188,17 +188,17 @@ const GameSelectionList = () => {
 				<div className="input-group">
 					<input
 						type="email"
-						placeholder="Your Email 📧"
+						placeholder="Your Email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						required
 					/>
 				</div>
 				<button type="submit" disabled={isSubmitting}>
-					{isSubmitting ? 'Submitting... ⏳' : 'Submit Picks 🚀'}
+					{isSubmitting ? 'Submitting...' : 'Submit Picks'}
 				</button>
 			</form>
-			{submissionStatus && <p className="submission-status">✅ {submissionStatus}</p>}
+			{submissionStatus && <p className="submission-status">{submissionStatus}</p>}
 		</div>
 	);
 };
