@@ -56,7 +56,7 @@ function App() {
   };
 
   useEffect(() => {
-    const fetchEntries = async () => {
+    const initializeSupabase = async () => {
       setIsLoading(true);
       try {
         console.log('Initializing Supabase...');
@@ -65,35 +65,18 @@ function App() {
           throw new Error('Failed to initialize Supabase client');
         }
         console.log('Supabase initialized successfully');
-
-        console.log('Fetching entries...');
-        const { data, error } = await supabase
-          .from('entries')
-          .select('*');
-        
-        if (error) {
-          console.error('Supabase query error:', error);
-          throw error;
-        }
-        console.log('Entries fetched successfully:', data);
-        setEntries(data || []);
+        setIsLoading(false);
       } catch (err) {
-        console.error("Error in fetchEntries:", err);
-        setError(`Failed to load entries data: ${err.message}`);
-      } finally {
+        console.error("Error initializing Supabase:", err);
+        setError(`Failed to initialize Supabase: ${err.message}`);
         setIsLoading(false);
       }
     };
 
-    fetchEntries();
-
-    // Log environment variables
-    console.log('REACT_APP_SUPABASE_URL:', process.env.REACT_APP_SUPABASE_URL);
-    console.log('REACT_APP_SUPABASE_ANON_KEY:', process.env.REACT_APP_SUPABASE_ANON_KEY ? 'Set' : 'Not set');
+    initializeSupabase();
   }, []);
 
   console.log('Rendering App component');
-  console.log('Active component:', activeComponent);
   console.log('Error state:', error);
   console.log('Is Loading:', isLoading);
 
@@ -104,10 +87,7 @@ function App() {
   return (
     <div className="App">
       <header className="app-header">
-        <h1>NFL Pick'em Pool</h1>
-        <nav>
-          <button onClick={() => setActiveComponent('gameSelection')}>Week 2 Picks</button>
-        </nav>
+        <h1>NFL Pick'em Pool - Week 2</h1>
       </header>
       <main className="app-main">
         <div className="app-content">
