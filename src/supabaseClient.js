@@ -1,3 +1,5 @@
+import { createClient } from '@supabase/supabase-js'
+
 let supabase = null;
 
 export async function initSupabase() {
@@ -15,7 +17,6 @@ export async function initSupabase() {
   }
 
   try {
-    const { createClient } = await import('@supabase/supabase-js');
     supabase = createClient(supabaseUrl, supabaseAnonKey);
     console.log('Supabase client created successfully');
     return supabase;

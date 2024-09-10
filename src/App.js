@@ -7,6 +7,7 @@ import './App.css';
 function App() {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [correctPicks, setCorrectPicks] = useState(0);
   const [incorrectPicks, setIncorrectPicks] = useState(0);
   const [correctTeams, setCorrectTeams] = useState(['49ers']);
@@ -84,6 +85,7 @@ function App() {
 
   useEffect(() => {
     const fetchEntries = async () => {
+      setIsLoading(true);
       try {
         console.log('Initializing Supabase...');
         const supabase = await initSupabase();
@@ -102,10 +104,12 @@ function App() {
           throw error;
         }
         console.log('Entries fetched successfully:', data);
-        setEntries(data);
+        setEntries(data || []);
       } catch (err) {
         console.error("Error in fetchEntries:", err);
         setError("Failed to load entries data. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -119,6 +123,11 @@ function App() {
   console.log('Rendering App component');
   console.log('Active component:', activeComponent);
   console.log('Error state:', error);
+  console.log('Is Loading:', isLoading);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="App">
