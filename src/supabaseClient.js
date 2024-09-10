@@ -15,7 +15,7 @@ export const initSupabase = async () => {
     const supabase = createClient(supabaseUrl, supabaseAnonKey);
     
     // Test the connection
-    const { data, error } = await supabase.from('entries').select('count', { count: 'exact' });
+    const { data, error } = await supabase.from('entries').select('count', { count: 'exact', head: true });
     
     if (error) {
       console.error('Supabase connection test error:', error);
@@ -26,6 +26,6 @@ export const initSupabase = async () => {
     return supabase;
   } catch (error) {
     console.error('Failed to initialize Supabase client:', error);
-    return null;
+    throw error; // Re-throw the error to be caught in App.js
   }
 };

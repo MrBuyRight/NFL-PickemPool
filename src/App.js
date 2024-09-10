@@ -61,9 +61,6 @@ function App() {
       try {
         console.log('Initializing Supabase...');
         const supabase = await initSupabase();
-        if (!supabase) {
-          throw new Error('Failed to initialize Supabase client');
-        }
         console.log('Supabase initialized successfully');
         setIsLoading(false);
       } catch (err) {
@@ -92,7 +89,13 @@ function App() {
       <main className="app-main">
         <div className="app-content">
           {error ? (
-            <div className="error-message">{error}</div>
+            <div className="error-message">
+              {error}
+              <br />
+              <small>Please check the console for more details.</small>
+            </div>
+          ) : isLoading ? (
+            <div>Loading...</div>
           ) : (
             <GameSelectionList
               games={week2Games}
