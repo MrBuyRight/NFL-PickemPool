@@ -80,6 +80,12 @@ function App() {
   };
 
   useEffect(() => {
+    // Check if Supabase is correctly configured
+    console.log('Supabase URL:', process.env.REACT_APP_SUPABASE_URL);
+    console.log('Supabase Anon Key:', process.env.REACT_APP_SUPABASE_ANON_KEY);
+  }, []);
+
+  useEffect(() => {
     const fetchEntries = async () => {
       try {
         const { data, error } = await supabase
