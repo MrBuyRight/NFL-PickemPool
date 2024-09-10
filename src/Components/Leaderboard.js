@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import './Leaderboard.css';
 
-function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) {
+function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, correctTeams, incorrectTeams }) {
   console.log('Leaderboard updated with new correct and incorrect teams');
   const [selectedWeek, setSelectedWeek] = useState(1);
 

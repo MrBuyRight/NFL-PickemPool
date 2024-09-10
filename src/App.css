@@ -86,6 +86,7 @@ body {
   height: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 20px;
 }
 
 h1 {
@@ -131,4 +132,18 @@ h1 {
 .error-message {
   color: red;
   font-weight: bold;
+}
+
+.game-item {
+  margin-bottom: 10px;
+}
+
+.game-item button {
+  margin: 0 5px;
+  padding: 5px 10px;
+}
+
+.game-item button.selected {
+  background-color: #4CAF50;
+  color: white;
 }

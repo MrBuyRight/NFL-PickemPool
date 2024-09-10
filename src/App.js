@@ -144,7 +144,6 @@ function App() {
               />
             ) : (
               <Leaderboard 
-                key={Date.now()}
                 entriesData={entries} 
                 updatePick={updatePick}
                 correctPicks={correctPicks}
