@@ -132,7 +132,7 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) 
           <thead>
             <tr>
               <th className="fixed-column name-column">
-                <span className="name-header">Name</span>
+                <span className="name-header">Name (Correct)</span>
               </th>
               {gameHeaders.map((header, index) => (
                 <th key={index} className="pick-header">
@@ -149,7 +149,7 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) 
               <tr key={index} className={`entry-row ${entry.isLeastIncorrect ? 'least-incorrect' : ''}`}>
                 <td className="fixed-column name-column">
                   <div className={`name-container ${entry.isLeastIncorrect ? 'least-incorrect' : ''}`} title={entry.name}>
-                    {formatName(entry.name)}
+                    {formatName(entry.name)} ({entry.score})
                   </div>
                 </td>
                 {gameMatchups.map((matchup, pickIndex) => {

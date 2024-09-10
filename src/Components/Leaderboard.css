@@ -70,8 +70,8 @@ body {
 }
 
 .name-column {
-  width: 50px;
-  min-width: 50px;
+  width: 120px;
+  min-width: 120px;
 }
 
 .name-container {
@@ -174,8 +174,8 @@ body {
 
 @media (max-width: 768px) {
   .name-column {
-    width: 40px;
-    min-width: 40px;
+    width: 100px;
+    min-width: 100px;
   }
 
   .pick-header {
