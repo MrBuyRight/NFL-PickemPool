@@ -188,9 +188,18 @@ body {
 }
 
 .entry-row.least-incorrect {
-  background-color: #e6ffe6; /* Light green background */
+  background-color: rgba(230, 255, 230, 0.1); /* Light green background with reduced opacity */
 }
 
 .entry-row.least-incorrect:hover {
-  background-color: #ccffcc; /* Slightly darker green on hover */
+  background-color: rgba(204, 255, 204, 0.2); /* Slightly darker green on hover with reduced opacity */
+}
+
+.name-container.least-incorrect {
+  background-color: #4CAF50; /* Green background for the name */
+  color: #ffffff; /* White text for better contrast */
+}
+
+.name-container.least-incorrect:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
 }

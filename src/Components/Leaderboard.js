@@ -148,7 +148,7 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks }) 
             {rankedEntries.map((entry, index) => (
               <tr key={index} className={`entry-row ${entry.isLeastIncorrect ? 'least-incorrect' : ''}`}>
                 <td className="fixed-column name-column">
-                  <div className="name-container" title={entry.name}>
+                  <div className={`name-container ${entry.isLeastIncorrect ? 'least-incorrect' : ''}`} title={entry.name}>
                     {formatName(entry.name)}
                   </div>
                 </td>
