@@ -27,19 +27,25 @@ const GameSelectionList = ({ games, onPickSelection, selectedPicks }) => {
 		}
 
 		try {
+			console.log('Submitting picks:', { name, email, picks: selectedPicks });
 			const { data, error } = await supabase
 				.from('entries')
 				.insert([
 					{ name, email, picks: selectedPicks }
 				]);
 
-			if (error) throw error;
+			if (error) {
+				console.error('Supabase error:', error);
+				throw error;
+			}
+			console.log('Submission successful:', data);
 			setSubmissionStatus('Entry submitted successfully!');
 			setName('');
 			setEmail('');
 		} catch (error) {
 			console.error('Error submitting entry:', error);
 			setSubmissionStatus('Failed to submit entry. Please try again.');
+			console.error('Supabase error:', error);
 		}
 	};
 
