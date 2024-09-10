@@ -7,8 +7,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>NFL Pick'em Pool</h1>
-      <p>This is a test render of the App component.</p>
+      <h1>NFL Pick'em Pool - Week 2</h1>
       <GameSelectionList />
     </div>
   );
