@@ -12,7 +12,7 @@ function App() {
   const [correctTeams, setCorrectTeams] = useState(['49ers']);
   const [incorrectTeams, setIncorrectTeams] = useState(['Jets']);
   const [selectedPicks, setSelectedPicks] = useState({});
-  const [activeComponent, setActiveComponent] = useState('leaderboard');
+  const [activeComponent, setActiveComponent] = useState('gameSelection');
 
   // Week 2 games data
   const week2Games = [
@@ -60,8 +60,8 @@ function App() {
       <header className="app-header">
         <h1>NFL Pick'em Pool</h1>
         <nav>
-          <button onClick={() => setActiveComponent('leaderboard')}>Leaderboard</button>
           <button onClick={() => setActiveComponent('gameSelection')}>Game Selection</button>
+          <button onClick={() => setActiveComponent('leaderboard')}>Leaderboard</button>
         </nav>
       </header>
       <main className="app-main">
@@ -69,7 +69,13 @@ function App() {
           {error ? (
             <div className="error-message">{error}</div>
           ) : (
-            activeComponent === 'leaderboard' ? (
+            activeComponent === 'gameSelection' ? (
+              <GameSelectionList
+                games={week2Games}
+                onPickSelection={handlePickSelection}
+                selectedPicks={selectedPicks}
+              />
+            ) : (
               <Leaderboard 
                 key={Date.now()}
                 entriesData={entries} 
@@ -78,12 +84,6 @@ function App() {
                 incorrectPicks={incorrectPicks}
                 correctTeams={correctTeams}
                 incorrectTeams={incorrectTeams}
-              />
-            ) : (
-              <GameSelectionList
-                games={week2Games}
-                onPickSelection={handlePickSelection}
-                selectedPicks={selectedPicks}
               />
             )
           )}

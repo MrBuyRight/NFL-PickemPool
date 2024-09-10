@@ -20,8 +20,6 @@ body {
 
 .leaderboard {
   width: 100%;
-  height: calc(100vh - 80px);
-  overflow: hidden;
   animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -37,8 +35,8 @@ body {
 }
 
 .leaderboard-container {
-  height: calc(100% - 40px);
-  overflow: auto;
+  width: 100%;
+  overflow-x: auto;
 }
 
 .leaderboard-table {

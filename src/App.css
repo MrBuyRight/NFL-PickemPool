@@ -49,9 +49,6 @@ body {
   background-color: #282c34;
   padding: 20px;
   color: white;
-  padding: 5px 10px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .app-header h1 {
