@@ -5,8 +5,8 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>NFL Pick'em Pool Week 2</h1>
       <Leaderboard />
+      {/* Other components */}
     </div>
   );
 }
