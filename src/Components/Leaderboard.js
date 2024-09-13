@@ -1,15 +1,19 @@
 import React from 'react';
 import './Leaderboard.css';
-import entriesData from './entriesData';
 
-function Leaderboard() {
+function Leaderboard({ entries }) {
   console.log('Leaderboard component is rendering');
-  console.log('entriesData:', entriesData);
+  console.log('entries:', entries);
+
+  if (!Array.isArray(entries)) {
+    console.error('entries is not an array:', entries);
+    return <div>Error: Invalid data format</div>;
+  }
 
   return (
     <div className="leaderboard" style={{backgroundColor: 'lightgray', padding: '20px'}}>
       <h2>Leaderboard</h2>
-      <p>Number of entries: {entriesData ? entriesData.length : 0}</p>
+      <p>Number of entries: {entries.length}</p>
       <table className="leaderboard-table">
         <thead>
           <tr>
@@ -21,13 +25,15 @@ function Leaderboard() {
           </tr>
         </thead>
         <tbody>
-          {entriesData.map((entry, index) => (
+          {entries.map((entry, index) => (
             <tr key={index}>
               <td>{entry.name}</td>
-              <td>{entry.picks["1"]}</td>
-              <td>{entry.picks["2"]}</td>
-              <td>{entry.picks["3"]}</td>
-              <td>{entry.scorePrediction.falcons} - {entry.scorePrediction.eagles}</td>
+              <td>{entry.picks && entry.picks["1"]}</td>
+              <td>{entry.picks && entry.picks["2"]}</td>
+              <td>{entry.picks && entry.picks["3"]}</td>
+              <td>
+                {entry.scorePrediction && `${entry.scorePrediction.falcons} - ${entry.scorePrediction.eagles}`}
+              </td>
             </tr>
           ))}
         </tbody>
