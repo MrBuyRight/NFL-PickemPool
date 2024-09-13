@@ -10,6 +10,28 @@ function Leaderboard() {
     <div className="leaderboard" style={{backgroundColor: 'lightgray', padding: '20px'}}>
       <h2>Leaderboard</h2>
       <p>Number of entries: {entriesData ? entriesData.length : 0}</p>
+      <table className="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Pick 1</th>
+            <th>Pick 2</th>
+            <th>Pick 3</th>
+            <th>Score Prediction</th>
+          </tr>
+        </thead>
+        <tbody>
+          {entriesData.map((entry, index) => (
+            <tr key={index}>
+              <td>{entry.name}</td>
+              <td>{entry.picks["1"]}</td>
+              <td>{entry.picks["2"]}</td>
+              <td>{entry.picks["3"]}</td>
+              <td>{entry.scorePrediction.falcons} - {entry.scorePrediction.eagles}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
