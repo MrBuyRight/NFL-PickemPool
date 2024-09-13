@@ -7,8 +7,6 @@ const Leaderboard = ({ entries }) => {
     return nameParts.length > 1 ? `${nameParts[0]} ${nameParts[1].charAt(0)}.` : name;
   };
 
-  const sortedEntries = [...entries].sort((a, b) => a.name.localeCompare(b.name));
-
   const games = [
     { id: 1, teams: ['BUF', 'MIA'] },
     { id: 2, teams: ['LV', 'BAL'] },
@@ -36,15 +34,30 @@ const Leaderboard = ({ entries }) => {
     return '';
   };
 
+  const calculateCorrectPicks = (picks) => {
+    let correctPicks = 0;
+    if (picks[1] === 'Buffalo Bills') correctPicks++;
+    return correctPicks;
+  };
+
+  const sortedEntries = [...entries]
+    .map(entry => ({
+      ...entry,
+      correctPicks: calculateCorrectPicks(entry.picks)
+    }))
+    .sort((a, b) => b.correctPicks - a.correctPicks || a.name.localeCompare(b.name));
+
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">2024 NFL Season</h2>
+      <h2 className="leaderboard-title">2024 NFL Season - Week 2</h2>
       <div className="leaderboard-container">
         <div className="table-wrapper">
           <table className="leaderboard-table">
             <thead>
               <tr>
+                <th className="rank-column">Rank</th>
                 <th className="name-column">Name</th>
+                <th className="score-column">Score</th>
                 {games.map((game) => (
                   <th key={game.id} className="pick-header">
                     <div className="game-header">
@@ -58,9 +71,11 @@ const Leaderboard = ({ entries }) => {
             <tbody>
               {sortedEntries.map((entry, index) => (
                 <tr key={entry.email} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                  <td className="rank-column">{index + 1}</td>
                   <td className="name-column">
                     <div className="name-container">{abbreviateName(entry.name)}</div>
                   </td>
+                  <td className="score-column">{entry.correctPicks}</td>
                   {games.map((game) => (
                     <td key={game.id} className="pick-cell">
                       <div className={`pick-container ${getPickClass(entry.picks[game.id], game.id)}`}>

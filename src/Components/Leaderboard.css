@@ -71,9 +71,24 @@ body {
   z-index: 10;
 }
 
+.rank-column,
+.score-column {
+  width: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.rank-column {
+  background-color: var(--secondary-color);
+}
+
+.score-column {
+  color: var(--accent-color);
+}
+
 .name-column {
   position: sticky;
-  left: 0;
+  left: 50px; /* Updated to accommodate the rank column */
   background-color: var(--primary-color);
   z-index: 5;
 }
