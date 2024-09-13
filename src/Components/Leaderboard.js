@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './Leaderboard.css';
-import entriesData from './entriesData';  // Make sure this path is correct
+import { useData } from '../DataContext';
 
 function Leaderboard() {
-  useEffect(() => {
-    console.log('Leaderboard component mounted');
-    console.log('entriesData:', entriesData);
-    console.log('First entry:', entriesData[0]);
-    console.log('Number of entries:', entriesData.length);
-  }, []);
+  const { entriesData } = useData();
+  
+  console.log('Leaderboard component is rendering');
+  console.log('entriesData:', entriesData);
 
   if (!Array.isArray(entriesData) || entriesData.length === 0) {
     console.error('entriesData is not a valid array:', entriesData);
