@@ -94,8 +94,7 @@ const Leaderboard = ({ entries }) => {
             <thead>
               <tr>
                 <th className="sticky-column rank-column">#</th>
-                <th className="sticky-column name-column">Name</th>
-                <th className="sticky-column score-column">Score</th>
+                <th className="sticky-column name-score-column">Name (Score)</th>
                 {games.map((game) => (
                   <th key={game.id} className="pick-header">
                     <div className="game-header">
@@ -110,10 +109,12 @@ const Leaderboard = ({ entries }) => {
               {sortedEntries.map((entry, index) => (
                 <tr key={entry.email} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
                   <td className="sticky-column rank-column">{index + 1}</td>
-                  <td className="sticky-column name-column">
-                    <div className="name-container">{abbreviateName(entry.name)}</div>
+                  <td className="sticky-column name-score-column">
+                    <div className="name-score-container">
+                      <span className="name">{abbreviateName(entry.name)}</span>
+                      <span className="score">({entry.correctPicks})</span>
+                    </div>
                   </td>
-                  <td className="sticky-column score-column">{entry.correctPicks}</td>
                   {games.map((game) => (
                     <td key={game.id} className="pick-cell">
                       <div className={`pick-container ${getPickClass(entry.picks[game.id], game.id)}`}>

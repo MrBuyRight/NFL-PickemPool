@@ -87,23 +87,30 @@ body {
   left: 0;
 }
 
-.name-column {
-  width: 120px;
+.name-score-column {
+  width: 150px;
   left: 30px;
+  text-align: left;
 }
 
-.score-column {
-  width: 30px;
-  text-align: center;
-  font-weight: bold;
-  left: 150px;
+.name-score-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.name-container {
+.name {
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 110px;
+}
+
+.score {
+  font-weight: 600;
+  color: var(--accent-color);
+  margin-left: 5px;
 }
 
 .pick-header {
@@ -219,13 +226,13 @@ body {
     font-size: 12px;
   }
 
-  .name-column {
-    width: 100px;
-    left: 30px;
+  .name-score-column {
+    width: 120px;
+    left: 25px;
   }
 
-  .score-column {
-    left: 130px;
+  .name {
+    max-width: 80px;
   }
 
   .matchup,
