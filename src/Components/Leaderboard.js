@@ -16,22 +16,22 @@ const Leaderboard = ({ entries }) => {
 
   // Define the games for Week 2
   const games = [
-    { id: 1, teams: ['BUF', 'MIA'], time: 'Thu 8:15pm' },
-    { id: 2, teams: ['LV', 'BAL'], time: 'Sun 1:00pm' },
-    { id: 3, teams: ['IND', 'GB'], time: 'Sun 1:00pm' },
-    { id: 4, teams: ['NYJ', 'TEN'], time: 'Sun 1:00pm' },
-    { id: 5, teams: ['SEA', 'NE'], time: 'Sun 1:00pm' },
-    { id: 6, teams: ['CLE', 'JAX'], time: 'Sun 1:00pm' },
-    { id: 7, teams: ['NO', 'DAL'], time: 'Sun 1:00pm' },
-    { id: 8, teams: ['LAC', 'CAR'], time: 'Sun 1:00pm' },
-    { id: 9, teams: ['NYG', 'WAS'], time: 'Sun 1:00pm' },
-    { id: 10, teams: ['SF', 'MIN'], time: 'Sun 1:00pm' },
-    { id: 11, teams: ['TB', 'DET'], time: 'Sun 1:00pm' },
-    { id: 12, teams: ['LAR', 'ARI'], time: 'Sun 4:05pm' },
-    { id: 13, teams: ['CIN', 'KC'], time: 'Sun 4:25pm' },
-    { id: 14, teams: ['PIT', 'DEN'], time: 'Sun 4:25pm' },
-    { id: 15, teams: ['CHI', 'HOU'], time: 'Sun 8:20pm' },
-    { id: 16, teams: ['ATL', 'PHI'], time: 'Mon 8:15pm' },
+    { id: 1, teams: ['BUF', 'MIA'] },
+    { id: 2, teams: ['LV', 'BAL'] },
+    { id: 3, teams: ['IND', 'GB'] },
+    { id: 4, teams: ['NYJ', 'TEN'] },
+    { id: 5, teams: ['SEA', 'NE'] },
+    { id: 6, teams: ['CLE', 'JAX'] },
+    { id: 7, teams: ['NO', 'DAL'] },
+    { id: 8, teams: ['LAC', 'CAR'] },
+    { id: 9, teams: ['NYG', 'WAS'] },
+    { id: 10, teams: ['SF', 'MIN'] },
+    { id: 11, teams: ['TB', 'DET'] },
+    { id: 12, teams: ['LAR', 'ARI'] },
+    { id: 13, teams: ['CIN', 'KC'] },
+    { id: 14, teams: ['PIT', 'DEN'] },
+    { id: 15, teams: ['CHI', 'HOU'] },
+    { id: 16, teams: ['ATL', 'PHI'] },
   ];
 
   return (
@@ -46,9 +46,7 @@ const Leaderboard = ({ entries }) => {
                 {games.map((game) => (
                   <th key={game.id} className="pick-header">
                     <div className="game-header">
-                      <span className="game-number">Game {game.id}</span>
                       <span className="matchup">{game.teams.join(' vs ')}</span>
-                      <span className="game-time">{game.time}</span>
                     </div>
                   </th>
                 ))}
