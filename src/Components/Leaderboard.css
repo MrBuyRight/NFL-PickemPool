@@ -38,6 +38,9 @@ body {
 }
 
 .leaderboard-container {
+  position: relative;
+  overflow: auto;
+  max-height: 80vh;
   background-color: var(--primary-color);
   border-radius: 8px;
   padding: 20px;
@@ -62,37 +65,29 @@ body {
   border-bottom: 1px solid var(--border-color);
 }
 
-.leaderboard-table th {
-  background-color: var(--secondary-color);
-  color: var(--accent-color);
-  font-weight: bold;
-  text-transform: uppercase;
+.sticky-column {
   position: sticky;
-  top: 0;
-  z-index: 10;
+  left: 0;
+  z-index: 2;
+  background-color: var(--primary-color);
 }
 
-.rank-column,
-.score-column {
+.rank-column {
   width: 30px;
   text-align: center;
   font-weight: bold;
 }
 
-.rank-column {
-  background-color: var(--secondary-color);
+.name-column {
+  width: 120px;
+  left: 30px;
 }
 
 .score-column {
-  color: var(--accent-color);
-}
-
-.name-column {
-  width: 120px;
-  position: sticky;
-  left: 30px;
-  background-color: var(--primary-color);
-  z-index: 5;
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+  left: 150px;
 }
 
 .name-container {
@@ -203,6 +198,11 @@ body {
 
   .name-column {
     width: 100px;
+    left: 25px;
+  }
+
+  .score-column {
+    left: 125px;
   }
 
   .matchup,
