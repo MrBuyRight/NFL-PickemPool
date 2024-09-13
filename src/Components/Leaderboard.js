@@ -1,10 +1,8 @@
 import React from 'react';
 import './Leaderboard.css';
-import { useData } from '../DataContext';
+import entriesData from './entriesData';
 
 function Leaderboard() {
-  const { entriesData } = useData();
-  
   console.log('Leaderboard component is rendering');
   console.log('entriesData:', entriesData);
 
