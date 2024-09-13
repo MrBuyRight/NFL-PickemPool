@@ -95,7 +95,6 @@ body {
 
 .name-score-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -105,12 +104,20 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 110px;
+  margin-right: 5px;
 }
 
 .score {
   font-weight: 600;
   color: var(--accent-color);
-  margin-left: 5px;
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
 }
 
 .pick-header {
@@ -237,6 +244,12 @@ body {
 
   .matchup,
   .pick-team {
+    font-size: 0.7rem;
+  }
+
+  .score {
+    width: 20px;
+    height: 20px;
     font-size: 0.7rem;
   }
 }
