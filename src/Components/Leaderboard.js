@@ -87,7 +87,7 @@ const Leaderboard = ({ entries }) => {
 
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">2024 NFL Season</h2>
+      <h2 className="leaderboard-title">Leaderboard</h2>
       <div className="leaderboard-container">
         <div className="table-wrapper">
           <table className="leaderboard-table">
