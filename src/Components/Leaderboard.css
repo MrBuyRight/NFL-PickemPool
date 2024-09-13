@@ -52,11 +52,12 @@ body {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  font-size: 14px;
 }
 
 .leaderboard-table th,
 .leaderboard-table td {
-  padding: 12px 8px;
+  padding: 8px 4px;
   text-align: center;
   border-bottom: 1px solid var(--border-color);
 }
@@ -73,7 +74,7 @@ body {
 
 .rank-column,
 .score-column {
-  width: 50px;
+  width: 30px;
   text-align: center;
   font-weight: bold;
 }
@@ -87,18 +88,22 @@ body {
 }
 
 .name-column {
+  width: 120px;
   position: sticky;
-  left: 50px; /* Updated to accommodate the rank column */
+  left: 30px;
   background-color: var(--primary-color);
   z-index: 5;
 }
 
 .name-container {
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pick-header {
-  min-width: 100px;
+  min-width: 60px;
 }
 
 .game-header {
@@ -108,7 +113,7 @@ body {
 }
 
 .matchup {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: bold;
 }
 
@@ -119,13 +124,13 @@ body {
 }
 
 .pick-cell {
-  padding: 4px 2px;
+  padding: 2px 1px;
 }
 
 .pick-container {
   background-color: var(--secondary-color);
   border-radius: 4px;
-  padding: 4px;
+  padding: 2px;
   transition: background-color 0.3s ease, border 0.3s ease;
   border: 1px solid transparent;
 }
@@ -135,13 +140,14 @@ body {
 }
 
 .pick-team {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: bold;
 }
 
 .score-prediction-cell {
   font-weight: bold;
   color: var(--accent-color);
+  font-size: 0.8rem;
 }
 
 .entry-row {
@@ -175,7 +181,7 @@ body {
   }
 
   .pick-header {
-    min-width: 80px;
+    min-width: 50px;
   }
 
   .game-number,
@@ -184,11 +190,24 @@ body {
   }
 
   .matchup {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .pick-team {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+  }
+
+  .leaderboard-table {
+    font-size: 12px;
+  }
+
+  .name-column {
+    width: 100px;
+  }
+
+  .matchup,
+  .pick-team {
+    font-size: 0.7rem;
   }
 }
 
@@ -209,3 +228,4 @@ body {
 .incorrect-pick .pick-team {
   color: #F44336;
 }
+

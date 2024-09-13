@@ -7,6 +7,44 @@ const Leaderboard = ({ entries }) => {
     return nameParts.length > 1 ? `${nameParts[0]} ${nameParts[1].charAt(0)}.` : name;
   };
 
+  const abbreviateTeam = (team) => {
+    const teamAbbreviations = {
+      'Buffalo Bills': 'BUF',
+      'Miami Dolphins': 'MIA',
+      'Las Vegas Raiders': 'LV',
+      'Baltimore Ravens': 'BAL',
+      'Indianapolis Colts': 'IND',
+      'Green Bay Packers': 'GB',
+      'New York Jets': 'NYJ',
+      'Tennessee Titans': 'TEN',
+      'Seattle Seahawks': 'SEA',
+      'New England Patriots': 'NE',
+      'Cleveland Browns': 'CLE',
+      'Jacksonville Jaguars': 'JAX',
+      'New Orleans Saints': 'NO',
+      'Dallas Cowboys': 'DAL',
+      'Los Angeles Chargers': 'LAC',
+      'Carolina Panthers': 'CAR',
+      'New York Giants': 'NYG',
+      'Washington Commanders': 'WAS',
+      'San Francisco 49ers': 'SF',
+      'Minnesota Vikings': 'MIN',
+      'Tampa Bay Buccaneers': 'TB',
+      'Detroit Lions': 'DET',
+      'Los Angeles Rams': 'LAR',
+      'Arizona Cardinals': 'ARI',
+      'Cincinnati Bengals': 'CIN',
+      'Kansas City Chiefs': 'KC',
+      'Pittsburgh Steelers': 'PIT',
+      'Denver Broncos': 'DEN',
+      'Chicago Bears': 'CHI',
+      'Houston Texans': 'HOU',
+      'Atlanta Falcons': 'ATL',
+      'Philadelphia Eagles': 'PHI'
+    };
+    return teamAbbreviations[team] || team;
+  };
+
   const games = [
     { id: 1, teams: ['BUF', 'MIA'] },
     { id: 2, teams: ['LV', 'BAL'] },
@@ -49,23 +87,23 @@ const Leaderboard = ({ entries }) => {
 
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">2024 NFL Season - Week 2</h2>
+      <h2 className="leaderboard-title">2024 NFL Season</h2>
       <div className="leaderboard-container">
         <div className="table-wrapper">
           <table className="leaderboard-table">
             <thead>
               <tr>
-                <th className="rank-column">Rank</th>
+                <th className="rank-column">#</th>
                 <th className="name-column">Name</th>
                 <th className="score-column">Score</th>
                 {games.map((game) => (
                   <th key={game.id} className="pick-header">
                     <div className="game-header">
-                      <span className="matchup">{game.teams.join(' vs ')}</span>
+                      <span className="matchup">{game.teams.join('/')}</span>
                     </div>
                   </th>
                 ))}
-                <th className="score-prediction-header">Score Prediction</th>
+                <th className="score-prediction-header">Prediction</th>
               </tr>
             </thead>
             <tbody>
@@ -79,12 +117,12 @@ const Leaderboard = ({ entries }) => {
                   {games.map((game) => (
                     <td key={game.id} className="pick-cell">
                       <div className={`pick-container ${getPickClass(entry.picks[game.id], game.id)}`}>
-                        <span className="pick-team">{entry.picks[game.id]}</span>
+                        <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
                       </div>
                     </td>
                   ))}
                   <td className="score-prediction-cell">
-                    {entry.scorePrediction.falcons || '-'} - {entry.scorePrediction.eagles || '-'}
+                    {entry.scorePrediction.falcons || '-'}-{entry.scorePrediction.eagles || '-'}
                   </td>
                 </tr>
               ))}
