@@ -62,12 +62,17 @@ body {
 .leaderboard-table td {
   padding: 8px 4px;
   text-align: center;
+  border-right: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
+}
+
+.leaderboard-table th:last-child,
+.leaderboard-table td:last-child {
+  border-right: none;
 }
 
 .sticky-column {
   position: sticky;
-  left: 0;
   z-index: 2;
   background-color: var(--primary-color);
 }
@@ -76,6 +81,7 @@ body {
   width: 30px;
   text-align: center;
   font-weight: bold;
+  left: 0;
 }
 
 .name-column {
@@ -161,6 +167,17 @@ body {
   background-color: var(--odd-row-color);
 }
 
+.leaderboard-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: var(--secondary-color);
+}
+
+.leaderboard-table thead th.sticky-column {
+  z-index: 4;
+}
+
 @media (max-width: 768px) {
   .leaderboard {
     padding: 10px;
@@ -198,11 +215,11 @@ body {
 
   .name-column {
     width: 100px;
-    left: 25px;
+    left: 30px;
   }
 
   .score-column {
-    left: 125px;
+    left: 130px;
   }
 
   .matchup,
