@@ -2,19 +2,13 @@ import React from 'react';
 import './Leaderboard.css';
 
 const Leaderboard = ({ entries }) => {
-  // Function to abbreviate names
   const abbreviateName = (name) => {
     const nameParts = name.split(' ');
-    if (nameParts.length > 1) {
-      return `${nameParts[0]} ${nameParts[1].charAt(0)}.`;
-    }
-    return name;
+    return nameParts.length > 1 ? `${nameParts[0]} ${nameParts[1].charAt(0)}.` : name;
   };
 
-  // Sort entries alphabetically by name
   const sortedEntries = [...entries].sort((a, b) => a.name.localeCompare(b.name));
 
-  // Define the games for Week 2
   const games = [
     { id: 1, teams: ['BUF', 'MIA'] },
     { id: 2, teams: ['LV', 'BAL'] },
@@ -36,7 +30,7 @@ const Leaderboard = ({ entries }) => {
 
   return (
     <div className="leaderboard">
-      <h2>Week 2 Entries - 2024 NFL Season</h2>
+      <h2 className="leaderboard-title">Week 2 Entries - 2024 NFL Season</h2>
       <div className="leaderboard-container">
         <div className="table-wrapper">
           <table className="leaderboard-table">
@@ -54,8 +48,8 @@ const Leaderboard = ({ entries }) => {
               </tr>
             </thead>
             <tbody>
-              {sortedEntries.map((entry) => (
-                <tr key={entry.email} className="entry-row">
+              {sortedEntries.map((entry, index) => (
+                <tr key={entry.email} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
                   <td className="name-column">
                     <div className="name-container">{abbreviateName(entry.name)}</div>
                   </td>
