@@ -111,7 +111,8 @@ body {
   background-color: var(--secondary-color);
   border-radius: 4px;
   padding: 4px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, border 0.3s ease;
+  border: 1px solid transparent;
 }
 
 .pick-container:hover {
@@ -174,4 +175,22 @@ body {
   .pick-team {
     font-size: 0.8rem;
   }
+}
+
+.correct-pick {
+  background-color: rgba(76, 175, 80, 0.2) !important; /* Light green with transparency */
+  border: 1px solid #4CAF50;
+}
+
+.incorrect-pick {
+  background-color: rgba(244, 67, 54, 0.2) !important; /* Light red with transparency */
+  border: 1px solid #F44336;
+}
+
+.correct-pick .pick-team {
+  color: #4CAF50;
+}
+
+.incorrect-pick .pick-team {
+  color: #F44336;
 }

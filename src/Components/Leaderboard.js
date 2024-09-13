@@ -28,9 +28,17 @@ const Leaderboard = ({ entries }) => {
     { id: 16, teams: ['ATL', 'PHI'] },
   ];
 
+  const getPickClass = (pick, gameId) => {
+    if (gameId === 1) {
+      if (pick === 'Buffalo Bills') return 'correct-pick';
+      if (pick === 'Miami Dolphins') return 'incorrect-pick';
+    }
+    return '';
+  };
+
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">Week 2 Entries - 2024 NFL Season</h2>
+      <h2 className="leaderboard-title">2024 NFL Season</h2>
       <div className="leaderboard-container">
         <div className="table-wrapper">
           <table className="leaderboard-table">
@@ -55,7 +63,7 @@ const Leaderboard = ({ entries }) => {
                   </td>
                   {games.map((game) => (
                     <td key={game.id} className="pick-cell">
-                      <div className="pick-container">
+                      <div className={`pick-container ${getPickClass(entry.picks[game.id], game.id)}`}>
                         <span className="pick-team">{entry.picks[game.id]}</span>
                       </div>
                     </td>
