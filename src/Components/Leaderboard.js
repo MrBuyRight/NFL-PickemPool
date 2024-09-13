@@ -2,6 +2,15 @@ import React from 'react';
 import './Leaderboard.css';
 
 const Leaderboard = ({ entries }) => {
+  // Function to abbreviate names
+  const abbreviateName = (name) => {
+    const nameParts = name.split(' ');
+    if (nameParts.length > 1) {
+      return `${nameParts[0]} ${nameParts[1].charAt(0)}.`;
+    }
+    return name;
+  };
+
   // Sort entries alphabetically by name
   const sortedEntries = [...entries].sort((a, b) => a.name.localeCompare(b.name));
 
@@ -50,7 +59,7 @@ const Leaderboard = ({ entries }) => {
               {sortedEntries.map((entry) => (
                 <tr key={entry.email} className="entry-row">
                   <td className="name-column">
-                    <div className="name-container">{entry.name}</div>
+                    <div className="name-container">{abbreviateName(entry.name)}</div>
                   </td>
                   {games.map((game) => (
                     <td key={game.id} className="pick-cell">
