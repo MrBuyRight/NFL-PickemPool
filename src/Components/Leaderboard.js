@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import './Leaderboard.css';
+import entriesData from './entriesData';
 
-function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, correctTeams, incorrectTeams }) {
-  console.log('Leaderboard rendering', { entriesData, correctTeams, incorrectTeams });
+function Leaderboard() {
   const [selectedWeek, setSelectedWeek] = useState(2);
 
   const teamAbbreviations = {
@@ -59,7 +59,7 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, co
     "ATL @ PHI"
   ];
 
-  const getPickClass = (pick) => {
+  const getPickClass = (pick, correctTeams, incorrectTeams) => {
     if (correctTeams.includes(pick)) return 'correct';
     if (incorrectTeams.includes(pick)) return 'wrong';
     return '';
@@ -73,24 +73,24 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, co
     return name;
   };
 
-  const calculateScore = (picks) => {
+  const calculateScore = (picks, correctTeams) => {
     return Object.values(picks).filter(pick => correctTeams.includes(pick)).length;
   };
 
-  const calculateIncorrectPicks = (picks) => {
+  const calculateIncorrectPicks = (picks, incorrectTeams) => {
     return Object.values(picks).filter(pick => incorrectTeams.includes(pick)).length;
   };
 
-  const rankedEntries = useMemo(() => {
-    if (!entriesData || entriesData.length === 0) {
-      return [];
-    }
+  // Simulated correct and incorrect teams (replace with actual data when available)
+  const correctTeams = ["Buffalo Bills",];
+  const incorrectTeams = ["Miami Dolphins",];
 
+  const rankedEntries = useMemo(() => {
     const entries = entriesData
       .map(entry => ({
         ...entry,
-        score: calculateScore(entry.picks),
-        incorrectPicks: calculateIncorrectPicks(entry.picks)
+        score: calculateScore(entry.picks, correctTeams),
+        incorrectPicks: calculateIncorrectPicks(entry.picks, incorrectTeams)
       }))
       .sort((a, b) => b.score - a.score || a.incorrectPicks - b.incorrectPicks || a.name.localeCompare(b.name));
 
@@ -101,7 +101,7 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, co
       rank: index === 0 || entry.score !== array[index - 1].score ? index + 1 : array[index - 1].rank,
       isLeastIncorrect: entry.incorrectPicks === minIncorrectPicks
     }));
-  }, [entriesData, correctTeams, incorrectTeams]);
+  }, []);
 
   return (
     <div className="leaderboard">
@@ -121,6 +121,7 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, co
                   </div>
                 </th>
               ))}
+              <th className="score-prediction-header">Score Prediction</th>
             </tr>
           </thead>
           <tbody>
@@ -135,12 +136,15 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, co
                   const pick = entry.picks[pickIndex + 1];
                   return (
                     <td key={pickIndex} className="pick-cell">
-                      <div className={`pick-container ${getPickClass(pick)}`}>
+                      <div className={`pick-container ${getPickClass(pick, correctTeams, incorrectTeams)}`}>
                         <span className="pick-team">{teamAbbreviations[pick] || pick}</span>
                       </div>
                     </td>
                   );
                 })}
+                <td className="score-prediction-cell">
+                  {entry.scorePrediction.falcons} - {entry.scorePrediction.eagles}
+                </td>
               </tr>
             ))}
           </tbody>

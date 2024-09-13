@@ -233,3 +233,13 @@ body {
 .name-container.least-incorrect:hover {
   background-color: #45a049; /* Slightly darker green on hover */
 }
+
+.score-prediction-header,
+.score-prediction-cell {
+  text-align: center;
+  min-width: 100px;
+}
+
+.score-prediction-cell {
+  font-weight: bold;
+}
