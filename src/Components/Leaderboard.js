@@ -1,19 +1,20 @@
 import React from 'react';
 import './Leaderboard.css';
+import entriesData from './entriesData';  // Import the entriesData directly
 
-function Leaderboard({ entries }) {
+function Leaderboard() {
   console.log('Leaderboard component is rendering');
-  console.log('entries:', entries);
+  console.log('entriesData:', entriesData);
 
-  if (!Array.isArray(entries)) {
-    console.error('entries is not an array:', entries);
+  if (!Array.isArray(entriesData)) {
+    console.error('entriesData is not an array:', entriesData);
     return <div>Error: Invalid data format</div>;
   }
 
   return (
     <div className="leaderboard" style={{backgroundColor: 'lightgray', padding: '20px'}}>
       <h2>Leaderboard</h2>
-      <p>Number of entries: {entries.length}</p>
+      <p>Number of entries: {entriesData.length}</p>
       <table className="leaderboard-table">
         <thead>
           <tr>
@@ -25,7 +26,7 @@ function Leaderboard({ entries }) {
           </tr>
         </thead>
         <tbody>
-          {entries.map((entry, index) => (
+          {entriesData.map((entry, index) => (
             <tr key={index}>
               <td>{entry.name}</td>
               <td>{entry.picks && entry.picks["1"]}</td>
