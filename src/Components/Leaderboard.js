@@ -3,6 +3,9 @@ import './Leaderboard.css';
 import entriesData from './entriesData';
 
 function Leaderboard() {
+  console.log('Leaderboard component is rendering');
+  console.log('entriesData:', entriesData);
+
   const [selectedWeek, setSelectedWeek] = useState(2);
 
   const teamAbbreviations = {
@@ -103,9 +106,14 @@ function Leaderboard() {
     }));
   }, []);
 
+  if (!entriesData || entriesData.length === 0) {
+    return <div>No entries data available</div>;
+  }
+
   return (
-    <div className="leaderboard">
+    <div className="leaderboard" style={{backgroundColor: 'lightgray', padding: '20px'}}>
       <h2>NFL Pick'em Pool - Week {selectedWeek}</h2>
+      <p>Number of entries: {entriesData.length}</p>
       <div className="leaderboard-container">
         <table className="leaderboard-table">
           <thead>
