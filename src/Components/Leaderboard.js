@@ -29,42 +29,44 @@ const Leaderboard = ({ entries }) => {
     <div className="leaderboard">
       <h2>Week 2 Entries - 2024 NFL Season</h2>
       <div className="leaderboard-container">
-        <table className="leaderboard-table">
-          <thead>
-            <tr>
-              <th className="name-column">Name</th>
-              {games.map((game) => (
-                <th key={game.id} className="pick-header">
-                  <div className="game-header">
-                    <span className="game-number">Game {game.id}</span>
-                    <span className="matchup">{game.teams.join(' vs ')}</span>
-                    <span className="game-time">{game.time}</span>
-                  </div>
-                </th>
-              ))}
-              <th className="score-prediction-header">Score Prediction</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedEntries.map((entry) => (
-              <tr key={entry.email} className="entry-row">
-                <td className="name-column">
-                  <div className="name-container">{entry.name}</div>
-                </td>
+        <div className="table-wrapper">
+          <table className="leaderboard-table">
+            <thead>
+              <tr>
+                <th className="name-column">Name</th>
                 {games.map((game) => (
-                  <td key={game.id} className="pick-cell">
-                    <div className="pick-container">
-                      <span className="pick-team">{entry.picks[game.id]}</span>
+                  <th key={game.id} className="pick-header">
+                    <div className="game-header">
+                      <span className="game-number">Game {game.id}</span>
+                      <span className="matchup">{game.teams.join(' vs ')}</span>
+                      <span className="game-time">{game.time}</span>
                     </div>
-                  </td>
+                  </th>
                 ))}
-                <td className="score-prediction-cell">
-                  {entry.scorePrediction.falcons || '-'} - {entry.scorePrediction.eagles || '-'}
-                </td>
+                <th className="score-prediction-header">Score Prediction</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {sortedEntries.map((entry) => (
+                <tr key={entry.email} className="entry-row">
+                  <td className="name-column">
+                    <div className="name-container">{entry.name}</div>
+                  </td>
+                  {games.map((game) => (
+                    <td key={game.id} className="pick-cell">
+                      <div className="pick-container">
+                        <span className="pick-team">{entry.picks[game.id]}</span>
+                      </div>
+                    </td>
+                  ))}
+                  <td className="score-prediction-cell">
+                    {entry.scorePrediction.falcons || '-'} - {entry.scorePrediction.eagles || '-'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
