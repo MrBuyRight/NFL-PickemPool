@@ -11,9 +11,9 @@
 }
 
 body {
+  font-family: 'Inter', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: Arial, sans-serif;
 }
 
 .leaderboard {
@@ -29,10 +29,12 @@ body {
 }
 
 .leaderboard-title {
+  font-family: 'Inter', sans-serif;
   text-align: center;
   color: var(--accent-color);
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 1.8rem;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -52,6 +54,7 @@ body {
 }
 
 .leaderboard-table {
+  font-family: 'Inter', sans-serif;
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -97,7 +100,7 @@ body {
 }
 
 .name-container {
-  font-weight: bold;
+  font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -114,8 +117,9 @@ body {
 }
 
 .matchup {
+  font-family: 'Roboto Mono', monospace;
   font-size: 0.8rem;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .game-time {
@@ -141,12 +145,14 @@ body {
 }
 
 .pick-team {
+  font-family: 'Roboto Mono', monospace;
   font-size: 0.8rem;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .score-prediction-cell {
-  font-weight: bold;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 600;
   color: var(--accent-color);
   font-size: 0.8rem;
 }
