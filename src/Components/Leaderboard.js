@@ -2,71 +2,62 @@ import React, { useMemo, useState } from 'react';
 import './Leaderboard.css';
 
 function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, correctTeams, incorrectTeams }) {
-  console.log('Rendering Leaderboard');
-  console.log('Entries Data:', entriesData);
-  console.log('Correct Teams:', correctTeams);
-  console.log('Incorrect Teams:', incorrectTeams);
+  console.log('Leaderboard rendering', { entriesData, correctTeams, incorrectTeams });
+  const [selectedWeek, setSelectedWeek] = useState(2);
 
-  const [selectedWeek, setSelectedWeek] = useState(1);
-
-  // Add the teamAbbreviations definition
   const teamAbbreviations = {
-    'Kansas City Chiefs': 'KC',
-    'Detroit Lions': 'DET',
-    'Philadelphia Eagles': 'PHI',
-    'New England Patriots': 'NE',
-    'Baltimore Ravens': 'BAL',
-    'Houston Texans': 'HOU',
-    'Atlanta Falcons': 'ATL',
-    'Carolina Panthers': 'CAR',
-    'Minnesota Vikings': 'MIN',
-    'Tampa Bay Buccaneers': 'TB',
-    'Indianapolis Colts': 'IND',
-    'Jacksonville Jaguars': 'JAX',
-    'Washington Commanders': 'WAS',
-    'Arizona Cardinals': 'ARI',
-    'Pittsburgh Steelers': 'PIT',
-    'San Francisco 49ers': 'SF',
-    'Cleveland Browns': 'CLE',
-    'Cincinnati Bengals': 'CIN',
-    'New Orleans Saints': 'NO',
-    'Tennessee Titans': 'TEN',
-    'Chicago Bears': 'CHI',
-    'Green Bay Packers': 'GB',
-    'Denver Broncos': 'DEN',
-    'Las Vegas Raiders': 'LV',
-    'Los Angeles Chargers': 'LAC',
-    'Miami Dolphins': 'MIA',
-    'Seattle Seahawks': 'SEA',
-    'Los Angeles Rams': 'LAR',
-    'New York Giants': 'NYG',
-    'Dallas Cowboys': 'DAL',
-    'New York Jets': 'NYJ',
-    'Buffalo Bills': 'BUF'
+    "Buffalo Bills": "BUF",
+    "Miami Dolphins": "MIA",
+    "Las Vegas Raiders": "LV",
+    "Baltimore Ravens": "BAL",
+    "Indianapolis Colts": "IND",
+    "Green Bay Packers": "GB",
+    "New York Jets": "NYJ",
+    "Tennessee Titans": "TEN",
+    "Seattle Seahawks": "SEA",
+    "New England Patriots": "NE",
+    "Cleveland Browns": "CLE",
+    "Jacksonville Jaguars": "JAX",
+    "New Orleans Saints": "NO",
+    "Dallas Cowboys": "DAL",
+    "Los Angeles Chargers": "LAC",
+    "Carolina Panthers": "CAR",
+    "New York Giants": "NYG",
+    "Washington Commanders": "WAS",
+    "San Francisco 49ers": "SF",
+    "Minnesota Vikings": "MIN",
+    "Tampa Bay Buccaneers": "TB",
+    "Detroit Lions": "DET",
+    "Los Angeles Rams": "LAR",
+    "Arizona Cardinals": "ARI",
+    "Cincinnati Bengals": "CIN",
+    "Kansas City Chiefs": "KC",
+    "Pittsburgh Steelers": "PIT",
+    "Denver Broncos": "DEN",
+    "Chicago Bears": "CHI",
+    "Houston Texans": "HOU",
+    "Atlanta Falcons": "ATL",
+    "Philadelphia Eagles": "PHI"
   };
 
-  // Update the gameMatchups definition
   const gameMatchups = [
-    { away: 'Baltimore Ravens', home: 'Kansas City Chiefs' },
-    { away: 'Green Bay Packers', home: 'Philadelphia Eagles' },
-    { away: 'Pittsburgh Steelers', home: 'Atlanta Falcons' },
-    { away: 'Arizona Cardinals', home: 'Buffalo Bills' },
-    { away: 'Tennessee Titans', home: 'Chicago Bears' },
-    { away: 'New England Patriots', home: 'Cincinnati Bengals' },
-    { away: 'Houston Texans', home: 'Indianapolis Colts' },
-    { away: 'Jacksonville Jaguars', home: 'Miami Dolphins' },
-    { away: 'Carolina Panthers', home: 'New Orleans Saints' },
-    { away: 'Minnesota Vikings', home: 'New York Giants' },
-    { away: 'Las Vegas Raiders', home: 'Los Angeles Chargers' },
-    { away: 'Denver Broncos', home: 'Seattle Seahawks' },
-    { away: 'Dallas Cowboys', home: 'Cleveland Browns' },
-    { away: 'Washington Commanders', home: 'Tampa Bay Buccaneers' },
-    { away: 'Los Angeles Rams', home: 'Detroit Lions' },
-    { away: 'New York Jets', home: 'San Francisco 49ers' }
+    "BUF @ MIA",
+    "LV @ BAL",
+    "IND @ GB",
+    "NYJ @ TEN",
+    "SEA @ NE",
+    "CLE @ JAX",
+    "NO @ DAL",
+    "LAC @ CAR",
+    "NYG @ WAS",
+    "SF @ MIN",
+    "TB @ DET",
+    "LAR @ ARI",
+    "CIN @ KC",
+    "PIT @ DEN",
+    "CHI @ HOU",
+    "ATL @ PHI"
   ];
-
-  // Add the gameHeaders definition
-  const gameHeaders = gameMatchups.map((matchup, index) => `${teamAbbreviations[matchup.away]} @ ${teamAbbreviations[matchup.home]}`);
 
   const getPickClass = (pick) => {
     if (correctTeams.includes(pick)) return 'correct';
@@ -110,7 +101,7 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, co
       rank: index === 0 || entry.score !== array[index - 1].score ? index + 1 : array[index - 1].rank,
       isLeastIncorrect: entry.incorrectPicks === minIncorrectPicks
     }));
-  }, [entriesData]);
+  }, [entriesData, correctTeams, incorrectTeams]);
 
   return (
     <div className="leaderboard">
@@ -122,11 +113,11 @@ function Leaderboard({ entriesData, updatePick, correctPicks, incorrectPicks, co
               <th className="fixed-column name-column">
                 <span className="name-header">Name (Correct)</span>
               </th>
-              {gameHeaders.map((header, index) => (
+              {gameMatchups.map((matchup, index) => (
                 <th key={index} className="pick-header">
                   <div className="game-header">
                     <span className="game-number">Game {index + 1}</span>
-                    <span className="matchup">{header}</span>
+                    <span className="matchup">{matchup}</span>
                   </div>
                 </th>
               ))}
