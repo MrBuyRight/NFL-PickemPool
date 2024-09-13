@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import EntriesList from './Components/EntriesList';
 import Leaderboard from './Components/Leaderboard';
 
 function App() {
@@ -10,7 +9,6 @@ function App() {
         <h1>Pickem Pool</h1>
       </header>
       <main>
-        <EntriesList />
         <Leaderboard />
       </main>
     </div>

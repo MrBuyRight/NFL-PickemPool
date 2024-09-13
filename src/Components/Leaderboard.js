@@ -2,12 +2,8 @@ import React from 'react';
 import entriesData from '../entriesData';
 
 const Leaderboard = () => {
-  // Sort entries by total correct picks (you may need to adjust this logic)
-  const sortedEntries = [...entriesData].sort((a, b) => {
-    const aCorrect = Object.values(a.picks).filter(pick => pick.correct).length;
-    const bCorrect = Object.values(b.picks).filter(pick => pick.correct).length;
-    return bCorrect - aCorrect;
-  });
+  // Sort entries alphabetically by name
+  const sortedEntries = [...entriesData].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className="leaderboard">
@@ -15,22 +11,21 @@ const Leaderboard = () => {
       <table>
         <thead>
           <tr>
-            <th>Rank</th>
             <th>Name</th>
-            <th>Correct Picks</th>
+            <th>Email</th>
+            <th>Score Prediction</th>
           </tr>
         </thead>
         <tbody>
-          {sortedEntries.map((entry, index) => {
-            const correctPicks = Object.values(entry.picks).filter(pick => pick.correct).length;
-            return (
-              <tr key={entry.id}>
-                <td>{index + 1}</td>
-                <td>{entry.name}</td>
-                <td>{correctPicks}</td>
-              </tr>
-            );
-          })}
+          {sortedEntries.map((entry) => (
+            <tr key={entry.email}>
+              <td>{entry.name}</td>
+              <td>{entry.email}</td>
+              <td>
+                {entry.scorePrediction.falcons} - {entry.scorePrediction.eagles}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
