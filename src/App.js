@@ -1,12 +1,18 @@
 import React from 'react';
 import './App.css';
+import EntriesList from './Components/EntriesList';
 import Leaderboard from './Components/Leaderboard';
 
 function App() {
   return (
     <div className="App">
-      <h1>NFL Pick'em Pool</h1>
-      <Leaderboard />
+      <header className="App-header">
+        <h1>Pickem Pool</h1>
+      </header>
+      <main>
+        <EntriesList />
+        <Leaderboard />
+      </main>
     </div>
   );
 }

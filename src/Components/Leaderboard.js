@@ -1,18 +1,40 @@
 import React from 'react';
-import './Leaderboard.css';
-import entriesData from './entriesData';  // Import entriesData directly
+import entriesData from '../entriesData';
 
-function Leaderboard() {  // Remove the { entries } prop
-  console.log('Leaderboard component is rendering');
-  console.log('Number of entries:', entriesData.length);
+const Leaderboard = () => {
+  // Sort entries by total correct picks (you may need to adjust this logic)
+  const sortedEntries = [...entriesData].sort((a, b) => {
+    const aCorrect = Object.values(a.picks).filter(pick => pick.correct).length;
+    const bCorrect = Object.values(b.picks).filter(pick => pick.correct).length;
+    return bCorrect - aCorrect;
+  });
 
   return (
-    <div className="leaderboard" style={{backgroundColor: 'lightgray', padding: '20px'}}>
+    <div className="leaderboard">
       <h2>Leaderboard</h2>
-      <p>The leaderboard is currently being updated. Check back soon!</p>
-      <p>Number of entries: {entriesData.length}</p>  // Display the number of entries
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Correct Picks</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedEntries.map((entry, index) => {
+            const correctPicks = Object.values(entry.picks).filter(pick => pick.correct).length;
+            return (
+              <tr key={entry.id}>
+                <td>{index + 1}</td>
+                <td>{entry.name}</td>
+                <td>{correctPicks}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
 export default Leaderboard;
