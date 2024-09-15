@@ -70,7 +70,8 @@ const Leaderboard = ({ entries }) => {
       4: 'New York Jets', 5: 'Seattle Seahawks', 6: 'Cleveland Browns',
       7: 'New Orleans Saints', 8: 'Los Angeles Chargers', 9: 'Washington Commanders', 
       10: 'San Francisco 49ers', 11: 'Tampa Bay Buccaneers', 12: 'Arizona Cardinals',
-      13: 'Kansas City Chiefs', 14: 'Pittsburgh Steelers', 16: 'Atlanta Falcons'
+      13: 'Kansas City Chiefs', 14: 'Pittsburgh Steelers'
+      // Removed: 16: 'Atlanta Falcons'
     };
     
     if (correctPicks[gameId] === pick) return 'correct-pick';
