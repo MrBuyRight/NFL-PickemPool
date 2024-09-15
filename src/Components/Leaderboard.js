@@ -65,17 +65,23 @@ const Leaderboard = ({ entries }) => {
   ];
 
   const getPickClass = (pick, gameId) => {
-    if (gameId === 1) {
-      if (pick === 'Buffalo Bills') return 'correct-pick';
-      if (pick === 'Miami Dolphins') return 'incorrect-pick';
-    }
+    const correctPicks = {
+      1: 'Buffalo Bills', 2: 'Las Vegas Raiders', 3: 'Green Bay Packers',
+      4: 'New York Jets', 5: 'Seattle Seahawks', 6: 'Cleveland Browns',
+      7: 'New Orleans Saints', 9: 'Washington Commanders', 10: 'San Francisco 49ers',
+      11: 'Tampa Bay Buccaneers', 13: 'Kansas City Chiefs', 14: 'Pittsburgh Steelers',
+      16: 'Atlanta Falcons'
+    };
+    
+    if (correctPicks[gameId] === pick) return 'correct-pick';
+    if (correctPicks[gameId] && correctPicks[gameId] !== pick) return 'incorrect-pick';
     return '';
   };
 
   const calculateCorrectPicks = (picks) => {
-    let correctPicks = 0;
-    if (picks[1] === 'Buffalo Bills') correctPicks++;
-    return correctPicks;
+    return Object.entries(picks).reduce((count, [gameId, pick]) => {
+      return count + (getPickClass(pick, parseInt(gameId)) === 'correct-pick' ? 1 : 0);
+    }, 0);
   };
 
   const sortedEntries = [...entries]
