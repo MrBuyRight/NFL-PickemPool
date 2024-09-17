@@ -10,42 +10,42 @@ const GameSelectionList = () => {
 	const [submissionStatus, setSubmissionStatus] = useState('');
 	const [expandedDates, setExpandedDates] = useState({});
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [mondayScorePrediction, setMondayScorePrediction] = useState({ falcons: '', eagles: '' });
+	const [mondayScorePrediction, setMondayScorePrediction] = useState({ jaguars: '', bills: '' });
 
 	const getFormattedDate = (dateString) => {
 		switch (dateString) {
-			case '2024-09-12':
-				return 'Thursday, Sept. 12th, 2024';
-			case '2024-09-15':
-				return 'Sunday, Sept. 15th, 2024';
-			case '2024-09-16':
-				return 'Monday, Sept. 16th, 2024';
+			case '2024-09-19':
+				return 'Thursday, Sept. 19th, 2024';
+			case '2024-09-22':
+				return 'Sunday, Sept. 22nd, 2024';
+			case '2024-09-23':
+				return 'Monday, Sept. 23rd, 2024';
 			default:
 				return dateString;
 		}
 	};
 
-	const week2Games = [
-		{ id: 1, awayTeam: 'Buffalo Bills', homeTeam: 'Miami Dolphins', date: '2024-09-12', time: '8:15pm ET' },
-		{ id: 2, awayTeam: 'Las Vegas Raiders', homeTeam: 'Baltimore Ravens', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 3, awayTeam: 'Indianapolis Colts', homeTeam: 'Green Bay Packers', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 4, awayTeam: 'New York Jets', homeTeam: 'Tennessee Titans', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 5, awayTeam: 'Seattle Seahawks', homeTeam: 'New England Patriots', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 6, awayTeam: 'Cleveland Browns', homeTeam: 'Jacksonville Jaguars', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 7, awayTeam: 'New Orleans Saints', homeTeam: 'Dallas Cowboys', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 8, awayTeam: 'Los Angeles Chargers', homeTeam: 'Carolina Panthers', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 9, awayTeam: 'New York Giants', homeTeam: 'Washington Commanders', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 10, awayTeam: 'San Francisco 49ers', homeTeam: 'Minnesota Vikings', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 11, awayTeam: 'Tampa Bay Buccaneers', homeTeam: 'Detroit Lions', date: '2024-09-15', time: '1:00pm ET' },
-		{ id: 12, awayTeam: 'Los Angeles Rams', homeTeam: 'Arizona Cardinals', date: '2024-09-15', time: '4:05pm ET' },
-		{ id: 13, awayTeam: 'Cincinnati Bengals', homeTeam: 'Kansas City Chiefs', date: '2024-09-15', time: '4:25pm ET' },
-		{ id: 14, awayTeam: 'Pittsburgh Steelers', homeTeam: 'Denver Broncos', date: '2024-09-15', time: '4:25pm ET' },
-		{ id: 15, awayTeam: 'Chicago Bears', homeTeam: 'Houston Texans', date: '2024-09-15', time: '8:20pm ET' },
-		{ id: 16, awayTeam: 'Atlanta Falcons', homeTeam: 'Philadelphia Eagles', date: '2024-09-16', time: '8:15pm ET' },
+	const week3Games = [
+		{ id: 1, awayTeam: 'New England Patriots', homeTeam: 'New York Jets', date: '2024-09-19', time: '8:15pm ET' },
+		{ id: 2, awayTeam: 'Philadelphia Eagles', homeTeam: 'New Orleans Saints', date: '2024-09-22', time: '1:00pm ET' },
+		{ id: 3, awayTeam: 'Green Bay Packers', homeTeam: 'Tennessee Titans', date: '2024-09-22', time: '1:00pm ET' },
+		{ id: 4, awayTeam: 'Los Angeles Chargers', homeTeam: 'Pittsburgh Steelers', date: '2024-09-22', time: '1:00pm ET' },
+		{ id: 5, awayTeam: 'Chicago Bears', homeTeam: 'Indianapolis Colts', date: '2024-09-22', time: '1:00pm ET' },
+		{ id: 6, awayTeam: 'Houston Texans', homeTeam: 'Minnesota Vikings', date: '2024-09-22', time: '1:00pm ET' },
+		{ id: 7, awayTeam: 'New York Giants', homeTeam: 'Cleveland Browns', date: '2024-09-22', time: '1:00pm ET' },
+		{ id: 8, awayTeam: 'Denver Broncos', homeTeam: 'Tampa Bay Buccaneers', date: '2024-09-22', time: '1:00pm ET' },
+		{ id: 9, awayTeam: 'Miami Dolphins', homeTeam: 'Seattle Seahawks', date: '2024-09-22', time: '4:05pm ET' },
+		{ id: 10, awayTeam: 'Carolina Panthers', homeTeam: 'Las Vegas Raiders', date: '2024-09-22', time: '4:05pm ET' },
+		{ id: 11, awayTeam: 'Baltimore Ravens', homeTeam: 'Dallas Cowboys', date: '2024-09-22', time: '4:25pm ET' },
+		{ id: 12, awayTeam: 'Detroit Lions', homeTeam: 'Arizona Cardinals', date: '2024-09-22', time: '4:25pm ET' },
+		{ id: 13, awayTeam: 'San Francisco 49ers', homeTeam: 'Los Angeles Rams', date: '2024-09-22', time: '4:25pm ET' },
+		{ id: 14, awayTeam: 'Kansas City Chiefs', homeTeam: 'Atlanta Falcons', date: '2024-09-22', time: '8:20pm ET' },
+		{ id: 15, awayTeam: 'Jacksonville Jaguars', homeTeam: 'Buffalo Bills', date: '2024-09-23', time: '7:30pm ET' },
+		{ id: 16, awayTeam: 'Washington Commanders', homeTeam: 'Cincinnati Bengals', date: '2024-09-23', time: '8:15pm ET' },
 	];
 
 	const gamesByDate = useMemo(() => {
-		return week2Games.reduce((acc, game) => {
+		return week3Games.reduce((acc, game) => {
 			const formattedDate = getFormattedDate(game.date);
 			if (!acc[formattedDate]) {
 				acc[formattedDate] = [];
@@ -101,7 +101,7 @@ const GameSelectionList = () => {
 			setName('');
 			setEmail('');
 			setSelectedPicks({});
-			setMondayScorePrediction({ falcons: '', eagles: '' });
+			setMondayScorePrediction({ jaguars: '', bills: '' });
 		} catch (error) {
 			console.error('Error submitting picks:', error);
 			setSubmissionStatus(`Error submitting picks: ${error.message}`);
@@ -145,7 +145,7 @@ const GameSelectionList = () => {
 												{game.homeTeam}
 											</button>
 										</div>
-										{game.date === '2024-09-16' && (
+										{game.date === '2024-09-23' && (
 											<div className="score-prediction">
 												<h4>Score Prediction</h4>
 												<div className="score-inputs">
@@ -153,16 +153,16 @@ const GameSelectionList = () => {
 														type="number"
 														min="0"
 														placeholder={game.awayTeam}
-														value={mondayScorePrediction.falcons}
-														onChange={(e) => handleScorePredictionChange('falcons', e.target.value)}
+														value={mondayScorePrediction.jaguars}
+														onChange={(e) => handleScorePredictionChange('jaguars', e.target.value)}
 													/>
 													<span>-</span>
 													<input
 														type="number"
 														min="0"
 														placeholder={game.homeTeam}
-														value={mondayScorePrediction.eagles}
-														onChange={(e) => handleScorePredictionChange('eagles', e.target.value)}
+														value={mondayScorePrediction.bills}
+														onChange={(e) => handleScorePredictionChange('bills', e.target.value)}
 													/>
 												</div>
 											</div>
@@ -173,7 +173,7 @@ const GameSelectionList = () => {
 						</div>
 					))}
 				</div>
-				<PickTracker selectedPicks={selectedPicks} games={week2Games} mondayScorePrediction={mondayScorePrediction} />
+				<PickTracker selectedPicks={selectedPicks} games={week3Games} mondayScorePrediction={mondayScorePrediction} />
 			</div>
 			<form className="entry-form" onSubmit={handleSubmit}>
 				<div className="input-group">
