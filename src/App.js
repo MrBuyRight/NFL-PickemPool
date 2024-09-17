@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="App-title">NFL Pick 'em Pool</h1>
+        <h1 className="App-title">NFL Pick 'em Pool 🏈</h1>
         <div className="view-toggle">
           <button
             className={`toggle-button ${activeView === 'gameSelection' ? 'active' : ''}`}
