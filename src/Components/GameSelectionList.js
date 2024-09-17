@@ -40,8 +40,8 @@ const GameSelectionList = () => {
 		{ id: 12, awayTeam: 'Detroit Lions', homeTeam: 'Arizona Cardinals', date: '2024-09-22', time: '4:25pm ET' },
 		{ id: 13, awayTeam: 'San Francisco 49ers', homeTeam: 'Los Angeles Rams', date: '2024-09-22', time: '4:25pm ET' },
 		{ id: 14, awayTeam: 'Kansas City Chiefs', homeTeam: 'Atlanta Falcons', date: '2024-09-22', time: '8:20pm ET' },
-		{ id: 15, awayTeam: 'Jacksonville Jaguars', homeTeam: 'Buffalo Bills', date: '2024-09-23', time: '7:30pm ET' },
-		{ id: 16, awayTeam: 'Washington Commanders', homeTeam: 'Cincinnati Bengals', date: '2024-09-23', time: '8:15pm ET' },
+		{ id: 16, awayTeam: 'Washington Commanders', homeTeam: 'Cincinnati Bengals', date: '2024-09-23', time: '7:15pm ET' },
+		{ id: 15, awayTeam: 'Jacksonville Jaguars', homeTeam: 'Buffalo Bills', date: '2024-09-23', time: '8:15pm ET' },
 	];
 
 	const gamesByDate = useMemo(() => {
@@ -145,7 +145,7 @@ const GameSelectionList = () => {
 												{game.homeTeam}
 											</button>
 										</div>
-										{game.date === '2024-09-23' && (
+										{game.id === 15 && (
 											<div className="score-prediction">
 												<h4>Score Prediction</h4>
 												<div className="score-inputs">
