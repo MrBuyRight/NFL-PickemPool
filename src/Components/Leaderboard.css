@@ -47,6 +47,7 @@ body {
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
 }
 
 .table-wrapper {
@@ -54,24 +55,65 @@ body {
 }
 
 .leaderboard-table {
-  font-family: 'Inter', sans-serif;
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
+  font-family: 'Inter', sans-serif;
   font-size: 14px;
 }
 
 .leaderboard-table th,
 .leaderboard-table td {
-  padding: 8px 4px;
+  padding: 8px;
   text-align: center;
-  border-right: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+  border: 1px solid #ddd;
 }
 
 .leaderboard-table th:last-child,
 .leaderboard-table td:last-child {
   border-right: none;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: #f2f2f2;
+  z-index: 1;
+}
+
+.rank-header,
+.name-header,
+.score-header,
+.prediction-header {
+  left: 0;
+  z-index: 2;
+}
+
+.even-row {
+  background-color: #f8f8f8;
+}
+
+.odd-row {
+  background-color: #ffffff;
+}
+
+.rank-cell,
+.name-cell,
+.score-cell {
+  position: sticky;
+  left: 0;
+  background-color: inherit;
+}
+
+.game-header {
+  white-space: nowrap;
+}
+
+.pick-cell {
+  font-weight: bold;
+}
+
+.prediction-cell {
+  white-space: nowrap;
 }
 
 .sticky-column {
