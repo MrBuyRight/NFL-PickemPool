@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import Leaderboard from './Components/Leaderboard';
 import GameSelectionList from './Components/GameSelectionList';
-import entriesData from './Week2entriesData';
 
 function App() {
   const [activeView, setActiveView] = useState('gameSelection');
@@ -22,7 +21,7 @@ function App() {
             className={`toggle-button ${activeView === 'leaderboard' ? 'active' : ''}`}
             onClick={() => setActiveView('leaderboard')}
           >
-            Week 2 Leaderboard
+            Week 3 Leaderboard
           </button>
         </div>
       </header>
@@ -30,7 +29,7 @@ function App() {
         {activeView === 'gameSelection' ? (
           <GameSelectionList />
         ) : (
-          <Leaderboard entries={entriesData} />
+          <Leaderboard />
         )}
       </main>
     </div>
