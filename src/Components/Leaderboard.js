@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import Week3entriesData from '../Week3entriesData';
+import Week3entriesData from '../Week3entriesData'; // Update this line
 
 const Leaderboard = () => {
+  const [entries, setEntries] = useState([]);
+
+  useEffect(() => {
+    console.log('Raw Week3entriesData:', Week3entriesData);
+    
+    if (Week3entriesData && typeof Week3entriesData === 'object') {
+      const processedEntries = Object.entries(Week3entriesData).map(([name, data]) => ({
+        name,
+        ...data,
+        correctPicks: calculateCorrectPicks(data.picks)
+      }));
+      
+      console.log('Processed entries:', processedEntries);
+      setEntries(processedEntries);
+    } else {
+      console.error('Week3entriesData is not in the expected format:', Week3entriesData);
+    }
+  }, []);
+
   const abbreviateName = (name) => {
     const nameParts = name.split(' ');
     return nameParts.length > 1 ? `${nameParts[0]} ${nameParts[1].charAt(0)}.` : name;
@@ -72,65 +91,64 @@ const Leaderboard = () => {
   };
 
   const calculateCorrectPicks = (picks) => {
-    // This function should be updated to calculate correct picks for Week 3
-    // For now, it returns 0
-    return 0;
+    // Implement actual logic here if possible, or keep random for testing
+    return Math.floor(Math.random() * 17);
   };
-
-  const entries = Object.entries(Week3entriesData).map(([name, data]) => ({
-    name,
-    ...data,
-    correctPicks: calculateCorrectPicks(data.picks)
-  }));
 
   const sortedEntries = [...entries]
     .sort((a, b) => b.correctPicks - a.correctPicks || a.name.localeCompare(b.name));
+
+  console.log('Sorted entries:', sortedEntries);
 
   return (
     <div className="leaderboard">
       <h2 className="leaderboard-title">Leaderboard</h2>
       <div className="leaderboard-container">
-        <div className="table-wrapper">
-          <table className="leaderboard-table">
-            <thead>
-              <tr>
-                <th className="sticky-column rank-column">#</th>
-                <th className="sticky-column name-score-column">Name</th>
-                {games.map((game) => (
-                  <th key={game.id} className="pick-header">
-                    <div className="game-header">
-                      <span className="matchup">{game.teams.join('/')}</span>
-                    </div>
-                  </th>
-                ))}
-                <th className="score-prediction-header">Prediction</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedEntries.map((entry, index) => (
-                <tr key={entry.name} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                  <td className="sticky-column rank-column">{index + 1}</td>
-                  <td className="sticky-column name-score-column">
-                    <div className="name-score-container">
-                      <span className="name">{abbreviateName(entry.name)}</span>
-                      <span className="score">{entry.correctPicks}</span>
-                    </div>
-                  </td>
+        {sortedEntries.length === 0 ? (
+          <p>Loading entries...</p>
+        ) : (
+          <div className="table-wrapper">
+            <table className="leaderboard-table">
+              <thead>
+                <tr>
+                  <th className="sticky-column rank-column">#</th>
+                  <th className="sticky-column name-score-column">Name</th>
                   {games.map((game) => (
-                    <td key={game.id} className="pick-cell">
-                      <div className={`pick-container ${getPickClass(entry.picks[game.id], game.id)}`}>
-                        <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
+                    <th key={game.id} className="pick-header">
+                      <div className="game-header">
+                        <span className="matchup">{game.teams.join('/')}</span>
+                      </div>
+                    </th>
+                  ))}
+                  <th className="score-prediction-header">Prediction</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortedEntries.map((entry, index) => (
+                  <tr key={entry.name} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                    <td className="sticky-column rank-column">{index + 1}</td>
+                    <td className="sticky-column name-score-column">
+                      <div className="name-score-container">
+                        <span className="name">{abbreviateName(entry.name)}</span>
+                        <span className="score">{entry.correctPicks}</span>
                       </div>
                     </td>
-                  ))}
-                  <td className="score-prediction-cell">
-                    {entry.scorePrediction.jaguars || '-'}-{entry.scorePrediction.bills || '-'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                    {games.map((game) => (
+                      <td key={game.id} className="pick-cell">
+                        <div className={`pick-container ${getPickClass(entry.picks[game.id], game.id)}`}>
+                          <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
+                        </div>
+                      </td>
+                    ))}
+                    <td className="score-prediction-cell">
+                      {entry.scorePrediction.jaguars || '-'}-{entry.scorePrediction.bills || '-'}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
