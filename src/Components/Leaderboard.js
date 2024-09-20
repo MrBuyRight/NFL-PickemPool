@@ -59,13 +59,51 @@ const Leaderboard = () => {
     { id: '16', teams: ['CIN', 'WAS'] },
   ];
 
+  const abbreviateTeam = (teamName) => {
+    const abbreviations = {
+      'New England Patriots': 'NE',
+      'New York Jets': 'NYJ',
+      'New Orleans Saints': 'NO',
+      'Philadelphia Eagles': 'PHI',
+      'Tennessee Titans': 'TEN',
+      'Green Bay Packers': 'GB',
+      'Pittsburgh Steelers': 'PIT',
+      'Los Angeles Chargers': 'LAC',
+      'Chicago Bears': 'CHI',
+      'Indianapolis Colts': 'IND',
+      'Minnesota Vikings': 'MIN',
+      'Houston Texans': 'HOU',
+      'Cleveland Browns': 'CLE',
+      'New York Giants': 'NYG',
+      'Tampa Bay Buccaneers': 'TB',
+      'Denver Broncos': 'DEN',
+      'Seattle Seahawks': 'SEA',
+      'Miami Dolphins': 'MIA',
+      'Carolina Panthers': 'CAR',
+      'Las Vegas Raiders': 'LV',
+      'Baltimore Ravens': 'BAL',
+      'Dallas Cowboys': 'DAL',
+      'Arizona Cardinals': 'ARI',
+      'Detroit Lions': 'DET',
+      'San Francisco 49ers': 'SF',
+      'Los Angeles Rams': 'LAR',
+      'Kansas City Chiefs': 'KC',
+      'Atlanta Falcons': 'ATL',
+      'Buffalo Bills': 'BUF',
+      'Jacksonville Jaguars': 'JAX',
+      'Cincinnati Bengals': 'CIN',
+      'Washington Commanders': 'WAS'
+    };
+    return abbreviations[teamName] || teamName;
+  };
+
   const sortedEntries = [...entries].sort((a, b) => b.correctPicks - a.correctPicks);
 
   console.log('Sorted entries:', sortedEntries);
 
   return (
     <div className="leaderboard">
-      <h2>Week 3 Leaderboard</h2>
+      <h2 className="leaderboard-title">Week 3 Leaderboard</h2>
       {error ? (
         <p>Error: {error}</p>
       ) : entries.length === 0 ? (
@@ -109,7 +147,7 @@ const Leaderboard = () => {
                     return (
                       <td key={game.id} className="pick-cell">
                         <div className={`pick-container ${pickClass}`}>
-                          <span className="pick-team">{entry.picks[game.id]}</span>
+                          <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
                         </div>
                       </td>
                     );
