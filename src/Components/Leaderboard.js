@@ -6,13 +6,17 @@ const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
 
   useEffect(() => {
+    console.log('Week3entriesData:', Week3entriesData);
     if (Week3entriesData && typeof Week3entriesData === 'object') {
       const processedEntries = Object.entries(Week3entriesData).map(([name, data]) => ({
         name,
         ...data,
         correctPicks: calculateCorrectPicks(data.picks)
       }));
+      console.log('Processed entries:', processedEntries);
       setEntries(processedEntries);
+    } else {
+      console.error('Week3entriesData is not in the expected format:', Week3entriesData);
     }
   }, []);
 
@@ -47,43 +51,49 @@ const Leaderboard = () => {
 
   const sortedEntries = [...entries].sort((a, b) => b.correctPicks - a.correctPicks);
 
+  console.log('Sorted entries:', sortedEntries);
+
   return (
     <div className="leaderboard">
       <h2>Week 3 Leaderboard</h2>
-      <div className="leaderboard-container">
-        <table className="leaderboard-table">
-          <thead>
-            <tr>
-              <th className="sticky-header rank-header">Rank</th>
-              <th className="sticky-header name-header">Name</th>
-              <th className="sticky-header score-header">Score</th>
-              {games.map((game) => (
-                <th key={game.id} className="game-header">
-                  {game.teams[0]}<br/>{game.teams[1]}
-                </th>
-              ))}
-              <th className="sticky-header prediction-header">Prediction</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedEntries.map((entry, index) => (
-              <tr key={entry.name}>
-                <td className="rank-cell">{index + 1}</td>
-                <td className="name-cell">{entry.name}</td>
-                <td className="score-cell">{entry.correctPicks}</td>
+      {entries.length === 0 ? (
+        <p>Loading entries...</p>
+      ) : (
+        <div className="leaderboard-container">
+          <table className="leaderboard-table">
+            <thead>
+              <tr>
+                <th className="sticky-header rank-header">Rank</th>
+                <th className="sticky-header name-header">Name</th>
+                <th className="sticky-header score-header">Score</th>
                 {games.map((game) => (
-                  <td key={game.id} className="pick-cell">
-                    {abbreviateTeam(entry.picks[game.id])}
-                  </td>
+                  <th key={game.id} className="game-header">
+                    {game.teams[0]}<br/>{game.teams[1]}
+                  </th>
                 ))}
-                <td className="prediction-cell">
-                  {entry.scorePrediction.jaguars}-{entry.scorePrediction.bills}
-                </td>
+                <th className="sticky-header prediction-header">Prediction</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {sortedEntries.map((entry, index) => (
+                <tr key={entry.name}>
+                  <td className="rank-cell">{index + 1}</td>
+                  <td className="name-cell">{entry.name}</td>
+                  <td className="score-cell">{entry.correctPicks}</td>
+                  {games.map((game) => (
+                    <td key={game.id} className="pick-cell">
+                      {abbreviateTeam(entry.picks[game.id])}
+                    </td>
+                  ))}
+                  <td className="prediction-cell">
+                    {entry.scorePrediction.jaguars}-{entry.scorePrediction.bills}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
