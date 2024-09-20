@@ -13,7 +13,7 @@ const Leaderboard = () => {
     try {
       if (Week3entriesData && typeof Week3entriesData === 'object') {
         const processedEntries = Object.entries(Week3entriesData).map(([name, data]) => ({
-          name,
+          name: abbreviateName(name),
           ...data,
           correctPicks: calculateCorrectPicks(data.picks)
         }));
@@ -38,6 +38,12 @@ const Leaderboard = () => {
     if (gameId === '1' && pick === 'New York Jets') return true;
     if (gameId === '1' && pick !== 'New York Jets') return false;
     return null; // For games that haven't been played yet
+  };
+
+  const abbreviateName = (name) => {
+    const nameParts = name.split(' ');
+    if (nameParts.length === 1) return name;
+    return `${nameParts[0]} ${nameParts[1].charAt(0)}.`;
   };
 
   const games = [
