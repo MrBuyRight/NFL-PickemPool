@@ -31,14 +31,13 @@ const Leaderboard = () => {
   const calculateCorrectPicks = (picks) => {
     let correctCount = 0;
     if (picks['1'] === 'New York Jets') correctCount++;
-    // Add more correct picks here as games are completed
     return correctCount;
   };
 
   const isCorrectPick = (gameId, pick) => {
     if (gameId === '1' && pick === 'New York Jets') return true;
-    // Add more correct picks here as games are completed
-    return false;
+    if (gameId === '1' && pick !== 'New York Jets') return false;
+    return null; // For games that haven't been played yet
   };
 
   const games = [
@@ -102,13 +101,19 @@ const Leaderboard = () => {
                       <span className="score">{entry.correctPicks}</span>
                     </div>
                   </td>
-                  {games.map((game) => (
-                    <td key={game.id} className="pick-cell">
-                      <div className={`pick-container ${isCorrectPick(game.id, entry.picks[game.id]) ? 'correct-pick' : 'incorrect-pick'}`}>
-                        <span className="pick-team">{entry.picks[game.id]}</span>
-                      </div>
-                    </td>
-                  ))}
+                  {games.map((game) => {
+                    const pickResult = isCorrectPick(game.id, entry.picks[game.id]);
+                    const pickClass = pickResult === true ? 'correct-pick' : 
+                                      pickResult === false ? 'incorrect-pick' : 
+                                      'neutral-pick';
+                    return (
+                      <td key={game.id} className="pick-cell">
+                        <div className={`pick-container ${pickClass}`}>
+                          <span className="pick-team">{entry.picks[game.id]}</span>
+                        </div>
+                      </td>
+                    );
+                  })}
                   <td className="prediction-cell">
                     {entry.scorePrediction.jaguars}-{entry.scorePrediction.bills}
                   </td>

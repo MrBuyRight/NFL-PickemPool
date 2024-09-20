@@ -304,11 +304,20 @@ body {
   border: 1px solid #F44336;
 }
 
+.neutral-pick {
+  background-color: rgba(158, 158, 158, 0.1) !important; /* Light gray with transparency */
+  border: 1px solid #9E9E9E;
+}
+
 .correct-pick .pick-team {
   color: #4CAF50;
 }
 
 .incorrect-pick .pick-team {
   color: #F44336;
+}
+
+.neutral-pick .pick-team {
+  color: #616161;
 }
 
