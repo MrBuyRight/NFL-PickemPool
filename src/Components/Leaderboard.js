@@ -1,7 +1,8 @@
 import React from 'react';
 import './Leaderboard.css';
+import Week3entriesData from '../Week3entriesData';
 
-const Leaderboard = ({ entries }) => {
+const Leaderboard = () => {
   const abbreviateName = (name) => {
     const nameParts = name.split(' ');
     return nameParts.length > 1 ? `${nameParts[0]} ${nameParts[1].charAt(0)}.` : name;
@@ -46,50 +47,43 @@ const Leaderboard = ({ entries }) => {
   };
 
   const games = [
-    { id: 1, teams: ['BUF', 'MIA'] },
-    { id: 2, teams: ['LV', 'BAL'] },
-    { id: 3, teams: ['IND', 'GB'] },
-    { id: 4, teams: ['NYJ', 'TEN'] },
-    { id: 5, teams: ['SEA', 'NE'] },
-    { id: 6, teams: ['CLE', 'JAX'] },
-    { id: 7, teams: ['NO', 'DAL'] },
-    { id: 8, teams: ['LAC', 'CAR'] },
-    { id: 9, teams: ['NYG', 'WAS'] },
-    { id: 10, teams: ['SF', 'MIN'] },
-    { id: 11, teams: ['TB', 'DET'] },
-    { id: 12, teams: ['LAR', 'ARI'] },
-    { id: 13, teams: ['CIN', 'KC'] },
-    { id: 14, teams: ['PIT', 'DEN'] },
-    { id: 15, teams: ['CHI', 'HOU'] },
-    { id: 16, teams: ['ATL', 'PHI'] },
+    { id: 1, teams: ['NYJ', 'NE'] },
+    { id: 2, teams: ['NO', 'PHI'] },
+    { id: 3, teams: ['TEN', 'GB'] },
+    { id: 4, teams: ['PIT', 'LAC'] },
+    { id: 5, teams: ['CHI', 'IND'] },
+    { id: 6, teams: ['HOU', 'MIN'] },
+    { id: 7, teams: ['CLE', 'NYG'] },
+    { id: 8, teams: ['TB', 'DEN'] },
+    { id: 9, teams: ['SEA', 'MIA'] },
+    { id: 10, teams: ['LV', 'CAR'] },
+    { id: 11, teams: ['BAL', 'DAL'] },
+    { id: 12, teams: ['ARI', 'DET'] },
+    { id: 13, teams: ['SF', 'LAR'] },
+    { id: 14, teams: ['KC', 'ATL'] },
+    { id: 15, teams: ['BUF', 'JAX'] },
+    { id: 16, teams: ['CIN', 'WAS'] },
   ];
 
   const getPickClass = (pick, gameId) => {
-    const correctPicks = {
-      1: 'Buffalo Bills', 2: 'Las Vegas Raiders', 3: 'Green Bay Packers',
-      4: 'New York Jets', 5: 'Seattle Seahawks', 6: 'Cleveland Browns',
-      7: 'New Orleans Saints', 8: 'Los Angeles Chargers', 9: 'Washington Commanders', 
-      10: 'Minnesota Vikings', 11: 'Tampa Bay Buccaneers', 12: 'Arizona Cardinals',
-      13: 'Kansas City Chiefs', 14: 'Pittsburgh Steelers', 15: 'Houston Texans',
-      16: 'Atlanta Falcons'
-    };
-    
-    if (correctPicks[gameId] === pick) return 'correct-pick';
-    if (correctPicks[gameId] && correctPicks[gameId] !== pick) return 'incorrect-pick';
+    // This function should be updated with the correct picks for Week 3
+    // For now, it returns an empty string
     return '';
   };
 
   const calculateCorrectPicks = (picks) => {
-    return Object.entries(picks).reduce((count, [gameId, pick]) => {
-      return count + (getPickClass(pick, parseInt(gameId)) === 'correct-pick' ? 1 : 0);
-    }, 0);
+    // This function should be updated to calculate correct picks for Week 3
+    // For now, it returns 0
+    return 0;
   };
 
+  const entries = Object.entries(Week3entriesData).map(([name, data]) => ({
+    name,
+    ...data,
+    correctPicks: calculateCorrectPicks(data.picks)
+  }));
+
   const sortedEntries = [...entries]
-    .map(entry => ({
-      ...entry,
-      correctPicks: calculateCorrectPicks(entry.picks)
-    }))
     .sort((a, b) => b.correctPicks - a.correctPicks || a.name.localeCompare(b.name));
 
   return (
@@ -114,7 +108,7 @@ const Leaderboard = ({ entries }) => {
             </thead>
             <tbody>
               {sortedEntries.map((entry, index) => (
-                <tr key={entry.email} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                <tr key={entry.name} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
                   <td className="sticky-column rank-column">{index + 1}</td>
                   <td className="sticky-column name-score-column">
                     <div className="name-score-container">
@@ -130,7 +124,7 @@ const Leaderboard = ({ entries }) => {
                     </td>
                   ))}
                   <td className="score-prediction-cell">
-                    {entry.scorePrediction.falcons || '-'}-{entry.scorePrediction.eagles || '-'}
+                    {entry.scorePrediction.jaguars || '-'}-{entry.scorePrediction.bills || '-'}
                   </td>
                 </tr>
               ))}
