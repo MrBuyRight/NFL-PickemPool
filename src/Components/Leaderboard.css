@@ -18,9 +18,11 @@ body {
 
 .leaderboard {
   max-width: 100%;
-  overflow-x: auto;
   padding: 20px;
   animation: fadeIn 0.5s ease-in-out;
+  height: calc(100vh - 100px); /* Adjust based on your app's header height */
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes fadeIn {
@@ -40,21 +42,36 @@ body {
 }
 
 .leaderboard-container {
-  overflow-x: auto;
-  max-height: 80vh;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-grow: 1;
+  overflow: hidden;
 }
 
-.table-wrapper {
+.leaderboard-scroll-container {
+  height: 100%;
+  overflow-y: auto;
   overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color) var(--primary-color);
+}
+
+.leaderboard-scroll-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.leaderboard-scroll-container::-webkit-scrollbar-track {
+  background: var(--primary-color);
+}
+
+.leaderboard-scroll-container::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 4px;
 }
 
 .leaderboard-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
 }
@@ -63,73 +80,35 @@ body {
 .leaderboard-table td {
   padding: 10px;
   text-align: center;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
 }
 
-.leaderboard-table th:last-child,
-.leaderboard-table td:last-child {
-  border-right: none;
-}
-
-.sticky-header {
+.leaderboard-table thead th {
   position: sticky;
   top: 0;
-  background-color: #f2f2f2;
-  z-index: 1;
-}
-
-.rank-header,
-.name-header,
-.score-header,
-.prediction-header {
-  left: 0;
-  z-index: 2;
-}
-
-.even-row {
-  background-color: #f8f8f8;
-}
-
-.odd-row {
-  background-color: #ffffff;
-}
-
-.rank-cell,
-.name-cell,
-.score-cell {
-  position: sticky;
-  left: 0;
-  background-color: inherit;
-}
-
-.game-header {
-  white-space: nowrap;
-}
-
-.pick-cell {
-  font-weight: bold;
-}
-
-.prediction-cell {
-  white-space: nowrap;
+  z-index: 10;
+  background-color: var(--primary-color);
 }
 
 .sticky-column {
   position: sticky;
-  z-index: 2;
+  left: 0;
+  z-index: 5;
   background-color: var(--primary-color);
+}
+
+.leaderboard-table thead th.sticky-column {
+  z-index: 15;
 }
 
 .rank-column {
   width: 30px;
   text-align: center;
   font-weight: bold;
-  left: 0;
 }
 
 .name-score-column {
   width: 150px;
-  left: 30px;
   text-align: left;
 }
 
@@ -176,12 +155,6 @@ body {
   font-weight: 400;
 }
 
-.game-time {
-  font-size: 0.8rem;
-  color: var(--text-color);
-  opacity: 0.7;
-}
-
 .pick-cell {
   padding: 2px 1px;
 }
@@ -204,7 +177,7 @@ body {
   font-weight: 400;
 }
 
-.score-prediction-cell {
+.prediction-cell {
   font-family: 'Roboto Mono', monospace;
   font-weight: 600;
   color: var(--accent-color);
@@ -227,85 +200,18 @@ body {
   background-color: var(--odd-row-color);
 }
 
-.leaderboard-table thead th {
-  position: sticky;
-  top: 0;
-  z-index: 3;
-  background-color: var(--secondary-color);
-}
-
-.leaderboard-table thead th.sticky-column {
-  z-index: 4;
-}
-
-@media (max-width: 768px) {
-  .leaderboard {
-    padding: 10px;
-  }
-
-  .leaderboard-container {
-    padding: 10px;
-  }
-
-  .leaderboard-table th,
-  .leaderboard-table td {
-    padding: 8px 4px;
-  }
-
-  .pick-header {
-    min-width: 50px;
-  }
-
-  .game-number,
-  .game-time {
-    font-size: 0.7rem;
-  }
-
-  .matchup {
-    font-size: 0.7rem;
-  }
-
-  .pick-team {
-    font-size: 0.7rem;
-  }
-
-  .leaderboard-table {
-    font-size: 12px;
-  }
-
-  .name-score-column {
-    width: 120px;
-    left: 25px;
-  }
-
-  .name {
-    max-width: 80px;
-  }
-
-  .matchup,
-  .pick-team {
-    font-size: 0.7rem;
-  }
-
-  .score {
-    width: 20px;
-    height: 20px;
-    font-size: 0.7rem;
-  }
-}
-
 .correct-pick {
-  background-color: rgba(76, 175, 80, 0.2) !important; /* Light green with transparency */
+  background-color: rgba(76, 175, 80, 0.2) !important;
   border: 1px solid #4CAF50;
 }
 
 .incorrect-pick {
-  background-color: rgba(244, 67, 54, 0.2) !important; /* Light red with transparency */
+  background-color: rgba(244, 67, 54, 0.2) !important;
   border: 1px solid #F44336;
 }
 
 .neutral-pick {
-  background-color: rgba(158, 158, 158, 0.1) !important; /* Light gray with transparency */
+  background-color: rgba(158, 158, 158, 0.1) !important;
   border: 1px solid #9E9E9E;
 }
 

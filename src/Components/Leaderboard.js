@@ -114,51 +114,53 @@ const Leaderboard = () => {
         </div>
       ) : (
         <div className="leaderboard-container">
-          <table className="leaderboard-table">
-            <thead>
-              <tr>
-                <th className="sticky-column rank-column">Rank</th>
-                <th className="sticky-column name-score-column">Name (Score)</th>
-                {games.map((game) => (
-                  <th key={game.id} className="pick-header">
-                    <div className="game-header">
-                      <span className="matchup">{game.teams[0]} vs {game.teams[1]}</span>
-                    </div>
-                  </th>
-                ))}
-                <th className="prediction-header">JAX-BUF Prediction</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedEntries.map((entry, index) => (
-                <tr key={entry.name} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                  <td className="sticky-column rank-column">{index + 1}</td>
-                  <td className="sticky-column name-score-column">
-                    <div className="name-score-container">
-                      <span className="name">{entry.name}</span>
-                      <span className="score">{entry.correctPicks}</span>
-                    </div>
-                  </td>
-                  {games.map((game) => {
-                    const pickResult = isCorrectPick(game.id, entry.picks[game.id]);
-                    const pickClass = pickResult === true ? 'correct-pick' : 
-                                      pickResult === false ? 'incorrect-pick' : 
-                                      'neutral-pick';
-                    return (
-                      <td key={game.id} className="pick-cell">
-                        <div className={`pick-container ${pickClass}`}>
-                          <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
-                        </div>
-                      </td>
-                    );
-                  })}
-                  <td className="prediction-cell">
-                    {entry.scorePrediction.jaguars}-{entry.scorePrediction.bills}
-                  </td>
+          <div className="leaderboard-scroll-container">
+            <table className="leaderboard-table">
+              <thead>
+                <tr>
+                  <th className="sticky-column rank-column">Rank</th>
+                  <th className="sticky-column name-score-column">Name (Score)</th>
+                  {games.map((game) => (
+                    <th key={game.id} className="pick-header">
+                      <div className="game-header">
+                        <span className="matchup">{game.teams[0]} vs {game.teams[1]}</span>
+                      </div>
+                    </th>
+                  ))}
+                  <th className="prediction-header">JAX-BUF Prediction</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {sortedEntries.map((entry, index) => (
+                  <tr key={entry.name} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                    <td className="sticky-column rank-column">{index + 1}</td>
+                    <td className="sticky-column name-score-column">
+                      <div className="name-score-container">
+                        <span className="name">{entry.name}</span>
+                        <span className="score">{entry.correctPicks}</span>
+                      </div>
+                    </td>
+                    {games.map((game) => {
+                      const pickResult = isCorrectPick(game.id, entry.picks[game.id]);
+                      const pickClass = pickResult === true ? 'correct-pick' : 
+                                        pickResult === false ? 'incorrect-pick' : 
+                                        'neutral-pick';
+                      return (
+                        <td key={game.id} className="pick-cell">
+                          <div className={`pick-container ${pickClass}`}>
+                            <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
+                          </div>
+                        </td>
+                      );
+                    })}
+                    <td className="prediction-cell">
+                      {entry.scorePrediction.jaguars}-{entry.scorePrediction.bills}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>
