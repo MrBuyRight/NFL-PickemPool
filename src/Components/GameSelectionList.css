@@ -1,6 +1,6 @@
 .game-list-container {
     max-width: 100%;
-    padding: var(--spacing-unit);
+    padding: 10px;
     animation: fadeIn 0.5s ease-out;
 }
 
@@ -65,14 +65,12 @@
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: var(--spacing-unit);
-    margin-bottom: var(--spacing-unit);
+    padding: 8px;
+    margin-bottom: 8px;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, opacity 0.3s ease-in-out;
     opacity: 0;
     animation: fadeIn 0.3s ease-out forwards;
     animation-delay: calc(var(--animation-order) * 0.1s);
-    padding: calc(var(--spacing-unit) / 2);
-    margin-bottom: calc(var(--spacing-unit) / 2);
 }
 
 .game-card:hover {
@@ -81,7 +79,7 @@
 }
 
 .game-time {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-secondary-color);
     font-weight: 600;
     margin-bottom: calc(var(--spacing-unit) / 2);
@@ -98,7 +96,7 @@
 
 .team-button {
     font-family: 'Open Sans', sans-serif;
-    padding: calc(var(--spacing-unit) / 2) calc(var(--spacing-unit) / 4);
+    padding: 6px 4px;
     background-color: var(--secondary-color);
     color: var(--text-color);
     border: none;
@@ -108,10 +106,10 @@
     font-weight: 600;
     flex: 1;
     margin: 0 calc(var(--spacing-unit) / 4);
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     white-space: normal; /* Allow text to wrap */
     text-align: center; /* Center the text */
-    min-height: 3em; /* Ensure buttons have a minimum height */
+    min-height: 2.5em; /* Ensure buttons have a minimum height */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -135,7 +133,7 @@
 }
 
 .at-symbol {
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin: 0 calc(var(--spacing-unit) / 4);
     color: var(--text-secondary-color);
     flex-shrink: 0;
@@ -152,7 +150,7 @@
     font-family: 'Poppins', sans-serif;
     margin-bottom: calc(var(--spacing-unit) / 2);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 0.9rem;
     text-align: center; /* Center the score prediction header */
 }
 
@@ -164,14 +162,14 @@
 
 .score-inputs input {
     font-family: 'Open Sans', sans-serif;
-    width: 60px; /* Increase width slightly */
-    padding: calc(var(--spacing-unit) / 2);
+    width: 50px;
+    padding: 6px;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     background-color: var(--surface-color);
     color: var(--text-color);
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .score-inputs span {
@@ -194,12 +192,12 @@
 .entry-form input,
 .entry-form button {
     font-family: 'Open Sans', sans-serif;
-    padding: var(--spacing-unit);
+    padding: 10px;
     border-radius: 6px;
     border: none;
     background-color: var(--surface-color);
     color: var(--text-color);
-    font-size: 1rem;
+    font-size: 0.9rem;
     width: 100%;
 }
 
@@ -218,48 +216,44 @@
     color: var(--text-color);
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     .game-list-container {
-        max-width: 1200px;
-        margin: 0 auto;
+        padding: 10px;
     }
 
-    .game-and-picks-wrapper {
-        flex-direction: row;
-        justify-content: space-between;
+    .game-card {
+        padding: 8px;
+        margin-bottom: 8px;
     }
 
-    .game-list {
-        flex: 1;
-        margin-right: var(--spacing-unit);
-        max-height: calc(100vh - 200px);
-    }
-
-    .teams-container {
-        flex-direction: row;
+    .game-time {
+        font-size: 0.7rem;
     }
 
     .team-button {
-        width: auto;
-        margin-bottom: 0;
-        font-size: 0.9rem;
-        padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
-    }
-
-    .team-button.away {
-        text-align: right;
-    }
-
-    .team-button.home {
-        text-align: left;
+        font-size: 0.7rem;
+        padding: 6px 4px;
+        min-height: 2.5em;
     }
 
     .at-symbol {
-        margin: 0 var(--spacing-unit);
+        font-size: 0.8rem;
     }
 
-    .entry-form {
-        max-width: 400px;
+    .score-prediction h4 {
+        font-size: 0.9rem;
+    }
+
+    .score-inputs input {
+        width: 50px;
+        padding: 6px;
+        font-size: 0.8rem;
+    }
+
+    .entry-form input,
+    .entry-form button {
+        padding: 10px;
+        font-size: 0.9rem;
     }
 }
 

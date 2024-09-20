@@ -133,7 +133,7 @@ const Leaderboard = () => {
                       </div>
                     </th>
                   ))}
-                  <th className="prediction-header">JAX-BUF Prediction</th>
+                  <th className="prediction-header">JAX-BUF</th>
                 </tr>
               </thead>
               <tbody>

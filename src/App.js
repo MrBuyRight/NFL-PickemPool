@@ -4,28 +4,28 @@ import Leaderboard from './Components/Leaderboard';
 import GameSelectionList from './Components/GameSelectionList';
 
 function App() {
-  const [activeView, setActiveView] = useState('leaderboard'); // Set default to 'leaderboard' for testing
+  const [activeView, setActiveView] = useState('leaderboard');
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="App-title">NFL Pick 'em Pool 🏈</h1>
-        <div className="view-toggle">
+        <h1>NFL Pick'em Pool</h1>
+        <nav>
           <button
-            className={`toggle-button ${activeView === 'gameSelection' ? 'active' : ''}`}
-            onClick={() => setActiveView('gameSelection')}
-          >
-            Week 3 Game Selection
-          </button>
-          <button
-            className={`toggle-button ${activeView === 'leaderboard' ? 'active' : ''}`}
+            className={activeView === 'leaderboard' ? 'active' : ''}
             onClick={() => setActiveView('leaderboard')}
           >
-            Week 3 Leaderboard
+            Leaderboard
           </button>
-        </div>
+          <button
+            className={activeView === 'gameSelection' ? 'active' : ''}
+            onClick={() => setActiveView('gameSelection')}
+          >
+            Make Picks
+          </button>
+        </nav>
       </header>
-      <main>
+      <main className="App-main">
         {activeView === 'gameSelection' ? (
           <GameSelectionList />
         ) : (
