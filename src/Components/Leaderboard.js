@@ -4,19 +4,25 @@ import Week3entriesData from './Week3entriesData';
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     console.log('Week3entriesData:', Week3entriesData);
-    if (Week3entriesData && typeof Week3entriesData === 'object') {
-      const processedEntries = Object.entries(Week3entriesData).map(([name, data]) => ({
-        name,
-        ...data,
-        correctPicks: calculateCorrectPicks(data.picks)
-      }));
-      console.log('Processed entries:', processedEntries);
-      setEntries(processedEntries);
-    } else {
-      console.error('Week3entriesData is not in the expected format:', Week3entriesData);
+    try {
+      if (Week3entriesData && typeof Week3entriesData === 'object') {
+        const processedEntries = Object.entries(Week3entriesData).map(([name, data]) => ({
+          name,
+          ...data,
+          correctPicks: calculateCorrectPicks(data.picks)
+        }));
+        console.log('Processed entries:', processedEntries);
+        setEntries(processedEntries);
+      } else {
+        throw new Error('Week3entriesData is not in the expected format');
+      }
+    } catch (err) {
+      console.error('Error processing Week3entriesData:', err);
+      setError(err.message);
     }
   }, []);
 
@@ -56,8 +62,14 @@ const Leaderboard = () => {
   return (
     <div className="leaderboard">
       <h2>Week 3 Leaderboard</h2>
-      {entries.length === 0 ? (
-        <p>Loading entries...</p>
+      {error ? (
+        <p>Error: {error}</p>
+      ) : entries.length === 0 ? (
+        <div>
+          <p>Loading entries...</p>
+          <p>Debug info:</p>
+          <pre>{JSON.stringify(Week3entriesData, null, 2)}</pre>
+        </div>
       ) : (
         <div className="leaderboard-container">
           <table className="leaderboard-table">
