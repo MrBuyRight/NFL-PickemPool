@@ -55,6 +55,12 @@ const GameSelectionList = () => {
 		}, {});
 	}, []);
 
+	const isPickingClosed = useMemo(() => {
+		const now = new Date();
+		const firstGameDate = new Date('2024-09-19T20:15:00-04:00'); // First game start time
+		return now >= firstGameDate;
+	}, []);
+
 	useEffect(() => {
 		const dates = Object.keys(gamesByDate);
 		for (let i = 0; i < dates.length; i++) {
@@ -119,6 +125,11 @@ const GameSelectionList = () => {
 			<div className="game-and-picks-wrapper">
 				<div className="game-list">
 					<h2>Game Selection</h2>
+					{isPickingClosed && (
+						<div className="picking-closed-message">
+							<p>Picking for Week 3 is now closed as games have started.</p>
+						</div>
+					)}
 					{Object.entries(gamesByDate).map(([date, games]) => (
 						<div key={date} className="date-group">
 							<h3 className={`date-header ${expandedDates[date] ? 'expanded' : ''}`} data-date={date} onClick={() => toggleDateExpansion(date)}>
@@ -175,29 +186,31 @@ const GameSelectionList = () => {
 				</div>
 				<PickTracker selectedPicks={selectedPicks} games={week3Games} mondayScorePrediction={mondayScorePrediction} />
 			</div>
-			<form className="entry-form" onSubmit={handleSubmit}>
-				<div className="input-group">
-					<input
-						type="text"
-						placeholder="Your Name"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-						required
-					/>
-				</div>
-				<div className="input-group">
-					<input
-						type="email"
-						placeholder="Your Email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						required
-					/>
-				</div>
-				<button type="submit" disabled={isSubmitting}>
-					{isSubmitting ? 'Submitting...' : 'Submit Picks'}
-				</button>
-			</form>
+			{!isPickingClosed && (
+				<form className="entry-form" onSubmit={handleSubmit}>
+					<div className="input-group">
+						<input
+							type="text"
+							placeholder="Your Name"
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+							required
+						/>
+					</div>
+					<div className="input-group">
+						<input
+							type="email"
+							placeholder="Your Email"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							required
+						/>
+					</div>
+					<button type="submit" disabled={isSubmitting}>
+						{isSubmitting ? 'Submitting...' : 'Submit Picks'}
+					</button>
+				</form>
+			)}
 			{submissionStatus && <p className="submission-status">{submissionStatus}</p>}
 		</div>
 	);

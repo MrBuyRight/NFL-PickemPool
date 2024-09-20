@@ -272,3 +272,13 @@
     from { transform: translateX(-20px); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
 }
+
+.picking-closed-message {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: var(--spacing-unit);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-unit);
+    font-weight: 600;
+    text-align: center;
+}
