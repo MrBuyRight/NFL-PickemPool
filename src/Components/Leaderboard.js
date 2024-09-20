@@ -2,17 +2,16 @@ import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
 import Week3entriesData from './Week3entriesData';
 
-console.log('Imported Week3entriesData:', Week3entriesData); // Log the imported data
+console.log('Imported Week3entriesData:', Week3entriesData);
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
 
-  const currentWeek = 3; // Make sure this is set to 3 for Week 3 data
-
   useEffect(() => {
-    console.log('Raw Week3entriesData:', Week3entriesData);
+    console.log('Week3entriesData type:', typeof Week3entriesData);
+    console.log('Week3entriesData keys:', Object.keys(Week3entriesData));
     
-    if (Week3entriesData && typeof Week3entriesData === 'object') {
+    if (Week3entriesData && typeof Week3entriesData === 'object' && Object.keys(Week3entriesData).length > 0) {
       const processedEntries = Object.entries(Week3entriesData).map(([name, data]) => ({
         name,
         ...data,
@@ -22,7 +21,7 @@ const Leaderboard = () => {
       console.log('Processed entries:', processedEntries);
       setEntries(processedEntries);
     } else {
-      console.error('Week3entriesData is not in the expected format:', Week3entriesData);
+      console.error('Week3entriesData is empty or not in the expected format:', Week3entriesData);
     }
   }, []);
 
