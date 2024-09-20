@@ -111,18 +111,30 @@ body {
 
 .name-score-container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .name {
   font-weight: 600;
-  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 30px);
 }
 
 .score {
-  font-size: 0.9em;
+  font-weight: 600;
   color: var(--accent-color);
+  background-color: rgba(76, 175, 80, 0.1);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  margin-left: 5px;
 }
 
 .pick-header {
@@ -170,7 +182,7 @@ body {
 }
 
 .entry-row:hover {
-  background-color: var(--hover-color) !important;
+  background-color: rgba(173, 216, 230, 0.2) !important; /* Light blue with 20% opacity */
 }
 
 .entry-row.even {
