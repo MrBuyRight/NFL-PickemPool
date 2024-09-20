@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import Week3entriesData from '../Week3entriesData'; // Update this line
+import Week3entriesData from './Week3entriesData';
+
+console.log('Imported Week3entriesData:', Week3entriesData); // Add this line
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
@@ -100,13 +102,17 @@ const Leaderboard = () => {
 
   console.log('Sorted entries:', sortedEntries);
 
+  console.log('Rendering entries:', entries);
+
+  console.log('Entries state:', entries); // Add this line outside useEffect
+
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">Leaderboard</h2>
-      <div className="leaderboard-container">
-        {sortedEntries.length === 0 ? (
-          <p>Loading entries...</p>
-        ) : (
+      <h2 className="leaderboard-title">Week 3 Leaderboard</h2>
+      {entries.length === 0 ? (
+        <p>No entries available. Debug info: {JSON.stringify(Week3entriesData)}</p>
+      ) : (
+        <div className="leaderboard-container">
           <div className="table-wrapper">
             <table className="leaderboard-table">
               <thead>
@@ -148,8 +154,8 @@ const Leaderboard = () => {
               </tbody>
             </table>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
