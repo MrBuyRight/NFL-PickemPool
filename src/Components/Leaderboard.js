@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
 import Week3entriesData from './Week3entriesData';
 
+console.log('Imported Week3entriesData:', Week3entriesData);
+
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
