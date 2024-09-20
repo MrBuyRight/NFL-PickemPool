@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
 import Week3entriesData from './Week3entriesData';
 
-console.log('Imported Week3entriesData:', Week3entriesData); // Add this line
+console.log('Imported Week3entriesData:', Week3entriesData); // Log the imported data
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
+
+  const currentWeek = 3; // Make sure this is set to 3 for Week 3 data
 
   useEffect(() => {
     console.log('Raw Week3entriesData:', Week3entriesData);
