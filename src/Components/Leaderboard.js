@@ -29,8 +29,16 @@ const Leaderboard = () => {
   }, []);
 
   const calculateCorrectPicks = (picks) => {
-    // Placeholder function - replace with actual logic when available
-    return Math.floor(Math.random() * 17);
+    let correctCount = 0;
+    if (picks['1'] === 'New York Jets') correctCount++;
+    // Add more correct picks here as games are completed
+    return correctCount;
+  };
+
+  const isCorrectPick = (gameId, pick) => {
+    if (gameId === '1' && pick === 'New York Jets') return true;
+    // Add more correct picks here as games are completed
+    return false;
   };
 
   const games = [
@@ -96,7 +104,7 @@ const Leaderboard = () => {
                   </td>
                   {games.map((game) => (
                     <td key={game.id} className="pick-cell">
-                      <div className="pick-container">
+                      <div className={`pick-container ${isCorrectPick(game.id, entry.picks[game.id]) ? 'correct-pick' : 'incorrect-pick'}`}>
                         <span className="pick-team">{entry.picks[game.id]}</span>
                       </div>
                     </td>
