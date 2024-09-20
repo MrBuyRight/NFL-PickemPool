@@ -33,11 +33,6 @@ const Leaderboard = () => {
     return Math.floor(Math.random() * 17);
   };
 
-  const abbreviateTeam = (team) => {
-    // Add your team abbreviation logic here
-    return team ? team.split(' ').map(word => word[0]).join('') : '';
-  };
-
   const games = [
     { id: '1', teams: ['NE', 'NYJ'] },
     { id: '2', teams: ['NO', 'PHI'] },
@@ -77,26 +72,33 @@ const Leaderboard = () => {
           <table className="leaderboard-table">
             <thead>
               <tr>
-                <th className="sticky-header rank-header">Rank</th>
-                <th className="sticky-header name-header">Name</th>
-                <th className="sticky-header score-header">Score</th>
+                <th className="sticky-column rank-column">Rank</th>
+                <th className="sticky-column name-score-column">Name (Score)</th>
                 {games.map((game) => (
-                  <th key={game.id} className="game-header">
-                    {game.teams[0]}<br/>{game.teams[1]}
+                  <th key={game.id} className="pick-header">
+                    <div className="game-header">
+                      <span className="matchup">{game.teams[0]} vs {game.teams[1]}</span>
+                    </div>
                   </th>
                 ))}
-                <th className="sticky-header prediction-header">Prediction</th>
+                <th className="prediction-header">JAX-BUF Prediction</th>
               </tr>
             </thead>
             <tbody>
               {sortedEntries.map((entry, index) => (
-                <tr key={entry.name}>
-                  <td className="rank-cell">{index + 1}</td>
-                  <td className="name-cell">{entry.name}</td>
-                  <td className="score-cell">{entry.correctPicks}</td>
+                <tr key={entry.name} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                  <td className="sticky-column rank-column">{index + 1}</td>
+                  <td className="sticky-column name-score-column">
+                    <div className="name-score-container">
+                      <span className="name">{entry.name}</span>
+                      <span className="score">{entry.correctPicks}</span>
+                    </div>
+                  </td>
                   {games.map((game) => (
                     <td key={game.id} className="pick-cell">
-                      {abbreviateTeam(entry.picks[game.id])}
+                      <div className="pick-container">
+                        <span className="pick-team">{entry.picks[game.id]}</span>
+                      </div>
                     </td>
                   ))}
                   <td className="prediction-cell">
