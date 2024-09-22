@@ -38,6 +38,11 @@ const Leaderboard = () => {
     if (picks['6'] === 'Minnesota Vikings') correctCount++;
     if (picks['7'] === 'New York Giants') correctCount++;
     if (picks['8'] === 'Denver Broncos') correctCount++;
+    if (picks['9'] === 'Seattle Seahawks') correctCount++;
+    if (picks['10'] === 'Carolina Panthers') correctCount++;
+    if (picks['11'] === 'Baltimore Ravens') correctCount++;
+    if (picks['12'] === 'Detroit Lions') correctCount++;
+    if (picks['13'] === 'Los Angeles Rams') correctCount++;
     return correctCount;
   };
 
@@ -50,7 +55,12 @@ const Leaderboard = () => {
       '5': 'Indianapolis Colts',
       '6': 'Minnesota Vikings',
       '7': 'New York Giants',
-      '8': 'Denver Broncos'
+      '8': 'Denver Broncos',
+      '9': 'Seattle Seahawks',
+      '10': 'Carolina Panthers',
+      '11': 'Baltimore Ravens',
+      '12': 'Detroit Lions',
+      '13': 'Los Angeles Rams'
     };
     
     if (correctPicks[gameId]) {
