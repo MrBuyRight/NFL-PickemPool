@@ -31,12 +31,31 @@ const Leaderboard = () => {
   const calculateCorrectPicks = (picks) => {
     let correctCount = 0;
     if (picks['1'] === 'New York Jets') correctCount++;
+    if (picks['2'] === 'Philadelphia Eagles') correctCount++;
+    if (picks['3'] === 'Green Bay Packers') correctCount++;
+    if (picks['4'] === 'Pittsburgh Steelers') correctCount++;
+    if (picks['5'] === 'Indianapolis Colts') correctCount++;
+    if (picks['6'] === 'Minnesota Vikings') correctCount++;
+    if (picks['7'] === 'New York Giants') correctCount++;
+    if (picks['8'] === 'Denver Broncos') correctCount++;
     return correctCount;
   };
 
   const isCorrectPick = (gameId, pick) => {
-    if (gameId === '1' && pick === 'New York Jets') return true;
-    if (gameId === '1' && pick !== 'New York Jets') return false;
+    const correctPicks = {
+      '1': 'New York Jets',
+      '2': 'Philadelphia Eagles',
+      '3': 'Green Bay Packers',
+      '4': 'Pittsburgh Steelers',
+      '5': 'Indianapolis Colts',
+      '6': 'Minnesota Vikings',
+      '7': 'New York Giants',
+      '8': 'Denver Broncos'
+    };
+    
+    if (correctPicks[gameId]) {
+      return pick === correctPicks[gameId];
+    }
     return null; // For games that haven't been played yet
   };
 
