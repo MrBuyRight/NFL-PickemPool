@@ -43,6 +43,7 @@ const Leaderboard = () => {
     if (picks['11'] === 'Baltimore Ravens') correctCount++;
     if (picks['12'] === 'Detroit Lions') correctCount++;
     if (picks['13'] === 'Los Angeles Rams') correctCount++;
+    if (picks['14'] === 'Kansas City Chiefs') correctCount++;
     return correctCount;
   };
 
@@ -60,7 +61,8 @@ const Leaderboard = () => {
       '10': 'Carolina Panthers',
       '11': 'Baltimore Ravens',
       '12': 'Detroit Lions',
-      '13': 'Los Angeles Rams'
+      '13': 'Los Angeles Rams',
+      '14': 'Kansas City Chiefs'
     };
     
     if (correctPicks[gameId]) {
