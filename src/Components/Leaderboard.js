@@ -173,12 +173,15 @@ const Leaderboard = () => {
               </thead>
               <tbody>
                 {sortedEntries.map((entry, index) => (
-                  <tr key={entry.name} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                    <td className="sticky-column rank-column">{index + 1}</td>
+                  <tr key={entry.name} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'} ${index === 0 ? 'winner' : ''}`}>
+                    <td className="sticky-column rank-column">
+                      {index === 0 && <span className="winner-trophy">🏆</span>}
+                      {index + 1}
+                    </td>
                     <td className="sticky-column name-score-column">
                       <div className="name-score-container">
                         <span className="name">{entry.name}</span>
-                        <span className="score">{entry.correctPicks}</span>
+                        <span className="score-badge">{entry.correctPicks}</span>
                       </div>
                     </td>
                     {games.map((game) => {
