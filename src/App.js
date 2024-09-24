@@ -21,7 +21,7 @@ function App() {
             className={activeView === 'leaderboard' ? 'active' : ''}
             onClick={() => setActiveView('leaderboard')}
           >
-            Leaderboard
+            Week 3 Leaderboard
           </button>
         </nav>
       </header>
