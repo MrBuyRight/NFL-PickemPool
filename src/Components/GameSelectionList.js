@@ -10,7 +10,7 @@ const GameSelectionList = () => {
   const [submissionStatus, setSubmissionStatus] = useState('');
   const [expandedDates, setExpandedDates] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [mondayScorePrediction, setMondayScorePrediction] = useState({ titans: '', dolphins: '' });
+  const [mondayScorePrediction, setMondayScorePrediction] = useState({ seahawks: '', lions: '' });
 
   const getFormattedDate = (dateString) => {
     switch (dateString) {
@@ -107,7 +107,7 @@ const GameSelectionList = () => {
       setName('');
       setEmail('');
       setSelectedPicks({});
-      setMondayScorePrediction({ titans: '', dolphins: '' });
+      setMondayScorePrediction({ seahawks: '', lions: '' });
     } catch (error) {
       console.error('Error submitting picks:', error);
       setSubmissionStatus(`Error submitting picks: ${error.message}`);
@@ -124,7 +124,7 @@ const GameSelectionList = () => {
     <div className="game-list-container">
       <div className="game-and-picks-wrapper">
         <div className="game-list">
-          <h2>Game Selection</h2>
+          <h2>Week 4 Game Selection</h2>
           {isPickingClosed && (
             <div className="picking-closed-message">
               <p>Picking for Week 4 is now closed as games have started.</p>
@@ -156,7 +156,7 @@ const GameSelectionList = () => {
                         {game.homeTeam}
                       </button>
                     </div>
-                    {game.id === 15 && (
+                    {game.id === 16 && (
                       <div className="score-prediction">
                         <h4>Score Prediction</h4>
                         <div className="score-inputs">
@@ -164,16 +164,16 @@ const GameSelectionList = () => {
                             type="number"
                             min="0"
                             placeholder={game.awayTeam}
-                            value={mondayScorePrediction.titans}
-                            onChange={(e) => handleScorePredictionChange('titans', e.target.value)}
+                            value={mondayScorePrediction.seahawks}
+                            onChange={(e) => handleScorePredictionChange('seahawks', e.target.value)}
                           />
                           <span>-</span>
                           <input
                             type="number"
                             min="0"
                             placeholder={game.homeTeam}
-                            value={mondayScorePrediction.dolphins}
-                            onChange={(e) => handleScorePredictionChange('dolphins', e.target.value)}
+                            value={mondayScorePrediction.lions}
+                            onChange={(e) => handleScorePredictionChange('lions', e.target.value)}
                           />
                         </div>
                       </div>
