@@ -170,6 +170,8 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
 }
 
 .score-badge {
@@ -192,6 +194,7 @@ body {
   color: gold;
   font-size: 1.2em;
   margin-right: 4px;
+  display: inline-block;
 }
 
 @media (max-width: 768px) {
