@@ -57,7 +57,7 @@ const GameSelectionList = () => {
 
   const isPickingClosed = useMemo(() => {
     const now = new Date();
-    const firstGameDate = new Date('2024-09-26T20:15:00-04:00'); // First game start time
+    const firstGameDate = new Date('2023-09-28T20:15:00-04:00'); // First game of Week 4 (adjust this date as needed)
     return now >= firstGameDate;
   }, []);
 
@@ -125,64 +125,65 @@ const GameSelectionList = () => {
       <div className="game-and-picks-wrapper">
         <div className="game-list">
           <h2>Week 4 Game Selection</h2>
-          {isPickingClosed && (
+          {isPickingClosed ? (
             <div className="picking-closed-message">
               <p>Picking for Week 4 is now closed as games have started.</p>
             </div>
-          )}
-          {Object.entries(gamesByDate).map(([date, games]) => (
-            <div key={date} className="date-group">
-              <h3 className={`date-header ${expandedDates[date] ? 'expanded' : ''}`} data-date={date} onClick={() => toggleDateExpansion(date)}>
-                {date}
-              </h3>
-              <div className={`game-grid ${expandedDates[date] ? 'expanded' : ''}`}>
-                {games.map((game, index) => (
-                  <div key={game.id} className="game-card" style={{"--animation-order": index}}>
-                    <div className="game-info">
-                      <div className="game-time">{game.time}</div>
-                    </div>
-                    <div className="teams-container">
-                      <button
-                        className={`team-button away ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
-                        onClick={() => handlePickSelection(game.id, game.awayTeam)}
-                      >
-                        {game.awayTeam}
-                      </button>
-                      <span className="at-symbol">@</span>
-                      <button
-                        className={`team-button home ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
-                        onClick={() => handlePickSelection(game.id, game.homeTeam)}
-                      >
-                        {game.homeTeam}
-                      </button>
-                    </div>
-                    {game.id === 16 && (
-                      <div className="score-prediction">
-                        <h4>Score Prediction</h4>
-                        <div className="score-inputs">
-                          <input
-                            type="number"
-                            min="0"
-                            placeholder={game.awayTeam}
-                            value={mondayScorePrediction.seahawks}
-                            onChange={(e) => handleScorePredictionChange('seahawks', e.target.value)}
-                          />
-                          <span>-</span>
-                          <input
-                            type="number"
-                            min="0"
-                            placeholder={game.homeTeam}
-                            value={mondayScorePrediction.lions}
-                            onChange={(e) => handleScorePredictionChange('lions', e.target.value)}
-                          />
-                        </div>
+          ) : (
+            Object.entries(gamesByDate).map(([date, games]) => (
+              <div key={date} className="date-group">
+                <h3 className={`date-header ${expandedDates[date] ? 'expanded' : ''}`} data-date={date} onClick={() => toggleDateExpansion(date)}>
+                  {date}
+                </h3>
+                <div className={`game-grid ${expandedDates[date] ? 'expanded' : ''}`}>
+                  {games.map((game, index) => (
+                    <div key={game.id} className="game-card" style={{"--animation-order": index}}>
+                      <div className="game-info">
+                        <div className="game-time">{game.time}</div>
                       </div>
-                    )}
-                  </div>
-                ))}
+                      <div className="teams-container">
+                        <button
+                          className={`team-button away ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
+                          onClick={() => handlePickSelection(game.id, game.awayTeam)}
+                        >
+                          {game.awayTeam}
+                        </button>
+                        <span className="at-symbol">@</span>
+                        <button
+                          className={`team-button home ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
+                          onClick={() => handlePickSelection(game.id, game.homeTeam)}
+                        >
+                          {game.homeTeam}
+                        </button>
+                      </div>
+                      {game.id === 16 && (
+                        <div className="score-prediction">
+                          <h4>Score Prediction</h4>
+                          <div className="score-inputs">
+                            <input
+                              type="number"
+                              min="0"
+                              placeholder={game.awayTeam}
+                              value={mondayScorePrediction.seahawks}
+                              onChange={(e) => handleScorePredictionChange('seahawks', e.target.value)}
+                            />
+                            <span>-</span>
+                            <input
+                              type="number"
+                              min="0"
+                              placeholder={game.homeTeam}
+                              value={mondayScorePrediction.lions}
+                              onChange={(e) => handleScorePredictionChange('lions', e.target.value)}
+                            />
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          )}
         </div>
         <PickTracker selectedPicks={selectedPicks} games={week4Games} mondayScorePrediction={mondayScorePrediction} />
       </div>
