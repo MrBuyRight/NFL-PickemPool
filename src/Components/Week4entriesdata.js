@@ -2224,6 +2224,14 @@ const week4EntriesData = [
           "10": "Washington Commanders",
           "11": "San Francisco 49ers",
           "12": "Kansas City Chiefs",
-          "13": "Cleveland Browns",
-          "14": "Tennessee Titans",
-          "15": "Baltimore Ravens",
+          "13": "Baltimore Ravens",
+          "14": "Cleveland Browns",
+          "15": "Tennessee Titans",
+          "16": "Detroit Lions"
+      },
+      scores: {
+          seahawks: "",
+          lions: ""
+      }
+  }
+]

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import Week4entriesData from './Week4entriesData'; // Corrected import statement
-
-console.log('Imported Week4entriesData:', Week4entriesData);
+import Week4entriesData from './Week4entriesdata'; // Ensure correct casing in import statement
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(null); // Moved error state initialization inside the component
+  console.log('Imported Week4entriesData:', Week4entriesData); // Moved log inside the component
 
   useEffect(() => {
     console.log('Week4entriesData:', Week4entriesData); // Update log message
