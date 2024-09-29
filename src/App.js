@@ -4,7 +4,7 @@ import Leaderboard from './Components/Leaderboard';
 import GameSelectionList from './Components/GameSelectionList';
 
 function App() {
-  const [activeView, setActiveView] = useState('gameSelection'); // Set default view to 'gameSelection'
+  const [activeView, setActiveView] = useState('leaderboard'); // Changed to 'leaderboard'
 
   return (
     <div className="App">
