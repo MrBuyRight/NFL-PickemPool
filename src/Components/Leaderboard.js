@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import week4EntriesData from './Week4entrydata'; // Updated import
+import week4EntryData from './Week4entrydata'; // Updated import
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
@@ -8,17 +8,15 @@ const Leaderboard = () => {
 
   useEffect(() => {
     try {
-      if (week4EntriesData && Array.isArray(week4EntriesData)) { // Updated casing
-        const processedEntries = week4EntriesData.map(entry => ({ // Updated casing
-          ...entry,
-          correctPicks: 0 // Initialize correctPicks to 0 as we don't have results yet
-        }));
-        setEntries(processedEntries);
-      } else {
-        throw new Error('Week4EntriesData is not in the expected format');
-      }
+      const processedEntries = Object.entries(week4EntryData).map(([name, data]) => ({
+        name,
+        picks: data.picks,
+        tiebreaker: data.tiebreaker,
+        correctPicks: 0 // Initialize correctPicks to 0 as we don't have results yet
+      }));
+      setEntries(processedEntries);
     } catch (err) {
-      console.error('Error processing Week4EntriesData:', err);
+      console.error('Error processing Week4EntryData:', err);
       setError(err.message);
     }
   }, []);
