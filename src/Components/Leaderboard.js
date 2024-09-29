@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import Week4entriesData from './Week4entriesData'; // Change this line
+import Week4entriesData from './Week4entriesData'; // Corrected import statement
 
 console.log('Imported Week4entriesData:', Week4entriesData);
 
