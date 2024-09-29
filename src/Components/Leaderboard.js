@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import week4EntriesData from './Week4entriesdata'; // Adjusted to match actual file name
+import week4EntriesData from './Week4entrydata'; // Updated import
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
