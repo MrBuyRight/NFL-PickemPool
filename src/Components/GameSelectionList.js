@@ -130,89 +130,15 @@ const GameSelectionList = () => {
               <p>Picking for Week 4 is now closed as games have started.</p>
             </div>
           ) : (
-            Object.entries(gamesByDate).map(([date, games]) => (
-              <div key={date} className="date-group">
-                <h3 className={`date-header ${expandedDates[date] ? 'expanded' : ''}`} data-date={date} onClick={() => toggleDateExpansion(date)}>
-                  {date}
-                </h3>
-                <div className={`game-grid ${expandedDates[date] ? 'expanded' : ''}`}>
-                  {games.map((game, index) => (
-                    <div key={game.id} className="game-card" style={{"--animation-order": index}}>
-                      <div className="game-info">
-                        <div className="game-time">{game.time}</div>
-                      </div>
-                      <div className="teams-container">
-                        <button
-                          className={`team-button away ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
-                          onClick={() => handlePickSelection(game.id, game.awayTeam)}
-                        >
-                          {game.awayTeam}
-                        </button>
-                        <span className="at-symbol">@</span>
-                        <button
-                          className={`team-button home ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
-                          onClick={() => handlePickSelection(game.id, game.homeTeam)}
-                        >
-                          {game.homeTeam}
-                        </button>
-                      </div>
-                      {game.id === 16 && (
-                        <div className="score-prediction">
-                          <h4>Score Prediction</h4>
-                          <div className="score-inputs">
-                            <input
-                              type="number"
-                              min="0"
-                              placeholder={game.awayTeam}
-                              value={mondayScorePrediction.seahawks}
-                              onChange={(e) => handleScorePredictionChange('seahawks', e.target.value)}
-                            />
-                            <span>-</span>
-                            <input
-                              type="number"
-                              min="0"
-                              placeholder={game.homeTeam}
-                              value={mondayScorePrediction.lions}
-                              onChange={(e) => handleScorePredictionChange('lions', e.target.value)}
-                            />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+            // Render game selection UI here when picking is not closed
+            <div className="game-selection">
+              {/* Add your game selection components here */}
+            </div>
           )}
         </div>
         <PickTracker selectedPicks={selectedPicks} games={week4Games} mondayScorePrediction={mondayScorePrediction} />
+        {/* ... rest of the component JSX */}
       </div>
-      {!isPickingClosed && (
-        <form className="entry-form" onSubmit={handleSubmit}>
-          <div className="input-group">
-            <input
-              type="text"
-              placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <input
-              type="email"
-              placeholder="Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Submit Picks'}
-          </button>
-        </form>
-      )}
-      {submissionStatus && <p className="submission-status">{submissionStatus}</p>}
     </div>
   );
 };

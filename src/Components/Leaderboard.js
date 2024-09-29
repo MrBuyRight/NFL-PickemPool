@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import Week3entriesData from './Week3entriesData';
+import Week4entriesData from './Week4entriesData'; // Change this line
 
-console.log('Imported Week3entriesData:', Week3entriesData);
+console.log('Imported Week4entriesData:', Week4entriesData);
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log('Week3entriesData:', Week3entriesData);
+    console.log('Week4entriesData:', Week4entriesData); // Update log message
     try {
-      if (Week3entriesData && typeof Week3entriesData === 'object') {
-        const processedEntries = Object.entries(Week3entriesData).map(([name, data]) => ({
+      if (Week4entriesData && typeof Week4entriesData === 'object') {
+        const processedEntries = Object.entries(Week4entriesData).map(([name, data]) => ({
           name: abbreviateName(name),
           ...data,
           correctPicks: calculateCorrectPicks(data.picks)
@@ -20,10 +20,10 @@ const Leaderboard = () => {
         console.log('Processed entries:', processedEntries);
         setEntries(processedEntries);
       } else {
-        throw new Error('Week3entriesData is not in the expected format');
+        throw new Error('Week4entriesData is not in the expected format'); // Update error message
       }
     } catch (err) {
-      console.error('Error processing Week3entriesData:', err);
+      console.error('Error processing Week4entriesData:', err); // Update error log
       setError(err.message);
     }
   }, []);
@@ -151,7 +151,7 @@ const Leaderboard = () => {
         <div>
           <p>Loading entries...</p>
           <p>Debug info:</p>
-          <pre>{JSON.stringify(Week3entriesData, null, 2)}</pre>
+          <pre>{JSON.stringify(Week4entriesData, null, 2)}</pre>
         </div>
       ) : (
         <div className="leaderboard-container">
