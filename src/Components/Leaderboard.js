@@ -8,12 +8,17 @@ const Leaderboard = () => {
 
   useEffect(() => {
     try {
-      const processedEntries = Object.entries(week4EntryData).map(([name, data]) => ({
-        name,
-        picks: data.picks,
-        tiebreaker: data.tiebreaker,
-        correctPicks: 0 // Initialize correctPicks to 0 as we don't have results yet
-      }));
+      console.log('week4EntryData:', week4EntryData);
+      const processedEntries = Object.entries(week4EntryData).map(([name, data]) => {
+        console.log('Processing entry:', name, data);
+        return {
+          name,
+          picks: data.picks,
+          tiebreaker: data.tiebreaker,
+          correctPicks: 0
+        };
+      });
+      console.log('Processed entries:', processedEntries);
       setEntries(processedEntries);
     } catch (err) {
       console.error('Error processing Week4EntryData:', err);
