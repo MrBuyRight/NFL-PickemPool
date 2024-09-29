@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import week4EntriesData from './Week4EntriesData';
+import week4EntriesData from './Week4entriesdata'; // Adjusted to match actual file name
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
@@ -8,8 +8,8 @@ const Leaderboard = () => {
 
   useEffect(() => {
     try {
-      if (week4EntriesData && Array.isArray(week4EntriesData)) {
-        const processedEntries = week4EntriesData.map(entry => ({
+      if (week4EntriesData && Array.isArray(week4EntriesData)) { // Updated casing
+        const processedEntries = week4EntriesData.map(entry => ({ // Updated casing
           ...entry,
           correctPicks: 0 // Initialize correctPicks to 0 as we don't have results yet
         }));
