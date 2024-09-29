@@ -1,17 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import week4EntryData from './Week4entrydata'; // Updated import
+import week4EntryData from './Week4entrydata';
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
+
+  const correctTeams = {
+    '1': 'Dallas Cowboys',
+    '2': 'Tampa Bay Buccaneers',
+    '3': 'Minnesota Vikings',
+    '4': 'Atlanta Falcons',
+    '5': 'Indianapolis Colts',
+    '6': 'Chicago Bears',
+    '7': 'Cincinnati Bengals',
+    '8': 'Houston Texans',
+    '9': 'Denver Broncos',
+    '10': 'Washington Commanders',
+    '11': 'San Francisco 49ers',
+    '12': 'Kansas City Chiefs',
+    '13': 'Las Vegas Raiders'
+  };
 
   useEffect(() => {
     try {
       console.log('week4EntryData:', week4EntryData);
       const processedEntries = Object.entries(week4EntryData).map(([name, data]) => {
         console.log('Processing entry:', name, data);
-        const correctPicks = data.picks['1'] === 'Dallas Cowboys' ? 1 : 0;
+        const correctPicks = Object.entries(correctTeams).reduce((acc, [gameId, correctTeam]) => {
+          return acc + (data.picks[gameId] === correctTeam ? 1 : 0);
+        }, 0);
         return {
           name,
           picks: data.picks,
@@ -19,7 +37,6 @@ const Leaderboard = () => {
           correctPicks: correctPicks
         };
       });
-      // Sort entries by correctPicks in descending order
       processedEntries.sort((a, b) => b.correctPicks - a.correctPicks);
       console.log('Processed entries:', processedEntries);
       setEntries(processedEntries);
@@ -93,7 +110,7 @@ const Leaderboard = () => {
   };
 
   const isCorrectPick = (gameId, pick) => {
-    return gameId === '1' && pick === 'Dallas Cowboys';
+    return correctTeams[gameId] === pick;
   };
 
   return (
@@ -119,7 +136,6 @@ const Leaderboard = () => {
                     </th>
                   ))}
                   <th className="prediction-header">SEA-DET</th>
-                  <th className="score-column">Score</th>
                 </tr>
               </thead>
               <tbody>
@@ -143,9 +159,6 @@ const Leaderboard = () => {
                     ))}
                     <td className="prediction-cell">
                       {entry.tiebreaker.seahawks}-{entry.tiebreaker.lions}
-                    </td>
-                    <td className="score-column">
-                      <span className="score-badge">{entry.correctPicks}</span>
                     </td>
                   </tr>
                 ))}

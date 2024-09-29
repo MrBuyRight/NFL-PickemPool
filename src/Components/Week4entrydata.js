@@ -49,7 +49,7 @@ const week4EntryData = {
     picks: {"1":"Dallas Cowboys","2":"Tampa Bay Buccaneers","3":"Minnesota Vikings","4":"New Orleans Saints","5":"Indianapolis Colts","6":"Chicago Bears","7":"Cincinnati Bengals","8":"Houston Texans","9":"New York Jets","10":"Arizona Cardinals","11":"San Francisco 49ers","12":"Kansas City Chiefs","13":"Cleveland Browns","14":"Baltimore Ravens","15":"Miami Dolphins","16":"Detroit Lions"},
     tiebreaker: {"seahawks":"21","lions":"27"}
   },
-  "Barnshad": {
+  "Bamshad": {
     email: "Barnshadgol@yahoo.com",
     picks: {"1":"Dallas Cowboys","2":"Philadelphia Eagles","3":"Green Bay Packers","4":"Atlanta Falcons","5":"Pittsburgh Steelers","6":"Chicago Bears","7":"Cincinnati Bengals","8":"Houston Texans","9":"New York Jets","10":"Arizona Cardinals","11":"San Francisco 49ers","12":"Kansas City Chiefs","13":"Cleveland Browns","14":"Baltimore Ravens","15":"Tennessee Titans","16":"Detroit Lions"},
     tiebreaker: {"seahawks":"17","lions":"27"}
