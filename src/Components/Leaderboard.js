@@ -131,6 +131,7 @@ const Leaderboard = () => {
                     <td className="sticky-column name-score-column">
                       <div className="name-score-container">
                         <span className="name">{abbreviateName(entry.name)}</span>
+                        <span className="score-badge">{entry.correctPicks}</span>
                       </div>
                     </td>
                     {games.map((game) => (

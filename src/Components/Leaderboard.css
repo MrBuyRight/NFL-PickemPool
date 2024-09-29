@@ -160,6 +160,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 .name {
@@ -170,8 +171,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: flex;
-  align-items: center;
+  margin-right: 8px;
 }
 
 .score-badge {
@@ -212,7 +212,7 @@ body {
   }
 
   .name-score-column {
-    width: 120px;
+    width: 100px;
   }
 
   .pick-header {
@@ -233,7 +233,7 @@ body {
 
   .name {
     font-size: 0.8em;
-    max-width: 70px;
+    max-width: 60px;
   }
 
   .score-badge {
