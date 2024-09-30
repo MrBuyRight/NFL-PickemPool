@@ -139,11 +139,6 @@ body {
   border: 1px solid #F44336;
 }
 
-.neutral-pick {
-  background-color: rgba(158, 158, 158, 0.1) !important;
-  border: 1px solid #9E9E9E;
-}
-
 .correct-pick .pick-team {
   color: #4CAF50;
 }
@@ -152,8 +147,9 @@ body {
   color: #F44336;
 }
 
-.neutral-pick .pick-team {
-  color: #616161;
+.neutral-pick {
+  background-color: rgba(158, 158, 158, 0.1) !important;
+  border: 1px solid #9E9E9E;
 }
 
 .name-score-container {
