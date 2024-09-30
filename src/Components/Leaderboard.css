@@ -147,10 +147,7 @@ body {
   color: #F44336;
 }
 
-.neutral-pick {
-  background-color: rgba(158, 158, 158, 0.1) !important;
-  border: 1px solid #9E9E9E;
-}
+/* Remove the .neutral-pick class as it's no longer used */
 
 .name-score-container {
   display: flex;

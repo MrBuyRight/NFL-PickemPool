@@ -19,7 +19,8 @@ const Leaderboard = () => {
     '10': 'Washington Commanders',
     '11': 'San Francisco 49ers',
     '12': 'Kansas City Chiefs',
-    '13': 'Las Vegas Raiders'
+    '13': 'Las Vegas Raiders',
+    '14': 'Baltimore Ravens'
   };
 
   useEffect(() => {
@@ -152,7 +153,7 @@ const Leaderboard = () => {
                     </td>
                     {games.map((game) => (
                       <td key={game.id} className="pick-cell">
-                        <div className={`pick-container ${isCorrectPick(game.id, entry.picks[game.id]) ? 'correct-pick' : 'neutral-pick'}`}>
+                        <div className={`pick-container ${isCorrectPick(game.id, entry.picks[game.id]) ? 'correct-pick' : 'incorrect-pick'}`}>
                           <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
                         </div>
                       </td>
