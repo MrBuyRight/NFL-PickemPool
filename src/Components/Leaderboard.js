@@ -111,6 +111,9 @@ const Leaderboard = () => {
   };
 
   const isCorrectPick = (gameId, pick) => {
+    if (gameId === '15' || gameId === '16') {
+      return 'neutral'; // Titans vs Dolphins and Lions vs Seahawks
+    }
     return correctTeams[gameId] === pick;
   };
 
@@ -151,13 +154,16 @@ const Leaderboard = () => {
                         <span className="score-badge">{entry.correctPicks}</span>
                       </div>
                     </td>
-                    {games.map((game) => (
-                      <td key={game.id} className="pick-cell">
-                        <div className={`pick-container ${isCorrectPick(game.id, entry.picks[game.id]) ? 'correct-pick' : 'incorrect-pick'}`}>
-                          <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
-                        </div>
-                      </td>
-                    ))}
+                    {games.map((game) => {
+                      const pickStatus = isCorrectPick(game.id, entry.picks[game.id]);
+                      return (
+                        <td key={game.id} className="pick-cell">
+                          <div className={`pick-container ${pickStatus === true ? 'correct-pick' : pickStatus === false ? 'incorrect-pick' : 'neutral-pick'}`}>
+                            <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
+                          </div>
+                        </td>
+                      );
+                    })}
                     <td className="prediction-cell">
                       {entry.tiebreaker.seahawks}-{entry.tiebreaker.lions}
                     </td>
