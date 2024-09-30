@@ -134,13 +134,13 @@ body {
   border: 1px solid #4CAF50;
 }
 
+.correct-pick .pick-team {
+  color: #4CAF50;
+}
+
 .incorrect-pick {
   background-color: rgba(244, 67, 54, 0.2) !important;
   border: 1px solid #F44336;
-}
-
-.correct-pick .pick-team {
-  color: #4CAF50;
 }
 
 .incorrect-pick .pick-team {
