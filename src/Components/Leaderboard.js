@@ -20,7 +20,9 @@ const Leaderboard = () => {
     '11': 'San Francisco 49ers',
     '12': 'Kansas City Chiefs',
     '13': 'Las Vegas Raiders',
-    '14': 'Baltimore Ravens'
+    '14': 'Baltimore Ravens',
+    '15': 'Tennessee Titans',
+    '16': 'Detroit Lions'
   };
 
   useEffect(() => {
@@ -111,9 +113,6 @@ const Leaderboard = () => {
   };
 
   const isCorrectPick = (gameId, pick) => {
-    if (gameId === '15' || gameId === '16') {
-      return 'neutral'; // Titans vs Dolphins and Lions vs Seahawks
-    }
     return correctTeams[gameId] === pick;
   };
 
