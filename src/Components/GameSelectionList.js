@@ -63,6 +63,12 @@ const GameSelectionList = () => {
     }
   }, [selectedPicks, gamesByDate]);
 
+  useEffect(() => {
+    // Expand the first date group by default
+    const firstDate = Object.keys(gamesByDate)[0];
+    setExpandedDates({ [firstDate]: true });
+  }, [gamesByDate]);
+
   const handlePickSelection = (gameId, team) => {
     setSelectedPicks(prev => ({ ...prev, [gameId]: team }));
   };
