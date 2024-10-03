@@ -141,7 +141,7 @@ const GameSelectionList = () => {
             </div>
           ) : (
             <div className="game-selection">
-              {Object.entries(gamesByDate).map(([date, games], index) => (
+              {Object.entries(gamesByDate).map(([date, games]) => (
                 <div key={date} className="date-group">
                   <h3 
                     className={`date-header ${expandedDates[date] ? 'expanded' : ''}`}
