@@ -11,6 +11,7 @@ const GameSelectionList = () => {
   const [expandedDates, setExpandedDates] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mondayScorePrediction, setMondayScorePrediction] = useState({ saints: '', chiefs: '' });
+  const [isFormComplete, setIsFormComplete] = useState(false);
 
   const getFormattedDate = (dateString) => {
     const date = new Date(dateString);
@@ -69,6 +70,14 @@ const GameSelectionList = () => {
     setExpandedDates({ [firstDate]: true });
   }, [gamesByDate]);
 
+  useEffect(() => {
+    const allGamesPicked = week5Games.every(game => selectedPicks[game.id]);
+    const mondayScorePredicted = mondayScorePrediction.saints !== '' && mondayScorePrediction.chiefs !== '';
+    const nameAndEmailFilled = name.trim() !== '' && email.trim() !== '';
+
+    setIsFormComplete(allGamesPicked && mondayScorePredicted && nameAndEmailFilled);
+  }, [selectedPicks, mondayScorePrediction, name, email, week5Games]);
+
   const handlePickSelection = (gameId, team) => {
     setSelectedPicks(prev => ({ ...prev, [gameId]: team }));
   };
@@ -82,6 +91,11 @@ const GameSelectionList = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isFormComplete) {
+      setSubmissionStatus('Please complete all picks and the Monday night score prediction before submitting.');
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmissionStatus('');
 
@@ -200,7 +214,7 @@ const GameSelectionList = () => {
               required
             />
           </div>
-          <button type="submit" disabled={isSubmitting}>
+          <button type="submit" disabled={isSubmitting || !isFormComplete}>
             {isSubmitting ? 'Submitting...' : 'Submit Picks'}
           </button>
         </form>
