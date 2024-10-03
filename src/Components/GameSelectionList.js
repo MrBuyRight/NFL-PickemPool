@@ -14,7 +14,7 @@ const GameSelectionList = () => {
   const [isFormComplete, setIsFormComplete] = useState(false);
 
   const getFormattedDate = (dateString) => {
-    const date = new Date(dateString);
+    const date = new Date(dateString + 'T00:00:00'); // Add time to ensure correct date
     return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
   };
 
@@ -36,14 +36,17 @@ const GameSelectionList = () => {
   ];
 
   const gamesByDate = useMemo(() => {
-    return week5Games.reduce((acc, game) => {
+    const groupedGames = week5Games.reduce((acc, game) => {
       const formattedDate = getFormattedDate(game.date);
+      console.log(`Original date: ${game.date}, Formatted date: ${formattedDate}`);
       if (!acc[formattedDate]) {
         acc[formattedDate] = [];
       }
       acc[formattedDate].push(game);
       return acc;
     }, {});
+    console.log('Grouped games:', groupedGames);
+    return groupedGames;
   }, []);
 
   const isPickingClosed = useMemo(() => {
