@@ -197,31 +197,35 @@ const GameSelectionList = () => {
             </div>
           )}
         </div>
-        <PickTracker selectedPicks={selectedPicks} games={week5Games} mondayScorePrediction={mondayScorePrediction} />
-        <form className="entry-form" onSubmit={handleSubmit}>
-          <div className="input-group">
-            <input
-              type="text"
-              placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <input
-              type="email"
-              placeholder="Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" disabled={isSubmitting || !isFormComplete}>
-            {isSubmitting ? 'Submitting...' : 'Submit Picks'}
-          </button>
-        </form>
-        {submissionStatus && <p className="submission-status">{submissionStatus}</p>}
+        {!isPickingClosed && (
+          <>
+            <PickTracker selectedPicks={selectedPicks} games={week5Games} mondayScorePrediction={mondayScorePrediction} />
+            <form className="entry-form" onSubmit={handleSubmit}>
+              <div className="input-group">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="input-group">
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" disabled={isSubmitting || !isFormComplete}>
+                {isSubmitting ? 'Submitting...' : 'Submit Picks'}
+              </button>
+            </form>
+            {submissionStatus && <p className="submission-status">{submissionStatus}</p>}
+          </>
+        )}
       </div>
     </div>
   );
