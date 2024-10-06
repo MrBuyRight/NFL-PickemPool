@@ -90,7 +90,7 @@ const Leaderboard = () => {
 
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">Week 5 Leaderboard</h2>
+      <h2 className="leaderboard-title">Week 5 Leaderboard ({entries.length} entries)</h2>
       {error ? (
         <p>Error: {error}</p>
       ) : entries.length === 0 ? (
@@ -115,7 +115,7 @@ const Leaderboard = () => {
               </thead>
               <tbody>
                 {entries.map((entry, index) => (
-                  <tr key={entry.name} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                  <tr key={`${entry.name}-${index}`} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
                     <td className="sticky-column rank-column">
                       {index + 1}
                     </td>
