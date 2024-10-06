@@ -7,20 +7,20 @@ const Leaderboard = () => {
   const [error, setError] = useState(null);
 
   const correctTeams = {
-    '1': 'Tampa Bay Buccaneers',
-    '2': 'Minnesota Vikings',
-    '3': 'Baltimore Ravens',
-    '4': 'Buffalo Bills',
-    '5': 'Chicago Bears',
-    '6': 'New England Patriots',
-    '7': 'Indianapolis Colts',
-    '8': 'Washington Commanders',
-    '9': 'San Francisco 49ers',
-    '10': 'Denver Broncos',
-    '11': 'Green Bay Packers',
-    '12': 'Seattle Seahawks',
-    '13': 'Dallas Cowboys',
-    '14': 'Kansas City Chiefs'
+    '1': '',
+    '2': '',
+    '3': '',
+    '4': '',
+    '5': '',
+    '6': '',
+    '7': '',
+    '8': '',
+    '9': '',
+    '10': '',
+    '11': '',
+    '12': '',
+    '13': '',
+    '14': ''
   };
 
   useEffect(() => {
@@ -28,15 +28,12 @@ const Leaderboard = () => {
       console.log('Week5entrydata:', Week5entrydata);
       const processedEntries = Week5entrydata.map((entry) => {
         console.log('Processing entry:', entry.name, entry);
-        const correctPicks = Object.entries(correctTeams).reduce((acc, [gameId, correctTeam]) => {
-          return acc + (entry.picks[gameId] === correctTeam ? 1 : 0);
-        }, 0);
         return {
           ...entry,
-          correctPicks: correctPicks
+          correctPicks: 0 // Set all correctPicks to 0
         };
       });
-      processedEntries.sort((a, b) => b.correctPicks - a.correctPicks);
+      // Remove the sorting since all entries will have 0 correct picks
       console.log('Processed entries:', processedEntries);
       setEntries(processedEntries);
     } catch (err) {
@@ -107,7 +104,7 @@ const Leaderboard = () => {
   };
 
   const isCorrectPick = (gameId, pick) => {
-    return correctTeams[gameId] === pick;
+    return null; // Return null for all picks since no games have been played
   };
 
   return (
