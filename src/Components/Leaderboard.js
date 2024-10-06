@@ -8,16 +8,12 @@ const Leaderboard = () => {
 
   useEffect(() => {
     try {
-      console.log('Week5entrydata:', Week5entrydata);
       console.log('Week5entrydata length:', Week5entrydata.length);
-      const processedEntries = Week5entrydata.map((entry, index) => {
-        console.log(`Processing entry ${index + 1}:`, entry.name);
-        return {
-          ...entry,
-          correctPicks: 0
-        };
-      });
-      console.log('Processed entries:', processedEntries);
+      const processedEntries = Week5entrydata.map((entry, index) => ({
+        ...entry,
+        correctPicks: 0,
+        id: index // Add a unique id for each entry
+      }));
       console.log('Processed entries length:', processedEntries.length);
       setEntries(processedEntries);
     } catch (err) {
@@ -121,35 +117,32 @@ const Leaderboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {entries.map((entry, index) => {
-                  console.log(`Rendering entry ${index + 1}:`, entry.name);
-                  return (
-                    <tr key={`${entry.name}-${index}`} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                      <td className="sticky-column rank-column">
-                        {index + 1}
-                      </td>
-                      <td className="sticky-column name-score-column">
-                        <div className="name-score-container">
-                          <span className="name">{abbreviateName(entry.name)}</span>
-                          <span className="score-badge">{entry.correctPicks}</span>
-                        </div>
-                      </td>
-                      {games.map((game) => {
-                        const pickStatus = isCorrectPick(game.id, entry.picks[game.id]);
-                        return (
-                          <td key={game.id} className="pick-cell">
-                            <div className={`pick-container ${pickStatus === true ? 'correct-pick' : pickStatus === false ? 'incorrect-pick' : 'neutral-pick'}`}>
-                              <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
-                            </div>
-                          </td>
-                        );
-                      })}
-                      <td className="prediction-cell">
-                        {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
-                      </td>
-                    </tr>
-                  );
-                })}
+                {entries.map((entry, index) => (
+                  <tr key={entry.id} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                    <td className="sticky-column rank-column">
+                      {index + 1}
+                    </td>
+                    <td className="sticky-column name-score-column">
+                      <div className="name-score-container">
+                        <span className="name">{abbreviateName(entry.name)}</span>
+                        <span className="score-badge">{entry.correctPicks}</span>
+                      </div>
+                    </td>
+                    {games.map((game) => {
+                      const pickStatus = isCorrectPick(game.id, entry.picks[game.id]);
+                      return (
+                        <td key={game.id} className="pick-cell">
+                          <div className={`pick-container ${pickStatus === true ? 'correct-pick' : pickStatus === false ? 'incorrect-pick' : 'neutral-pick'}`}>
+                            <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
+                          </div>
+                        </td>
+                      );
+                    })}
+                    <td className="prediction-cell">
+                      {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
