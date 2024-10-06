@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './Leaderboard.css';
 import Week5entrydata from './Week5entrydata';
 
@@ -26,30 +26,13 @@ const Leaderboard = () => {
     console.log('Entries state updated:', entries.length);
   }, [entries]);
 
-  const abbreviateName = (name) => {
+  const abbreviateName = useCallback((name) => {
     const nameParts = name.split(' ');
     if (nameParts.length === 1) return name;
     return `${nameParts[0]} ${nameParts[1].charAt(0)}.`;
-  };
+  }, []);
 
-  const games = [
-    { id: '1', teams: ['ATL', 'TB'] },
-    { id: '2', teams: ['MIN', 'NYJ'] },
-    { id: '3', teams: ['BAL', 'CIN'] },
-    { id: '4', teams: ['BUF', 'HOU'] },
-    { id: '5', teams: ['CHI', 'CAR'] },
-    { id: '6', teams: ['NE', 'MIA'] },
-    { id: '7', teams: ['IND', 'JAX'] },
-    { id: '8', teams: ['WAS', 'CLE'] },
-    { id: '9', teams: ['SF', 'ARI'] },
-    { id: '10', teams: ['DEN', 'LV'] },
-    { id: '11', teams: ['GB', 'LAR'] },
-    { id: '12', teams: ['SEA', 'PHI'] },
-    { id: '13', teams: ['DAL', 'PIT'] },
-    { id: '14', teams: ['KC', 'NO'] },
-  ];
-
-  const abbreviateTeam = (teamName) => {
+  const abbreviateTeam = useCallback((teamName) => {
     const abbreviations = {
       'Dallas Cowboys': 'DAL',
       'New York Giants': 'NYG',
@@ -85,11 +68,58 @@ const Leaderboard = () => {
       'Detroit Lions': 'DET'
     };
     return abbreviations[teamName] || teamName;
-  };
+  }, []);
 
-  const isCorrectPick = (gameId, pick) => {
+  const isCorrectPick = useCallback((gameId, pick) => {
     return null; // Return null for all picks since no games have been played
-  };
+  }, []);
+
+  const games = [
+    { id: '1', teams: ['ATL', 'TB'] },
+    { id: '2', teams: ['MIN', 'NYJ'] },
+    { id: '3', teams: ['BAL', 'CIN'] },
+    { id: '4', teams: ['BUF', 'HOU'] },
+    { id: '5', teams: ['CHI', 'CAR'] },
+    { id: '6', teams: ['NE', 'MIA'] },
+    { id: '7', teams: ['IND', 'JAX'] },
+    { id: '8', teams: ['WAS', 'CLE'] },
+    { id: '9', teams: ['SF', 'ARI'] },
+    { id: '10', teams: ['DEN', 'LV'] },
+    { id: '11', teams: ['GB', 'LAR'] },
+    { id: '12', teams: ['SEA', 'PHI'] },
+    { id: '13', teams: ['DAL', 'PIT'] },
+    { id: '14', teams: ['KC', 'NO'] },
+  ];
+
+  const renderEntries = useCallback(() => {
+    return entries.map((entry, index) => {
+      console.log(`Rendering entry ${index + 1}:`, entry.name);
+      return (
+        <tr key={entry.id} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+          <td className="sticky-column rank-column">{index + 1}</td>
+          <td className="sticky-column name-score-column">
+            <div className="name-score-container">
+              <span className="name">{abbreviateName(entry.name)}</span>
+              <span className="score-badge">{entry.correctPicks}</span>
+            </div>
+          </td>
+          {games.map((game) => {
+            const pickStatus = isCorrectPick(game.id, entry.picks[game.id]);
+            return (
+              <td key={game.id} className="pick-cell">
+                <div className={`pick-container ${pickStatus === true ? 'correct-pick' : pickStatus === false ? 'incorrect-pick' : 'neutral-pick'}`}>
+                  <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
+                </div>
+              </td>
+            );
+          })}
+          <td className="prediction-cell">
+            {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
+          </td>
+        </tr>
+      );
+    });
+  }, [entries, abbreviateName, abbreviateTeam, isCorrectPick]);
 
   return (
     <div className="leaderboard">
@@ -117,35 +147,7 @@ const Leaderboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {entries.map((entry, index) => {
-                  console.log(`Rendering entry ${index + 1}:`, entry.name);
-                  return (
-                    <tr key={entry.id} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                      <td className="sticky-column rank-column">
-                        {index + 1}
-                      </td>
-                      <td className="sticky-column name-score-column">
-                        <div className="name-score-container">
-                          <span className="name">{abbreviateName(entry.name)}</span>
-                          <span className="score-badge">{entry.correctPicks}</span>
-                        </div>
-                      </td>
-                      {games.map((game) => {
-                        const pickStatus = isCorrectPick(game.id, entry.picks[game.id]);
-                        return (
-                          <td key={game.id} className="pick-cell">
-                            <div className={`pick-container ${pickStatus === true ? 'correct-pick' : pickStatus === false ? 'incorrect-pick' : 'neutral-pick'}`}>
-                              <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
-                            </div>
-                          </td>
-                        );
-                      })}
-                      <td className="prediction-cell">
-                        {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
-                      </td>
-                    </tr>
-                  );
-                })}
+                {renderEntries()}
               </tbody>
             </table>
           </div>
