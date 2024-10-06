@@ -4,7 +4,7 @@ import Leaderboard from './Components/Leaderboard';
 import GameSelectionList from './Components/GameSelectionList';
 
 function App() {
-  const [activeView, setActiveView] = useState('gameSelection'); // Changed to 'gameSelection'
+  const [activeView, setActiveView] = useState('leaderboard'); // Changed to 'leaderboard'
 
   return (
     <div className="App">
@@ -12,24 +12,24 @@ function App() {
         <h1>NFL Pick'em Pool</h1>
         <nav>
           <button
+            className={activeView === 'leaderboard' ? 'active' : ''}
+            onClick={() => setActiveView('leaderboard')}
+          >
+            Week 5 Leaderboard
+          </button>
+          <button
             className={activeView === 'gameSelection' ? 'active' : ''}
             onClick={() => setActiveView('gameSelection')}
           >
             Make Picks
           </button>
-          <button
-            className={activeView === 'leaderboard' ? 'active' : ''}
-            onClick={() => setActiveView('leaderboard')}
-          >
-            Week 4 Leaderboard
-          </button>
         </nav>
       </header>
       <main className="App-main">
-        {activeView === 'gameSelection' ? (
-          <GameSelectionList />
-        ) : (
+        {activeView === 'leaderboard' ? (
           <Leaderboard />
+        ) : (
+          <GameSelectionList />
         )}
       </main>
     </div>

@@ -3,20 +3,17 @@ import './Leaderboard.css';
 import Week5entrydata from './Week5entrydata';
 
 const Leaderboard = () => {
-  console.log('Week5entrydata:', Week5entrydata);
-  console.log('Week5entrydata length:', Week5entrydata.length);
-
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     try {
+      console.log('Week5entrydata length:', Week5entrydata.length);
       const processedEntries = Week5entrydata.map((entry, index) => ({
         ...entry,
         correctPicks: 0,
         id: index
       }));
-      console.log('Processed entries:', processedEntries);
       console.log('Processed entries length:', processedEntries.length);
       setEntries(processedEntries);
     } catch (err) {
