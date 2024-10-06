@@ -6,35 +6,16 @@ const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
 
-  const correctTeams = {
-    '1': '',
-    '2': '',
-    '3': '',
-    '4': '',
-    '5': '',
-    '6': '',
-    '7': '',
-    '8': '',
-    '9': '',
-    '10': '',
-    '11': '',
-    '12': '',
-    '13': '',
-    '14': ''
-  };
-
   useEffect(() => {
     try {
-      console.log('Week5entrydata:', Week5entrydata);
+      console.log('Week5entrydata length:', Week5entrydata.length);
       const processedEntries = Week5entrydata.map((entry) => {
-        console.log('Processing entry:', entry.name, entry);
         return {
           ...entry,
           correctPicks: 0 // Set all correctPicks to 0
         };
       });
-      // Remove the sorting since all entries will have 0 correct picks
-      console.log('Processed entries:', processedEntries);
+      console.log('Processed entries length:', processedEntries.length);
       setEntries(processedEntries);
     } catch (err) {
       console.error('Error processing Week5entrydata:', err);
