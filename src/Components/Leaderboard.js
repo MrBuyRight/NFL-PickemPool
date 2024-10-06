@@ -1,42 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import week4EntryData from './Week4entrydata';
+import Week5entrydata from './Week5entrydata';
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
 
   const correctTeams = {
-    '1': 'Dallas Cowboys',
-    '2': 'Tampa Bay Buccaneers',
-    '3': 'Minnesota Vikings',
-    '4': 'Atlanta Falcons',
-    '5': 'Indianapolis Colts',
-    '6': 'Chicago Bears',
-    '7': 'Cincinnati Bengals',
-    '8': 'Houston Texans',
-    '9': 'Denver Broncos',
-    '10': 'Washington Commanders',
-    '11': 'San Francisco 49ers',
-    '12': 'Kansas City Chiefs',
-    '13': 'Las Vegas Raiders',
-    '14': 'Baltimore Ravens',
-    '15': 'Tennessee Titans',
-    '16': 'Detroit Lions'
+    '1': 'Tampa Bay Buccaneers',
+    '2': 'Minnesota Vikings',
+    '3': 'Baltimore Ravens',
+    '4': 'Buffalo Bills',
+    '5': 'Chicago Bears',
+    '6': 'New England Patriots',
+    '7': 'Indianapolis Colts',
+    '8': 'Washington Commanders',
+    '9': 'San Francisco 49ers',
+    '10': 'Denver Broncos',
+    '11': 'Green Bay Packers',
+    '12': 'Seattle Seahawks',
+    '13': 'Dallas Cowboys',
+    '14': 'Kansas City Chiefs'
   };
 
   useEffect(() => {
     try {
-      console.log('week4EntryData:', week4EntryData);
-      const processedEntries = Object.entries(week4EntryData).map(([name, data]) => {
-        console.log('Processing entry:', name, data);
+      console.log('Week5entrydata:', Week5entrydata);
+      const processedEntries = Week5entrydata.map((entry) => {
+        console.log('Processing entry:', entry.name, entry);
         const correctPicks = Object.entries(correctTeams).reduce((acc, [gameId, correctTeam]) => {
-          return acc + (data.picks[gameId] === correctTeam ? 1 : 0);
+          return acc + (entry.picks[gameId] === correctTeam ? 1 : 0);
         }, 0);
         return {
-          name,
-          picks: data.picks,
-          tiebreaker: data.tiebreaker,
+          ...entry,
           correctPicks: correctPicks
         };
       });
@@ -44,7 +40,7 @@ const Leaderboard = () => {
       console.log('Processed entries:', processedEntries);
       setEntries(processedEntries);
     } catch (err) {
-      console.error('Error processing Week4EntryData:', err);
+      console.error('Error processing Week5entrydata:', err);
       setError(err.message);
     }
   }, []);
@@ -56,22 +52,20 @@ const Leaderboard = () => {
   };
 
   const games = [
-    { id: '1', teams: ['DAL', 'NYG'] },
-    { id: '2', teams: ['PHI', 'TB'] },
-    { id: '3', teams: ['MIN', 'GB'] },
-    { id: '4', teams: ['NO', 'ATL'] },
-    { id: '5', teams: ['PIT', 'IND'] },
-    { id: '6', teams: ['LAR', 'CHI'] },
-    { id: '7', teams: ['CIN', 'CAR'] },
-    { id: '8', teams: ['JAX', 'HOU'] },
-    { id: '9', teams: ['DEN', 'NYJ'] },
-    { id: '10', teams: ['WAS', 'ARI'] },
-    { id: '11', teams: ['NE', 'SF'] },
-    { id: '12', teams: ['KC', 'LAC'] },
-    { id: '13', teams: ['CLE', 'LV'] },
-    { id: '14', teams: ['BUF', 'BAL'] },
-    { id: '15', teams: ['TEN', 'MIA'] },
-    { id: '16', teams: ['SEA', 'DET'] },
+    { id: '1', teams: ['ATL', 'TB'] },
+    { id: '2', teams: ['MIN', 'NYJ'] },
+    { id: '3', teams: ['BAL', 'CIN'] },
+    { id: '4', teams: ['BUF', 'HOU'] },
+    { id: '5', teams: ['CHI', 'CAR'] },
+    { id: '6', teams: ['NE', 'MIA'] },
+    { id: '7', teams: ['IND', 'JAX'] },
+    { id: '8', teams: ['WAS', 'CLE'] },
+    { id: '9', teams: ['SF', 'ARI'] },
+    { id: '10', teams: ['DEN', 'LV'] },
+    { id: '11', teams: ['GB', 'LAR'] },
+    { id: '12', teams: ['SEA', 'PHI'] },
+    { id: '13', teams: ['DAL', 'PIT'] },
+    { id: '14', teams: ['KC', 'NO'] },
   ];
 
   const abbreviateTeam = (teamName) => {
@@ -118,7 +112,7 @@ const Leaderboard = () => {
 
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">Week 4 Leaderboard</h2>
+      <h2 className="leaderboard-title">Week 5 Leaderboard</h2>
       {error ? (
         <p>Error: {error}</p>
       ) : entries.length === 0 ? (
@@ -138,7 +132,7 @@ const Leaderboard = () => {
                       </div>
                     </th>
                   ))}
-                  <th className="prediction-header">SEA-DET</th>
+                  <th className="prediction-header">KC-NO</th>
                 </tr>
               </thead>
               <tbody>
@@ -164,7 +158,7 @@ const Leaderboard = () => {
                       );
                     })}
                     <td className="prediction-cell">
-                      {entry.tiebreaker.seahawks}-{entry.tiebreaker.lions}
+                      {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
                     </td>
                   </tr>
                 ))}
