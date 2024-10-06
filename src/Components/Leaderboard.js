@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
 import Week5entrydata from './Week5entrydata';
 
@@ -9,70 +9,52 @@ const Leaderboard = () => {
   useEffect(() => {
     try {
       console.log('Week5entrydata length:', Week5entrydata.length);
-      const processedEntries = Week5entrydata.map((entry, index) => ({
-        ...entry,
-        correctPicks: 0,
-        id: index
-      }));
-      console.log('Processed entries length:', processedEntries.length);
-      setEntries(processedEntries);
+      setEntries(Week5entrydata);
     } catch (err) {
-      console.error('Error processing Week5entrydata:', err);
+      console.error('Error setting Week5entrydata:', err);
       setError(err.message);
     }
   }, []);
 
-  useEffect(() => {
-    console.log('Entries state updated:', entries.length);
-  }, [entries]);
-
-  const abbreviateName = useCallback((name) => {
+  const abbreviateName = (name) => {
     const nameParts = name.split(' ');
     if (nameParts.length === 1) return name;
     return `${nameParts[0]} ${nameParts[1].charAt(0)}.`;
-  }, []);
+  };
 
-  const abbreviateTeam = useCallback((teamName) => {
+  const abbreviateTeam = (teamName) => {
     const abbreviations = {
-      'Dallas Cowboys': 'DAL',
-      'New York Giants': 'NYG',
-      'Philadelphia Eagles': 'PHI',
       'Tampa Bay Buccaneers': 'TB',
       'Minnesota Vikings': 'MIN',
+      'Cincinnati Bengals': 'CIN',
+      'Buffalo Bills': 'BUF',
+      'Carolina Panthers': 'CAR',
+      'New England Patriots': 'NE',
+      'Jacksonville Jaguars': 'JAX',
+      'Cleveland Browns': 'CLE',
+      'San Francisco 49ers': 'SF',
+      'Denver Broncos': 'DEN',
       'Green Bay Packers': 'GB',
+      'Seattle Seahawks': 'SEA',
+      'Dallas Cowboys': 'DAL',
       'New Orleans Saints': 'NO',
       'Atlanta Falcons': 'ATL',
-      'Pittsburgh Steelers': 'PIT',
-      'Indianapolis Colts': 'IND',
-      'Los Angeles Rams': 'LAR',
-      'Chicago Bears': 'CHI',
-      'Cincinnati Bengals': 'CIN',
-      'Carolina Panthers': 'CAR',
-      'Jacksonville Jaguars': 'JAX',
-      'Houston Texans': 'HOU',
-      'Denver Broncos': 'DEN',
       'New York Jets': 'NYJ',
+      'Baltimore Ravens': 'BAL',
+      'Houston Texans': 'HOU',
+      'Chicago Bears': 'CHI',
+      'Miami Dolphins': 'MIA',
+      'Indianapolis Colts': 'IND',
       'Washington Commanders': 'WAS',
       'Arizona Cardinals': 'ARI',
-      'New England Patriots': 'NE',
-      'San Francisco 49ers': 'SF',
-      'Kansas City Chiefs': 'KC',
-      'Los Angeles Chargers': 'LAC',
-      'Cleveland Browns': 'CLE',
       'Las Vegas Raiders': 'LV',
-      'Buffalo Bills': 'BUF',
-      'Baltimore Ravens': 'BAL',
-      'Tennessee Titans': 'TEN',
-      'Miami Dolphins': 'MIA',
-      'Seattle Seahawks': 'SEA',
-      'Detroit Lions': 'DET'
+      'Los Angeles Rams': 'LAR',
+      'Philadelphia Eagles': 'PHI',
+      'Pittsburgh Steelers': 'PIT',
+      'Kansas City Chiefs': 'KC'
     };
     return abbreviations[teamName] || teamName;
-  }, []);
-
-  const isCorrectPick = useCallback((gameId, pick) => {
-    return null; // Return null for all picks since no games have been played
-  }, []);
+  };
 
   const games = [
     { id: '1', teams: ['ATL', 'TB'] },
@@ -90,36 +72,6 @@ const Leaderboard = () => {
     { id: '13', teams: ['DAL', 'PIT'] },
     { id: '14', teams: ['KC', 'NO'] },
   ];
-
-  const renderEntries = useCallback(() => {
-    return entries.map((entry, index) => {
-      console.log(`Rendering entry ${index + 1}:`, entry.name);
-      return (
-        <tr key={entry.id} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-          <td className="sticky-column rank-column">{index + 1}</td>
-          <td className="sticky-column name-score-column">
-            <div className="name-score-container">
-              <span className="name">{abbreviateName(entry.name)}</span>
-              <span className="score-badge">{entry.correctPicks}</span>
-            </div>
-          </td>
-          {games.map((game) => {
-            const pickStatus = isCorrectPick(game.id, entry.picks[game.id]);
-            return (
-              <td key={game.id} className="pick-cell">
-                <div className={`pick-container ${pickStatus === true ? 'correct-pick' : pickStatus === false ? 'incorrect-pick' : 'neutral-pick'}`}>
-                  <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
-                </div>
-              </td>
-            );
-          })}
-          <td className="prediction-cell">
-            {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
-          </td>
-        </tr>
-      );
-    });
-  }, [entries, abbreviateName, abbreviateTeam, isCorrectPick]);
 
   return (
     <div className="leaderboard">
@@ -147,7 +99,27 @@ const Leaderboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {renderEntries()}
+                {entries.map((entry, index) => (
+                  <tr key={index} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                    <td className="sticky-column rank-column">{index + 1}</td>
+                    <td className="sticky-column name-score-column">
+                      <div className="name-score-container">
+                        <span className="name">{abbreviateName(entry.name)}</span>
+                        <span className="score-badge">0</span>
+                      </div>
+                    </td>
+                    {games.map((game) => (
+                      <td key={game.id} className="pick-cell">
+                        <div className="pick-container neutral-pick">
+                          <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
+                        </div>
+                      </td>
+                    ))}
+                    <td className="prediction-cell">
+                      {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
