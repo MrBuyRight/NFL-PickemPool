@@ -83,6 +83,21 @@ body {
   border: 1px solid var(--border-color);
 }
 
+.sticky-column {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: var(--background-color);
+}
+
+.rank-column {
+  width: 40px;
+}
+
+.name-score-column {
+  width: 120px;
+}
+
 .pick-header {
   font-size: 0.8em;
   white-space: nowrap;
@@ -206,7 +221,7 @@ body {
 
   .leaderboard-table th,
   .leaderboard-table td {
-    padding: 6px;
+    padding: 4px;
   }
 
   .rank-column {

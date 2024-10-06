@@ -121,7 +121,7 @@ const Leaderboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {(entries.length > 0 ? entries : Week5entrydata).map((entry, index) => {
+                {entries.map((entry, index) => {
                   console.log(`Rendering entry ${index + 1}:`, entry.name);
                   return (
                     <tr key={`${entry.name}-${index}`} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
