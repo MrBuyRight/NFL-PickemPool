@@ -18,8 +18,9 @@ const Leaderboard = () => {
     '9': 'San Francisco 49ers',
     '10': 'Denver Broncos',
     '11': 'Green Bay Packers',
-    '12': 'Seattle Seahawks',
+    '12': 'New York Giants',
     '13': 'Dallas Cowboys',
+    '14': 'Kansas City Chiefs'
   };
 
   useEffect(() => {
