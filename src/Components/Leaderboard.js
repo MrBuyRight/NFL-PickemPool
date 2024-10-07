@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import Week5entrydata from './Week5entrydata';
+import Week5entries from './Week5entries';
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
@@ -8,10 +8,10 @@ const Leaderboard = () => {
 
   useEffect(() => {
     try {
-      console.log('Week5entrydata length:', Week5entrydata.length);
-      setEntries(Week5entrydata);
+      console.log('Week5entries length:', Week5entries.length);
+      setEntries(Week5entries);
     } catch (err) {
-      console.error('Error setting Week5entrydata:', err);
+      console.error('Error setting Week5entries:', err);
       setError(err.message);
     }
   }, []);
