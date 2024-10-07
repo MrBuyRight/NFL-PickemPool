@@ -8,6 +8,7 @@ const Leaderboard = () => {
 
   useEffect(() => {
     try {
+      console.log('Week5entries:', Week5entries);
       console.log('Week5entries length:', Week5entries.length);
       setEntries(Week5entries);
     } catch (err) {
@@ -15,6 +16,10 @@ const Leaderboard = () => {
       setError(err.message);
     }
   }, []);
+
+  useEffect(() => {
+    console.log('Entries state updated:', entries);
+  }, [entries]);
 
   const abbreviateName = (name) => {
     const nameParts = name.split(' ');

@@ -4,7 +4,12 @@ import Leaderboard from './Components/Leaderboard';
 import GameSelectionList from './Components/GameSelectionList';
 
 function App() {
-  const [activeView, setActiveView] = useState('leaderboard'); // Changed to 'leaderboard'
+  const [activeView, setActiveView] = useState('leaderboard');
+  const [error, setError] = useState(null);
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="App">
@@ -27,7 +32,9 @@ function App() {
       </header>
       <main className="App-main">
         {activeView === 'leaderboard' ? (
-          <Leaderboard />
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <Leaderboard />
+          </React.Suspense>
         ) : (
           <GameSelectionList />
         )}
