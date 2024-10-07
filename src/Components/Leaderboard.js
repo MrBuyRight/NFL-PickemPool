@@ -15,12 +15,12 @@ const Leaderboard = () => {
     '6': 'Miami Dolphins',
     '7': 'Jacksonville Jaguars',
     '8': 'Washington Commanders',
-    '9': 'San Francisco 49ers',
+    '9': 'Arizona Cardinals',
     '10': 'Denver Broncos',
     '11': 'Green Bay Packers',
     '12': 'New York Giants',
-    '13': 'Dallas Cowboys',
-    '14': 'Kansas City Chiefs'
+    '13': 'Dallas Cowboys'
+    // '14': 'Kansas City Chiefs' - removed
   };
 
   useEffect(() => {
