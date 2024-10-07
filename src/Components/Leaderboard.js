@@ -6,11 +6,33 @@ const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
 
+  const correctPicks = {
+    '1': 'Atlanta Falcons',
+    '2': 'Minnesota Vikings',
+    '3': 'Baltimore Ravens',
+    '4': 'Houston Texans',
+    '5': 'Chicago Bears',
+    '6': 'Miami Dolphins',
+    '7': 'Jacksonville Jaguars',
+    '8': 'Washington Commanders',
+    '9': 'San Francisco 49ers',
+    '10': 'Denver Broncos',
+    '11': 'Green Bay Packers',
+    '12': 'Seattle Seahawks',
+    '13': 'Dallas Cowboys',
+  };
+
   useEffect(() => {
     try {
       console.log('Week5entries:', Week5entries);
       console.log('Week5entries length:', Week5entries.length);
-      setEntries(Week5entries);
+      const scoredEntries = Week5entries.map(entry => ({
+        ...entry,
+        score: Object.keys(correctPicks).reduce((acc, gameId) => 
+          acc + (entry.picks[gameId] === correctPicks[gameId] ? 1 : 0), 0)
+      }));
+      scoredEntries.sort((a, b) => b.score - a.score);
+      setEntries(scoredEntries);
     } catch (err) {
       console.error('Error setting Week5entries:', err);
       setError(err.message);
@@ -110,12 +132,12 @@ const Leaderboard = () => {
                     <td className="sticky-column name-score-column">
                       <div className="name-score-container">
                         <span className="name">{abbreviateName(entry.name)}</span>
-                        <span className="score-badge">0</span>
+                        <span className="score-badge">{entry.score}</span>
                       </div>
                     </td>
                     {games.map((game) => (
                       <td key={game.id} className="pick-cell">
-                        <div className="pick-container neutral-pick">
+                        <div className={`pick-container ${entry.picks[game.id] === correctPicks[game.id] ? 'correct-pick' : 'incorrect-pick'}`}>
                           <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
                         </div>
                       </td>
