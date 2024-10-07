@@ -165,7 +165,8 @@ body {
   border: 1px solid #9E9E9E;
 }
 
-.neutral-pick .pick-team {
+.neutral-pick .pick-team,
+.neutral-pick.prediction-cell {
   color: #9E9E9E;
 }
 

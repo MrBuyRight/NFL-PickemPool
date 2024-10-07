@@ -138,12 +138,12 @@ const Leaderboard = () => {
                     </td>
                     {games.map((game) => (
                       <td key={game.id} className="pick-cell">
-                        <div className={`pick-container ${entry.picks[game.id] === correctPicks[game.id] ? 'correct-pick' : 'incorrect-pick'}`}>
+                        <div className={`pick-container ${game.id === '14' ? 'neutral-pick' : (entry.picks[game.id] === correctPicks[game.id] ? 'correct-pick' : 'incorrect-pick')}`}>
                           <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
                         </div>
                       </td>
                     ))}
-                    <td className="prediction-cell">
+                    <td className="prediction-cell neutral-pick">
                       {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
                     </td>
                   </tr>
