@@ -136,103 +136,95 @@ const GameSelectionList = () => {
 
   return (
     <div className="game-list-container">
-      <div className="game-and-picks-wrapper">
-        {showSuccessMessage && (
-          <div className="success-message">
-            <p>{submissionStatus}</p>
-          </div>
-        )}
-        <div className="game-list">
-          <h2>Week 6 Game Selection</h2>
-          {isPickingClosed ? (
-            <div className="picking-closed-message">
-              <p>Picking for Week 6 is now closed as games have started.</p>
-            </div>
-          ) : (
-            <div className="game-selection">
-              {Object.entries(gamesByDate).map(([date, games]) => (
-                <div key={date} className="date-group">
-                  <h3 
-                    className={`date-header ${expandedDates[date] ? 'expanded' : ''}`}
-                    onClick={() => toggleDateExpansion(date)}
-                  >
-                    {date}
-                  </h3>
-                  <div className={`game-grid ${expandedDates[date] ? 'expanded' : ''}`}>
-                    {games.map((game, gameIndex) => (
-                      <div key={game.id} className="game-card" style={{'--animation-order': gameIndex}}>
-                        <div className="game-time">{game.time}</div>
-                        <div className="teams-container">
-                          <button
-                            className={`team-button away ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
-                            onClick={() => handlePickSelection(game.id, game.awayTeam)}
-                          >
-                            {game.awayTeam}
-                          </button>
-                          <span className="at-symbol">@</span>
-                          <button
-                            className={`team-button home ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
-                            onClick={() => handlePickSelection(game.id, game.homeTeam)}
-                          >
-                            {game.homeTeam}
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-              <div className="score-prediction">
-                <h4>Monday Night Score Prediction</h4>
-                <div className="score-inputs">
-                  <input
-                    type="number"
-                    placeholder="BUF"
-                    value={mondayScorePrediction.bills}
-                    onChange={(e) => handleScorePredictionChange('bills', e.target.value)}
-                  />
-                  <span>-</span>
-                  <input
-                    type="number"
-                    placeholder="NYJ"
-                    value={mondayScorePrediction.jets}
-                    onChange={(e) => handleScorePredictionChange('jets', e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
+      <h2 className="week-title">Week 6 Game Selection</h2>
+      {showSuccessMessage && (
+        <div className="success-message">
+          <p>{submissionStatus}</p>
         </div>
-        {!isPickingClosed && (
-          <>
-            <PickTracker selectedPicks={selectedPicks} games={week6Games} mondayScorePrediction={mondayScorePrediction} />
-            <form className="entry-form" onSubmit={handleSubmit}>
-              <div className="input-group">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
+      )}
+      {isPickingClosed ? (
+        <div className="picking-closed-message">
+          <p>Picking for Week 6 is now closed as games have started.</p>
+        </div>
+      ) : (
+        <div className="game-selection">
+          {Object.entries(gamesByDate).map(([date, games]) => (
+            <div key={date} className="date-group">
+              <h3 
+                className={`date-header ${expandedDates[date] ? 'expanded' : ''}`}
+                onClick={() => toggleDateExpansion(date)}
+              >
+                {date} <span className="expand-icon">{expandedDates[date] ? '▼' : '▶'}</span>
+              </h3>
+              <div className={`game-grid ${expandedDates[date] ? 'expanded' : ''}`}>
+                {games.map((game, gameIndex) => (
+                  <div key={game.id} className="game-card" style={{'--animation-order': gameIndex}}>
+                    <div className="game-time">{game.time}</div>
+                    <div className="teams-container">
+                      <button
+                        className={`team-button away ${selectedPicks[game.id] === game.awayTeam ? 'selected' : ''}`}
+                        onClick={() => handlePickSelection(game.id, game.awayTeam)}
+                      >
+                        {game.awayTeam}
+                      </button>
+                      <span className="at-symbol">@</span>
+                      <button
+                        className={`team-button home ${selectedPicks[game.id] === game.homeTeam ? 'selected' : ''}`}
+                        onClick={() => handlePickSelection(game.id, game.homeTeam)}
+                      >
+                        {game.homeTeam}
+                      </button>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="input-group">
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <button type="submit" disabled={isSubmitting || !isFormComplete}>
-                {isSubmitting ? 'Submitting...' : 'Submit Picks'}
-              </button>
-            </form>
-            {submissionStatus && <p className="submission-status">{submissionStatus}</p>}
-          </>
-        )}
-      </div>
+            </div>
+          ))}
+          <div className="score-prediction">
+            <h4>Monday Night Score Prediction</h4>
+            <div className="score-inputs">
+              <input
+                type="number"
+                placeholder="BUF"
+                value={mondayScorePrediction.bills}
+                onChange={(e) => handleScorePredictionChange('bills', e.target.value)}
+              />
+              <span>-</span>
+              <input
+                type="number"
+                placeholder="NYJ"
+                value={mondayScorePrediction.jets}
+                onChange={(e) => handleScorePredictionChange('jets', e.target.value)}
+              />
+            </div>
+          </div>
+          <PickTracker selectedPicks={selectedPicks} games={week6Games} mondayScorePrediction={mondayScorePrediction} />
+          <form className="entry-form" onSubmit={handleSubmit}>
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="email"
+                placeholder="Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" disabled={isSubmitting || !isFormComplete}>
+              {isSubmitting ? 'Submitting...' : 'Submit Picks'}
+            </button>
+          </form>
+          {submissionStatus && <p className="submission-status">{submissionStatus}</p>}
+        </div>
+      )}
     </div>
   );
 };
