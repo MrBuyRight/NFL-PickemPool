@@ -12,6 +12,7 @@ const GameSelectionList = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [mondayScorePrediction, setMondayScorePrediction] = useState({ bills: '', jets: '' });
   const [isFormComplete, setIsFormComplete] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const getFormattedDate = (dateString) => {
     const date = new Date(dateString + 'T00:00:00');
@@ -94,14 +95,7 @@ const GameSelectionList = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isFormComplete) {
-      setSubmissionStatus('Please complete all picks and the Monday night score prediction before submitting.');
-      return;
-    }
-
     setIsSubmitting(true);
-    setSubmissionStatus('');
-
     try {
       const { data, error } = await supabase
         .from('entries')
@@ -117,10 +111,17 @@ const GameSelectionList = () => {
       if (error) throw error;
 
       setSubmissionStatus('Picks submitted successfully!');
+      setShowSuccessMessage(true);
+      setSelectedPicks({});
       setName('');
       setEmail('');
-      setSelectedPicks({});
       setMondayScorePrediction({ bills: '', jets: '' });
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+        setSubmissionStatus('');
+      }, 5000);
     } catch (error) {
       console.error('Error submitting picks:', error);
       setSubmissionStatus(`Error submitting picks: ${error.message}`);
@@ -136,6 +137,11 @@ const GameSelectionList = () => {
   return (
     <div className="game-list-container">
       <div className="game-and-picks-wrapper">
+        {showSuccessMessage && (
+          <div className="success-message">
+            <p>{submissionStatus}</p>
+          </div>
+        )}
         <div className="game-list">
           <h2>Week 6 Game Selection</h2>
           {isPickingClosed ? (

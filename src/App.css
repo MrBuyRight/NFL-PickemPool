@@ -1,20 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
 :root {
-  --primary-color: #121212;
-  --secondary-color: #1e1e1e;
-  --accent-color: #3700B3;
-  --highlight-color: #03DAC6;
+  --primary-color: #1e1e1e;
+  --secondary-color: #2a2a2a;
+  --background-color: #121212;
   --text-color: #ffffff;
-  --text-secondary-color: #b3b3b3;
-  --surface-color: #2c2c2c;
+  --accent-color: #4CAF50;
   --border-color: #333333;
-  --error-color: #CF6679;
-  --correct-pick-bg: #1B5E20;
-  --correct-pick-text: #ffffff;
-  --wrong-pick-bg: #B71C1C;
-  --wrong-pick-text: #ffffff;
-  --spacing-unit: 16px;
+  --hover-color: #3a3a3a;
 }
 
 * {
@@ -35,104 +28,29 @@ body {
   font-family: 'Lato', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
-  line-height: 1.6;
+  margin: 0;
+  padding: 0;
 }
 
 .App {
-  text-align: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--spacing-unit);
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato', sans-serif;
-}
-
-h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--highlight-color);
-  margin-bottom: calc(var(--spacing-unit) * 2);
-  animation: fadeIn 1s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--secondary-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent-color);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--highlight-color);
-}
-
-.error-message {
-  color: var(--error-color);
-  font-weight: 600;
-  margin-top: var(--spacing-unit);
-}
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  .App {
-    padding: calc(var(--spacing-unit) / 2);
-  }
+  min-height: 100vh;
 }
 
 .App-header {
+  background-color: var(--primary-color);
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  background-color: var(--primary-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .App-header h1 {
-  font-family: 'Lato', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  font-weight: 700;
-  font-size: 2.5rem;
   margin: 0;
-  letter-spacing: -0.5px;
-  text-transform: uppercase;
-  background: linear-gradient(45deg, #4CAF50, #2196F3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-@media (max-width: 768px) {
-  .App-header h1 {
-    font-size: 2rem;
-  }
-}
-
-.view-toggle {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  font-size: 1.5rem;
+  color: var(--accent-color);
 }
 
 .toggle-button {
@@ -143,13 +61,42 @@ h1 {
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .toggle-button:hover {
-  background-color: var(--highlight-color);
+  background-color: var(--hover-color);
+  transform: translateY(-2px);
 }
 
-main {
-  animation: fadeIn 0.3s ease-out;
+.App-main {
+  flex-grow: 1;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  .App-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .App-header h1 {
+    margin-bottom: 1rem;
+  }
+
+  .toggle-button {
+    width: 100%;
+  }
 }

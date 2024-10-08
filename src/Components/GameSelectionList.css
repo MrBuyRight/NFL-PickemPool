@@ -13,12 +13,17 @@
 .game-list {
     background-color: var(--surface-color);
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
     padding: var(--spacing-unit);
     margin-bottom: var(--spacing-unit);
     overflow-y: auto;
     max-height: none;
     animation: slideIn 0.5s ease-out;
+    transition: box-shadow 0.3s ease;
+}
+
+.game-list:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 .date-header {
@@ -31,22 +36,16 @@
     font-weight: 600;
     cursor: pointer;
     user-select: none;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 1.1rem;
 }
 
-.date-header::after {
-    content: '▶';
-    font-size: 0.8em;
-    transition: transform 0.3s ease;
-}
-
-.date-header.expanded::after {
-    content: '▼';
-    transform: rotate(0deg);
+.date-header:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
 }
 
 .game-grid {
@@ -101,7 +100,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, transform 0.2s ease;
     font-weight: 600;
     flex: 1;
     margin: 0 calc(var(--spacing-unit) / 4);
@@ -116,6 +115,7 @@
 
 .team-button:hover {
     background-color: var(--accent-color);
+    transform: scale(1.05);
 }
 
 .team-button.selected {
@@ -206,13 +206,14 @@
     color: var(--primary-color);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, transform 0.2s ease;
     margin-top: var(--spacing-unit);
 }
 
 .entry-form button:hover:not(:disabled) {
     background-color: var(--accent-color);
     color: var(--text-color);
+    transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
@@ -264,6 +265,17 @@
 @keyframes slideIn {
     from { transform: translateX(-20px); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
+}
+
+.success-message {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: var(--spacing-unit);
+    border-radius: 8px;
+    margin-bottom: var(--spacing-unit);
+    font-weight: 600;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
 }
 
 .picking-closed-message {

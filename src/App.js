@@ -18,9 +18,9 @@ function App() {
           {showLeaderboard ? 'Make Picks' : 'View Leaderboard'}
         </button>
       </header>
-      <main>
+      <main className="App-main">
         {showLeaderboard ? (
-          <Suspense fallback={<div>Loading Leaderboard...</div>}>
+          <Suspense fallback={<div className="loading">Loading Leaderboard...</div>}>
             <Leaderboard />
           </Suspense>
         ) : (
