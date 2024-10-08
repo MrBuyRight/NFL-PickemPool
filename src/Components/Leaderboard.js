@@ -19,8 +19,8 @@ const Leaderboard = () => {
     '10': 'Denver Broncos',
     '11': 'Green Bay Packers',
     '12': 'New York Giants',
-    '13': 'Dallas Cowboys'
-    // '14': 'Kansas City Chiefs' - removed
+    '13': 'Dallas Cowboys',
+    '14': 'Kansas City Chiefs' // Added Chiefs as correct pick
   };
 
   useEffect(() => {
@@ -138,12 +138,12 @@ const Leaderboard = () => {
                     </td>
                     {games.map((game) => (
                       <td key={game.id} className="pick-cell">
-                        <div className={`pick-container ${game.id === '14' ? 'neutral-pick' : (entry.picks[game.id] === correctPicks[game.id] ? 'correct-pick' : 'incorrect-pick')}`}>
+                        <div className={`pick-container ${entry.picks[game.id] === correctPicks[game.id] ? 'correct-pick' : 'incorrect-pick'}`}>
                           <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
                         </div>
                       </td>
                     ))}
-                    <td className="prediction-cell neutral-pick">
+                    <td className="prediction-cell">
                       {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
                     </td>
                   </tr>
