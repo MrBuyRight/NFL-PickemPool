@@ -1,19 +1,31 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import './App.css';
 import GameSelectionList from './Components/GameSelectionList';
 const Leaderboard = React.lazy(() => import('./Components/Leaderboard'));
 
 function App() {
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+
+  const toggleView = () => {
+    setShowLeaderboard(!showLeaderboard);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>NFL Pick'em Pool</h1>
+        <button onClick={toggleView} className="toggle-button">
+          {showLeaderboard ? 'Make Picks' : 'View Leaderboard'}
+        </button>
       </header>
       <main>
-        <GameSelectionList />
-        <Suspense fallback={<div>Loading Leaderboard...</div>}>
-          <Leaderboard />
-        </Suspense>
+        {showLeaderboard ? (
+          <Suspense fallback={<div>Loading Leaderboard...</div>}>
+            <Leaderboard />
+          </Suspense>
+        ) : (
+          <GameSelectionList />
+        )}
       </main>
     </div>
   );
