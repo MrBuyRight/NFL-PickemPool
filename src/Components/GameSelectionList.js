@@ -10,33 +10,33 @@ const GameSelectionList = () => {
   const [submissionStatus, setSubmissionStatus] = useState('');
   const [expandedDates, setExpandedDates] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [mondayScorePrediction, setMondayScorePrediction] = useState({ saints: '', chiefs: '' });
+  const [mondayScorePrediction, setMondayScorePrediction] = useState({ bills: '', jets: '' });
   const [isFormComplete, setIsFormComplete] = useState(false);
 
   const getFormattedDate = (dateString) => {
-    const date = new Date(dateString + 'T00:00:00'); // Add time to ensure correct date
+    const date = new Date(dateString + 'T00:00:00');
     return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
   };
 
-  const week5Games = [
-    { id: 1, awayTeam: 'Tampa Bay Buccaneers', homeTeam: 'Atlanta Falcons', date: '2024-10-03', time: '8:15pm ET' },
-    { id: 2, awayTeam: 'New York Jets', homeTeam: 'Minnesota Vikings', date: '2024-10-06', time: '9:30am ET' },
-    { id: 3, awayTeam: 'Baltimore Ravens', homeTeam: 'Cincinnati Bengals', date: '2024-10-06', time: '1:00pm ET' },
-    { id: 4, awayTeam: 'Buffalo Bills', homeTeam: 'Houston Texans', date: '2024-10-06', time: '1:00pm ET' },
-    { id: 5, awayTeam: 'Carolina Panthers', homeTeam: 'Chicago Bears', date: '2024-10-06', time: '1:00pm ET' },
-    { id: 6, awayTeam: 'Miami Dolphins', homeTeam: 'New England Patriots', date: '2024-10-06', time: '1:00pm ET' },
-    { id: 7, awayTeam: 'Indianapolis Colts', homeTeam: 'Jacksonville Jaguars', date: '2024-10-06', time: '1:00pm ET' },
-    { id: 8, awayTeam: 'Cleveland Browns', homeTeam: 'Washington Commanders', date: '2024-10-06', time: '1:00pm ET' },
-    { id: 9, awayTeam: 'Arizona Cardinals', homeTeam: 'San Francisco 49ers', date: '2024-10-06', time: '4:05pm ET' },
-    { id: 10, awayTeam: 'Las Vegas Raiders', homeTeam: 'Denver Broncos', date: '2024-10-06', time: '4:05pm ET' },
-    { id: 11, awayTeam: 'Green Bay Packers', homeTeam: 'Los Angeles Rams', date: '2024-10-06', time: '4:25pm ET' },
-    { id: 12, awayTeam: 'New York Giants', homeTeam: 'Seattle Seahawks', date: '2024-10-06', time: '4:25pm ET' },
-    { id: 13, awayTeam: 'Dallas Cowboys', homeTeam: 'Pittsburgh Steelers', date: '2024-10-06', time: '8:20pm ET' },
-    { id: 14, awayTeam: 'New Orleans Saints', homeTeam: 'Kansas City Chiefs', date: '2024-10-07', time: '8:15pm ET' },
+  const week6Games = [
+    { id: 1, awayTeam: 'San Francisco 49ers', homeTeam: 'Seattle Seahawks', date: '2024-10-10', time: '8:15pm ET' },
+    { id: 2, awayTeam: 'Jacksonville Jaguars', homeTeam: 'Chicago Bears', date: '2024-10-13', time: '9:30am ET' },
+    { id: 3, awayTeam: 'Washington Commanders', homeTeam: 'Baltimore Ravens', date: '2024-10-13', time: '1:00pm ET' },
+    { id: 4, awayTeam: 'Cleveland Browns', homeTeam: 'Philadelphia Eagles', date: '2024-10-13', time: '1:00pm ET' },
+    { id: 5, awayTeam: 'Arizona Cardinals', homeTeam: 'Green Bay Packers', date: '2024-10-13', time: '1:00pm ET' },
+    { id: 6, awayTeam: 'Indianapolis Colts', homeTeam: 'Tennessee Titans', date: '2024-10-13', time: '1:00pm ET' },
+    { id: 7, awayTeam: 'Houston Texans', homeTeam: 'New England Patriots', date: '2024-10-13', time: '1:00pm ET' },
+    { id: 8, awayTeam: 'Tampa Bay Buccaneers', homeTeam: 'New Orleans Saints', date: '2024-10-13', time: '1:00pm ET' },
+    { id: 9, awayTeam: 'Pittsburgh Steelers', homeTeam: 'Las Vegas Raiders', date: '2024-10-13', time: '4:05pm ET' },
+    { id: 10, awayTeam: 'Los Angeles Chargers', homeTeam: 'Denver Broncos', date: '2024-10-13', time: '4:05pm ET' },
+    { id: 11, awayTeam: 'Atlanta Falcons', homeTeam: 'Carolina Panthers', date: '2024-10-13', time: '4:25pm ET' },
+    { id: 12, awayTeam: 'Detroit Lions', homeTeam: 'Dallas Cowboys', date: '2024-10-13', time: '4:25pm ET' },
+    { id: 13, awayTeam: 'Cincinnati Bengals', homeTeam: 'New York Giants', date: '2024-10-13', time: '8:20pm ET' },
+    { id: 14, awayTeam: 'Buffalo Bills', homeTeam: 'New York Jets', date: '2024-10-14', time: '8:15pm ET' },
   ];
 
   const gamesByDate = useMemo(() => {
-    const groupedGames = week5Games.reduce((acc, game) => {
+    const groupedGames = week6Games.reduce((acc, game) => {
       const formattedDate = getFormattedDate(game.date);
       console.log(`Original date: ${game.date}, Formatted date: ${formattedDate}`);
       if (!acc[formattedDate]) {
@@ -51,7 +51,7 @@ const GameSelectionList = () => {
 
   const isPickingClosed = useMemo(() => {
     const now = new Date();
-    const firstGameDate = new Date('2024-10-03T20:15:00-04:00'); // First game of Week 5
+    const firstGameDate = new Date('2024-10-10T20:15:00-04:00'); // First game of Week 6
     return now >= firstGameDate;
   }, []);
 
@@ -74,12 +74,12 @@ const GameSelectionList = () => {
   }, [gamesByDate]);
 
   useEffect(() => {
-    const allGamesPicked = week5Games.every(game => selectedPicks[game.id]);
-    const mondayScorePredicted = mondayScorePrediction.saints !== '' && mondayScorePrediction.chiefs !== '';
+    const allGamesPicked = week6Games.every(game => selectedPicks[game.id]);
+    const mondayScorePredicted = mondayScorePrediction.bills !== '' && mondayScorePrediction.jets !== '';
     const nameAndEmailFilled = name.trim() !== '' && email.trim() !== '';
 
     setIsFormComplete(allGamesPicked && mondayScorePredicted && nameAndEmailFilled);
-  }, [selectedPicks, mondayScorePrediction, name, email, week5Games]);
+  }, [selectedPicks, mondayScorePrediction, name, email, week6Games]);
 
   const handlePickSelection = (gameId, team) => {
     setSelectedPicks(prev => ({ ...prev, [gameId]: team }));
@@ -120,7 +120,7 @@ const GameSelectionList = () => {
       setName('');
       setEmail('');
       setSelectedPicks({});
-      setMondayScorePrediction({ saints: '', chiefs: '' });
+      setMondayScorePrediction({ bills: '', jets: '' });
     } catch (error) {
       console.error('Error submitting picks:', error);
       setSubmissionStatus(`Error submitting picks: ${error.message}`);
@@ -137,10 +137,10 @@ const GameSelectionList = () => {
     <div className="game-list-container">
       <div className="game-and-picks-wrapper">
         <div className="game-list">
-          <h2>Week 5 Game Selection</h2>
+          <h2>Week 6 Game Selection</h2>
           {isPickingClosed ? (
             <div className="picking-closed-message">
-              <p>Picking for Week 5 is now closed as games have started.</p>
+              <p>Picking for Week 6 is now closed as games have started.</p>
             </div>
           ) : (
             <div className="game-selection">
@@ -181,16 +181,16 @@ const GameSelectionList = () => {
                 <div className="score-inputs">
                   <input
                     type="number"
-                    placeholder="NO"
-                    value={mondayScorePrediction.saints}
-                    onChange={(e) => handleScorePredictionChange('saints', e.target.value)}
+                    placeholder="BUF"
+                    value={mondayScorePrediction.bills}
+                    onChange={(e) => handleScorePredictionChange('bills', e.target.value)}
                   />
                   <span>-</span>
                   <input
                     type="number"
-                    placeholder="KC"
-                    value={mondayScorePrediction.chiefs}
-                    onChange={(e) => handleScorePredictionChange('chiefs', e.target.value)}
+                    placeholder="NYJ"
+                    value={mondayScorePrediction.jets}
+                    onChange={(e) => handleScorePredictionChange('jets', e.target.value)}
                   />
                 </div>
               </div>
@@ -199,7 +199,7 @@ const GameSelectionList = () => {
         </div>
         {!isPickingClosed && (
           <>
-            <PickTracker selectedPicks={selectedPicks} games={week5Games} mondayScorePrediction={mondayScorePrediction} />
+            <PickTracker selectedPicks={selectedPicks} games={week6Games} mondayScorePrediction={mondayScorePrediction} />
             <form className="entry-form" onSubmit={handleSubmit}>
               <div className="input-group">
                 <input
