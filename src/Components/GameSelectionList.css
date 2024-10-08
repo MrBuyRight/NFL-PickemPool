@@ -1,10 +1,22 @@
+:root {
+  --primary-color: #121212;
+  --secondary-color: #1e1e1e;
+  --surface-color: #2c2c2c;
+  --text-color: #ffffff;
+  --text-secondary-color: #b0b0b0;
+  --accent-color: #bb86fc;
+  --highlight-color: #03dac6;
+  --error-color: #cf6679;
+  --border-color: #333333;
+}
+
 .game-list-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: var(--surface-color);
+  background-color: var(--secondary-color);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .week-title {
@@ -18,7 +30,7 @@
 }
 
 .date-header {
-  background-color: var(--secondary-color);
+  background-color: var(--surface-color);
   color: var(--text-color);
   padding: 10px 15px;
   border-radius: 4px;
@@ -30,6 +42,7 @@
 
 .expand-icon {
   font-size: 0.8em;
+  color: var(--text-secondary-color);
 }
 
 .game-grid {
@@ -67,15 +80,17 @@
   background-color: var(--secondary-color);
   color: var(--text-color);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .team-button:hover {
   background-color: var(--accent-color);
+  transform: translateY(-2px);
 }
 
 .team-button.selected {
-  background-color: var(--accent-color);
+  background-color: var(--highlight-color);
+  color: var(--primary-color);
   font-weight: bold;
 }
 
@@ -87,6 +102,7 @@
 .score-prediction {
   margin-top: 30px;
   text-align: center;
+  color: var(--text-color);
 }
 
 .score-inputs {
@@ -100,6 +116,9 @@
   width: 60px;
   padding: 5px;
   text-align: center;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
 }
 
 .entry-form {
@@ -123,15 +142,16 @@
   width: 100%;
   padding: 10px;
   background-color: var(--accent-color);
-  color: var(--text-color);
+  color: var(--primary-color);
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .entry-form button:hover:not(:disabled) {
   background-color: var(--highlight-color);
+  transform: translateY(-2px);
 }
 
 .entry-form button:disabled {
@@ -142,7 +162,7 @@
 .success-message,
 .picking-closed-message {
   background-color: var(--accent-color);
-  color: var(--text-color);
+  color: var(--primary-color);
   padding: 15px;
   border-radius: 4px;
   margin-bottom: 20px;
@@ -152,7 +172,7 @@
 .submission-status {
   margin-top: 15px;
   text-align: center;
-  color: var(--accent-color);
+  color: var(--highlight-color);
 }
 
 @media (max-width: 600px) {
