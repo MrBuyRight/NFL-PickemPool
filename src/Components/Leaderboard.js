@@ -13,7 +13,13 @@ const Leaderboard = () => {
   useEffect(() => {
     try {
       console.log('Week6entries:', Week6entries);
-      console.log('Week6entries length:', Week6entries.length);
+      console.log('Week6entries type:', typeof Week6entries);
+      console.log('Is Week6entries an array?', Array.isArray(Week6entries));
+      
+      if (!Array.isArray(Week6entries)) {
+        throw new Error('Week6entries is not an array');
+      }
+
       const scoredEntries = Week6entries.map(entry => ({
         ...entry,
         score: Object.keys(correctPicks).reduce((acc, gameId) => 
@@ -22,7 +28,7 @@ const Leaderboard = () => {
       scoredEntries.sort((a, b) => b.score - a.score);
       setEntries(scoredEntries);
     } catch (err) {
-      console.error('Error setting Week6entries:', err);
+      console.error('Error processing Week6entries:', err);
       setError(err.message);
     }
   }, []);
