@@ -4,7 +4,7 @@ import GameSelectionList from './Components/GameSelectionList';
 const Leaderboard = React.lazy(() => import('./Components/Leaderboard'));
 
 function App() {
-  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(true);  // Changed to true
 
   const toggleView = () => {
     setShowLeaderboard(!showLeaderboard);
