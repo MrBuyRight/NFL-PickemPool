@@ -1,33 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import Week5entries from './Week5entries';
+import Week6entries from './Week6entrydata';
 
 const Leaderboard = () => {
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
 
   const correctPicks = {
-    '1': 'Atlanta Falcons',
-    '2': 'Minnesota Vikings',
-    '3': 'Baltimore Ravens',
-    '4': 'Houston Texans',
-    '5': 'Chicago Bears',
-    '6': 'Miami Dolphins',
-    '7': 'Jacksonville Jaguars',
-    '8': 'Washington Commanders',
-    '9': 'Arizona Cardinals',
-    '10': 'Denver Broncos',
-    '11': 'Green Bay Packers',
-    '12': 'New York Giants',
-    '13': 'Dallas Cowboys',
-    '14': 'Kansas City Chiefs' // Added Chiefs as correct pick
+    '1': 'San Francisco 49ers',
   };
 
   useEffect(() => {
     try {
-      console.log('Week5entries:', Week5entries);
-      console.log('Week5entries length:', Week5entries.length);
-      const scoredEntries = Week5entries.map(entry => ({
+      console.log('Week6entries:', Week6entries);
+      console.log('Week6entries length:', Week6entries.length);
+      const scoredEntries = Week6entries.map(entry => ({
         ...entry,
         score: Object.keys(correctPicks).reduce((acc, gameId) => 
           acc + (entry.picks[gameId] === correctPicks[gameId] ? 1 : 0), 0)
@@ -35,7 +22,7 @@ const Leaderboard = () => {
       scoredEntries.sort((a, b) => b.score - a.score);
       setEntries(scoredEntries);
     } catch (err) {
-      console.error('Error setting Week5entries:', err);
+      console.error('Error setting Week6entries:', err);
       setError(err.message);
     }
   }, []);
@@ -52,58 +39,58 @@ const Leaderboard = () => {
 
   const abbreviateTeam = (teamName) => {
     const abbreviations = {
-      'Tampa Bay Buccaneers': 'TB',
-      'Minnesota Vikings': 'MIN',
-      'Cincinnati Bengals': 'CIN',
-      'Buffalo Bills': 'BUF',
-      'Carolina Panthers': 'CAR',
-      'New England Patriots': 'NE',
-      'Jacksonville Jaguars': 'JAX',
-      'Cleveland Browns': 'CLE',
       'San Francisco 49ers': 'SF',
-      'Denver Broncos': 'DEN',
-      'Green Bay Packers': 'GB',
       'Seattle Seahawks': 'SEA',
-      'Dallas Cowboys': 'DAL',
-      'New Orleans Saints': 'NO',
-      'Atlanta Falcons': 'ATL',
-      'New York Jets': 'NYJ',
-      'Baltimore Ravens': 'BAL',
-      'Houston Texans': 'HOU',
       'Chicago Bears': 'CHI',
-      'Miami Dolphins': 'MIA',
-      'Indianapolis Colts': 'IND',
+      'Jacksonville Jaguars': 'JAX',
+      'Baltimore Ravens': 'BAL',
       'Washington Commanders': 'WAS',
-      'Arizona Cardinals': 'ARI',
-      'Las Vegas Raiders': 'LV',
-      'Los Angeles Rams': 'LAR',
       'Philadelphia Eagles': 'PHI',
+      'Cleveland Browns': 'CLE',
+      'Green Bay Packers': 'GB',
+      'Arizona Cardinals': 'ARI',
+      'Indianapolis Colts': 'IND',
+      'Tennessee Titans': 'TEN',
+      'Houston Texans': 'HOU',
+      'New England Patriots': 'NE',
+      'Tampa Bay Buccaneers': 'TB',
+      'New Orleans Saints': 'NO',
       'Pittsburgh Steelers': 'PIT',
-      'Kansas City Chiefs': 'KC'
+      'Las Vegas Raiders': 'LV',
+      'Denver Broncos': 'DEN',
+      'Los Angeles Chargers': 'LAC',
+      'Atlanta Falcons': 'ATL',
+      'Carolina Panthers': 'CAR',
+      'Detroit Lions': 'DET',
+      'Dallas Cowboys': 'DAL',
+      'Cincinnati Bengals': 'CIN',
+      'New York Giants': 'NYG',
+      'Buffalo Bills': 'BUF',
+      'New York Jets': 'NYJ'
     };
     return abbreviations[teamName] || teamName;
   };
 
   const games = [
-    { id: '1', teams: ['ATL', 'TB'] },
-    { id: '2', teams: ['MIN', 'NYJ'] },
-    { id: '3', teams: ['BAL', 'CIN'] },
-    { id: '4', teams: ['BUF', 'HOU'] },
-    { id: '5', teams: ['CHI', 'CAR'] },
-    { id: '6', teams: ['NE', 'MIA'] },
-    { id: '7', teams: ['IND', 'JAX'] },
-    { id: '8', teams: ['WAS', 'CLE'] },
-    { id: '9', teams: ['SF', 'ARI'] },
-    { id: '10', teams: ['DEN', 'LV'] },
-    { id: '11', teams: ['GB', 'LAR'] },
-    { id: '12', teams: ['SEA', 'PHI'] },
-    { id: '13', teams: ['DAL', 'PIT'] },
-    { id: '14', teams: ['KC', 'NO'] },
+    { id: '1', teams: ['SF', 'SEA'] },
+    { id: '2', teams: ['CHI', 'JAX'] },
+    { id: '3', teams: ['BAL', 'WAS'] },
+    { id: '4', teams: ['PHI', 'CLE'] },
+    { id: '5', teams: ['GB', 'ARI'] },
+    { id: '6', teams: ['IND', 'TEN'] },
+    { id: '7', teams: ['HOU', 'NE'] },
+    { id: '8', teams: ['TB', 'NO'] },
+    { id: '9', teams: ['PIT', 'LV'] },
+    { id: '10', teams: ['DEN', 'LAC'] },
+    { id: '11', teams: ['ATL', 'CAR'] },
+    { id: '12', teams: ['DET', 'DAL'] },
+    { id: '13', teams: ['CIN', 'NYG'] },
+    { id: '14', teams: ['BUF', 'NYJ'] },
   ];
 
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">Week 5 Leaderboard ({entries.length} entries)</h2>
+      <h2 className="leaderboard-title">Week 6 Leaderboard ({entries.length} entries)</h2>
       {error ? (
         <p>Error: {error}</p>
       ) : entries.length === 0 ? (
@@ -123,7 +110,7 @@ const Leaderboard = () => {
                       </div>
                     </th>
                   ))}
-                  <th className="prediction-header">KC-NO</th>
+                  <th className="prediction-header">BUF-NYJ</th>
                 </tr>
               </thead>
               <tbody>
@@ -144,7 +131,7 @@ const Leaderboard = () => {
                       </td>
                     ))}
                     <td className="prediction-cell">
-                      {entry.tiebreaker.chiefs}-{entry.tiebreaker.saints}
+                      {entry.tiebreaker.bills}-{entry.tiebreaker.jets}
                     </td>
                   </tr>
                 ))}
