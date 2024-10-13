@@ -15,6 +15,10 @@ const Leaderboard = () => {
     '6': 'Indianapolis Colts',
     '7': 'Houston Texans',
     '8': 'Tampa Bay Buccaneers',
+    '9': 'Pittsburgh Steelers',
+    '10': 'Los Angeles Chargers',
+    '11': 'Atlanta Falcons',
+    '12': 'Detroit Lions',
   };
 
   useEffect(() => {
