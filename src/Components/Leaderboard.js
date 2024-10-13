@@ -8,6 +8,13 @@ const Leaderboard = () => {
 
   const correctPicks = {
     '1': 'San Francisco 49ers',
+    '2': 'Jacksonville Jaguars',
+    '3': 'Baltimore Ravens',
+    '4': 'Philadelphia Eagles',
+    '5': 'Green Bay Packers',
+    '6': 'Indianapolis Colts',
+    '7': 'Houston Texans',
+    '8': 'Tampa Bay Buccaneers',
   };
 
   useEffect(() => {
