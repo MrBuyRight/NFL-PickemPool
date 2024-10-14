@@ -5,7 +5,7 @@ import './GameSelectionList.css';
 // Initialize Supabase client
 const supabase = createClient('https://grnjclpmqlawncskxhqf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdybmpjbHBtcWxhd25jc2t4aHFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjUzMjI4NTUsImV4cCI6MjA0MDg5ODg1NX0.tBAWOEnq2rEOoWF976tvdcqy2spZUDzQXqlat_XtPMo');
 
-const GameSelectionList = () => {
+const GameSelectionList = ({ updatePicks }) => {
   console.log('Rendering GameSelectionList');
   const [selectedTeams, setSelectedTeams] = useState({});
   const [scorePrediction, setScorePrediction] = useState({ jets: '', steelers: '' });
@@ -32,7 +32,9 @@ const GameSelectionList = () => {
   ];
 
   const handleTeamSelect = (gameId, team) => {
-    setSelectedTeams(prev => ({ ...prev, [gameId]: team }));
+    const newSelectedTeams = { ...selectedTeams, [gameId]: team };
+    setSelectedTeams(newSelectedTeams);
+    updatePicks(newSelectedTeams);
   };
 
   const submitEntry = async (entry) => {
