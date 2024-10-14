@@ -3,6 +3,7 @@ import './Leaderboard.css';
 import Week6entries from './Week6entrydata';
 
 const Leaderboard = () => {
+  console.log('Rendering Leaderboard');
   const [entries, setEntries] = useState([]);
   const [error, setError] = useState(null);
 

@@ -3,9 +3,10 @@ import { createClient } from '@supabase/supabase-js';
 import './GameSelectionList.css';
 
 // Initialize Supabase client
-const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
+const supabase = createClient('https://grnjclpmqlawncskxhqf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdybmpjbHBtcWxhd25jc2t4aHFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjUzMjI4NTUsImV4cCI6MjA0MDg5ODg1NX0.tBAWOEnq2rEOoWF976tvdcqy2spZUDzQXqlat_XtPMo');
 
 const GameSelectionList = () => {
+  console.log('Rendering GameSelectionList');
   const [selectedTeams, setSelectedTeams] = useState({});
   const [scorePrediction, setScorePrediction] = useState({ jets: '', steelers: '' });
   const [name, setName] = useState('');
