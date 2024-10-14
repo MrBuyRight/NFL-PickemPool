@@ -15,21 +15,18 @@ function App() {
       <header className="App-header">
         <h1>NFL Pick'em Pool</h1>
         <button className="toggle-button" onClick={toggleGameSelection}>
-          {showGameSelection ? 'Close Picks' : 'Make Picks'}
+          {showGameSelection ? 'View Leaderboard' : 'Make Picks'}
         </button>
       </header>
       <main className="App-main">
-        <div className="leaderboard-container">
-          <Leaderboard />
-        </div>
-        {showGameSelection && (
-          <div className="game-selection-overlay">
-            <div className="game-selection-window">
-              <button className="close-button" onClick={toggleGameSelection}>×</button>
-              <GameSelectionList />
-            </div>
+        <div className={`component-container ${showGameSelection ? 'show-game-selection' : ''}`}>
+          <div className="component-wrapper leaderboard-wrapper">
+            <Leaderboard />
           </div>
-        )}
+          <div className="component-wrapper game-selection-wrapper">
+            <GameSelectionList />
+          </div>
+        </div>
       </main>
     </div>
   );
