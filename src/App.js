@@ -8,7 +8,10 @@ function App() {
 
   const toggleView = () => {
     setShowLeaderboard(!showLeaderboard);
+    console.log("Toggled view. showLeaderboard:", !showLeaderboard);
   };
+
+  console.log("Rendering App. showLeaderboard:", showLeaderboard);
 
   return (
     <div className="App">
@@ -19,7 +22,8 @@ function App() {
         </button>
       </header>
       <main className="App-main">
-        {showLeaderboard ? <Leaderboard /> : <GameSelectionList />}
+        <Leaderboard />
+        <GameSelectionList />
       </main>
     </div>
   );
