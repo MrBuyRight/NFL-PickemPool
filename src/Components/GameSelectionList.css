@@ -171,8 +171,21 @@
 
 .submission-status {
   margin-top: 15px;
+  margin-bottom: 15px;
   text-align: center;
-  color: var(--highlight-color);
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.submission-status.success {
+  background-color: var(--highlight-color);
+  color: var(--primary-color);
+}
+
+.submission-status.error {
+  background-color: var(--error-color);
+  color: var(--text-color);
 }
 
 @media (max-width: 600px) {

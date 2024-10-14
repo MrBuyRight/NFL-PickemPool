@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import './GameSelectionList.css';
+
+// Initialize Supabase client
+const supabase = createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
 
 const GameSelectionList = () => {
   const [selectedTeams, setSelectedTeams] = useState({});
   const [scorePrediction, setScorePrediction] = useState({ jets: '', steelers: '' });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [submissionStatus, setSubmissionStatus] = useState('');
 
   const week7Games = [
     { id: 1, date: 'Thursday, October 17th, 2024', time: '8:15pm ET', away: 'Denver Broncos', home: 'New Orleans Saints' },
@@ -29,13 +34,41 @@ const GameSelectionList = () => {
     setSelectedTeams(prev => ({ ...prev, [gameId]: team }));
   };
 
-  const handleSubmit = (e) => {
+  const submitEntry = async (entry) => {
+    const { data, error } = await supabase
+      .from('entries')
+      .insert([entry]);
+
+    if (error) throw error;
+    return data;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log('Selected teams:', selectedTeams);
-    console.log('Score prediction:', scorePrediction);
-    console.log('Name:', name);
-    console.log('Email:', email);
+    setSubmissionStatus('Submitting...');
+
+    try {
+      const entry = {
+        name,
+        email,
+        picks: selectedTeams,
+        score_prediction: scorePrediction,
+        week: 7,
+      };
+
+      await submitEntry(entry);
+      setSubmissionStatus('Your picks have been submitted successfully!');
+      
+      // Reset form
+      setSelectedTeams({});
+      setScorePrediction({ jets: '', steelers: '' });
+      setName('');
+      setEmail('');
+
+    } catch (error) {
+      console.error('Error submitting entry:', error);
+      setSubmissionStatus('There was an error submitting your picks. Please try again.');
+    }
   };
 
   const groupedGames = week7Games.reduce((acc, game) => {
@@ -49,6 +82,7 @@ const GameSelectionList = () => {
   return (
     <div className="game-list-container">
       <h2 className="week-title">Week 7 Game Selection</h2>
+      {submissionStatus && <div className="submission-status">{submissionStatus}</div>}
       <form onSubmit={handleSubmit}>
         {Object.entries(groupedGames).map(([date, games]) => (
           <div key={date} className="date-group">
