@@ -5,8 +5,7 @@ import './GameSelectionList.css';
 // Initialize Supabase client
 const supabase = createClient('https://grnjclpmqlawncskxhqf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdybmpjbHBtcWxhd25jc2t4aHFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjUzMjI4NTUsImV4cCI6MjA0MDg5ODg1NX0.tBAWOEnq2rEOoWF976tvdcqy2spZUDzQXqlat_XtPMo');
 
-const GameSelectionList = ({ updatePicks }) => {
-  console.log('Rendering GameSelectionList');
+const GameSelectionList = () => {
   const [selectedTeams, setSelectedTeams] = useState({});
   const [scorePrediction, setScorePrediction] = useState({ jets: '', steelers: '' });
   const [name, setName] = useState('');
@@ -32,9 +31,10 @@ const GameSelectionList = ({ updatePicks }) => {
   ];
 
   const handleTeamSelect = (gameId, team) => {
-    const newSelectedTeams = { ...selectedTeams, [gameId]: team };
-    setSelectedTeams(newSelectedTeams);
-    updatePicks(newSelectedTeams);
+    setSelectedTeams(prev => ({
+      ...prev,
+      [gameId]: team
+    }));
   };
 
   const submitEntry = async (entry) => {
@@ -134,6 +134,7 @@ const GameSelectionList = ({ updatePicks }) => {
             />
           </div>
         </div>
+        <PickTracker picks={selectedTeams} />
         <div className="entry-form">
           <div className="input-group">
             <input
@@ -156,6 +157,23 @@ const GameSelectionList = ({ updatePicks }) => {
           <button type="submit">Submit Picks</button>
         </div>
       </form>
+    </div>
+  );
+};
+
+const PickTracker = ({ picks }) => {
+  const pickCount = Object.keys(picks).length;
+
+  return (
+    <div className="pick-tracker">
+      <h3>Your Picks: {pickCount}/15</h3>
+      <div className="pick-list">
+        {Object.entries(picks).map(([gameId, team]) => (
+          <div key={gameId} className="pick-item">
+            Game {gameId}: {team}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

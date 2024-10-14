@@ -193,3 +193,28 @@
     grid-template-columns: 1fr;
   }
 }
+
+.pick-tracker {
+  margin-top: 20px;
+  background-color: var(--surface-color);
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.pick-tracker h3 {
+  color: var(--accent-color);
+  margin-bottom: 10px;
+}
+
+.pick-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.pick-item {
+  background-color: var(--secondary-color);
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
