@@ -21,37 +21,34 @@ body, html {
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 body {
   font-family: 'Lato', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
-  margin: 0;
-  padding: 0;
 }
 
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .App-header {
   background-color: var(--primary-color);
   padding: 1rem;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .App-header h1 {
-  margin: 0 0 1rem 0;
-  font-size: 2rem;
+  margin: 0;
+  font-size: 1.5rem;
   color: var(--accent-color);
-  text-align: center;
 }
 
 .toggle-button {
@@ -66,101 +63,68 @@ body {
 }
 
 .toggle-button:hover {
-  background-color: var(--highlight-color);
+  background-color: var(--hover-color);
   transform: translateY(-2px);
 }
 
 .App-main {
   flex-grow: 1;
-  padding: 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.loading {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  font-size: 1.2rem;
-  color: var(--accent-color);
-}
-
-@media (max-width: 768px) {
-  .App-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .App-header h1 {
-    margin-bottom: 1rem;
-  }
-
-  .toggle-button {
-    width: 100%;
-  }
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .component-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-grow: 1;
+  transition: transform 0.3s ease-in-out;
 }
 
 .component-wrapper {
   flex: 1;
-  min-width: 300px;
-  margin: 10px;
-  padding: 20px;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.leaderboard-wrapper {
   background-color: var(--secondary-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.game-selection-wrapper {
+  background-color: var(--primary-color);
 }
 
 .component-wrapper h2 {
   color: var(--accent-color);
-  margin-bottom: 20px;
-}
-
-.leaderboard-wrapper {
-  flex: 2;
-  max-width: 800px;
-}
-
-.game-selection-wrapper {
-  flex: 1;
-  max-width: 400px;
+  margin-bottom: 1rem;
 }
 
 .pick-tracker {
   background-color: var(--secondary-color);
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
 }
 
 .pick-tracker h3 {
   color: var(--accent-color);
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
 .pick-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .pick-item {
   background-color: var(--primary-color);
-  padding: 10px;
+  padding: 0.5rem;
   border-radius: 4px;
-  font-size: 0.9em;
+  font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
-  .component-wrapper {
-    flex: 1 0 100%;
+  .component-container {
+    flex-direction: column;
   }
 }
