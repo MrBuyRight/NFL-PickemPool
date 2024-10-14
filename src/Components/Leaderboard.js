@@ -19,6 +19,7 @@ const Leaderboard = () => {
     '10': 'Los Angeles Chargers',
     '11': 'Atlanta Falcons',
     '12': 'Detroit Lions',
+    '13': 'Cincinnati Bengals',
   };
 
   useEffect(() => {
