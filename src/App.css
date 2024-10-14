@@ -8,6 +8,7 @@
   --accent-color: #4CAF50;
   --border-color: #333333;
   --hover-color: #3a3a3a;
+  --overlay-color: rgba(0, 0, 0, 0.8);
 }
 
 * {
@@ -74,29 +75,45 @@ body {
   overflow: hidden;
 }
 
-.component-container {
-  display: flex;
+.leaderboard-container {
   flex-grow: 1;
-  transition: transform 0.3s ease-in-out;
-}
-
-.component-wrapper {
-  flex: 1;
   padding: 1rem;
   overflow-y: auto;
 }
 
-.leaderboard-wrapper {
+.game-selection-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--overlay-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.game-selection-window {
   background-color: var(--secondary-color);
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
 }
 
-.game-selection-wrapper {
-  background-color: var(--primary-color);
-}
-
-.component-wrapper h2 {
-  color: var(--accent-color);
-  margin-bottom: 1rem;
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .pick-tracker {
@@ -124,7 +141,8 @@ body {
 }
 
 @media (max-width: 768px) {
-  .component-container {
-    flex-direction: column;
+  .game-selection-window {
+    width: 95%;
+    padding: 1rem;
   }
 }
