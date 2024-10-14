@@ -13,7 +13,7 @@
 .game-list-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1.5rem;
   background-color: var(--secondary-color);
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -22,11 +22,13 @@
 .week-title {
   text-align: center;
   color: var(--accent-color);
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .date-group {
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .date-header {
@@ -48,7 +50,7 @@
 .game-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
+  gap: 1rem;
   margin-top: 15px;
 }
 
@@ -62,9 +64,9 @@
 }
 
 .game-time {
-  font-size: 0.9em;
-  color: var(--text-secondary-color);
-  margin-bottom: 10px;
+  font-size: 0.8rem;
+  color: #86868b;
+  margin-bottom: 0.5rem;
 }
 
 .teams-container {
@@ -75,23 +77,34 @@
 
 .team-button {
   flex: 1;
-  padding: 8px;
-  border: none;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
   background-color: var(--secondary-color);
   color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease;
+}
+
+.team-button:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.team-button:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .team-button:hover {
-  background-color: var(--accent-color);
-  transform: translateY(-2px);
+  background-color: var(--hover-color);
 }
 
 .team-button.selected {
-  background-color: var(--highlight-color);
-  color: var(--primary-color);
-  font-weight: bold;
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
 }
 
 .at-symbol {
@@ -100,29 +113,27 @@
 }
 
 .score-prediction {
-  margin-top: 30px;
+  margin-top: 2rem;
   text-align: center;
   color: var(--text-color);
 }
 
 .score-inputs {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  gap: 0.5rem;
 }
 
 .score-inputs input {
   width: 60px;
-  padding: 5px;
-  text-align: center;
-  background-color: var(--surface-color);
-  color: var(--text-color);
+  padding: 0.5rem;
   border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
 }
 
 .entry-form {
-  margin-top: 30px;
+  margin-top: 2rem;
 }
 
 .input-group {
@@ -131,11 +142,10 @@
 
 .input-group input {
   width: 100%;
-  padding: 10px;
+  padding: 0.5rem;
   border: 1px solid var(--border-color);
-  border-radius: 4px;
-  background-color: var(--surface-color);
-  color: var(--text-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
 }
 
 .entry-form button {
@@ -208,13 +218,13 @@
 
 .pick-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 0.5rem;
 }
 
 .pick-item {
-  background-color: var(--secondary-color);
-  padding: 8px;
-  border-radius: 4px;
-  font-size: 0.9em;
+  background-color: var(--surface-color);
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
 }
