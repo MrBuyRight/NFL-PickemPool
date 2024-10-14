@@ -67,7 +67,7 @@ const GameSelectionList = () => {
         name,
         email,
         picks: selectedTeams,
-        score_prediction: scorePrediction,
+        score_prediction: JSON.stringify(scorePrediction), // Convert to JSON string
         week: 7,
       };
 
