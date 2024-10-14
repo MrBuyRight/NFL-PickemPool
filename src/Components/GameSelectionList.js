@@ -38,12 +38,20 @@ const GameSelectionList = () => {
   };
 
   const submitEntry = async (entry) => {
-    const { data, error } = await supabase
-      .from('entries')
-      .insert([entry]);
+    try {
+      const { data, error } = await supabase
+        .from('entries')
+        .insert([entry]);
 
-    if (error) throw error;
-    return data;
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+      return data;
+    } catch (error) {
+      console.error('Error in submitEntry:', error);
+      throw error;
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -51,6 +59,10 @@ const GameSelectionList = () => {
     setSubmissionStatus('Submitting...');
 
     try {
+      if (Object.keys(selectedTeams).length !== 15) {
+        throw new Error('Please select a team for all 15 games.');
+      }
+
       const entry = {
         name,
         email,
@@ -59,6 +71,7 @@ const GameSelectionList = () => {
         week: 7,
       };
 
+      console.log('Submitting entry:', entry);
       await submitEntry(entry);
       setSubmissionStatus('Your picks have been submitted successfully!');
       
@@ -70,7 +83,7 @@ const GameSelectionList = () => {
 
     } catch (error) {
       console.error('Error submitting entry:', error);
-      setSubmissionStatus('There was an error submitting your picks. Please try again.');
+      setSubmissionStatus(`Error: ${error.message || 'There was an error submitting your picks. Please try again.'}`);
     }
   };
 
@@ -85,7 +98,7 @@ const GameSelectionList = () => {
   return (
     <div className="game-list-container">
       <h2 className="week-title">Week 7 Game Selection</h2>
-      {submissionStatus && <div className="submission-status">{submissionStatus}</div>}
+      {submissionStatus && <div className={`submission-status ${submissionStatus.startsWith('Error') ? 'error' : 'success'}`}>{submissionStatus}</div>}
       <form onSubmit={handleSubmit}>
         {Object.entries(groupedGames).map(([date, games]) => (
           <div key={date} className="date-group">
@@ -154,7 +167,9 @@ const GameSelectionList = () => {
               required
             />
           </div>
-          <button type="submit">Submit Picks</button>
+          <button type="submit" disabled={Object.keys(selectedTeams).length !== 15}>
+            Submit Picks
+          </button>
         </div>
       </form>
     </div>
