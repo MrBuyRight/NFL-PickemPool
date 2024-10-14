@@ -22,8 +22,7 @@ function App() {
         </button>
       </header>
       <main className="App-main">
-        <Leaderboard />
-        <GameSelectionList />
+        {showLeaderboard ? <Leaderboard /> : <GameSelectionList />}
       </main>
     </div>
   );
