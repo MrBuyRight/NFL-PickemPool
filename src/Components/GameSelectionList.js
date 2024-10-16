@@ -102,11 +102,6 @@ const GameSelectionList = () => {
     <div className="game-list-container">
       <h2 className="week-title">Week 7 Game Selection</h2>
       <form onSubmit={handleSubmit}>
-        {submissionStatus && (
-          <div className={`submission-status ${submissionStatus.startsWith('Error') ? 'error' : 'success'}`}>
-            {submissionStatus}
-          </div>
-        )}
         <div className="games-section">
           {Object.entries(groupedGames).map(([date, games]) => (
             <div key={date} className="date-group">
@@ -181,6 +176,11 @@ const GameSelectionList = () => {
           <button type="submit" disabled={Object.keys(selectedTeams).length !== 15}>
             Submit Picks
           </button>
+          {submissionStatus && (
+            <div className={`submission-status ${submissionStatus.startsWith('Error') ? 'error' : 'success'}`}>
+              {submissionStatus}
+            </div>
+          )}
         </div>
       </form>
     </div>
