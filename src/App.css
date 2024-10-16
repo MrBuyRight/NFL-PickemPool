@@ -37,16 +37,22 @@ body, html {
 .App-header {
   background-color: var(--primary-color);
   padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .App-header h1 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  margin: 0;
+  margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .toggle-button {
@@ -72,12 +78,16 @@ body, html {
 }
 
 @media (max-width: 768px) {
-  .App-header {
-    flex-direction: column;
-    align-items: flex-start;
+  .header-content {
+    width: 100%;
+  }
+
+  .App-header h1 {
+    font-size: 1.25rem;
   }
 
   .toggle-button {
+    width: 100%;
     margin-top: 0.5rem;
   }
 }

@@ -13,10 +13,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>NFL Pick'em Pool</h1>
-        <button className="toggle-button" onClick={toggleGameSelection}>
-          {showGameSelection ? 'View Leaderboard' : 'Make Picks'}
-        </button>
+        <div className="header-content">
+          <h1>NFL Pick'em Pool</h1>
+          <button className="toggle-button" onClick={toggleGameSelection}>
+            {showGameSelection ? 'View Leaderboard' : 'Make Picks'}
+          </button>
+        </div>
       </header>
       <main className="App-main">
         {showGameSelection ? (
