@@ -81,6 +81,9 @@ const GameSelectionList = () => {
       setName('');
       setEmail('');
 
+      // Scroll to the top of the form
+      window.scrollTo(0, 0);
+
     } catch (error) {
       console.error('Error submitting entry:', error);
       setSubmissionStatus(`Error: ${error.message || 'There was an error submitting your picks. Please try again.'}`);
@@ -98,37 +101,43 @@ const GameSelectionList = () => {
   return (
     <div className="game-list-container">
       <h2 className="week-title">Week 7 Game Selection</h2>
-      {submissionStatus && <div className={`submission-status ${submissionStatus.startsWith('Error') ? 'error' : 'success'}`}>{submissionStatus}</div>}
       <form onSubmit={handleSubmit}>
-        {Object.entries(groupedGames).map(([date, games]) => (
-          <div key={date} className="date-group">
-            <h3 className="date-header">{date}</h3>
-            <div className="game-grid">
-              {games.map(game => (
-                <div key={game.id} className="game-card">
-                  <div className="game-time">{game.time}</div>
-                  <div className="teams-container">
-                    <button
-                      type="button"
-                      className={`team-button ${selectedTeams[game.id] === game.away ? 'selected' : ''}`}
-                      onClick={() => handleTeamSelect(game.id, game.away)}
-                    >
-                      {game.away}
-                    </button>
-                    <span className="at-symbol">@</span>
-                    <button
-                      type="button"
-                      className={`team-button ${selectedTeams[game.id] === game.home ? 'selected' : ''}`}
-                      onClick={() => handleTeamSelect(game.id, game.home)}
-                    >
-                      {game.home}
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {submissionStatus && (
+          <div className={`submission-status ${submissionStatus.startsWith('Error') ? 'error' : 'success'}`}>
+            {submissionStatus}
           </div>
-        ))}
+        )}
+        <div className="games-section">
+          {Object.entries(groupedGames).map(([date, games]) => (
+            <div key={date} className="date-group">
+              <h3 className="date-header">{date}</h3>
+              <div className="game-grid">
+                {games.map(game => (
+                  <div key={game.id} className="game-card">
+                    <div className="game-time">{game.time}</div>
+                    <div className="teams-container">
+                      <button
+                        type="button"
+                        className={`team-button ${selectedTeams[game.id] === game.away ? 'selected' : ''}`}
+                        onClick={() => handleTeamSelect(game.id, game.away)}
+                      >
+                        {game.away}
+                      </button>
+                      <span className="at-symbol">@</span>
+                      <button
+                        type="button"
+                        className={`team-button ${selectedTeams[game.id] === game.home ? 'selected' : ''}`}
+                        onClick={() => handleTeamSelect(game.id, game.home)}
+                      >
+                        {game.home}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
         <div className="score-prediction">
           <h3>Score Prediction: Jets @ Steelers</h3>
           <div className="score-inputs">
