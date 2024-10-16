@@ -68,7 +68,7 @@ const GameSelectionList = () => {
         email,
         picks: selectedTeams,
         score_prediction: JSON.stringify(scorePrediction),
-        week: 7,
+        // Remove the week field for now
       };
 
       console.log('Submitting entry:', entry);
