@@ -4,7 +4,6 @@ import Leaderboard from './Components/Leaderboard';
 import GameSelectionList from './Components/GameSelectionList';
 
 function App() {
-  // Change the initial state to true
   const [showGameSelection, setShowGameSelection] = useState(true);
 
   const toggleGameSelection = () => {
@@ -20,17 +19,11 @@ function App() {
         </button>
       </header>
       <main className="App-main">
-        <div className="component-container">
-          {showGameSelection ? (
-            <div className="component-wrapper game-selection-wrapper">
-              <GameSelectionList />
-            </div>
-          ) : (
-            <div className="component-wrapper leaderboard-wrapper">
-              <Leaderboard />
-            </div>
-          )}
-        </div>
+        {showGameSelection ? (
+          <GameSelectionList />
+        ) : (
+          <Leaderboard />
+        )}
       </main>
     </div>
   );

@@ -12,10 +12,7 @@
 .game-list-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 1.5rem;
-  background-color: var(--primary-color);
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding-bottom: 2rem;
 }
 
 .week-title {
@@ -212,6 +209,10 @@ button[type="submit"]:disabled {
 }
 
 @media (max-width: 768px) {
+  .game-list-container {
+    padding: 0;
+  }
+
   .game-grid {
     grid-template-columns: 1fr;
   }

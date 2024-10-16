@@ -19,7 +19,9 @@ body {
 }
 
 .leaderboard {
-  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
 }
 
 .leaderboard-title {
@@ -36,8 +38,7 @@ body {
 
 .leaderboard-scroll-container {
   overflow-x: auto;
-  overflow-y: auto;
-  max-height: calc(100vh - 150px);
+  max-height: none;
 }
 
 .leaderboard-table {
@@ -118,6 +119,10 @@ body {
 }
 
 @media (max-width: 768px) {
+  .leaderboard {
+    padding: 0;
+  }
+
   .leaderboard-table {
     font-size: 0.75rem;
   }

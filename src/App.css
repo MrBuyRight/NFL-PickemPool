@@ -30,7 +30,8 @@ body, html {
 .App {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .App-header {
@@ -66,31 +67,8 @@ body, html {
 
 .App-main {
   flex-grow: 1;
-  padding: 1rem;
-  overflow: hidden;
-}
-
-.component-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: calc(100vh - 60px);
   overflow-y: auto;
-}
-
-.component-wrapper {
-  background-color: var(--primary-color);
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 1rem;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.game-selection-wrapper {
-  overflow-y: auto;
-  max-height: calc(100vh - 100px);
 }
 
 @media (max-width: 768px) {
@@ -101,9 +79,5 @@ body, html {
 
   .toggle-button {
     margin-top: 0.5rem;
-  }
-
-  .component-wrapper {
-    padding: 0.5rem;
   }
 }
