@@ -143,3 +143,15 @@ body {
     padding: 0.5rem 0;
   }
 }
+
+.entry-row.winner {
+  background-color: rgba(0, 188, 212, 0.1); /* Slight highlight using the accent color */
+}
+
+.entry-row.winner .name-score-column {
+  font-weight: 700;
+}
+
+.entry-row.winner .score-badge {
+  background-color: var(--highlight-color);
+}

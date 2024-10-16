@@ -21,6 +21,7 @@ const Leaderboard = () => {
     '11': 'Atlanta Falcons',
     '12': 'Detroit Lions',
     '13': 'Cincinnati Bengals',
+    '14': 'Buffalo Bills', // Added Bills to correct picks
   };
 
   useEffect(() => {
@@ -38,7 +39,8 @@ const Leaderboard = () => {
         score: Object.keys(correctPicks).reduce((acc, gameId) => 
           acc + (entry.picks[gameId] === correctPicks[gameId] ? 1 : 0), 0)
       }));
-      scoredEntries.sort((a, b) => b.score - a.score);
+      scoredEntries.sort((a, b) => b.score - a.score || 
+        (Math.abs(a.tiebreaker.bills - a.tiebreaker.jets) - Math.abs(b.tiebreaker.bills - b.tiebreaker.jets)));
       setEntries(scoredEntries);
     } catch (err) {
       console.error('Error processing Week6entries:', err);
@@ -134,7 +136,7 @@ const Leaderboard = () => {
               </thead>
               <tbody>
                 {entries.map((entry, index) => (
-                  <tr key={index} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                  <tr key={index} className={`entry-row ${index === 0 ? 'winner' : index % 2 === 0 ? 'even' : 'odd'}`}>
                     <td className="sticky-column rank-column">{index + 1}</td>
                     <td className="sticky-column name-score-column">
                       <div className="name-score-container">
