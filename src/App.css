@@ -138,3 +138,26 @@ body {
     padding: 1rem;
   }
 }
+
+.component-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: calc(100vh - 60px); /* Adjust based on your header height */
+  overflow-y: auto;
+}
+
+.component-wrapper {
+  background-color: var(--secondary-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.game-selection-wrapper {
+  overflow-y: auto;
+  max-height: calc(100vh - 100px); /* Adjust based on your layout */
+}

@@ -19,13 +19,16 @@ function App() {
         </button>
       </header>
       <main className="App-main">
-        <div className={`component-container ${showGameSelection ? 'show-game-selection' : ''}`}>
-          <div className="component-wrapper leaderboard-wrapper">
-            <Leaderboard />
-          </div>
-          <div className="component-wrapper game-selection-wrapper">
-            <GameSelectionList />
-          </div>
+        <div className="component-container">
+          {showGameSelection ? (
+            <div className="component-wrapper game-selection-wrapper">
+              <GameSelectionList />
+            </div>
+          ) : (
+            <div className="component-wrapper leaderboard-wrapper">
+              <Leaderboard />
+            </div>
+          )}
         </div>
       </main>
     </div>

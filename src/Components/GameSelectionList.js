@@ -67,7 +67,7 @@ const GameSelectionList = () => {
         name,
         email,
         picks: selectedTeams,
-        score_prediction: JSON.stringify(scorePrediction), // Convert to JSON string
+        score_prediction: JSON.stringify(scorePrediction),
         week: 7,
       };
 
@@ -137,6 +137,7 @@ const GameSelectionList = () => {
               placeholder="Jets"
               value={scorePrediction.jets}
               onChange={(e) => setScorePrediction(prev => ({ ...prev, jets: e.target.value }))}
+              required
             />
             <span>-</span>
             <input
@@ -144,6 +145,7 @@ const GameSelectionList = () => {
               placeholder="Steelers"
               value={scorePrediction.steelers}
               onChange={(e) => setScorePrediction(prev => ({ ...prev, steelers: e.target.value }))}
+              required
             />
           </div>
         </div>
