@@ -7,7 +7,7 @@ const supabase = createClient('https://grnjclpmqlawncskxhqf.supabase.co', 'eyJhb
 
 const GameSelectionList = () => {
   const [selectedTeams, setSelectedTeams] = useState({});
-  const [scorePrediction, setScorePrediction] = useState({ jets: '', steelers: '' });
+  const [scorePrediction, setScorePrediction] = useState({ chargers: '', cardinals: '' });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [submissionStatus, setSubmissionStatus] = useState('');
@@ -77,7 +77,7 @@ const GameSelectionList = () => {
       
       // Reset form
       setSelectedTeams({});
-      setScorePrediction({ jets: '', steelers: '' });
+      setScorePrediction({ chargers: '', cardinals: '' });
       setName('');
       setEmail('');
 
@@ -134,21 +134,21 @@ const GameSelectionList = () => {
           ))}
         </div>
         <div className="score-prediction">
-          <h3>Score Prediction: Jets @ Steelers</h3>
+          <h3>Score Prediction: Chargers @ Cardinals</h3>
           <div className="score-inputs">
             <input
               type="number"
-              placeholder="Jets"
-              value={scorePrediction.jets}
-              onChange={(e) => setScorePrediction(prev => ({ ...prev, jets: e.target.value }))}
+              placeholder="Chargers"
+              value={scorePrediction.chargers}
+              onChange={(e) => setScorePrediction(prev => ({ ...prev, chargers: e.target.value }))}
               required
             />
             <span>-</span>
             <input
               type="number"
-              placeholder="Steelers"
-              value={scorePrediction.steelers}
-              onChange={(e) => setScorePrediction(prev => ({ ...prev, steelers: e.target.value }))}
+              placeholder="Cardinals"
+              value={scorePrediction.cardinals}
+              onChange={(e) => setScorePrediction(prev => ({ ...prev, cardinals: e.target.value }))}
               required
             />
           </div>
