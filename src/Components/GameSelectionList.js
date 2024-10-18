@@ -11,6 +11,7 @@ const GameSelectionList = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [submissionStatus, setSubmissionStatus] = useState('');
+  const [isSubmissionClosed, setIsSubmissionClosed] = useState(true);
 
   const week7Games = [
     { id: 1, date: 'Thursday, October 17th, 2024', time: '8:15pm ET', away: 'Denver Broncos', home: 'New Orleans Saints' },
@@ -101,88 +102,95 @@ const GameSelectionList = () => {
   return (
     <div className="game-list-container">
       <h2 className="week-title">Week 7 Game Selection</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="games-section">
-          {Object.entries(groupedGames).map(([date, games]) => (
-            <div key={date} className="date-group">
-              <h3 className="date-header">{date}</h3>
-              <div className="game-grid">
-                {games.map(game => (
-                  <div key={game.id} className="game-card">
-                    <div className="game-time">{game.time}</div>
-                    <div className="teams-container">
-                      <button
-                        type="button"
-                        className={`team-button ${selectedTeams[game.id] === game.away ? 'selected' : ''}`}
-                        onClick={() => handleTeamSelect(game.id, game.away)}
-                      >
-                        {game.away}
-                      </button>
-                      <span className="at-symbol">@</span>
-                      <button
-                        type="button"
-                        className={`team-button ${selectedTeams[game.id] === game.home ? 'selected' : ''}`}
-                        onClick={() => handleTeamSelect(game.id, game.home)}
-                      >
-                        {game.home}
-                      </button>
+      {isSubmissionClosed ? (
+        <div className="submission-closed-message">
+          <h3>Submissions are now closed for this week.</h3>
+          <p>Thank you for participating! Check back next week for new games.</p>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <div className="games-section">
+            {Object.entries(groupedGames).map(([date, games]) => (
+              <div key={date} className="date-group">
+                <h3 className="date-header">{date}</h3>
+                <div className="game-grid">
+                  {games.map(game => (
+                    <div key={game.id} className="game-card">
+                      <div className="game-time">{game.time}</div>
+                      <div className="teams-container">
+                        <button
+                          type="button"
+                          className={`team-button ${selectedTeams[game.id] === game.away ? 'selected' : ''}`}
+                          onClick={() => handleTeamSelect(game.id, game.away)}
+                        >
+                          {game.away}
+                        </button>
+                        <span className="at-symbol">@</span>
+                        <button
+                          type="button"
+                          className={`team-button ${selectedTeams[game.id] === game.home ? 'selected' : ''}`}
+                          onClick={() => handleTeamSelect(game.id, game.home)}
+                        >
+                          {game.home}
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
+            ))}
+          </div>
+          <div className="score-prediction">
+            <h3>Score Prediction: Chargers @ Cardinals</h3>
+            <div className="score-inputs">
+              <input
+                type="number"
+                placeholder="Chargers"
+                value={scorePrediction.chargers}
+                onChange={(e) => setScorePrediction(prev => ({ ...prev, chargers: e.target.value }))}
+                required
+              />
+              <span>-</span>
+              <input
+                type="number"
+                placeholder="Cardinals"
+                value={scorePrediction.cardinals}
+                onChange={(e) => setScorePrediction(prev => ({ ...prev, cardinals: e.target.value }))}
+                required
+              />
             </div>
-          ))}
-        </div>
-        <div className="score-prediction">
-          <h3>Score Prediction: Chargers @ Cardinals</h3>
-          <div className="score-inputs">
-            <input
-              type="number"
-              placeholder="Chargers"
-              value={scorePrediction.chargers}
-              onChange={(e) => setScorePrediction(prev => ({ ...prev, chargers: e.target.value }))}
-              required
-            />
-            <span>-</span>
-            <input
-              type="number"
-              placeholder="Cardinals"
-              value={scorePrediction.cardinals}
-              onChange={(e) => setScorePrediction(prev => ({ ...prev, cardinals: e.target.value }))}
-              required
-            />
           </div>
-        </div>
-        <PickTracker picks={selectedTeams} />
-        <div className="entry-form">
-          <div className="input-group">
-            <input
-              type="text"
-              placeholder="Your Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <input
-              type="email"
-              placeholder="Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" disabled={Object.keys(selectedTeams).length !== 15}>
-            Submit Picks
-          </button>
-          {submissionStatus && (
-            <div className={`submission-status ${submissionStatus.startsWith('Error') ? 'error' : 'success'}`}>
-              {submissionStatus}
+          <PickTracker picks={selectedTeams} />
+          <div className="entry-form">
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
             </div>
-          )}
-        </div>
-      </form>
+            <div className="input-group">
+              <input
+                type="email"
+                placeholder="Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" disabled={Object.keys(selectedTeams).length !== 15}>
+              Submit Picks
+            </button>
+            {submissionStatus && (
+              <div className={`submission-status ${submissionStatus.startsWith('Error') ? 'error' : 'success'}`}>
+                {submissionStatus}
+              </div>
+            )}
+          </div>
+        </form>
+      )}
     </div>
   );
 };

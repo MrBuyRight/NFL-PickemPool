@@ -227,3 +227,22 @@ button[type="submit"]:disabled {
     width: 100%;
   }
 }
+
+.submission-closed-message {
+  background-color: var(--secondary-color);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.submission-closed-message h3 {
+  color: var(--accent-color);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.submission-closed-message p {
+  color: var(--text-color);
+  font-size: 1rem;
+}
