@@ -1,19 +1,19 @@
 :root {
-  --primary-color: #121212;
-  --secondary-color: #1e1e1e;
-  --surface-color: #2c2c2c;
+  --primary-color: #1a1a1a;
+  --secondary-color: #2c2c2c;
+  --surface-color: #242424;
   --text-color: #ffffff;
   --text-secondary-color: #b0b0b0;
-  --accent-color: #00bcd4;
-  --highlight-color: #03dac6;
-  --error-color: #cf6679;
+  --accent-color: #3b82f6;
+  --highlight-color: #4caf50;
+  --error-color: #f44336;
   --border-color: #333333;
-  --even-row-color: #1a1a1a;
+  --even-row-color: #1e1e1e;
   --odd-row-color: #242424;
 }
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: var(--primary-color);
   color: var(--text-color);
 }
@@ -35,7 +35,8 @@ body {
 .leaderboard-container {
   overflow: hidden;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  background-color: var(--surface-color);
 }
 
 .leaderboard-scroll-container {
@@ -68,7 +69,7 @@ body {
 .sticky-column {
   position: sticky;
   left: 0;
-  background-color: var(--primary-color);
+  background-color: var(--surface-color);
   z-index: 5;
 }
 
@@ -109,12 +110,12 @@ body {
 }
 
 .correct-pick {
-  color: #10b981;
+  color: var(--highlight-color);
   font-weight: 600;
 }
 
 .incorrect-pick {
-  color: #ef4444;
+  color: var(--error-color);
 }
 
 .prediction-cell {
