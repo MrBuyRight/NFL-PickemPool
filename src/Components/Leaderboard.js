@@ -128,7 +128,7 @@ const Leaderboard = () => {
               </thead>
               <tbody>
                 {entries.map((entry, index) => (
-                  <tr key={index} className={`entry-row ${index === 0 ? 'winner' : index % 2 === 0 ? 'even' : 'odd'}`}>
+                  <tr key={index} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
                     <td className="sticky-column rank-column">{index + 1}</td>
                     <td className="sticky-column name-score-column">
                       <div className="name-score-container">
