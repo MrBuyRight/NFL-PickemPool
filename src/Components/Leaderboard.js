@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
-import Week6entries from './Week6entrydata';
+import Week7entries from './Week7entrydata';
 
 const Leaderboard = () => {
   console.log('Rendering Leaderboard');
@@ -8,42 +8,32 @@ const Leaderboard = () => {
   const [error, setError] = useState(null);
 
   const correctPicks = {
-    '1': 'San Francisco 49ers',
-    '2': 'Chicago Bears',
-    '3': 'Baltimore Ravens',
-    '4': 'Philadelphia Eagles',
-    '5': 'Green Bay Packers',
-    '6': 'Indianapolis Colts',
-    '7': 'Houston Texans',
-    '8': 'Tampa Bay Buccaneers',
-    '9': 'Pittsburgh Steelers',
-    '10': 'Los Angeles Chargers',
-    '11': 'Atlanta Falcons',
-    '12': 'Detroit Lions',
-    '13': 'Cincinnati Bengals',
-    '14': 'Buffalo Bills', // Added Bills to correct picks
+    '1': 'Denver Broncos',
+    // Other games are not included in the correct picks list
   };
 
   useEffect(() => {
     try {
-      console.log('Week6entries:', Week6entries);
-      console.log('Week6entries type:', typeof Week6entries);
-      console.log('Is Week6entries an array?', Array.isArray(Week6entries));
+      console.log('Week7entries:', Week7entries);
+      console.log('Week7entries type:', typeof Week7entries);
+      console.log('Is Week7entries an array?', Array.isArray(Week7entries));
       
-      if (!Array.isArray(Week6entries)) {
-        throw new Error('Week6entries is not an array');
+      if (!Array.isArray(Week7entries)) {
+        throw new Error('Week7entries is not an array');
       }
 
-      const scoredEntries = Week6entries.map(entry => ({
-        ...entry,
-        score: Object.keys(correctPicks).reduce((acc, gameId) => 
-          acc + (entry.picks[gameId] === correctPicks[gameId] ? 1 : 0), 0)
+      const scoredEntries = Week7entries.map(entry => ({
+        name: entry.name,
+        picks: entry.picks,
+        chargers: entry.chargers,
+        cardinals: entry.cardinals,
+        score: entry.picks[0] === correctPicks['1'] ? 1 : 0
       }));
       scoredEntries.sort((a, b) => b.score - a.score || 
-        (Math.abs(a.tiebreaker.bills - a.tiebreaker.jets) - Math.abs(b.tiebreaker.bills - b.tiebreaker.jets)));
+        (Math.abs(parseInt(a.chargers) - parseInt(a.cardinals)) - Math.abs(parseInt(b.chargers) - parseInt(b.cardinals))));
       setEntries(scoredEntries);
     } catch (err) {
-      console.error('Error processing Week6entries:', err);
+      console.error('Error processing Week7entries:', err);
       setError(err.message);
     }
   }, []);
@@ -60,58 +50,60 @@ const Leaderboard = () => {
 
   const abbreviateTeam = (teamName) => {
     const abbreviations = {
-      'San Francisco 49ers': 'SF',
-      'Seattle Seahawks': 'SEA',
-      'Chicago Bears': 'CHI',
-      'Jacksonville Jaguars': 'JAX',
-      'Baltimore Ravens': 'BAL',
-      'Washington Commanders': 'WAS',
-      'Philadelphia Eagles': 'PHI',
-      'Cleveland Browns': 'CLE',
-      'Green Bay Packers': 'GB',
-      'Arizona Cardinals': 'ARI',
-      'Indianapolis Colts': 'IND',
-      'Tennessee Titans': 'TEN',
-      'Houston Texans': 'HOU',
-      'New England Patriots': 'NE',
-      'Tampa Bay Buccaneers': 'TB',
-      'New Orleans Saints': 'NO',
-      'Pittsburgh Steelers': 'PIT',
-      'Las Vegas Raiders': 'LV',
       'Denver Broncos': 'DEN',
-      'Los Angeles Chargers': 'LAC',
-      'Atlanta Falcons': 'ATL',
-      'Carolina Panthers': 'CAR',
-      'Detroit Lions': 'DET',
-      'Dallas Cowboys': 'DAL',
-      'Cincinnati Bengals': 'CIN',
+      'New Orleans Saints': 'NO',
+      'Jacksonville Jaguars': 'JAX',
+      'New England Patriots': 'NE',
+      'Philadelphia Eagles': 'PHI',
       'New York Giants': 'NYG',
+      'Green Bay Packers': 'GB',
+      'Houston Texans': 'HOU',
+      'Atlanta Falcons': 'ATL',
+      'Seattle Seahawks': 'SEA',
       'Buffalo Bills': 'BUF',
-      'New York Jets': 'NYJ'
+      'Cincinnati Bengals': 'CIN',
+      'Cleveland Browns': 'CLE',
+      'Indianapolis Colts': 'IND',
+      'Miami Dolphins': 'MIA',
+      'Detroit Lions': 'DET',
+      'Minnesota Vikings': 'MIN',
+      'Washington Commanders': 'WAS',
+      'Carolina Panthers': 'CAR',
+      'Los Angeles Rams': 'LAR',
+      'Las Vegas Raiders': 'LV',
+      'Kansas City Chiefs': 'KC',
+      'San Francisco 49ers': 'SF',
+      'Pittsburgh Steelers': 'PIT',
+      'New York Jets': 'NYJ',
+      'Baltimore Ravens': 'BAL',
+      'Tampa Bay Buccaneers': 'TB',
+      'Arizona Cardinals': 'ARI',
+      'Los Angeles Chargers': 'LAC',
     };
     return abbreviations[teamName] || teamName;
   };
 
   const games = [
-    { id: '1', teams: ['SF', 'SEA'] },
-    { id: '2', teams: ['CHI', 'JAX'] },
-    { id: '3', teams: ['BAL', 'WAS'] },
-    { id: '4', teams: ['PHI', 'CLE'] },
-    { id: '5', teams: ['GB', 'ARI'] },
-    { id: '6', teams: ['IND', 'TEN'] },
-    { id: '7', teams: ['HOU', 'NE'] },
-    { id: '8', teams: ['TB', 'NO'] },
-    { id: '9', teams: ['PIT', 'LV'] },
-    { id: '10', teams: ['DEN', 'LAC'] },
-    { id: '11', teams: ['ATL', 'CAR'] },
-    { id: '12', teams: ['DET', 'DAL'] },
-    { id: '13', teams: ['CIN', 'NYG'] },
-    { id: '14', teams: ['BUF', 'NYJ'] },
+    { id: '1', teams: ['DEN', 'NO'] },
+    { id: '2', teams: ['JAX', 'NE'] },
+    { id: '3', teams: ['PHI', 'NYG'] },
+    { id: '4', teams: ['GB', 'HOU'] },
+    { id: '5', teams: ['ATL', 'SEA'] },
+    { id: '6', teams: ['BUF', 'TEN'] },
+    { id: '7', teams: ['CIN', 'CLE'] },
+    { id: '8', teams: ['IND', 'MIA'] },
+    { id: '9', teams: ['DET', 'MIN'] },
+    { id: '10', teams: ['WAS', 'CAR'] },
+    { id: '11', teams: ['LAR', 'LV'] },
+    { id: '12', teams: ['KC', 'SF'] },
+    { id: '13', teams: ['PIT', 'NYJ'] },
+    { id: '14', teams: ['BAL', 'TB'] },
+    { id: '15', teams: ['LAC', 'ARI'] },
   ];
 
   return (
     <div className="leaderboard">
-      <h2 className="leaderboard-title">Week 6 Leaderboard ({entries.length} entries)</h2>
+      <h2 className="leaderboard-title">Week 7 Leaderboard ({entries.length} entries)</h2>
       {error ? (
         <p>Error: {error}</p>
       ) : entries.length === 0 ? (
@@ -131,7 +123,7 @@ const Leaderboard = () => {
                       </div>
                     </th>
                   ))}
-                  <th className="prediction-header">BUF-NYJ</th>
+                  <th className="prediction-header">LAC-ARI</th>
                 </tr>
               </thead>
               <tbody>
@@ -144,15 +136,15 @@ const Leaderboard = () => {
                         <span className="score-badge">{entry.score}</span>
                       </div>
                     </td>
-                    {games.map((game) => (
-                      <td key={game.id} className="pick-cell">
-                        <div className={`pick-container ${entry.picks[game.id] === correctPicks[game.id] ? 'correct-pick' : 'incorrect-pick'}`}>
-                          <span className="pick-team">{abbreviateTeam(entry.picks[game.id])}</span>
+                    {entry.picks.map((pick, idx) => (
+                      <td key={idx} className="pick-cell">
+                        <div className={`pick-container ${idx === 0 && pick === correctPicks['1'] ? 'correct-pick' : 'incorrect-pick'}`}>
+                          <span className="pick-team">{abbreviateTeam(pick)}</span>
                         </div>
                       </td>
                     ))}
                     <td className="prediction-cell">
-                      {entry.tiebreaker.bills}-{entry.tiebreaker.jets}
+                      {entry.chargers}-{entry.cardinals}
                     </td>
                   </tr>
                 ))}
