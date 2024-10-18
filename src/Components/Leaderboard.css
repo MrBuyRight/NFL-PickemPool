@@ -7,7 +7,7 @@
   --accent-color: #4caf50;
   --highlight-color: #66bb6a;
   --error-color: #ef5350;
-  --border-color: #333333;
+  --border-color: #444444;
   --even-row-color: #1a1a1a;
   --odd-row-color: #242424;
 }
@@ -169,7 +169,7 @@ body {
 }
 
 .entry-row:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .even {
@@ -178,4 +178,8 @@ body {
 
 .odd {
   background-color: var(--odd-row-color);
+}
+
+.pick-header .matchup {
+  color: var(--text-secondary-color);
 }
