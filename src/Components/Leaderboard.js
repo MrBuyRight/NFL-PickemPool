@@ -151,7 +151,13 @@ const Leaderboard = () => {
                     </td>
                     {entry.picks.map((pick, idx) => (
                       <td key={idx} className="pick-cell">
-                        <div className={`pick-container ${correctPicks[idx + 1] === pick ? 'correct-pick' : ''}`}>
+                        <div className={`pick-container ${
+                          correctPicks[idx + 1] === pick 
+                            ? 'correct-pick' 
+                            : correctPicks[idx + 1] && correctPicks[idx + 1] !== pick 
+                              ? 'incorrect-pick' 
+                              : ''
+                        }`}>
                           <span className="pick-team">{abbreviateTeam(pick)}</span>
                         </div>
                       </td>

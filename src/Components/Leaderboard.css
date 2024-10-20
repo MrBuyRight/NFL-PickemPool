@@ -116,7 +116,8 @@ body {
 }
 
 .incorrect-pick {
-  color: var(--error-color);
+  color: #d32f2f;  /* This is a red color, you can adjust it as needed */
+  font-weight: 600;
 }
 
 .prediction-cell {
