@@ -10,6 +10,16 @@ const Leaderboard = () => {
   const correctPicks = {
     '1': 'Denver Broncos',
     '2': 'Jacksonville Jaguars',
+    '3': 'Philadelphia Eagles',
+    '4': 'Green Bay Packers',
+    '5': 'Seattle Seahawks',
+    '6': 'Buffalo Bills',
+    '7': 'Cincinnati Bengals',
+    '8': 'Indianapolis Colts',
+    '9': 'Detroit Lions',
+    '10': 'Washington Commanders',
+    '11': 'Los Angeles Rams',
+    '12': 'Kansas City Chiefs',
     // Other games are not included in the correct picks list
   };
 
