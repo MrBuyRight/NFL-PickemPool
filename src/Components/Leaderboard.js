@@ -9,6 +9,7 @@ const Leaderboard = () => {
 
   const correctPicks = {
     '1': 'Denver Broncos',
+    '2': 'Jacksonville Jaguars',
     // Other games are not included in the correct picks list
   };
 
@@ -27,7 +28,9 @@ const Leaderboard = () => {
         picks: entry.picks,
         chargers: entry.chargers,
         cardinals: entry.cardinals,
-        score: entry.picks[0] === correctPicks['1'] ? 1 : 0
+        score: Object.keys(correctPicks).reduce((acc, key) => {
+          return acc + (entry.picks[parseInt(key) - 1] === correctPicks[key] ? 1 : 0);
+        }, 0)
       }));
       scoredEntries.sort((a, b) => b.score - a.score || 
         (Math.abs(parseInt(a.chargers) - parseInt(a.cardinals)) - Math.abs(parseInt(b.chargers) - parseInt(b.cardinals))));
@@ -138,7 +141,7 @@ const Leaderboard = () => {
                     </td>
                     {entry.picks.map((pick, idx) => (
                       <td key={idx} className="pick-cell">
-                        <div className={`pick-container ${idx === 0 && pick === correctPicks['1'] ? 'correct-pick' : ''}`}>
+                        <div className={`pick-container ${correctPicks[idx + 1] === pick ? 'correct-pick' : ''}`}>
                           <span className="pick-team">{abbreviateTeam(pick)}</span>
                         </div>
                       </td>
