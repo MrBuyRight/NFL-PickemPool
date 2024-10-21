@@ -20,6 +20,7 @@ const Leaderboard = () => {
     '10': 'Washington Commanders',
     '11': 'Los Angeles Rams',
     '12': 'Kansas City Chiefs',
+    '13': 'Pittsburgh Steelers',
     // Other games are not included in the correct picks list
   };
 
