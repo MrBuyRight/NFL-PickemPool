@@ -21,6 +21,8 @@ const Leaderboard = () => {
     '11': 'Los Angeles Rams',
     '12': 'Kansas City Chiefs',
     '13': 'Pittsburgh Steelers',
+    '14': 'Baltimore Ravens',
+    '15': 'Arizona Cardinals',
     // Other games are not included in the correct picks list
   };
 
