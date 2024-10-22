@@ -4,7 +4,7 @@ import Leaderboard from './Components/Leaderboard';
 import GameSelectionList from './Components/GameSelectionList';
 
 function App() {
-  const [showGameSelection, setShowGameSelection] = useState(false);
+  const [showGameSelection, setShowGameSelection] = useState(true);
 
   const toggleGameSelection = () => {
     setShowGameSelection(!showGameSelection);
