@@ -7,28 +7,29 @@ const supabase = createClient('https://grnjclpmqlawncskxhqf.supabase.co', 'eyJhb
 
 const GameSelectionList = () => {
   const [selectedTeams, setSelectedTeams] = useState({});
-  const [scorePrediction, setScorePrediction] = useState({ chargers: '', cardinals: '' });
+  const [scorePrediction, setScorePrediction] = useState({ cowboys: '', niners: '' });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [submissionStatus, setSubmissionStatus] = useState('');
-  const [isSubmissionClosed, setIsSubmissionClosed] = useState(true);
+  const [isSubmissionClosed, setIsSubmissionClosed] = useState(false);
 
-  const week7Games = [
-    { id: 1, date: 'Thursday, October 17th, 2024', time: '8:15pm ET', away: 'Denver Broncos', home: 'New Orleans Saints' },
-    { id: 2, date: 'Sunday, October 20th, 2024', time: '9:30am ET', away: 'New England Patriots', home: 'Jacksonville Jaguars' },
-    { id: 3, date: 'Sunday, October 20th, 2024', time: '1:00pm ET', away: 'Philadelphia Eagles', home: 'New York Giants' },
-    { id: 4, date: 'Sunday, October 20th, 2024', time: '1:00pm ET', away: 'Houston Texans', home: 'Green Bay Packers' },
-    { id: 5, date: 'Sunday, October 20th, 2024', time: '1:00pm ET', away: 'Seattle Seahawks', home: 'Atlanta Falcons' },
-    { id: 6, date: 'Sunday, October 20th, 2024', time: '1:00pm ET', away: 'Tennessee Titans', home: 'Buffalo Bills' },
-    { id: 7, date: 'Sunday, October 20th, 2024', time: '1:00pm ET', away: 'Cincinnati Bengals', home: 'Cleveland Browns' },
-    { id: 8, date: 'Sunday, October 20th, 2024', time: '1:00pm ET', away: 'Miami Dolphins', home: 'Indianapolis Colts' },
-    { id: 9, date: 'Sunday, October 20th, 2024', time: '1:00pm ET', away: 'Detroit Lions', home: 'Minnesota Vikings' },
-    { id: 10, date: 'Sunday, October 20th, 2024', time: '4:05pm ET', away: 'Carolina Panthers', home: 'Washington Commanders' },
-    { id: 11, date: 'Sunday, October 20th, 2024', time: '4:05pm ET', away: 'Las Vegas Raiders', home: 'Los Angeles Rams' },
-    { id: 12, date: 'Sunday, October 20th, 2024', time: '4:25pm ET', away: 'Kansas City Chiefs', home: 'San Francisco 49ers' },
-    { id: 13, date: 'Sunday, October 20th, 2024', time: '8:20pm ET', away: 'New York Jets', home: 'Pittsburgh Steelers' },
-    { id: 14, date: 'Monday, October 21st, 2024', time: '8:15pm ET', away: 'Baltimore Ravens', home: 'Tampa Bay Buccaneers' },
-    { id: 15, date: 'Monday, October 21st, 2024', time: '9:00pm ET', away: 'Los Angeles Chargers', home: 'Arizona Cardinals' },
+  const week8Games = [
+    { id: 1, date: 'Thursday, October 24th, 2024', time: '8:15pm ET', away: 'Minnesota Vikings', home: 'Los Angeles Rams' },
+    { id: 2, date: 'Sunday, October 27th, 2024', time: '1:00pm ET', away: 'Baltimore Ravens', home: 'Cleveland Browns' },
+    { id: 3, date: 'Sunday, October 27th, 2024', time: '1:00pm ET', away: 'Philadelphia Eagles', home: 'Cincinnati Bengals' },
+    { id: 4, date: 'Sunday, October 27th, 2024', time: '1:00pm ET', away: 'Green Bay Packers', home: 'Jacksonville Jaguars' },
+    { id: 5, date: 'Sunday, October 27th, 2024', time: '1:00pm ET', away: 'Atlanta Falcons', home: 'Tampa Bay Buccaneers' },
+    { id: 6, date: 'Sunday, October 27th, 2024', time: '1:00pm ET', away: 'Arizona Cardinals', home: 'Miami Dolphins' },
+    { id: 7, date: 'Sunday, October 27th, 2024', time: '1:00pm ET', away: 'Tennessee Titans', home: 'Detroit Lions' },
+    { id: 8, date: 'Sunday, October 27th, 2024', time: '1:00pm ET', away: 'New York Jets', home: 'New England Patriots' },
+    { id: 9, date: 'Sunday, October 27th, 2024', time: '1:00pm ET', away: 'Indianapolis Colts', home: 'Houston Texans' },
+    { id: 10, date: 'Sunday, October 27th, 2024', time: '4:05pm ET', away: 'Buffalo Bills', home: 'Seattle Seahawks' },
+    { id: 11, date: 'Sunday, October 27th, 2024', time: '4:05pm ET', away: 'New Orleans Saints', home: 'Los Angeles Chargers' },
+    { id: 12, date: 'Sunday, October 27th, 2024', time: '4:25pm ET', away: 'Kansas City Chiefs', home: 'Las Vegas Raiders' },
+    { id: 13, date: 'Sunday, October 27th, 2024', time: '4:25pm ET', away: 'Chicago Bears', home: 'Washington Commanders' },
+    { id: 14, date: 'Sunday, October 27th, 2024', time: '4:25pm ET', away: 'Carolina Panthers', home: 'Denver Broncos' },
+    { id: 15, date: 'Sunday, October 27th, 2024', time: '8:20pm ET', away: 'Dallas Cowboys', home: 'San Francisco 49ers' },
+    { id: 16, date: 'Monday, October 28th, 2024', time: '8:15pm ET', away: 'New York Giants', home: 'Pittsburgh Steelers' },
   ];
 
   const handleTeamSelect = (gameId, team) => {
@@ -60,8 +61,8 @@ const GameSelectionList = () => {
     setSubmissionStatus('Submitting...');
 
     try {
-      if (Object.keys(selectedTeams).length !== 15) {
-        throw new Error('Please select a team for all 15 games.');
+      if (Object.keys(selectedTeams).length !== 16) {
+        throw new Error('Please select a team for all 16 games.');
       }
 
       const entry = {
@@ -78,7 +79,7 @@ const GameSelectionList = () => {
       
       // Reset form
       setSelectedTeams({});
-      setScorePrediction({ chargers: '', cardinals: '' });
+      setScorePrediction({ cowboys: '', niners: '' });
       setName('');
       setEmail('');
 
@@ -91,7 +92,7 @@ const GameSelectionList = () => {
     }
   };
 
-  const groupedGames = week7Games.reduce((acc, game) => {
+  const groupedGames = week8Games.reduce((acc, game) => {
     if (!acc[game.date]) {
       acc[game.date] = [];
     }
@@ -101,7 +102,7 @@ const GameSelectionList = () => {
 
   return (
     <div className="game-list-container">
-      <h2 className="week-title">Week 7 Game Selection</h2>
+      <h2 className="week-title">Week 8 Game Selection</h2>
       {isSubmissionClosed ? (
         <div className="submission-closed-message">
           <h3>Submissions are now closed for this week.</h3>
@@ -141,21 +142,21 @@ const GameSelectionList = () => {
             ))}
           </div>
           <div className="score-prediction">
-            <h3>Score Prediction: Chargers @ Cardinals</h3>
+            <h3>Score Prediction: Cowboys @ 49ers</h3>
             <div className="score-inputs">
               <input
                 type="number"
-                placeholder="Chargers"
-                value={scorePrediction.chargers}
-                onChange={(e) => setScorePrediction(prev => ({ ...prev, chargers: e.target.value }))}
+                placeholder="Cowboys"
+                value={scorePrediction.cowboys}
+                onChange={(e) => setScorePrediction(prev => ({ ...prev, cowboys: e.target.value }))}
                 required
               />
               <span>-</span>
               <input
                 type="number"
-                placeholder="Cardinals"
-                value={scorePrediction.cardinals}
-                onChange={(e) => setScorePrediction(prev => ({ ...prev, cardinals: e.target.value }))}
+                placeholder="49ers"
+                value={scorePrediction.niners}
+                onChange={(e) => setScorePrediction(prev => ({ ...prev, niners: e.target.value }))}
                 required
               />
             </div>
@@ -180,7 +181,7 @@ const GameSelectionList = () => {
                 required
               />
             </div>
-            <button type="submit" disabled={Object.keys(selectedTeams).length !== 15}>
+            <button type="submit" disabled={Object.keys(selectedTeams).length !== 16}>
               Submit Picks
             </button>
             {submissionStatus && (
@@ -200,7 +201,7 @@ const PickTracker = ({ picks }) => {
 
   return (
     <div className="pick-tracker">
-      <h3>Your Picks: {pickCount}/15</h3>
+      <h3>Your Picks: {pickCount}/16</h3>
       <div className="pick-list">
         {Object.entries(picks).map(([gameId, team]) => (
           <div key={gameId} className="pick-item">
