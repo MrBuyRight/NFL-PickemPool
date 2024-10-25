@@ -11,7 +11,7 @@ const GameSelectionList = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [submissionStatus, setSubmissionStatus] = useState('');
-  const [isSubmissionClosed, setIsSubmissionClosed] = useState(false);
+  const [isSubmissionClosed, setIsSubmissionClosed] = useState(true);
 
   const week8Games = [
     { id: 1, date: 'Thursday, October 24th, 2024', time: '8:15pm ET', away: 'Minnesota Vikings', home: 'Los Angeles Rams' },
@@ -105,8 +105,8 @@ const GameSelectionList = () => {
       <h2 className="week-title">Week 8 Game Selection</h2>
       {isSubmissionClosed ? (
         <div className="submission-closed-message">
-          <h3>Submissions are now closed for this week.</h3>
-          <p>Thank you for participating! Check back next week for new games.</p>
+          <h3>Submissions are now closed for Week 8.</h3>
+          <p>The first game of the week has already been played. Thank you for your interest! Check back next week for new games.</p>
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
