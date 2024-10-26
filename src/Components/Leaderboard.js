@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Leaderboard.css';
 import Week8entries from './Week8entrydata';
 
 const Leaderboard = () => {
+  const [sortedEntries, setSortedEntries] = useState([]);
+
   const games = [
-    { id: 1, teams: ['MIN', 'LAR'] },
+    { id: 1, teams: ['MIN', 'LAR'], winner: 'LAR' },
     { id: 2, teams: ['BAL', 'CLE'] },
     { id: 3, teams: ['PHI', 'CIN'] },
     { id: 4, teams: ['GB', 'JAX'] },
@@ -60,6 +62,24 @@ const Leaderboard = () => {
     return abbreviations[teamName] || teamName;
   };
 
+  useEffect(() => {
+    const calculateScores = () => {
+      return Week8entries.map(entry => {
+        let score = 0;
+        if (abbreviateTeam(entry.picks[0]) === 'LAR') score++;
+        return { ...entry, score };
+      });
+    };
+
+    const sortEntries = (entries) => {
+      return entries.sort((a, b) => b.score - a.score);
+    };
+
+    const scoredEntries = calculateScores();
+    const sorted = sortEntries(scoredEntries);
+    setSortedEntries(sorted);
+  }, []);
+
   return (
     <div className="leaderboard">
       <h2 className="leaderboard-title">Week 8 Leaderboard</h2>
@@ -68,7 +88,9 @@ const Leaderboard = () => {
           <table className="leaderboard-table">
             <thead>
               <tr>
+                <th className="sticky-column rank-column">Rank</th>
                 <th className="sticky-column name-column">Name</th>
+                <th className="sticky-column score-column">Score</th>
                 {games.map((game) => (
                   <th key={game.id} className="pick-header">
                     <div className="game-header">
@@ -80,11 +102,13 @@ const Leaderboard = () => {
               </tr>
             </thead>
             <tbody>
-              {Week8entries.map((entry, index) => (
+              {sortedEntries.map((entry, index) => (
                 <tr key={index} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
+                  <td className="sticky-column rank-column">{index + 1}</td>
                   <td className="sticky-column name-column">{entry.name}</td>
+                  <td className="sticky-column score-column">{entry.score}</td>
                   {entry.picks.map((pick, pickIndex) => (
-                    <td key={pickIndex} className="pick-cell">
+                    <td key={pickIndex} className={`pick-cell ${games[pickIndex].winner && abbreviateTeam(pick) === games[pickIndex].winner ? 'correct-pick' : ''}`}>
                       {abbreviateTeam(pick)}
                     </td>
                   ))}
