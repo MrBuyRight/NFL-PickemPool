@@ -25,7 +25,6 @@ body {
 .leaderboard {
   max-width: 100%;
   margin: 0 auto;
-  padding: 0.5rem;
 }
 
 .leaderboard-title {
@@ -47,9 +46,6 @@ body {
 .table-container {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  max-height: calc(100vh - 140px);
-  scrollbar-width: thin;
-  scrollbar-color: var(--text-secondary-color) var(--surface-color);
 }
 
 .table-container::-webkit-scrollbar {
@@ -217,5 +213,62 @@ body {
   .pick-header .matchup {
     font-size: 0.6rem;
     height: 50px;
+  }
+}
+
+.name-score-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.score-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.sticky-columns {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  left: 0;
+  background-color: var(--surface-color);
+  z-index: 5;
+  box-shadow: 2px 0 4px var(--shadow-color);
+}
+
+.rank-column {
+  width: 40px;
+  padding-right: 0.5rem;
+  font-weight: 600;
+}
+
+.name-column {
+  min-width: 160px;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .rank-column {
+    width: 32px;
+  }
+
+  .name-column {
+    min-width: 140px;
+  }
+
+  .score-circle {
+    width: 20px;
+    height: 20px;
+    font-size: 0.7rem;
   }
 }

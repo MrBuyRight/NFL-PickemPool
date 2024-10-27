@@ -101,9 +101,10 @@ const Leaderboard = () => {
           <table className="leaderboard-table">
             <thead>
               <tr>
-                <th className="sticky-column rank-column">#</th>
-                <th className="sticky-column name-column">Name</th>
-                <th className="sticky-column score-column">Score</th>
+                <th className="sticky-columns" colSpan="2">
+                  <div className="rank-column">#</div>
+                  <div className="name-column">Player</div>
+                </th>
                 {games.map((game) => (
                   <th key={game.id} className="pick-header">
                     <div className="game-header">
@@ -117,9 +118,15 @@ const Leaderboard = () => {
             <tbody>
               {sortedEntries.map((entry, index) => (
                 <tr key={index} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
-                  <td className="sticky-column rank-column">{index + 1}</td>
-                  <td className="sticky-column name-column">{entry.name}</td>
-                  <td className="sticky-column score-column">{entry.score}</td>
+                  <td className="sticky-columns" colSpan="2">
+                    <div className="rank-column">{index + 1}</div>
+                    <div className="name-column">
+                      <div className="name-score-container">
+                        {entry.name}
+                        <div className="score-circle">{entry.score}</div>
+                      </div>
+                    </div>
+                  </td>
                   {entry.picks.map((pick, pickIndex) => {
                     const game = games[pickIndex];
                     const pickAbbr = abbreviateTeam(pick);
