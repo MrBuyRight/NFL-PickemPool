@@ -1,30 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap');
 
 :root {
   --primary-color: #ffffff;
   --secondary-color: #f5f5f5;
-  --background-color: #ffffff;
-  --text-color: #333333;
-  --text-secondary-color: #666666;
-  --accent-color: #2e7d32;
-  --border-color: #e0e0e0;
-  --hover-color: #f5f5f5;
+  --background-color: #fafafa;
+  --text-color: #1d1d1f;
+  --text-secondary: #86868b;
+  --accent-color: #0071e3;
+  --border-color: #d2d2d7;
+  --shadow-color: rgba(0, 0, 0, 0.05);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
+  line-height: 1.47059;
 }
 
 .App {
@@ -34,64 +32,49 @@ body, html {
 }
 
 .App-header {
-  background-color: var(--primary-color);
-  padding: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
 .header-content {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
 }
 
 .App-header h1 {
   font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--text-color);
-  margin: 0;
+  font-weight: 500;
+  letter-spacing: -0.022em;
 }
 
 .toggle-button {
   background-color: var(--accent-color);
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
+  padding: 0.5rem 1.125rem;
+  border-radius: 980px;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .toggle-button:hover {
-  background-color: #1b5e20;
+  background-color: #0077ED;
+  transform: scale(1.02);
 }
 
 .App-main {
-  flex: 1;
-  padding: 1rem;
-  background-color: var(--background-color);
-}
-
-@media (max-width: 768px) {
-  .header-content {
-    flex-direction: row;
-    padding: 0 0.5rem;
-  }
-
-  .App-header h1 {
-    font-size: 1.25rem;
-  }
-
-  .toggle-button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  width: 100%;
 }
