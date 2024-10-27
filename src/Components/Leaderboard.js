@@ -62,6 +62,16 @@ const Leaderboard = () => {
     return abbreviations[teamName] || teamName;
   };
 
+  const formatName = (fullName) => {
+    const names = fullName.split(' ');
+    if (names.length === 1) return names[0];
+    
+    return names.map((name, index) => {
+      if (index === 0) return name; // Keep first name
+      return name.charAt(0) + '.'; // Abbreviate other names
+    }).join(' ');
+  };
+
   useEffect(() => {
     const calculateScores = () => {
       return Week8entries.map(entry => {
@@ -122,11 +132,9 @@ const Leaderboard = () => {
                 <tr key={index} className={`entry-row ${index % 2 === 0 ? 'even' : 'odd'}`}>
                   <td className="sticky-columns" colSpan="2">
                     <div className="rank-column">{index + 1}</div>
-                    <div className="name-column">
-                      <div className="name-score-container">
-                        {entry.name}
-                        <div className="score-circle">{entry.score}</div>
-                      </div>
+                    <div className="name-score-container">
+                      {formatName(entry.name)}
+                      <div className="score-circle">{entry.score}</div>
                     </div>
                   </td>
                   {entry.picks.map((pick, pickIndex) => {

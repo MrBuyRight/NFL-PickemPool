@@ -75,7 +75,7 @@ body {
 
 .leaderboard-table th,
 .leaderboard-table td {
-  padding: 0.75rem 0.5rem;
+  padding: 0.5rem;
   text-align: center;
   border: 1px solid var(--border-color);
 }
@@ -229,7 +229,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.875rem;
+  padding: 0.5rem;
 }
 
 .score-circle {
@@ -246,9 +246,16 @@ body {
 }
 
 .sticky-columns {
-  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  left: 0;
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: saturate(180%) blur(20px);
   border-right: 1px solid var(--border-color);
+  z-index: 5;
+  padding: 0.5rem;
+  gap: 1rem;
 }
 
 .rank-column {
@@ -295,6 +302,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding: 0.5rem;
 }
 
 .rank-header {
