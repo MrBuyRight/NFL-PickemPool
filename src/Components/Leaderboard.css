@@ -1,19 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
 :root {
-  --primary-color: #ffffff;
-  --secondary-color: #f0f0f0;
-  --surface-color: #ffffff;
-  --text-color: #333333;
-  --text-secondary-color: #666666;
+  --primary-color: #1a1a1a;
+  --secondary-color: #2d2d2d;
+  --surface-color: #121212;
+  --text-color: #ffffff;
+  --text-secondary-color: #b0b0b0;
   --accent-color: #4caf50;
-  --highlight-color: #2e7d32;
-  --error-color: #d32f2f;
-  --border-color: #e0e0e0;
-  --even-row-color: #f9f9f9;
-  --odd-row-color: #ffffff;
+  --highlight-color: rgba(76, 175, 80, 0.15);
+  --error-color: rgba(211, 47, 47, 0.15);
+  --border-color: #333333;
+  --even-row-color: #1e1e1e;
+  --odd-row-color: #121212;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: var(--primary-color);
   color: var(--text-color);
 }
@@ -25,34 +27,53 @@ body {
 }
 
 .leaderboard-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
   text-align: center;
   color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .leaderboard-container {
   overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   background-color: var(--surface-color);
 }
 
 .table-container {
   overflow-x: auto;
-  max-height: calc(100vh - 150px);
+  max-height: calc(100vh - 180px);
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary-color) var(--surface-color);
+}
+
+.table-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: var(--surface-color);
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color);
+  border-radius: 4px;
 }
 
 .leaderboard-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  font-size: 0.9rem;
 }
 
 .leaderboard-table th,
 .leaderboard-table td {
-  padding: 0.5rem;
+  padding: 0.75rem;
   text-align: center;
   border: 1px solid var(--border-color);
   color: var(--text-color);
@@ -60,10 +81,9 @@ body {
 
 .leaderboard-table th {
   background-color: var(--secondary-color);
-  font-weight: 600;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .sticky-column {
@@ -71,47 +91,61 @@ body {
   left: 0;
   background-color: var(--surface-color);
   z-index: 5;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.2);
 }
 
 .rank-column {
-  width: 50px;
+  width: 60px;
   left: 0;
   z-index: 15;
+  font-weight: 700;
 }
 
 .name-column {
-  min-width: 120px;
-  left: 50px;
+  min-width: 140px;
+  left: 60px;
   z-index: 14;
+  font-weight: 500;
 }
 
 .score-column {
-  width: 60px;
-  left: 170px;
+  width: 70px;
+  left: 200px;
   z-index: 13;
+  font-weight: 700;
+  color: var(--accent-color);
 }
 
-.pick-cell,
-.prediction-cell {
-  font-weight: bold;
+.pick-cell {
+  font-weight: 500;
+  transition: background-color 0.2s ease;
 }
 
 .correct-pick {
-  color: var(--highlight-color);
-  font-weight: 600;
+  background-color: var(--highlight-color);
+  color: var(--accent-color);
+  font-weight: 700;
 }
 
 .incorrect-pick {
+  background-color: var(--error-color);
   color: var(--error-color);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .pick-header .matchup {
   writing-mode: vertical-rl;
   text-orientation: mixed;
   white-space: nowrap;
-  padding: 0.5rem 0;
-  height: 80px;
+  padding: 0.75rem 0;
+  height: 100px;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+}
+
+.prediction-cell {
+  font-weight: 500;
+  color: var(--text-secondary-color);
 }
 
 .even {
@@ -128,11 +162,12 @@ body {
   }
 
   .leaderboard-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .leaderboard-table {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
   .leaderboard-table th,
@@ -155,10 +190,12 @@ body {
   }
 
   .pick-header .matchup {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
+    height: 80px;
   }
 }
 
 .entry-row:hover {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--secondary-color);
+  transition: background-color 0.2s ease;
 }

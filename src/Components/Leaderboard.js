@@ -101,7 +101,7 @@ const Leaderboard = () => {
           <table className="leaderboard-table">
             <thead>
               <tr>
-                <th className="sticky-column rank-column">Rank</th>
+                <th className="sticky-column rank-column">#</th>
                 <th className="sticky-column name-column">Name</th>
                 <th className="sticky-column score-column">Score</th>
                 {games.map((game) => (
@@ -120,11 +120,21 @@ const Leaderboard = () => {
                   <td className="sticky-column rank-column">{index + 1}</td>
                   <td className="sticky-column name-column">{entry.name}</td>
                   <td className="sticky-column score-column">{entry.score}</td>
-                  {entry.picks.map((pick, pickIndex) => (
-                    <td key={pickIndex} className={`pick-cell ${games[pickIndex].winner && abbreviateTeam(pick) === games[pickIndex].winner ? 'correct-pick' : ''}`}>
-                      {abbreviateTeam(pick)}
-                    </td>
-                  ))}
+                  {entry.picks.map((pick, pickIndex) => {
+                    const game = games[pickIndex];
+                    const pickAbbr = abbreviateTeam(pick);
+                    let cellClass = 'pick-cell';
+                    
+                    if (game.winner) {
+                      cellClass += pickAbbr === game.winner ? ' correct-pick' : ' incorrect-pick';
+                    }
+                    
+                    return (
+                      <td key={pickIndex} className={cellClass}>
+                        {pickAbbr}
+                      </td>
+                    );
+                  })}
                   <td className="prediction-cell">
                     {entry.cowboys}-{entry.niners}
                   </td>
