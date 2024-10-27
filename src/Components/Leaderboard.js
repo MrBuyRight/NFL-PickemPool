@@ -7,14 +7,14 @@ const Leaderboard = () => {
 
   const games = [
     { id: 1, teams: ['MIN', 'LAR'], winner: 'LAR' },
-    { id: 2, teams: ['BAL', 'CLE'] },
-    { id: 3, teams: ['PHI', 'CIN'] },
-    { id: 4, teams: ['GB', 'JAX'] },
-    { id: 5, teams: ['ATL', 'TB'] },
-    { id: 6, teams: ['ARI', 'MIA'] },
-    { id: 7, teams: ['TEN', 'DET'] },
-    { id: 8, teams: ['NYJ', 'NE'] },
-    { id: 9, teams: ['IND', 'HOU'] },
+    { id: 2, teams: ['BAL', 'CLE'], winner: 'CLE' },
+    { id: 3, teams: ['PHI', 'CIN'], winner: 'PHI' },
+    { id: 4, teams: ['GB', 'JAX'], winner: 'GB' },
+    { id: 5, teams: ['ATL', 'TB'], winner: 'ATL' },
+    { id: 6, teams: ['ARI', 'MIA'], winner: 'ARI' },
+    { id: 7, teams: ['TEN', 'DET'], winner: 'DET' },
+    { id: 8, teams: ['NYJ', 'NE'], winner: 'NE' },
+    { id: 9, teams: ['IND', 'HOU'], winner: 'HOU' },
     { id: 10, teams: ['BUF', 'SEA'] },
     { id: 11, teams: ['NO', 'LAC'] },
     { id: 12, teams: ['KC', 'LV'] },
@@ -66,13 +66,26 @@ const Leaderboard = () => {
     const calculateScores = () => {
       return Week8entries.map(entry => {
         let score = 0;
-        if (abbreviateTeam(entry.picks[0]) === 'LAR') score++;
+        // Check each pick against the winners
+        entry.picks.forEach((pick, index) => {
+          const game = games[index];
+          if (game.winner && abbreviateTeam(pick) === game.winner) {
+            score++;
+          }
+        });
         return { ...entry, score };
       });
     };
 
     const sortEntries = (entries) => {
-      return entries.sort((a, b) => b.score - a.score);
+      return entries.sort((a, b) => {
+        // First sort by score
+        if (b.score !== a.score) {
+          return b.score - a.score;
+        }
+        // If scores are tied, sort alphabetically by name
+        return a.name.localeCompare(b.name);
+      });
     };
 
     const scoredEntries = calculateScores();
