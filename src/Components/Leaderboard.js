@@ -102,8 +102,10 @@ const Leaderboard = () => {
             <thead>
               <tr>
                 <th className="sticky-columns" colSpan="2">
-                  <div className="rank-column">#</div>
-                  <div className="name-column">Player</div>
+                  <div className="header-container">
+                    <div className="rank-header">#</div>
+                    <div className="name-header">Player</div>
+                  </div>
                 </th>
                 {games.map((game) => (
                   <th key={game.id} className="pick-header">
