@@ -20,7 +20,7 @@ const Leaderboard = () => {
     { id: 12, teams: ['KC', 'LV'], winner: 'KC' },
     { id: 13, teams: ['CHI', 'WAS'], winner: 'WAS' },
     { id: 14, teams: ['CAR', 'DEN'], winner: 'DEN' },
-    { id: 15, teams: ['DAL', 'SF'] },
+    { id: 15, teams: ['DAL', 'SF'], winner: 'SF' },
     { id: 16, teams: ['NYG', 'PIT'] },
   ];
 
